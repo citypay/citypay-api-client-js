@@ -116,3 +116,4 @@ dist
 .pnp.*
 /.openapi-generator/
 /git_push.sh
+/.config/
