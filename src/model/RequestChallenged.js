@@ -56,8 +56,8 @@ class RequestChallenged {
             if (data.hasOwnProperty('merchantid')) {
                 obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
             }
-            if (data.hasOwnProperty('ThreeDServerTransId')) {
-                obj['ThreeDServerTransId'] = ApiClient.convertToType(data['ThreeDServerTransId'], 'String');
+            if (data.hasOwnProperty('threedserver_trans_id')) {
+                obj['threedserver_trans_id'] = ApiClient.convertToType(data['threedserver_trans_id'], 'String');
             }
             if (data.hasOwnProperty('transno')) {
                 obj['transno'] = ApiClient.convertToType(data['transno'], 'Number');
@@ -89,9 +89,9 @@ RequestChallenged.prototype['merchantid'] = undefined;
 
 /**
  * The 3DSv2 trans id reference for the challenge process.
- * @member {String} ThreeDServerTransId
+ * @member {String} threedserver_trans_id
  */
-RequestChallenged.prototype['ThreeDServerTransId'] = undefined;
+RequestChallenged.prototype['threedserver_trans_id'] = undefined;
 
 /**
  * The transaction number for the challenge, ordered incrementally from 1 for every merchant_id. 
