@@ -57,11 +57,6 @@
       expect(instance2.context).to.be("19NSYQq8g43KR9N");
     });
 
-    it('should have the property identifier (base name: "identifier")', function() {
-      expect(instance1.identifier).to.be(null);
-      expect(instance2.identifier).to.be(null);
-    });
-
     it('should have the property message (base name: "message")', function() {
       expect(instance2.message).to.be("Test Error");
       expect(instance1.message).to.be("Test Error");

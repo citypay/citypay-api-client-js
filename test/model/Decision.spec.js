@@ -92,6 +92,10 @@
             expect(decision['AuthResponse']).to.be.a(citypay_api_client.AuthResponse);
             expect(decision.hasOwnProperty('RequestChallenged')).to.be(false);
 
+            expect(decision.isAuthenRequired()).to.be(false);
+            expect(decision.isChallengeRequired()).to.be(false);
+            expect(decision.isAuthResponse()).to.be(true);
+
             let response = decision.AuthResponse;
             expect(response.amount).to.be(5500);
             expect(response.atrn).to.be("atrn1");

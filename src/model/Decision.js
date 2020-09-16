@@ -62,6 +62,17 @@ class Decision {
         return obj;
     }
 
+    isAuthResponse() {
+        return this.AuthResponse !== undefined;
+    }
+
+    isAuthenRequired() {
+        return this.AuthenRequired !== undefined;
+    }
+
+    isChallengeRequired() {
+        return this.RequestChallenged !== undefined;
+    }
 
 }
 

@@ -55,7 +55,8 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            "User-Agent": "CP-JS-SDK/" + this.version
+            "User-Agent": "CityPay-JS-SDK/" + this.version,
+            "cp-sdk": "CP-JS-SDK/" + this.version
         };
 
         /**

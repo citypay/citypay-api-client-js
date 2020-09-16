@@ -126,16 +126,9 @@ module: {
 Please follow the [installation](#installation) instruction and execute the following JS code:
 
 ```javascript
-var Citypay Api Client = require('citypay-api-client-js');
-
-var defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-var cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = "YOUR API KEY"
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix['cp-api-key'] = "Token"
-
-var api = new Citypay Api Client.CardHolderAccountApi()
+import { ApiClient, CardHolderAccountApi } from 'citypay-api-client';
+var client = new ApiClient({ "sandbox": true, "client_id": client_id, "licence_key": licence_key });
+var api = new CardHolderAccountApi()
 var accountid = "accountid_example"; // {String} The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 var card_id = "card_id_example"; // {String} The id of the card that is presented by a call to retrieve a card holder account.
 api.accountCardDeleteRequest(accountid, card_id).then(function(data) {
