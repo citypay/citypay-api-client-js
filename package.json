@@ -7,8 +7,8 @@
     "email": "support@citypay.com"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/citypay/citypay-api-client-js"
+    "type": "git",
+    "url": "https://github.com/citypay/citypay-api-client-js"
   },
   "version": "1.0.0",
   "description": "JavaScript ECMAScript 6 client for the CityPay API",
