@@ -31,6 +31,9 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          CP_CLIENT_ID: ${{secrets.CP_CLIENT_ID}}
+          CP_MERCHANT_ID: ${{secrets.CP_MERCHANT_ID}}
+          CP_LICENCE_KEY: ${{secrets.CP_LICENCE_KEY}}
 
   publish-gpr:
     needs: build
@@ -45,3 +48,6 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          CP_CLIENT_ID: ${{secrets.CP_CLIENT_ID}}
+          CP_MERCHANT_ID: ${{secrets.CP_MERCHANT_ID}}
+          CP_LICENCE_KEY: ${{secrets.CP_LICENCE_KEY}}
