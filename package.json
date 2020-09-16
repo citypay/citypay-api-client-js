@@ -1,8 +1,18 @@
 {
-  "name": "citypay-api-client-js",
+  "scope": "@citypay",
+  "name": "citypay-api-client",
+  "homepage": "https://github.com/citypay/citypay-api-client-js",
+  "bugs": {
+    "url": "https://github.com/citypay/citypay-api-client-js/issues",
+    "email": "support@citypay.com"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/citypay/citypay-api-client-js"
+  },
   "version": "1.0.0",
   "description": "JavaScript ECMAScript 6 client for the CityPay API",
-  "license": "Unlicense",
+  "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
@@ -14,6 +24,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",
+    "api-client-js": "^1.0.0",
     "crypto-js": "^4.0.0",
     "superagent": "3.7.0"
   },
