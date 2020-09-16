@@ -49,7 +49,6 @@ import OperationalApi from './api/OperationalApi';
 import PaymentProcessingApi from './api/PaymentProcessingApi';
 import ApiKey from "./model/ApiKey";
 
-
 /**
 * JavaScript ECMAScript 6 client for the CityPay API.<br>
 * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
@@ -82,6 +81,9 @@ import ApiKey from "./model/ApiKey";
 * @version 1.0.0
 */
 export {
+
+    ApiKey,
+
     /**
      * The ApiClient constructor.
      * @property {module:ApiClient}
@@ -290,7 +292,5 @@ export {
     * The PaymentProcessingApi service constructor.
     * @property {module:api/PaymentProcessingApi}
     */
-    PaymentProcessingApi,
-
-    ApiKey
+    PaymentProcessingApi
 };
