@@ -236,7 +236,7 @@ export default class PaymentProcessingApi {
 
     /**
      * Refund
-     * .
+     * A refund request which allows for the refunding of a previous transaction up  and to the amount of the original sale. A refund will be performed against the  original card used to process the transaction. 
      * @param {module:model/RefundRequest} refund_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthResponse} and HTTP response
      */
@@ -269,7 +269,7 @@ export default class PaymentProcessingApi {
 
     /**
      * Refund
-     * .
+     * A refund request which allows for the refunding of a previous transaction up  and to the amount of the original sale. A refund will be performed against the  original card used to process the transaction. 
      * @param {module:model/RefundRequest} refund_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AuthResponse}
      */

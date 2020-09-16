@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 Refund
 
-.
+A refund request which allows for the refunding of a previous transaction up  and to the amount of the original sale. A refund will be performed against the  original card used to process the transaction. 
 
 ### Example
 
