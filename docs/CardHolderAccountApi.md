@@ -27,7 +27,7 @@ Deletes a card from the account. The card will be marked for deletion before a s
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -79,7 +79,7 @@ Allows for a card to be registered for the account. The card will be added for f
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -131,7 +131,7 @@ Updates the status of a card for processing. The following values are available 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -185,7 +185,7 @@ Allows for the ability to change the contact details for an account.
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -237,7 +237,7 @@ Creates a new card holder account and initialises the account ready for adding c
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -287,7 +287,7 @@ Allows for the deletion of an account. The account will marked for deletion and 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -337,7 +337,7 @@ Allows for the retrieval of a card holder account for the given &#x60;id&#x60;. 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -387,7 +387,7 @@ Updates the status of an account. An account can have the following statuses app
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -439,7 +439,7 @@ A charge process obtains an authorisation using a tokenised value which represen
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];

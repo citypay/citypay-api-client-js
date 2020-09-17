@@ -20,7 +20,7 @@ An operational request to list current merchants for a client.  ### Sorting  Sor
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -70,7 +70,7 @@ A ping request which performs a connection and authentication test to the CityPa
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];

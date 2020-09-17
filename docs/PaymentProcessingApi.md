@@ -25,7 +25,7 @@ An authorisation process performs a standard transaction authorisation based on 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -75,7 +75,7 @@ The CRes request performs authorisation processing once a challenge request has 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -125,7 +125,7 @@ _The capture process only applies to transactions which have been pre-authorised
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -175,7 +175,7 @@ The Payer Authentication Response (PaRes) is an operation after the result of au
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -225,7 +225,7 @@ A refund request which allows for the refunding of a previous transaction up  an
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -275,7 +275,7 @@ A retrieval request which allows an integration to obtain the result of a transa
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
@@ -325,7 +325,7 @@ _The void process generally applies to transactions which have been pre-authoris
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api-client-js';
+import Citypay Api Client from 'citypay-api';
 let defaultClient = Citypay Api Client.ApiClient.instance;
 // Configure API key authorization: cp-api-key
 let cp-api-key = defaultClient.authentications['cp-api-key'];
