@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The Merchant model module.
  * @module model/Merchant
- * @version 1.0.0
  */
 class Merchant {
     /**

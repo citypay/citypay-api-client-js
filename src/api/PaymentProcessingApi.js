@@ -28,7 +28,6 @@ import VoidRequest from '../model/VoidRequest';
 /**
 * PaymentProcessing service.
 * @module api/PaymentProcessingApi
-* @version 1.0.0
 */
 export default class PaymentProcessingApi {
 

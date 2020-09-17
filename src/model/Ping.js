@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The Ping model module.
  * @module model/Ping
- * @version 1.0.0
  */
 class Ping {
     /**

@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The MCC6012 model module.
  * @module model/MCC6012
- * @version 1.0.0
  */
 class MCC6012 {
     /**

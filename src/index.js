@@ -77,7 +77,6 @@ import ApiKey from "./model/ApiKey";
 * </pre>
 * </p>
 * @module index
-* @version 1.0.0
 */
 export {
 

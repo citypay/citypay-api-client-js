@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The ExternalMPI model module.
  * @module model/ExternalMPI
- * @version 1.0.0
  */
 class ExternalMPI {
     /**

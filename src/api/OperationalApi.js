@@ -20,7 +20,6 @@ import Ping from '../model/Ping';
 /**
 * Operational service.
 * @module api/OperationalApi
-* @version 1.0.0
 */
 export default class OperationalApi {
 

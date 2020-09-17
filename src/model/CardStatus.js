@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The CardStatus model module.
  * @module model/CardStatus
- * @version 1.0.0
  */
 class CardStatus {
     /**

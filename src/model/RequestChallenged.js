@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The RequestChallenged model module.
  * @module model/RequestChallenged
- * @version 1.0.0
  */
 class RequestChallenged {
     /**

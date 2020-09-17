@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The RefundRequest model module.
  * @module model/RefundRequest
- * @version 1.0.0
  */
 class RefundRequest {
     /**

@@ -16,7 +16,6 @@ import AuthReference from './AuthReference';
 /**
  * The AuthReferences model module.
  * @module model/AuthReferences
- * @version 1.0.0
  */
 class AuthReferences {
     /**

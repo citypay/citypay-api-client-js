@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The ChargeRequest model module.
  * @module model/ChargeRequest
- * @version 1.0.0
  */
 class ChargeRequest {
     /**

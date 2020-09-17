@@ -16,7 +16,6 @@ import Merchant from './Merchant';
 /**
  * The ListMerchantsResponse model module.
  * @module model/ListMerchantsResponse
- * @version 1.0.0
  */
 class ListMerchantsResponse {
     /**

@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The PaResAuthRequest model module.
  * @module model/PaResAuthRequest
- * @version 1.0.0
  */
 class PaResAuthRequest {
     /**

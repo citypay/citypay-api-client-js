@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The CResAuthRequest model module.
  * @module model/CResAuthRequest
- * @version 1.0.0
  */
 class CResAuthRequest {
     /**

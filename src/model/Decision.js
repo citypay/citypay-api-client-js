@@ -18,7 +18,6 @@ import RequestChallenged from './RequestChallenged';
 /**
  * The Decision model module.
  * @module model/Decision
- * @version 1.0.0
  */
 class Decision {
     /**

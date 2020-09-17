@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The AirlineSegment model module.
  * @module model/AirlineSegment
- * @version 1.0.0
  */
 class AirlineSegment {
     /**

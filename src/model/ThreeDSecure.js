@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The ThreeDSecure model module.
  * @module model/ThreeDSecure
- * @version 1.0.0
  */
 class ThreeDSecure {
     /**

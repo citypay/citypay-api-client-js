@@ -26,7 +26,6 @@ import RegisterCard from '../model/RegisterCard';
 /**
 * CardHolderAccount service.
 * @module api/CardHolderAccountApi
-* @version 1.0.0
 */
 export default class CardHolderAccountApi {
 

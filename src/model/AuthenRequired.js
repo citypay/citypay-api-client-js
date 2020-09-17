@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The AuthenRequired model module.
  * @module model/AuthenRequired
- * @version 1.0.0
  */
 class AuthenRequired {
     /**

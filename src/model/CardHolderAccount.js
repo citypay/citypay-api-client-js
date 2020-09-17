@@ -17,7 +17,6 @@ import ContactDetails from './ContactDetails';
 /**
  * The CardHolderAccount model module.
  * @module model/CardHolderAccount
- * @version 1.0.0
  */
 class CardHolderAccount {
     /**

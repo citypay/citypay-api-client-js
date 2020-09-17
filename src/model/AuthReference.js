@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The AuthReference model module.
  * @module model/AuthReference
- * @version 1.0.0
  */
 class AuthReference {
     /**

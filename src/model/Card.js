@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The Card model module.
  * @module model/Card
- * @version 1.0.0
  */
 class Card {
     /**

@@ -20,7 +20,6 @@ import ThreeDSecure from './ThreeDSecure';
 /**
  * The AuthRequest model module.
  * @module model/AuthRequest
- * @version 1.0.0
  */
 class AuthRequest {
     /**

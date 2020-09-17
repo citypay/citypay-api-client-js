@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The RegisterCard model module.
  * @module model/RegisterCard
- * @version 1.0.0
  */
 class RegisterCard {
     /**

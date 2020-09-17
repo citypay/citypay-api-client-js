@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The RetrieveRequest model module.
  * @module model/RetrieveRequest
- * @version 1.0.0
  */
 class RetrieveRequest {
     /**

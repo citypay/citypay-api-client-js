@@ -32,7 +32,7 @@ class ApiClient {
 
         this.config = config || {};
 
-        this.version = "1.0.0";
+        this.version = "1.0.1";
 
         /**
          * The base URL against which to resolve every API call's (relative) path.

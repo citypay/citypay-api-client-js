@@ -16,7 +16,6 @@ import AirlineAdvice from './AirlineAdvice';
 /**
  * The CaptureRequest model module.
  * @module model/CaptureRequest
- * @version 1.0.0
  */
 class CaptureRequest {
     /**
