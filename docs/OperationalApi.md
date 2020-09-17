@@ -20,15 +20,14 @@ An operational request to list current merchants for a client.  ### Sorting  Sor
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.OperationalApi();
+let apiInstance = new CityPay.OperationalApi();
 let clientid = "clientid_example"; // String | The client id to return merchants for, specifying \"default\" will use the value in your api key.
 apiInstance.listMerchantsRequest(clientid).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -70,16 +69,15 @@ A ping request which performs a connection and authentication test to the CityPa
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.OperationalApi();
-let ping = new Citypay Api Client.Ping(); // Ping | 
+let apiInstance = new CityPay.OperationalApi();
+let ping = new CityPay.Ping(); // Ping | 
 apiInstance.pingRequest(ping).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

@@ -25,16 +25,15 @@ An authorisation process performs a standard transaction authorisation based on 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let auth_request = new Citypay Api Client.AuthRequest(); // AuthRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let auth_request = new CityPay.AuthRequest(); // AuthRequest | 
 apiInstance.authorisationRequest(auth_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -75,16 +74,15 @@ The CRes request performs authorisation processing once a challenge request has 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let c_res_auth_request = new Citypay Api Client.CResAuthRequest(); // CResAuthRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let c_res_auth_request = new CityPay.CResAuthRequest(); // CResAuthRequest | 
 apiInstance.cResRequest(c_res_auth_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -125,16 +123,15 @@ _The capture process only applies to transactions which have been pre-authorised
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let capture_request = new Citypay Api Client.CaptureRequest(); // CaptureRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let capture_request = new CityPay.CaptureRequest(); // CaptureRequest | 
 apiInstance.captureRequest(capture_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -175,16 +172,15 @@ The Payer Authentication Response (PaRes) is an operation after the result of au
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let pa_res_auth_request = new Citypay Api Client.PaResAuthRequest(); // PaResAuthRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let pa_res_auth_request = new CityPay.PaResAuthRequest(); // PaResAuthRequest | 
 apiInstance.paResRequest(pa_res_auth_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -225,16 +221,15 @@ A refund request which allows for the refunding of a previous transaction up  an
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let refund_request = new Citypay Api Client.RefundRequest(); // RefundRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let refund_request = new CityPay.RefundRequest(); // RefundRequest | 
 apiInstance.refundRequest(refund_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -275,16 +270,15 @@ A retrieval request which allows an integration to obtain the result of a transa
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let retrieve_request = new Citypay Api Client.RetrieveRequest(); // RetrieveRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let retrieve_request = new CityPay.RetrieveRequest(); // RetrieveRequest | 
 apiInstance.retrievalRequest(retrieve_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -325,16 +319,15 @@ _The void process generally applies to transactions which have been pre-authoris
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.PaymentProcessingApi();
-let void_request = new Citypay Api Client.VoidRequest(); // VoidRequest | 
+let apiInstance = new CityPay.PaymentProcessingApi();
+let void_request = new CityPay.VoidRequest(); // VoidRequest | 
 apiInstance.voidRequest(void_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {

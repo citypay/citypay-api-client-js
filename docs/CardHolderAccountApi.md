@@ -27,15 +27,14 @@ Deletes a card from the account. The card will be marked for deletion before a s
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 let card_id = "card_id_example"; // String | The id of the card that is presented by a call to retrieve a card holder account.
 apiInstance.accountCardDeleteRequest(accountid, card_id).then((data) => {
@@ -79,17 +78,16 @@ Allows for a card to be registered for the account. The card will be added for f
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
-let register_card = new Citypay Api Client.RegisterCard(); // RegisterCard | 
+let register_card = new CityPay.RegisterCard(); // RegisterCard | 
 apiInstance.accountCardRegisterRequest(accountid, register_card).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -131,18 +129,17 @@ Updates the status of a card for processing. The following values are available 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 let card_id = "card_id_example"; // String | The id of the card that is presented by a call to retrieve a card holder account.
-let card_status = new Citypay Api Client.CardStatus(); // CardStatus | 
+let card_status = new CityPay.CardStatus(); // CardStatus | 
 apiInstance.accountCardStatusRequest(accountid, card_id, card_status).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -185,17 +182,16 @@ Allows for the ability to change the contact details for an account.
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
-let contact_details = new Citypay Api Client.ContactDetails(); // ContactDetails | 
+let contact_details = new CityPay.ContactDetails(); // ContactDetails | 
 apiInstance.accountChangeContactRequest(accountid, contact_details).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -237,16 +233,15 @@ Creates a new card holder account and initialises the account ready for adding c
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
-let account_create = new Citypay Api Client.AccountCreate(); // AccountCreate | 
+let apiInstance = new CityPay.CardHolderAccountApi();
+let account_create = new CityPay.AccountCreate(); // AccountCreate | 
 apiInstance.accountCreate(account_create).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -287,15 +282,14 @@ Allows for the deletion of an account. The account will marked for deletion and 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 apiInstance.accountDeleteRequest(accountid).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -337,15 +331,14 @@ Allows for the retrieval of a card holder account for the given &#x60;id&#x60;. 
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 apiInstance.accountRetrieveRequest(accountid).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -387,17 +380,16 @@ Updates the status of an account. An account can have the following statuses app
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
+let apiInstance = new CityPay.CardHolderAccountApi();
 let accountid = "accountid_example"; // String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
-let account_status = new Citypay Api Client.AccountStatus(); // AccountStatus | 
+let account_status = new CityPay.AccountStatus(); // AccountStatus | 
 apiInstance.accountStatusRequest(accountid, account_status).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
@@ -439,16 +431,15 @@ A charge process obtains an authorisation using a tokenised value which represen
 ### Example
 
 ```javascript
-import Citypay Api Client from 'citypay-api';
-let defaultClient = Citypay Api Client.ApiClient.instance;
-// Configure API key authorization: cp-api-key
-let cp-api-key = defaultClient.authentications['cp-api-key'];
-cp-api-key.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//cp-api-key.apiKeyPrefix = 'Token';
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
 
-let apiInstance = new Citypay Api Client.CardHolderAccountApi();
-let charge_request = new Citypay Api Client.ChargeRequest(); // ChargeRequest | 
+let apiInstance = new CityPay.CardHolderAccountApi();
+let charge_request = new CityPay.ChargeRequest(); // ChargeRequest | 
 apiInstance.chargeRequest(charge_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
