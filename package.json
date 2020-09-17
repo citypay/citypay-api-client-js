@@ -1,6 +1,6 @@
 {
   "scope": "@citypay",
-  "name": "citypay-api-client",
+  "name": "citypay-api",
   "homepage": "https://github.com/citypay/citypay-api-client-js",
   "bugs": {
     "url": "https://github.com/citypay/citypay-api-client-js/issues",
