@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The Acknowledgement model module.
  * @module model/Acknowledgement
- * @version 1.0.0
  */
 class Acknowledgement {
     /**

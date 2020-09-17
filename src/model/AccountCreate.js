@@ -16,7 +16,6 @@ import ContactDetails from './ContactDetails';
 /**
  * The AccountCreate model module.
  * @module model/AccountCreate
- * @version 1.0.0
  */
 class AccountCreate {
     /**

@@ -16,7 +16,6 @@ import AirlineSegment from './AirlineSegment';
 /**
  * The AirlineAdvice model module.
  * @module model/AirlineAdvice
- * @version 1.0.0
  */
 class AirlineAdvice {
     /**

@@ -15,7 +15,6 @@ import ApiClient from '../ApiClient';
 /**
  * The AccountStatus model module.
  * @module model/AccountStatus
- * @version 1.0.0
  */
 class AccountStatus {
     /**
