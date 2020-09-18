@@ -46,11 +46,11 @@ class ListMerchantsResponse {
         if (data) {
             obj = obj || new ListMerchantsResponse();
 
-            if (data.hasOwnProperty('client_id')) {
-                obj['client_id'] = ApiClient.convertToType(data['client_id'], 'String');
-            }
             if (data.hasOwnProperty('client_name')) {
                 obj['client_name'] = ApiClient.convertToType(data['client_name'], 'String');
+            }
+            if (data.hasOwnProperty('clientid')) {
+                obj['clientid'] = ApiClient.convertToType(data['clientid'], 'String');
             }
             if (data.hasOwnProperty('merchants')) {
                 obj['merchants'] = ApiClient.convertToType(data['merchants'], [Merchant]);
@@ -63,16 +63,16 @@ class ListMerchantsResponse {
 }
 
 /**
- * The client id requested.
- * @member {String} client_id
- */
-ListMerchantsResponse.prototype['client_id'] = undefined;
-
-/**
  * The client name that was requested.
  * @member {String} client_name
  */
 ListMerchantsResponse.prototype['client_name'] = undefined;
+
+/**
+ * The client id requested.
+ * @member {String} clientid
+ */
+ListMerchantsResponse.prototype['clientid'] = undefined;
 
 /**
  * @member {Array.<module:model/Merchant>} merchants
