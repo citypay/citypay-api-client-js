@@ -27,7 +27,7 @@
     let json = {
         ListMerchantsResponse: {
             "client_name": "CityPay Demo",
-            "client_id": "PC123456",
+            "clientid": "PC123456",
             "merchants": [
                 {
                     "currency": "GBP",
@@ -67,7 +67,7 @@
         });
 
         it('should have the property clientid (base name: "client_id")', function () {
-            expect(instance.client_id).to.be("PC123456");
+            expect(instance.clientid).to.be("PC123456");
         });
 
         it('should have the property merchants (base name: "merchants")', function () {
