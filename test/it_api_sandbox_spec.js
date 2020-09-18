@@ -146,7 +146,7 @@ function uuidv4() {
 
 
                 let ack = await api.accountDeleteRequest(cha_id);
-                expect(ack.code).to.be("01");
+                expect(ack.code).to.be("001");
 
             });
 
