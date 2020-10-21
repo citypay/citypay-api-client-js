@@ -48,6 +48,9 @@ class ThreeDSecure {
             if (data.hasOwnProperty('accept_headers')) {
                 obj['accept_headers'] = ApiClient.convertToType(data['accept_headers'], 'String');
             }
+            if (data.hasOwnProperty('cp_bx')) {
+                obj['cp_bx'] = ApiClient.convertToType(data['cp_bx'], 'String');
+            }
             if (data.hasOwnProperty('downgrade1')) {
                 obj['downgrade1'] = ApiClient.convertToType(data['downgrade1'], 'Boolean');
             }
@@ -68,10 +71,16 @@ class ThreeDSecure {
 }
 
 /**
- * The content of the HTTP accept header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
+ * Required for 3DSv1. Optional if the `cp_bx` value is provided otherwise required for 3Dv2 processing operating in browser authentication mode.  The `cp_bx` value will override any value supplied to this field.  The content of the HTTP accept header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
  * @member {String} accept_headers
  */
 ThreeDSecure.prototype['accept_headers'] = undefined;
+
+/**
+ * Required for 3DSv2.  Browser extension value produced by the citypay.js `bx` function. See https://sandbox.citypay.com/3dsv2/bx for  details. 
+ * @member {String} cp_bx
+ */
+ThreeDSecure.prototype['cp_bx'] = undefined;
 
 /**
  * Where a merchant is configured for 3DSv2, setting this option will attempt to downgrade the transaction to  3DSv1. 
@@ -80,7 +89,7 @@ ThreeDSecure.prototype['accept_headers'] = undefined;
 ThreeDSecure.prototype['downgrade1'] = undefined;
 
 /**
- * A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing. Required if 3DSv1 or 3DSv2 is required. 
+ * Required for 3DSv1 and 3Dv2 processing.  A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing. Required if 3DSv1 or 3DSv2 is required. 
  * @member {String} merchant_termurl
  */
 ThreeDSecure.prototype['merchant_termurl'] = undefined;
@@ -92,7 +101,7 @@ ThreeDSecure.prototype['merchant_termurl'] = undefined;
 ThreeDSecure.prototype['tds_policy'] = undefined;
 
 /**
- * The content of the HTTP user-agent header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
+ * Required for 3DSv1. Optional if the `cp_bx` value is provided otherwise required 3Dv2 processing operating in browser authentication mode.  The `cp_bx` value will override any value supplied to this field.  The content of the HTTP user-agent header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
  * @member {String} user_agent
  */
 ThreeDSecure.prototype['user_agent'] = undefined;

@@ -31,6 +31,7 @@ import ChargeRequest from './model/ChargeRequest';
 import ContactDetails from './model/ContactDetails';
 import Decision from './model/Decision';
 import Error from './model/Error';
+import Exists from './model/Exists';
 import ExternalMPI from './model/ExternalMPI';
 import ListMerchantsResponse from './model/ListMerchantsResponse';
 import MCC6012 from './model/MCC6012';
@@ -47,6 +48,7 @@ import CardHolderAccountApi from './api/CardHolderAccountApi';
 import OperationalApi from './api/OperationalApi';
 import PaymentProcessingApi from './api/PaymentProcessingApi';
 import ApiKey from "./model/ApiKey";
+
 
 /**
 * JavaScript ECMAScript 6 client for the CityPay API.<br>
@@ -201,6 +203,12 @@ export {
      * @property {module:model/Error}
      */
     Error,
+
+    /**
+     * The Exists model constructor.
+     * @property {module:model/Exists}
+     */
+    Exists,
 
     /**
      * The ExternalMPI model constructor.

@@ -11,6 +11,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import ThreeDSecure from './ThreeDSecure';
 
 /**
  * The ChargeRequest model module.
@@ -82,6 +83,9 @@ class ChargeRequest {
             }
             if (data.hasOwnProperty('match_avsa')) {
                 obj['match_avsa'] = ApiClient.convertToType(data['match_avsa'], 'String');
+            }
+            if (data.hasOwnProperty('threedsecure')) {
+                obj['threedsecure'] = ThreeDSecure.constructFromObject(data['threedsecure']);
             }
             if (data.hasOwnProperty('trans_info')) {
                 obj['trans_info'] = ApiClient.convertToType(data['trans_info'], 'String');
@@ -155,6 +159,11 @@ ChargeRequest.prototype['duplicate_policy'] = undefined;
  * @member {String} match_avsa
  */
 ChargeRequest.prototype['match_avsa'] = undefined;
+
+/**
+ * @member {module:model/ThreeDSecure} threedsecure
+ */
+ChargeRequest.prototype['threedsecure'] = undefined;
 
 /**
  * Further information that can be added to the transaction will display in reporting. Can be used for flexible values such as operator id.

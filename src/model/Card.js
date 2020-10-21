@@ -75,6 +75,9 @@ class Card {
             if (data.hasOwnProperty('card_status')) {
                 obj['card_status'] = ApiClient.convertToType(data['card_status'], 'String');
             }
+            if (data.hasOwnProperty('date_created')) {
+                obj['date_created'] = ApiClient.convertToType(data['date_created'], 'Date');
+            }
             if (data.hasOwnProperty('default')) {
                 obj['default'] = ApiClient.convertToType(data['default'], 'Boolean');
             }
@@ -165,6 +168,12 @@ Card.prototype['card_id'] = undefined;
  * @member {String} card_status
  */
 Card.prototype['card_status'] = undefined;
+
+/**
+ * The date time of when the card was created.
+ * @member {Date} date_created
+ */
+Card.prototype['date_created'] = undefined;
 
 /**
  * Determines if the card is the default card for the account and should be regarded as the first option to be used for processing.
