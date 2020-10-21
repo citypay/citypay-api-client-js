@@ -13,6 +13,7 @@
 import ApiClient from '../ApiClient';
 import Card from './Card';
 import ContactDetails from './ContactDetails';
+import DateTime from './DateTime';
 
 /**
  * The CardHolderAccount model module.
@@ -69,6 +70,9 @@ class CardHolderAccount {
             if (data.hasOwnProperty('default_card_index')) {
                 obj['default_card_index'] = ApiClient.convertToType(data['default_card_index'], 'Number');
             }
+            if (data.hasOwnProperty('last_modified')) {
+                obj['last_modified'] = ApiClient.convertToType(data['last_modified'], 'Date');
+            }
             if (data.hasOwnProperty('status')) {
                 obj['status'] = ApiClient.convertToType(data['status'], 'String');
             }
@@ -115,6 +119,12 @@ CardHolderAccount.prototype['default_card_id'] = undefined;
  * @member {Number} default_card_index
  */
 CardHolderAccount.prototype['default_card_index'] = undefined;
+
+/**
+ * The date and time the account was last modified.
+ * @member {module:model/Date} last_modified
+ */
+CardHolderAccount.prototype['last_modified'] = undefined;
 
 /**
  * Defines the status of the account for processing valid values are   - ACTIVE for active accounts that are able to process  - DISABLED for accounts that are currently disabled for processing. 

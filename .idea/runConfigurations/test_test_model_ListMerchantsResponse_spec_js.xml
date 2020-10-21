@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="test test/model/ListMerchantsResponse.spec.js" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="test" />
+    </scripts>
+    <arguments value="test/model/ListMerchantsResponse.spec.js " />
+    <node-interpreter value="project" />
+    <envs>
+      <env name="CP_CLIENT_ID" value="PC03480" />
+      <env name="CP_LICENCE_KEY" value="PSMGE5KV2OJ78E54" />
+      <env name="CP_MERCHANT_ID" value="105" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

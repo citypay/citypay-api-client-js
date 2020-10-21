@@ -21,6 +21,7 @@ import ChargeRequest from '../model/ChargeRequest';
 import ContactDetails from '../model/ContactDetails';
 import Decision from '../model/Decision';
 import Error from '../model/Error';
+import Exists from '../model/Exists';
 import RegisterCard from '../model/RegisterCard';
 
 /**
@@ -355,6 +356,54 @@ export default class CardHolderAccountApi {
      */
     accountDeleteRequest(accountid) {
       return this.accountDeleteRequestWithHttpInfo(accountid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Account Exists
+     * .
+     * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Exists} and HTTP response
+     */
+    accountExistsRequestWithHttpInfo(accountid) {
+      let postBody = null;
+      // verify the required parameter 'accountid' is set
+      if (accountid === undefined || accountid === null) {
+        throw new Error("Missing the required parameter 'accountid' when calling accountExistsRequest");
+      }
+
+      let pathParams = {
+        'accountid': accountid
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = [];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Exists;
+      return this.apiClient.callApi(
+        '/account-exists/{accountid}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Account Exists
+     * .
+     * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Exists}
+     */
+    accountExistsRequest(accountid) {
+      return this.accountExistsRequestWithHttpInfo(accountid)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
