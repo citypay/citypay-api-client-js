@@ -13,7 +13,6 @@
 import ApiClient from '../ApiClient';
 import Card from './Card';
 import ContactDetails from './ContactDetails';
-import DateTime from './DateTime';
 
 /**
  * The CardHolderAccount model module.
