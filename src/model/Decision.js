@@ -73,6 +73,7 @@ class Decision {
         return this.RequestChallenged !== undefined;
     }
 
+
 }
 
 /**
