@@ -19,15 +19,15 @@
     factory(require('expect.js'), require(process.cwd()+'/src/index'));
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.Citypay Api Client);
+    factory(root.expect, root.citypay_api_client);
   }
-}(this, function(expect, Citypay Api Client) {
+}(this, function(expect, citypay_api_client) {
   'use strict';
 
   var instance;
 
   beforeEach(function() {
-    instance = new Citypay Api Client.Exists();
+    // instance = new Citypay Api Client.Exists();
   });
 
   var getProperty = function(object, getter, property) {
