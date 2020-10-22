@@ -117,4 +117,5 @@ dist
 /.openapi-generator/
 /git_push.sh
 /.config/
-.idea
+.idea/
+Library/
