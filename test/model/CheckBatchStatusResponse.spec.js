@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.Exists();
+    // instance = new Citypay Api Client.CheckBatchStatusResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,28 +46,28 @@
       object[property] = value;
   }
 
-  describe('Exists', function() {
-    it('should create an instance of Exists', function() {
-      // uncomment below and update the code to test Exists
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be.a(Citypay Api Client.Exists);
+  describe('CheckBatchStatusResponse', function() {
+    it('should create an instance of CheckBatchStatusResponse', function() {
+      // uncomment below and update the code to test CheckBatchStatusResponse
+      //var // instance = new Citypay Api Client.CheckBatchStatusResponse();
+      //expect(instance).to.be.a(Citypay Api Client.CheckBatchStatusResponse);
     });
 
-    it('should have the property exists (base name: "exists")', function() {
-      // uncomment below and update the code to test the property exists
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property batch_date (base name: "batch_date")', function() {
+      // uncomment below and update the code to test the property batch_date
+      //var // instance = new Citypay Api Client.CheckBatchStatusResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property active (base name: "active")', function() {
-      // uncomment below and update the code to test the property active
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property batch_status (base name: "batch_status")', function() {
+      // uncomment below and update the code to test the property batch_status
+      //var // instance = new Citypay Api Client.CheckBatchStatusResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property last_modified (base name: "last_modified")', function() {
-      // uncomment below and update the code to test the property last_modified
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property batch_id (base name: "batch_id")', function() {
+      // uncomment below and update the code to test the property batch_id
+      //var // instance = new Citypay Api Client.CheckBatchStatusResponse();
       //expect(instance).to.be();
     });
 

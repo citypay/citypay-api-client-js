@@ -158,19 +158,19 @@ AuthResponse.prototype['atsd'] = undefined;
 AuthResponse.prototype['authcode'] = undefined;
 
 /**
- * The result of any authentication using 3d_secure authorisation against ecommerce transactions. Values are | Value | Description | |-------|-------------| | Y | Authentication Successful. The Cardholder's password was successfully validated. | | N | Authentication Failed. Customer failed or cancelled authentication, transaction denied. | | A | Attempts Processing Performed Authentication could not be completed but a proof of authentication attempt (CAVV) was generated | | U | Authentication Could Not Be Performed Authentication could not be completed, due to technical or other problem | 
+ * The result of any authentication using 3d_secure authorisation against ecommerce transactions. Values are:  <table> <tr> <th>Value</th> <th>Description</th> </tr> <tr> <td>Y</td> <td>Authentication Successful. The Cardholder's password was successfully validated.</td> </tr> <tr> <td>N</td> <td>Authentication Failed. Customer failed or cancelled authentication, transaction denied.</td> </tr> <tr> <td>A</td> <td>Attempts Processing Performed Authentication could not be completed but a proof of authentication attempt (CAVV) was generated.</td> </tr> <tr> <td>U</td> <td>Authentication Could Not Be Performed Authentication could not be completed, due to technical or other problem.</td> </tr> </table> 
  * @member {String} authen_result
  */
 AuthResponse.prototype['authen_result'] = undefined;
 
 /**
- * A boolean definition that indicates that the transaction was authorised. It will return false if the transaction  was declined, rejected or cancelled due to CSC matching failures. Attention should be referenced to the AuthResult and Response code for accurate determination of the result. 
+ * A boolean definition that indicates that the transaction was authorised. It will return false if the transaction  was declined, rejected or cancelled due to CSC matching failures.  Attention should be referenced to the AuthResult and Response code for accurate determination of the result. 
  * @member {Boolean} authorised
  */
 AuthResponse.prototype['authorised'] = undefined;
 
 /**
- * The AVS result codes determine the result of checking the AVS values within the Address Verification fraud system. If a transaction is declined due to the AVS code not matching, this value can help determine the reason for the decline.   | Code | Description |  |------|------------|  | Y | Address and 5 digit post code match |  | M | Street address and Postal codes match for international transaction |  | U | No AVS data available from issuer auth system |  | A | Addres matches, post code does not |  | I | Address information verified for international transaction |  | Z | 5 digit post code matches, Address does not |  | W | 9 digit post code matches, Address does not |  | X | Postcode and address match |  | B | Postal code not verified due to incompatible formats |  | P | Postal codes match. Street address not verified due to to incompatible formats |  | E | AVS Error |  | C | Street address and Postal code not verified due to incompatible formats |  | D | Street address and postal codes match |  |   | No information |  | N | Neither postcode nor address match |  | R | Retry, System unavailble or Timed Out |  | S | AVS Service not supported by issuer or processor |  | G | Issuer does not participate in AVS | 
+ * The AVS result codes determine the result of checking the AVS values within the Address Verification fraud system. If a transaction is declined due to the AVS code not matching, this value can help determine the reason for the decline.  <table> <tr> <th>Code</th> <th>Description</th> </tr> <tr><td>Y</td><td>Address and 5 digit post code match</td></tr> <tr><td>M</td><td>Street address and Postal codes match for international transaction</td></tr> <tr><td>U</td><td>No AVS data available from issuer auth system</td></tr> <tr><td>A</td><td>Addres matches, post code does not</td></tr> <tr><td>I</td><td>Address information verified for international transaction</td></tr> <tr><td>Z</td><td>5 digit post code matches, Address does not</td></tr> <tr><td>W</td><td>9 digit post code matches, Address does not</td></tr> <tr><td>X</td><td>Postcode and address match</td></tr> <tr><td>B</td><td>Postal code not verified due to incompatible formats</td></tr> <tr><td>P</td><td>Postal codes match. Street address not verified due to to incompatible formats</td></tr> <tr><td>E</td><td>AVS Error</td></tr> <tr><td>C</td><td>Street address and Postal code not verified due to incompatible formats</td></tr> <tr><td>D</td><td>Street address and postal codes match</td></tr> <tr><td> </td><td>No information</td></tr> <tr><td>N</td><td>Neither postcode nor address match</td></tr> <tr><td>R</td><td>Retry, System unavailble or Timed Out</td></tr> <tr><td>S</td><td>AVS Service not supported by issuer or processor</td></tr> <tr><td>G</td><td>Issuer does not participate in AVS</td></tr> </table> 
  * @member {String} avs_result
  */
 AuthResponse.prototype['avs_result'] = undefined;
@@ -206,7 +206,7 @@ AuthResponse.prototype['cavv'] = undefined;
 AuthResponse.prototype['context'] = undefined;
 
 /**
- * The CSC rseult codes determine the result of checking the provided CSC value within the Card Security Code fraud system. If a transaction is declined due to the CSC code not matching, this value can help determine the reason for the decline.   | Code | Description |  |------|------------|  |   | No information |  | M | Card verification data matches |  | N | Card verification data was checked but did not match |  | P | Card verification was not processed |  | S | The card verification data should be on the card but the merchant indicates that it is not |  | U | The card issuer is not certified | 
+ * The CSC rseult codes determine the result of checking the provided CSC value within the Card Security Code fraud system. If a transaction is declined due to the CSC code not matching, this value can help determine the reason for the decline.  <table> <tr> <th>Code</th> <th>Description</th> </tr> <tr><td> </td><td>No information</td></tr> <tr><td>M</td><td>Card verification data matches</td></tr> <tr><td>N</td><td>Card verification data was checked but did not match</td></tr> <tr><td>P</td><td>Card verification was not processed</td></tr> <tr><td>S</td><td>The card verification data should be on the card but the merchant indicates that it is not</td></tr> <tr><td>U</td><td>The card issuer is not certified</td></tr> </table> 
  * @member {String} csc_result
  */
 AuthResponse.prototype['csc_result'] = undefined;
@@ -236,7 +236,7 @@ AuthResponse.prototype['eci'] = undefined;
 AuthResponse.prototype['identifier'] = undefined;
 
 /**
- * Used to identify that a tranasction was processed on a live authorisation platform.
+ * Used to identify that a transaction was processed on a live authorisation platform.
  * @member {Boolean} live
  */
 AuthResponse.prototype['live'] = undefined;
@@ -254,13 +254,13 @@ AuthResponse.prototype['maskedpan'] = undefined;
 AuthResponse.prototype['merchantid'] = undefined;
 
 /**
- * An integer result that indicates the outcome of the transaction. The Code value below maps to the result value   | Code | Abbrev | Description |  |------|-------|-------------|  | 0 | Declined | Declined |  | 1 | Accepted | Accepted |  | 2 | Rejected | Rejected |  | 3 | Not Attempted | Not Attempted |  | 4 | Referred | Referred |  | 5 | PinRetry | Perform PIN Retry |  | 6 | ForSigVer | Force Signature Verification |  | 7 | Hold | Hold |  | 8 | SecErr | Security Error |  | 9 | CallAcq | Call Acquirer |  | 10 | DNH | Do Not Honour |  | 11 | RtnCrd | Retain Card |  | 12 | ExprdCrd | Expired Card |  | 13 | InvldCrd | Invalid Card No |  | 14 | PinExcd | Pin Tries Exceeded |  | 15 | PinInvld | Pin Invalid |  | 16 | AuthReq | Authentication Required |  | 17 | AuthenFail | Authentication Failed |  | 18 | Verified | Card Verified |  | 19 | Cancelled | Cancelled |  | 20 | Un | Unknown | 
+ * An integer result that indicates the outcome of the transaction. The Code value below maps to the result value  <table> <tr> <th>Code</th> <th>Abbrev</th> <th>Description</th> </tr> <tr><td>0</td><td>Declined</td><td>Declined</td></tr> <tr><td>1</td><td>Accepted</td><td>Accepted</td></tr> <tr><td>2</td><td>Rejected</td><td>Rejected</td></tr> <tr><td>3</td><td>Not Attempted</td><td>Not Attempted</td></tr> <tr><td>4</td><td>Referred</td><td>Referred</td></tr> <tr><td>5</td><td>PinRetry</td><td>Perform PIN Retry</td></tr> <tr><td>6</td><td>ForSigVer</td><td>Force Signature Verification</td></tr> <tr><td>7</td><td>Hold</td><td>Hold</td></tr> <tr><td>8</td><td>SecErr</td><td>Security Error</td></tr> <tr><td>9</td><td>CallAcq</td><td>Call Acquirer</td></tr> <tr><td>10</td><td>DNH</td><td>Do Not Honour</td></tr> <tr><td>11</td><td>RtnCrd</td><td>Retain Card</td></tr> <tr><td>12</td><td>ExprdCrd</td><td>Expired Card</td></tr> <tr><td>13</td><td>InvldCrd</td><td>Invalid Card No</td></tr> <tr><td>14</td><td>PinExcd</td><td>Pin Tries Exceeded</td></tr> <tr><td>15</td><td>PinInvld</td><td>Pin Invalid</td></tr> <tr><td>16</td><td>AuthReq</td><td>Authentication Required</td></tr> <tr><td>17</td><td>AuthenFail</td><td>Authentication Failed</td></tr> <tr><td>18</td><td>Verified</td><td>Card Verified</td></tr> <tr><td>19</td><td>Cancelled</td><td>Cancelled</td></tr> <tr><td>20</td><td>Un</td><td>Unknown</td></tr> </table> 
  * @member {Number} result
  */
 AuthResponse.prototype['result'] = undefined;
 
 /**
- * The result code as defined in the Response Codes Reference for example 000 is an accepted live transaction whilst 001 is an accepted test transaction. Result codes identify the source of success and failure. Codes may start with an alpha character i.e. C001 indicating a type of error such as a card validation error. 
+ * The result code as defined in the Response Codes Reference for example 000 is an accepted live transaction whilst 001 is an accepted test transaction. Result codes identify the source of success and failure.  Codes may start with an alpha character i.e. C001 indicating a type of error such as a card validation error. 
  * @member {String} result_code
  */
 AuthResponse.prototype['result_code'] = undefined;
@@ -278,13 +278,13 @@ AuthResponse.prototype['result_message'] = undefined;
 AuthResponse.prototype['scheme'] = undefined;
 
 /**
- * A SHA256 digest value of the transaction used to validate the response data The digest is calculated by concatenating  * authcode  * amount  * response_code  * merchant_id  * trans_no  * identifier  * licence_key - which is not provided in the response. 
+ * A SHA256 digest value of the transaction used to validate the response data The digest is calculated by concatenating   * authcode   * amount   * response_code   * merchant_id   * trans_no   * identifier   * licence_key - which is not provided in the response. 
  * @member {String} sha256
  */
 AuthResponse.prototype['sha256'] = undefined;
 
 /**
- * Used to identify the status of a transaction. The status is used to track a transaction through its life cycle.  | Id | Description | |----|-------------| | O | Transaction is open for settlement | | A | Transaction is assigned for settlement and can no longer be voided | | S | Transaction has been settled   | | D | Transaction has been declined | | R | Transaction has been rejected | | P | Transaction has been authorised only and awaiting a capture. Used in pre-auth situations | | C | Transaction has been cancelled | | E | Transaction has expired | | I | Transaction has been initialised but no action was able to be carried out | | H | Transaction is awaiting authorisation | | . | Transaction is on hold | | V | Transaction has been verified | 
+ * Used to identify the status of a transaction. The status is used to track a transaction through its life cycle.  <table> <tr> <th>Id</th> <th>Description</th> </tr> <tr> <td>O</td> <td>Transaction is open for settlement</td> </tr> <tr> <td>A</td> <td>Transaction is assigned for settlement and can no longer be voided</td> </tr> <tr> <td>S</td> <td>Transaction has been settled</td> </tr> <tr> <td>D</td> <td>Transaction has been declined</td> </tr> <tr> <td>R</td> <td>Transaction has been rejected</td> </tr> <tr> <td>P</td> <td>Transaction has been authorised only and awaiting a capture. Used in pre-auth situations</td> </tr> <tr> <td>C</td> <td>Transaction has been cancelled</td> </tr> <tr> <td>E</td> <td>Transaction has expired</td> </tr> <tr> <td>I</td> <td>Transaction has been initialised but no action was able to be carried out</td> </tr> <tr> <td>H</td> <td>Transaction is awaiting authorisation</td> </tr> <tr> <td>.</td> <td>Transaction is on hold</td> </tr> <tr> <td>V</td> <td>Transaction has been verified</td> </tr> </table> 
  * @member {String} trans_status
  */
 AuthResponse.prototype['trans_status'] = undefined;

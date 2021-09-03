@@ -327,7 +327,7 @@ Name | Type | Description  | Notes
 
 Account Exists
 
-.
+Checks that an account exists and is active by providing the account id as a url parameter  Checks that an account exists and is active by providing the account id as a url parameter. 
 
 ### Example
 

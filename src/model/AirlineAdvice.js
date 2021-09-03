@@ -28,7 +28,7 @@ class AirlineAdvice {
      * @param ticket_issue_date {Date} The date the ticket was issued in ISO Date format (yyyy-MM-dd).
      * @param ticket_issue_name {String} The name of the agency generating the ticket.
      * @param ticket_no {String} This must be a valid ticket number, i.e. numeric (the first 3 digits must represent the valid IATA plate carrier code). The final check digit should be validated prior to submission. On credit charges, this field should contain the number of the original ticket, and not of a replacement. 
-     * @param transaction_type {String} This field contains the Transaction Type code assigned to this transaction. Valid codes include:   - `TKT` = Ticket Purchase  - `REF` = Refund  - `EXC` = Exchange Ticket  - `MSC` = Miscellaneous (non-Ticket Purchase- and non-Exchange Ticket-related transactions only). 
+     * @param transaction_type {String} This field contains the Transaction Type code assigned to this transaction. Valid codes include:   - `TKT` = Ticket Purchase   - `REF` = Refund   - `EXC` = Exchange Ticket   - `MSC` = Miscellaneous (non-Ticket Purchase- and non-Exchange Ticket-related transactions only). 
      */
     constructor(carrier_name, number_in_party, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type) { 
         
@@ -159,7 +159,7 @@ AirlineAdvice.prototype['ticket_issue_name'] = undefined;
 AirlineAdvice.prototype['ticket_no'] = undefined;
 
 /**
- * This field contains the Transaction Type code assigned to this transaction. Valid codes include:   - `TKT` = Ticket Purchase  - `REF` = Refund  - `EXC` = Exchange Ticket  - `MSC` = Miscellaneous (non-Ticket Purchase- and non-Exchange Ticket-related transactions only). 
+ * This field contains the Transaction Type code assigned to this transaction. Valid codes include:   - `TKT` = Ticket Purchase   - `REF` = Refund   - `EXC` = Exchange Ticket   - `MSC` = Miscellaneous (non-Ticket Purchase- and non-Exchange Ticket-related transactions only). 
  * @member {String} transaction_type
  */
 AirlineAdvice.prototype['transaction_type'] = undefined;
@@ -177,7 +177,7 @@ AirlineAdvice.prototype['conjunction_ticket_indicator'] = undefined;
 AirlineAdvice.prototype['eticket_indicator'] = undefined;
 
 /**
- * A value that indicates the number of air travel segments included on this ticket. Valid entries include the numerals “0” through “4”. Required only if the transaction type is TKT or EXC. 
+ * A value that indicates the number of air travel segments included on this ticket.  Valid entries include the numerals “0” through “4”. Required only if the transaction type is TKT or EXC. 
  * @member {Number} no_air_segments
  */
 AirlineAdvice.prototype['no_air_segments'] = undefined;

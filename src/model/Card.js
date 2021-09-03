@@ -164,7 +164,7 @@ Card.prototype['bin_eu'] = undefined;
 Card.prototype['card_id'] = undefined;
 
 /**
- * The status of the card such, valid values are  - ACTIVE the card is active for processing  - INACTIVE the card is not active for processing  - EXPIRED for cards that have passed their expiry date. 
+ * The status of the card such, valid values are   - ACTIVE the card is active for processing   - INACTIVE the card is not active for processing   - EXPIRED for cards that have passed their expiry date. 
  * @member {String} card_status
  */
 Card.prototype['card_status'] = undefined;

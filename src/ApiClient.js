@@ -17,7 +17,7 @@ import ApiKey from "./model/ApiKey";
 
 /**
 * @module ApiClient
-* @version 1.0.7
+* @version 1.0.8
 */
 
 /**
@@ -32,7 +32,7 @@ class ApiClient {
 
         this.config = config || {};
 
-        this.version = "1.0.7";
+        this.version = "1.0.8";
 
         /**
          * The base URL against which to resolve every API call's (relative) path.
