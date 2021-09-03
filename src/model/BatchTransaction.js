@@ -13,17 +13,19 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The RequestChallenged model module.
- * @module model/RequestChallenged
+ * The BatchTransaction model module.
+ * @module model/BatchTransaction
  */
-class RequestChallenged {
+class BatchTransaction {
     /**
-     * Constructs a new <code>RequestChallenged</code>.
-     * @alias module:model/RequestChallenged
+     * Constructs a new <code>BatchTransaction</code>.
+     * @alias module:model/BatchTransaction
+     * @param account_id {String} The card holder account id to process against.
+     * @param amount {Number} The amount required to process in the lowest denomination.
      */
-    constructor() { 
+    constructor(account_id, amount) { 
         
-        RequestChallenged.initialize(this);
+        BatchTransaction.initialize(this, account_id, amount);
     }
 
     /**
@@ -31,34 +33,33 @@ class RequestChallenged {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj) { 
+    static initialize(obj, account_id, amount) { 
+        obj['account_id'] = account_id;
+        obj['amount'] = amount;
     }
 
     /**
-     * Constructs a <code>RequestChallenged</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>BatchTransaction</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/RequestChallenged} obj Optional instance to populate.
-     * @return {module:model/RequestChallenged} The populated <code>RequestChallenged</code> instance.
+     * @param {module:model/BatchTransaction} obj Optional instance to populate.
+     * @return {module:model/BatchTransaction} The populated <code>BatchTransaction</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new RequestChallenged();
+            obj = obj || new BatchTransaction();
 
-            if (data.hasOwnProperty('acs_url')) {
-                obj['acs_url'] = ApiClient.convertToType(data['acs_url'], 'String');
+            if (data.hasOwnProperty('account_id')) {
+                obj['account_id'] = ApiClient.convertToType(data['account_id'], 'String');
             }
-            if (data.hasOwnProperty('creq')) {
-                obj['creq'] = ApiClient.convertToType(data['creq'], 'String');
+            if (data.hasOwnProperty('amount')) {
+                obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
+            }
+            if (data.hasOwnProperty('identifier')) {
+                obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
             }
             if (data.hasOwnProperty('merchantid')) {
                 obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
-            }
-            if (data.hasOwnProperty('threedserver_trans_id')) {
-                obj['threedserver_trans_id'] = ApiClient.convertToType(data['threedserver_trans_id'], 'String');
-            }
-            if (data.hasOwnProperty('transno')) {
-                obj['transno'] = ApiClient.convertToType(data['transno'], 'Number');
             }
         }
         return obj;
@@ -68,39 +69,33 @@ class RequestChallenged {
 }
 
 /**
- * The url of the Access Control Server (ACS) to forward the user to. 
- * @member {String} acs_url
+ * The card holder account id to process against.
+ * @member {String} account_id
  */
-RequestChallenged.prototype['acs_url'] = undefined;
+BatchTransaction.prototype['account_id'] = undefined;
 
 /**
- * The challenge request data which is encoded for usage by the ACS.
- * @member {String} creq
+ * The amount required to process in the lowest denomination.
+ * @member {Number} amount
  */
-RequestChallenged.prototype['creq'] = undefined;
+BatchTransaction.prototype['amount'] = undefined;
 
 /**
- * The merchant id that processed this transaction.
+ * An identifier used to reference the transaction set by your integration. The value should be used to refer to the transaction in future calls.
+ * @member {String} identifier
+ */
+BatchTransaction.prototype['identifier'] = undefined;
+
+/**
+ * The CityPay merchant id used to process the transaction.
  * @member {Number} merchantid
  */
-RequestChallenged.prototype['merchantid'] = undefined;
-
-/**
- * The 3DSv2 trans id reference for the challenge process. May be used to create the ThreeDSSessionData value to send to the ACS.
- * @member {String} threedserver_trans_id
- */
-RequestChallenged.prototype['threedserver_trans_id'] = undefined;
-
-/**
- * The transaction number for the challenge, ordered incrementally from 1 for every merchant_id. 
- * @member {Number} transno
- */
-RequestChallenged.prototype['transno'] = undefined;
+BatchTransaction.prototype['merchantid'] = undefined;
 
 
 
 
 
 
-export default RequestChallenged;
+export default BatchTransaction;
 

@@ -13,17 +13,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The RequestChallenged model module.
- * @module model/RequestChallenged
+ * The ProcessBatchResponse model module.
+ * @module model/ProcessBatchResponse
  */
-class RequestChallenged {
+class ProcessBatchResponse {
     /**
-     * Constructs a new <code>RequestChallenged</code>.
-     * @alias module:model/RequestChallenged
+     * Constructs a new <code>ProcessBatchResponse</code>.
+     * @alias module:model/ProcessBatchResponse
+     * @param valid {Boolean} true if the request has been accepted for processing and is valid.
      */
-    constructor() { 
+    constructor(valid) { 
         
-        RequestChallenged.initialize(this);
+        ProcessBatchResponse.initialize(this, valid);
     }
 
     /**
@@ -31,34 +32,26 @@ class RequestChallenged {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj) { 
+    static initialize(obj, valid) { 
+        obj['valid'] = valid;
     }
 
     /**
-     * Constructs a <code>RequestChallenged</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>ProcessBatchResponse</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/RequestChallenged} obj Optional instance to populate.
-     * @return {module:model/RequestChallenged} The populated <code>RequestChallenged</code> instance.
+     * @param {module:model/ProcessBatchResponse} obj Optional instance to populate.
+     * @return {module:model/ProcessBatchResponse} The populated <code>ProcessBatchResponse</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new RequestChallenged();
+            obj = obj || new ProcessBatchResponse();
 
-            if (data.hasOwnProperty('acs_url')) {
-                obj['acs_url'] = ApiClient.convertToType(data['acs_url'], 'String');
+            if (data.hasOwnProperty('valid')) {
+                obj['valid'] = ApiClient.convertToType(data['valid'], 'Boolean');
             }
-            if (data.hasOwnProperty('creq')) {
-                obj['creq'] = ApiClient.convertToType(data['creq'], 'String');
-            }
-            if (data.hasOwnProperty('merchantid')) {
-                obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
-            }
-            if (data.hasOwnProperty('threedserver_trans_id')) {
-                obj['threedserver_trans_id'] = ApiClient.convertToType(data['threedserver_trans_id'], 'String');
-            }
-            if (data.hasOwnProperty('transno')) {
-                obj['transno'] = ApiClient.convertToType(data['transno'], 'Number');
+            if (data.hasOwnProperty('message')) {
+                obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
         }
         return obj;
@@ -68,39 +61,21 @@ class RequestChallenged {
 }
 
 /**
- * The url of the Access Control Server (ACS) to forward the user to. 
- * @member {String} acs_url
+ * true if the request has been accepted for processing and is valid.
+ * @member {Boolean} valid
  */
-RequestChallenged.prototype['acs_url'] = undefined;
+ProcessBatchResponse.prototype['valid'] = undefined;
 
 /**
- * The challenge request data which is encoded for usage by the ACS.
- * @member {String} creq
+ * Information regarding the processing request.
+ * @member {String} message
  */
-RequestChallenged.prototype['creq'] = undefined;
-
-/**
- * The merchant id that processed this transaction.
- * @member {Number} merchantid
- */
-RequestChallenged.prototype['merchantid'] = undefined;
-
-/**
- * The 3DSv2 trans id reference for the challenge process. May be used to create the ThreeDSSessionData value to send to the ACS.
- * @member {String} threedserver_trans_id
- */
-RequestChallenged.prototype['threedserver_trans_id'] = undefined;
-
-/**
- * The transaction number for the challenge, ordered incrementally from 1 for every merchant_id. 
- * @member {Number} transno
- */
-RequestChallenged.prototype['transno'] = undefined;
+ProcessBatchResponse.prototype['message'] = undefined;
 
 
 
 
 
 
-export default RequestChallenged;
+export default ProcessBatchResponse;
 

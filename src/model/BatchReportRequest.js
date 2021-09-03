@@ -13,17 +13,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The RequestChallenged model module.
- * @module model/RequestChallenged
+ * The BatchReportRequest model module.
+ * @module model/BatchReportRequest
  */
-class RequestChallenged {
+class BatchReportRequest {
     /**
-     * Constructs a new <code>RequestChallenged</code>.
-     * @alias module:model/RequestChallenged
+     * Constructs a new <code>BatchReportRequest</code>.
+     * @alias module:model/BatchReportRequest
+     * @param batch_id {Number} The batch id specified in the batch processing request.
      */
-    constructor() { 
+    constructor(batch_id) { 
         
-        RequestChallenged.initialize(this);
+        BatchReportRequest.initialize(this, batch_id);
     }
 
     /**
@@ -31,34 +32,26 @@ class RequestChallenged {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj) { 
+    static initialize(obj, batch_id) { 
+        obj['batch_id'] = batch_id;
     }
 
     /**
-     * Constructs a <code>RequestChallenged</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>BatchReportRequest</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/RequestChallenged} obj Optional instance to populate.
-     * @return {module:model/RequestChallenged} The populated <code>RequestChallenged</code> instance.
+     * @param {module:model/BatchReportRequest} obj Optional instance to populate.
+     * @return {module:model/BatchReportRequest} The populated <code>BatchReportRequest</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new RequestChallenged();
+            obj = obj || new BatchReportRequest();
 
-            if (data.hasOwnProperty('acs_url')) {
-                obj['acs_url'] = ApiClient.convertToType(data['acs_url'], 'String');
+            if (data.hasOwnProperty('batch_id')) {
+                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], 'Number');
             }
-            if (data.hasOwnProperty('creq')) {
-                obj['creq'] = ApiClient.convertToType(data['creq'], 'String');
-            }
-            if (data.hasOwnProperty('merchantid')) {
-                obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
-            }
-            if (data.hasOwnProperty('threedserver_trans_id')) {
-                obj['threedserver_trans_id'] = ApiClient.convertToType(data['threedserver_trans_id'], 'String');
-            }
-            if (data.hasOwnProperty('transno')) {
-                obj['transno'] = ApiClient.convertToType(data['transno'], 'Number');
+            if (data.hasOwnProperty('account_id')) {
+                obj['account_id'] = ApiClient.convertToType(data['account_id'], 'String');
             }
         }
         return obj;
@@ -68,39 +61,21 @@ class RequestChallenged {
 }
 
 /**
- * The url of the Access Control Server (ACS) to forward the user to. 
- * @member {String} acs_url
+ * The batch id specified in the batch processing request.
+ * @member {Number} batch_id
  */
-RequestChallenged.prototype['acs_url'] = undefined;
+BatchReportRequest.prototype['batch_id'] = undefined;
 
 /**
- * The challenge request data which is encoded for usage by the ACS.
- * @member {String} creq
+ * The batch account id that the batch was processed for. Defaults to your client id if not provided.
+ * @member {String} account_id
  */
-RequestChallenged.prototype['creq'] = undefined;
-
-/**
- * The merchant id that processed this transaction.
- * @member {Number} merchantid
- */
-RequestChallenged.prototype['merchantid'] = undefined;
-
-/**
- * The 3DSv2 trans id reference for the challenge process. May be used to create the ThreeDSSessionData value to send to the ACS.
- * @member {String} threedserver_trans_id
- */
-RequestChallenged.prototype['threedserver_trans_id'] = undefined;
-
-/**
- * The transaction number for the challenge, ordered incrementally from 1 for every merchant_id. 
- * @member {Number} transno
- */
-RequestChallenged.prototype['transno'] = undefined;
+BatchReportRequest.prototype['account_id'] = undefined;
 
 
 
 
 
 
-export default RequestChallenged;
+export default BatchReportRequest;
 

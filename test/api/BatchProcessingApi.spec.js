@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.Exists();
+    // instance = new Citypay Api Client.BatchProcessingApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,31 +46,37 @@
       object[property] = value;
   }
 
-  describe('Exists', function() {
-    it('should create an instance of Exists', function() {
-      // uncomment below and update the code to test Exists
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be.a(Citypay Api Client.Exists);
+  describe('BatchProcessingApi', function() {
+    describe('batchProcessRequest', function() {
+      it('should call batchProcessRequest successfully', function(done) {
+        //uncomment below and update the code to test batchProcessRequest
+        //instance.batchProcessRequest(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property exists (base name: "exists")', function() {
-      // uncomment below and update the code to test the property exists
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be();
+    describe('checkBatchStatusRequest', function() {
+      it('should call checkBatchStatusRequest successfully', function(done) {
+        //uncomment below and update the code to test checkBatchStatusRequest
+        //instance.checkBatchStatusRequest(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property active (base name: "active")', function() {
-      // uncomment below and update the code to test the property active
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be();
+    describe('getBatchReportRequest', function() {
+      it('should call getBatchReportRequest successfully', function(done) {
+        //uncomment below and update the code to test getBatchReportRequest
+        //instance.getBatchReportRequest(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property last_modified (base name: "last_modified")', function() {
-      // uncomment below and update the code to test the property last_modified
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be();
-    });
-
   });
 
 }));

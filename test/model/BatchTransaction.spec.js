@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.Exists();
+    // instance = new Citypay Api Client.BatchTransaction();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,28 +46,34 @@
       object[property] = value;
   }
 
-  describe('Exists', function() {
-    it('should create an instance of Exists', function() {
-      // uncomment below and update the code to test Exists
-      //var instane = new Citypay Api Client.Exists();
-      //expect(instance).to.be.a(Citypay Api Client.Exists);
+  describe('BatchTransaction', function() {
+    it('should create an instance of BatchTransaction', function() {
+      // uncomment below and update the code to test BatchTransaction
+      //var // instance = new Citypay Api Client.BatchTransaction();
+      //expect(instance).to.be.a(Citypay Api Client.BatchTransaction);
     });
 
-    it('should have the property exists (base name: "exists")', function() {
-      // uncomment below and update the code to test the property exists
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property account_id (base name: "account_id")', function() {
+      // uncomment below and update the code to test the property account_id
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 
-    it('should have the property active (base name: "active")', function() {
-      // uncomment below and update the code to test the property active
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property amount (base name: "amount")', function() {
+      // uncomment below and update the code to test the property amount
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 
-    it('should have the property last_modified (base name: "last_modified")', function() {
-      // uncomment below and update the code to test the property last_modified
-      //var instane = new Citypay Api Client.Exists();
+    it('should have the property identifier (base name: "identifier")', function() {
+      // uncomment below and update the code to test the property identifier
+      //var // instance = new Citypay Api Client.BatchTransaction();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property merchantid (base name: "merchantid")', function() {
+      // uncomment below and update the code to test the property merchantid
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 

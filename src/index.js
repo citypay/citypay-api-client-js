@@ -22,12 +22,18 @@ import AuthReferences from './model/AuthReferences';
 import AuthRequest from './model/AuthRequest';
 import AuthResponse from './model/AuthResponse';
 import AuthenRequired from './model/AuthenRequired';
+import BatchReportRequest from './model/BatchReportRequest';
+import BatchReportResponseModel from './model/BatchReportResponseModel';
+import BatchTransaction from './model/BatchTransaction';
+import BatchTransactionResultModel from './model/BatchTransactionResultModel';
 import CResAuthRequest from './model/CResAuthRequest';
 import CaptureRequest from './model/CaptureRequest';
 import Card from './model/Card';
 import CardHolderAccount from './model/CardHolderAccount';
 import CardStatus from './model/CardStatus';
 import ChargeRequest from './model/ChargeRequest';
+import CheckBatchStatus from './model/CheckBatchStatus';
+import CheckBatchStatusResponse from './model/CheckBatchStatusResponse';
 import ContactDetails from './model/ContactDetails';
 import Decision from './model/Decision';
 import Error from './model/Error';
@@ -38,12 +44,15 @@ import MCC6012 from './model/MCC6012';
 import Merchant from './model/Merchant';
 import PaResAuthRequest from './model/PaResAuthRequest';
 import Ping from './model/Ping';
+import ProcessBatchRequest from './model/ProcessBatchRequest';
+import ProcessBatchResponse from './model/ProcessBatchResponse';
 import RefundRequest from './model/RefundRequest';
 import RegisterCard from './model/RegisterCard';
 import RequestChallenged from './model/RequestChallenged';
 import RetrieveRequest from './model/RetrieveRequest';
 import ThreeDSecure from './model/ThreeDSecure';
 import VoidRequest from './model/VoidRequest';
+import BatchProcessingApi from './api/BatchProcessingApi';
 import CardHolderAccountApi from './api/CardHolderAccountApi';
 import OperationalApi from './api/OperationalApi';
 import PaymentProcessingApi from './api/PaymentProcessingApi';
@@ -151,6 +160,30 @@ export {
     AuthenRequired,
 
     /**
+     * The BatchReportRequest model constructor.
+     * @property {module:model/BatchReportRequest}
+     */
+    BatchReportRequest,
+
+    /**
+     * The BatchReportResponseModel model constructor.
+     * @property {module:model/BatchReportResponseModel}
+     */
+    BatchReportResponseModel,
+
+    /**
+     * The BatchTransaction model constructor.
+     * @property {module:model/BatchTransaction}
+     */
+    BatchTransaction,
+
+    /**
+     * The BatchTransactionResultModel model constructor.
+     * @property {module:model/BatchTransactionResultModel}
+     */
+    BatchTransactionResultModel,
+
+    /**
      * The CResAuthRequest model constructor.
      * @property {module:model/CResAuthRequest}
      */
@@ -185,6 +218,18 @@ export {
      * @property {module:model/ChargeRequest}
      */
     ChargeRequest,
+
+    /**
+     * The CheckBatchStatus model constructor.
+     * @property {module:model/CheckBatchStatus}
+     */
+    CheckBatchStatus,
+
+    /**
+     * The CheckBatchStatusResponse model constructor.
+     * @property {module:model/CheckBatchStatusResponse}
+     */
+    CheckBatchStatusResponse,
 
     /**
      * The ContactDetails model constructor.
@@ -247,6 +292,18 @@ export {
     Ping,
 
     /**
+     * The ProcessBatchRequest model constructor.
+     * @property {module:model/ProcessBatchRequest}
+     */
+    ProcessBatchRequest,
+
+    /**
+     * The ProcessBatchResponse model constructor.
+     * @property {module:model/ProcessBatchResponse}
+     */
+    ProcessBatchResponse,
+
+    /**
      * The RefundRequest model constructor.
      * @property {module:model/RefundRequest}
      */
@@ -281,6 +338,12 @@ export {
      * @property {module:model/VoidRequest}
      */
     VoidRequest,
+
+    /**
+    * The BatchProcessingApi service constructor.
+    * @property {module:api/BatchProcessingApi}
+    */
+    BatchProcessingApi,
 
     /**
     * The CardHolderAccountApi service constructor.

@@ -82,7 +82,7 @@ CaptureRequest.prototype['merchantid'] = undefined;
 CaptureRequest.prototype['airline_data'] = undefined;
 
 /**
- * The completion amount provided in the lowest unit of currency for the specific currency of the merchant, with a variable length to a maximum of 12 digits. No decimal points to be included. For example with GBP 75.45 use the value 7545. Please check that you do not supply divisional characters such as 1,024 in the request which may be caused by some number formatters. If no amount is supplied, the original processing amount is used. 
+ * The completion amount provided in the lowest unit of currency for the specific currency of the merchant, with a variable length to a maximum of 12 digits. No decimal points to be included. For example with GBP 75.45 use the value 7545. Please check that you do not supply divisional characters such as 1,024 in the request which may be caused by some number formatters.  If no amount is supplied, the original processing amount is used. 
  * @member {Number} amount
  */
 CaptureRequest.prototype['amount'] = undefined;

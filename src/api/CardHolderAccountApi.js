@@ -364,7 +364,7 @@ export default class CardHolderAccountApi {
 
     /**
      * Account Exists
-     * .
+     * Checks that an account exists and is active by providing the account id as a url parameter  Checks that an account exists and is active by providing the account id as a url parameter. 
      * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Exists} and HTTP response
      */
@@ -398,7 +398,7 @@ export default class CardHolderAccountApi {
 
     /**
      * Account Exists
-     * .
+     * Checks that an account exists and is active by providing the account id as a url parameter  Checks that an account exists and is active by providing the account id as a url parameter. 
      * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Exists}
      */

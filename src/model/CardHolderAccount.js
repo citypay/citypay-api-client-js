@@ -126,7 +126,7 @@ CardHolderAccount.prototype['default_card_index'] = undefined;
 CardHolderAccount.prototype['last_modified'] = undefined;
 
 /**
- * Defines the status of the account for processing valid values are   - ACTIVE for active accounts that are able to process  - DISABLED for accounts that are currently disabled for processing. 
+ * Defines the status of the account for processing valid values are   - ACTIVE for active accounts that are able to process   - DISABLED for accounts that are currently disabled for processing. 
  * @member {String} status
  */
 CardHolderAccount.prototype['status'] = undefined;
