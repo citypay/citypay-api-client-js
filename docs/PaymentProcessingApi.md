@@ -5,6 +5,7 @@ All URIs are relative to *https://api.citypay.com/v6*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**authorisationRequest**](PaymentProcessingApi.md#authorisationRequest) | **POST** /authorise | Authorisation
+[**binRangeLookupRequest**](PaymentProcessingApi.md#binRangeLookupRequest) | **POST** /bin | Bin Lookup
 [**cResRequest**](PaymentProcessingApi.md#cResRequest) | **POST** /cres | CRes
 [**captureRequest**](PaymentProcessingApi.md#captureRequest) | **POST** /capture | Capture
 [**paResRequest**](PaymentProcessingApi.md#paResRequest) | **POST** /pares | PaRes
@@ -52,6 +53,55 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Decision**](Decision.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
+
+
+## binRangeLookupRequest
+
+> Bin binRangeLookupRequest(bin_lookup)
+
+Bin Lookup
+
+A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number&#39;s  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it&#39;s country of origin 3. it&#39;s currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.PaymentProcessingApi();
+let bin_lookup = new CityPay.BinLookup(); // BinLookup | 
+apiInstance.binRangeLookupRequest(bin_lookup).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bin_lookup** | [**BinLookup**](BinLookup.md)|  | 
+
+### Return type
+
+[**Bin**](Bin.md)
 
 ### Authorization
 
