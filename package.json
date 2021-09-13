@@ -1,6 +1,6 @@
 {
   "name": "citypay-api",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "JavaScript ECMAScript 6 client for the CityPay API",
   "license": "MIT",
   "main": "dist/index.js",

@@ -16,6 +16,8 @@ import Acknowledgement from '../model/Acknowledgement';
 import AuthReferences from '../model/AuthReferences';
 import AuthRequest from '../model/AuthRequest';
 import AuthResponse from '../model/AuthResponse';
+import Bin from '../model/Bin';
+import BinLookup from '../model/BinLookup';
 import CResAuthRequest from '../model/CResAuthRequest';
 import CaptureRequest from '../model/CaptureRequest';
 import Decision from '../model/Decision';
@@ -85,6 +87,53 @@ export default class PaymentProcessingApi {
      */
     authorisationRequest(auth_request) {
       return this.authorisationRequestWithHttpInfo(auth_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Bin Lookup
+     * A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it's country of origin 3. it's currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+     * @param {module:model/BinLookup} bin_lookup 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Bin} and HTTP response
+     */
+    binRangeLookupRequestWithHttpInfo(bin_lookup) {
+      let postBody = bin_lookup;
+      // verify the required parameter 'bin_lookup' is set
+      if (bin_lookup === undefined || bin_lookup === null) {
+        throw new Error("Missing the required parameter 'bin_lookup' when calling binRangeLookupRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Bin;
+      return this.apiClient.callApi(
+        '/bin', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Bin Lookup
+     * A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it's country of origin 3. it's currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+     * @param {module:model/BinLookup} bin_lookup 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Bin}
+     */
+    binRangeLookupRequest(bin_lookup) {
+      return this.binRangeLookupRequestWithHttpInfo(bin_lookup)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

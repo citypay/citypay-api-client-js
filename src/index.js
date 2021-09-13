@@ -26,6 +26,8 @@ import BatchReportRequest from './model/BatchReportRequest';
 import BatchReportResponseModel from './model/BatchReportResponseModel';
 import BatchTransaction from './model/BatchTransaction';
 import BatchTransactionResultModel from './model/BatchTransactionResultModel';
+import Bin from './model/Bin';
+import BinLookup from './model/BinLookup';
 import CResAuthRequest from './model/CResAuthRequest';
 import CaptureRequest from './model/CaptureRequest';
 import Card from './model/Card';
@@ -182,6 +184,18 @@ export {
      * @property {module:model/BatchTransactionResultModel}
      */
     BatchTransactionResultModel,
+
+    /**
+     * The Bin model constructor.
+     * @property {module:model/Bin}
+     */
+    Bin,
+
+    /**
+     * The BinLookup model constructor.
+     * @property {module:model/BinLookup}
+     */
+    BinLookup,
 
     /**
      * The CResAuthRequest model constructor.
