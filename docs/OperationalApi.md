@@ -4,9 +4,59 @@ All URIs are relative to *https://api.citypay.com/v6*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**aclCheckRequest**](OperationalApi.md#aclCheckRequest) | **POST** /acl/check | ACL Check Request
 [**listMerchantsRequest**](OperationalApi.md#listMerchantsRequest) | **GET** /merchants/{clientid} | List Merchants Request
 [**pingRequest**](OperationalApi.md#pingRequest) | **POST** /ping | Ping Request
 
+
+
+## aclCheckRequest
+
+> AclCheckResponseModel aclCheckRequest(acl_check_request)
+
+ACL Check Request
+
+Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.OperationalApi();
+let acl_check_request = new CityPay.AclCheckRequest(); // AclCheckRequest | 
+apiInstance.aclCheckRequest(acl_check_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **acl_check_request** | [**AclCheckRequest**](AclCheckRequest.md)|  | 
+
+### Return type
+
+[**AclCheckResponseModel**](AclCheckResponseModel.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
 
 
 ## listMerchantsRequest

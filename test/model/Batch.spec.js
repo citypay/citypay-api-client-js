@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // instance = new Citypay Api Client.BatchProcessingApi();
+    // instance = new Citypay Api Client.Batch();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,37 +46,31 @@
       object[property] = value;
   }
 
-  describe('BatchProcessingApi', function() {
-    describe('batchProcessRequest', function() {
-      it('should call batchProcessRequest successfully', function(done) {
-        //uncomment below and update the code to test batchProcessRequest
-        //instance.batchProcessRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe('Batch', function() {
+    it('should create an instance of Batch', function() {
+      // uncomment below and update the code to test Batch
+      //var // instance = new Citypay Api Client.Batch();
+      //expect(instance).to.be.a(Citypay Api Client.Batch);
     });
-    describe('checkBatchStatusRequest', function() {
-      it('should call checkBatchStatusRequest successfully', function(done) {
-        //uncomment below and update the code to test checkBatchStatusRequest
-        //instance.checkBatchStatusRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property batch_date (base name: "batch_date")', function() {
+      // uncomment below and update the code to test the property batch_date
+      //var // instance = new Citypay Api Client.Batch();
+      //expect(instance).to.be();
     });
-    describe('getBatchReportRequest', function() {
-      it('should call getBatchReportRequest successfully', function(done) {
-        //uncomment below and update the code to test getBatchReportRequest
-        //instance.getBatchReportRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property batch_status (base name: "batch_status")', function() {
+      // uncomment below and update the code to test the property batch_status
+      //var // instance = new Citypay Api Client.Batch();
+      //expect(instance).to.be();
     });
+
+    it('should have the property batch_id (base name: "batch_id")', function() {
+      // uncomment below and update the code to test the property batch_id
+      //var // instance = new Citypay Api Client.Batch();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

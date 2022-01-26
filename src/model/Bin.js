@@ -13,17 +13,17 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The Card model module.
- * @module model/Card
+ * The Bin model module.
+ * @module model/Bin
  */
-class Card {
+class Bin {
     /**
-     * Constructs a new <code>Card</code>.
-     * @alias module:model/Card
+     * Constructs a new <code>Bin</code>.
+     * @alias module:model/Bin
      */
     constructor() { 
         
-        Card.initialize(this);
+        Bin.initialize(this);
     }
 
     /**
@@ -35,15 +35,15 @@ class Card {
     }
 
     /**
-     * Constructs a <code>Card</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>Bin</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Card} obj Optional instance to populate.
-     * @return {module:model/Card} The populated <code>Card</code> instance.
+     * @param {module:model/Bin} obj Optional instance to populate.
+     * @return {module:model/Bin} The populated <code>Bin</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Card();
+            obj = obj || new Bin();
 
             if (data.hasOwnProperty('bin_commercial')) {
                 obj['bin_commercial'] = ApiClient.convertToType(data['bin_commercial'], 'Boolean');
@@ -69,41 +69,8 @@ class Card {
             if (data.hasOwnProperty('bin_eu')) {
                 obj['bin_eu'] = ApiClient.convertToType(data['bin_eu'], 'Boolean');
             }
-            if (data.hasOwnProperty('card_id')) {
-                obj['card_id'] = ApiClient.convertToType(data['card_id'], 'String');
-            }
-            if (data.hasOwnProperty('card_status')) {
-                obj['card_status'] = ApiClient.convertToType(data['card_status'], 'String');
-            }
-            if (data.hasOwnProperty('date_created')) {
-                obj['date_created'] = ApiClient.convertToType(data['date_created'], 'Date');
-            }
-            if (data.hasOwnProperty('default')) {
-                obj['default'] = ApiClient.convertToType(data['default'], 'Boolean');
-            }
-            if (data.hasOwnProperty('expmonth')) {
-                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
-            }
-            if (data.hasOwnProperty('expyear')) {
-                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
-            }
-            if (data.hasOwnProperty('label')) {
-                obj['label'] = ApiClient.convertToType(data['label'], 'String');
-            }
-            if (data.hasOwnProperty('label2')) {
-                obj['label2'] = ApiClient.convertToType(data['label2'], 'String');
-            }
-            if (data.hasOwnProperty('last4digits')) {
-                obj['last4digits'] = ApiClient.convertToType(data['last4digits'], 'String');
-            }
-            if (data.hasOwnProperty('name_on_card')) {
-                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
-            }
             if (data.hasOwnProperty('scheme')) {
                 obj['scheme'] = ApiClient.convertToType(data['scheme'], 'String');
-            }
-            if (data.hasOwnProperty('token')) {
-                obj['token'] = ApiClient.convertToType(data['token'], 'String');
             }
         }
         return obj;
@@ -116,126 +83,60 @@ class Card {
  * Defines whether the card is a commercial card.
  * @member {Boolean} bin_commercial
  */
-Card.prototype['bin_commercial'] = undefined;
+Bin.prototype['bin_commercial'] = undefined;
 
 /**
  * Defines whether the card is a corporate business card.
  * @member {Boolean} bin_corporate
  */
-Card.prototype['bin_corporate'] = undefined;
+Bin.prototype['bin_corporate'] = undefined;
 
 /**
  * The determined country where the card was issued.
  * @member {String} bin_country_issued
  */
-Card.prototype['bin_country_issued'] = undefined;
+Bin.prototype['bin_country_issued'] = undefined;
 
 /**
  * Defines whether the card is a credit card.
  * @member {Boolean} bin_credit
  */
-Card.prototype['bin_credit'] = undefined;
+Bin.prototype['bin_credit'] = undefined;
 
 /**
  * The default currency determined for the card.
  * @member {String} bin_currency
  */
-Card.prototype['bin_currency'] = undefined;
+Bin.prototype['bin_currency'] = undefined;
 
 /**
  * Defines whether the card is a debit card.
  * @member {Boolean} bin_debit
  */
-Card.prototype['bin_debit'] = undefined;
+Bin.prototype['bin_debit'] = undefined;
 
 /**
  * A description of the bin on the card to identify what type of product the card is.
  * @member {String} bin_description
  */
-Card.prototype['bin_description'] = undefined;
+Bin.prototype['bin_description'] = undefined;
 
 /**
  * Defines whether the card is regulated within the EU.
  * @member {Boolean} bin_eu
  */
-Card.prototype['bin_eu'] = undefined;
-
-/**
- * The id of the card that is returned. Should be used for referencing the card when perform any changes.
- * @member {String} card_id
- */
-Card.prototype['card_id'] = undefined;
-
-/**
- * The status of the card such, valid values are   - ACTIVE the card is active for processing   - INACTIVE the card is not active for processing   - EXPIRED for cards that have passed their expiry date. 
- * @member {String} card_status
- */
-Card.prototype['card_status'] = undefined;
-
-/**
- * The date time of when the card was created.
- * @member {Date} date_created
- */
-Card.prototype['date_created'] = undefined;
-
-/**
- * Determines if the card is the default card for the account and should be regarded as the first option to be used for processing.
- * @member {Boolean} default
- */
-Card.prototype['default'] = undefined;
-
-/**
- * The expiry month of the card.
- * @member {Number} expmonth
- */
-Card.prototype['expmonth'] = undefined;
-
-/**
- * The expiry year of the card.
- * @member {Number} expyear
- */
-Card.prototype['expyear'] = undefined;
-
-/**
- * A label which identifies this card.
- * @member {String} label
- */
-Card.prototype['label'] = undefined;
-
-/**
- * A label which also provides the expiry date of the card.
- * @member {String} label2
- */
-Card.prototype['label2'] = undefined;
-
-/**
- * The last 4 digits of the card to aid in identification.
- * @member {String} last4digits
- */
-Card.prototype['last4digits'] = undefined;
-
-/**
- * The name on the card.
- * @member {String} name_on_card
- */
-Card.prototype['name_on_card'] = undefined;
+Bin.prototype['bin_eu'] = undefined;
 
 /**
  * The scheme that issued the card.
  * @member {String} scheme
  */
-Card.prototype['scheme'] = undefined;
-
-/**
- * A token that can be used to process against the card.
- * @member {String} token
- */
-Card.prototype['token'] = undefined;
+Bin.prototype['scheme'] = undefined;
 
 
 
 
 
 
-export default Card;
+export default Bin;
 

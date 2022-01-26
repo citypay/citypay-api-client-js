@@ -13,20 +13,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The RegisterCard model module.
- * @module model/RegisterCard
+ * The BinLookup model module.
+ * @module model/BinLookup
  */
-class RegisterCard {
+class BinLookup {
     /**
-     * Constructs a new <code>RegisterCard</code>.
-     * @alias module:model/RegisterCard
-     * @param cardnumber {String} The primary number of the card.
-     * @param expmonth {Number} The expiry month of the card.
-     * @param expyear {Number} The expiry year of the card.
+     * Constructs a new <code>BinLookup</code>.
+     * @alias module:model/BinLookup
+     * @param bin {Number} A bin value to use for lookup.
      */
-    constructor(cardnumber, expmonth, expyear) { 
+    constructor(bin) { 
         
-        RegisterCard.initialize(this, cardnumber, expmonth, expyear);
+        BinLookup.initialize(this, bin);
     }
 
     /**
@@ -34,37 +32,23 @@ class RegisterCard {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, cardnumber, expmonth, expyear) { 
-        obj['cardnumber'] = cardnumber;
-        obj['expmonth'] = expmonth;
-        obj['expyear'] = expyear;
+    static initialize(obj, bin) { 
+        obj['bin'] = bin;
     }
 
     /**
-     * Constructs a <code>RegisterCard</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>BinLookup</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/RegisterCard} obj Optional instance to populate.
-     * @return {module:model/RegisterCard} The populated <code>RegisterCard</code> instance.
+     * @param {module:model/BinLookup} obj Optional instance to populate.
+     * @return {module:model/BinLookup} The populated <code>BinLookup</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new RegisterCard();
+            obj = obj || new BinLookup();
 
-            if (data.hasOwnProperty('cardnumber')) {
-                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
-            }
-            if (data.hasOwnProperty('expmonth')) {
-                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
-            }
-            if (data.hasOwnProperty('expyear')) {
-                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
-            }
-            if (data.hasOwnProperty('default')) {
-                obj['default'] = ApiClient.convertToType(data['default'], 'Boolean');
-            }
-            if (data.hasOwnProperty('name_on_card')) {
-                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
+            if (data.hasOwnProperty('bin')) {
+                obj['bin'] = ApiClient.convertToType(data['bin'], 'Number');
             }
         }
         return obj;
@@ -74,39 +58,15 @@ class RegisterCard {
 }
 
 /**
- * The primary number of the card.
- * @member {String} cardnumber
+ * A bin value to use for lookup.
+ * @member {Number} bin
  */
-RegisterCard.prototype['cardnumber'] = undefined;
-
-/**
- * The expiry month of the card.
- * @member {Number} expmonth
- */
-RegisterCard.prototype['expmonth'] = undefined;
-
-/**
- * The expiry year of the card.
- * @member {Number} expyear
- */
-RegisterCard.prototype['expyear'] = undefined;
-
-/**
- * Determines whether the card should be the new default card.
- * @member {Boolean} default
- */
-RegisterCard.prototype['default'] = undefined;
-
-/**
- * The card holder name as it appears on the card. The value is required if the account is to be used for 3dsv2 processing, otherwise it is optional.
- * @member {String} name_on_card
- */
-RegisterCard.prototype['name_on_card'] = undefined;
+BinLookup.prototype['bin'] = undefined;
 
 
 
 
 
 
-export default RegisterCard;
+export default BinLookup;
 

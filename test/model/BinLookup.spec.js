@@ -10,71 +10,55 @@
  *
  */
 
-import ApiClient from '../ApiClient';
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD.
+    define(['expect.js', process.cwd()+'/src/index'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    factory(require('expect.js'), require(process.cwd()+'/src/index'));
+  } else {
+    // Browser globals (root is window)
+    factory(root.expect, root.citypay_api_client);
+  }
+}(this, function(expect, citypay_api_client) {
+  'use strict';
 
-/**
- * The BatchReportRequest model module.
- * @module model/BatchReportRequest
- */
-class BatchReportRequest {
-    /**
-     * Constructs a new <code>BatchReportRequest</code>.
-     * @alias module:model/BatchReportRequest
-     * @param batch_id {Array.<Number>} 
-     */
-    constructor(batch_id) { 
-        
-        BatchReportRequest.initialize(this, batch_id);
-    }
+  var instance;
 
-    /**
-     * Initializes the fields of this object.
-     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
-     * Only for internal use.
-     */
-    static initialize(obj, batch_id) { 
-        obj['batch_id'] = batch_id;
-    }
+  beforeEach(function() {
+    // // instance = new Citypay Api Client.BinLookup();
+  });
 
-    /**
-     * Constructs a <code>BatchReportRequest</code> from a plain JavaScript object, optionally creating a new instance.
-     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
-     * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/BatchReportRequest} obj Optional instance to populate.
-     * @return {module:model/BatchReportRequest} The populated <code>BatchReportRequest</code> instance.
-     */
-    static constructFromObject(data, obj) {
-        if (data) {
-            obj = obj || new BatchReportRequest();
+  var getProperty = function(object, getter, property) {
+    // Use getter method if present; otherwise, get the property directly.
+    if (typeof object[getter] === 'function')
+      return object[getter]();
+    else
+      return object[property];
+  }
 
-            if (data.hasOwnProperty('batch_id')) {
-                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], ['Number']);
-            }
-            if (data.hasOwnProperty('client_account_id')) {
-                obj['client_account_id'] = ApiClient.convertToType(data['client_account_id'], 'String');
-            }
-        }
-        return obj;
-    }
+  var setProperty = function(object, setter, property, value) {
+    // Use setter method if present; otherwise, set the property directly.
+    if (typeof object[setter] === 'function')
+      object[setter](value);
+    else
+      object[property] = value;
+  }
 
+  describe('BinLookup', function() {
+    it('should create an instance of BinLookup', function() {
+      // uncomment below and update the code to test BinLookup
+      //var // // instance = new Citypay Api Client.BinLookup();
+      //expect(instance).to.be.a(Citypay Api Client.BinLookup);
+    });
 
-}
+    it('should have the property bin (base name: "bin")', function() {
+      // uncomment below and update the code to test the property bin
+      //var // // instance = new Citypay Api Client.BinLookup();
+      //expect(instance).to.be();
+    });
 
-/**
- * @member {Array.<Number>} batch_id
- */
-BatchReportRequest.prototype['batch_id'] = undefined;
+  });
 
-/**
- * The batch account id that the batch was processed for. Defaults to your client id if not provided.
- * @member {String} client_account_id
- */
-BatchReportRequest.prototype['client_account_id'] = undefined;
-
-
-
-
-
-
-export default BatchReportRequest;
-
+}));

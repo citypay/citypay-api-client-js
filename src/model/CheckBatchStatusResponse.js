@@ -11,6 +11,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import Batch from './Batch';
 
 /**
  * The CheckBatchStatusResponse model module.
@@ -20,12 +21,10 @@ class CheckBatchStatusResponse {
     /**
      * Constructs a new <code>CheckBatchStatusResponse</code>.
      * @alias module:model/CheckBatchStatusResponse
-     * @param batch_date {Date} The date and time that the file was created in ISO-8601 format.
-     * @param batch_status {String} The status of the batch. Possible values are.
      */
-    constructor(batch_date, batch_status) { 
+    constructor() { 
         
-        CheckBatchStatusResponse.initialize(this, batch_date, batch_status);
+        CheckBatchStatusResponse.initialize(this);
     }
 
     /**
@@ -33,9 +32,7 @@ class CheckBatchStatusResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, batch_date, batch_status) { 
-        obj['batch_date'] = batch_date;
-        obj['batch_status'] = batch_status;
+    static initialize(obj) { 
     }
 
     /**
@@ -49,14 +46,8 @@ class CheckBatchStatusResponse {
         if (data) {
             obj = obj || new CheckBatchStatusResponse();
 
-            if (data.hasOwnProperty('batch_date')) {
-                obj['batch_date'] = ApiClient.convertToType(data['batch_date'], 'Date');
-            }
-            if (data.hasOwnProperty('batch_status')) {
-                obj['batch_status'] = ApiClient.convertToType(data['batch_status'], 'String');
-            }
-            if (data.hasOwnProperty('batch_id')) {
-                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], 'Number');
+            if (data.hasOwnProperty('batches')) {
+                obj['batches'] = ApiClient.convertToType(data['batches'], [Batch]);
             }
         }
         return obj;
@@ -66,22 +57,9 @@ class CheckBatchStatusResponse {
 }
 
 /**
- * The date and time that the file was created in ISO-8601 format.
- * @member {Date} batch_date
+ * @member {Array.<module:model/Batch>} batches
  */
-CheckBatchStatusResponse.prototype['batch_date'] = undefined;
-
-/**
- * The status of the batch. Possible values are.
- * @member {String} batch_status
- */
-CheckBatchStatusResponse.prototype['batch_status'] = undefined;
-
-/**
- * The batch id requested.
- * @member {Number} batch_id
- */
-CheckBatchStatusResponse.prototype['batch_id'] = undefined;
+CheckBatchStatusResponse.prototype['batches'] = undefined;
 
 
 

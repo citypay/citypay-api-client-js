@@ -13,20 +13,17 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The RegisterCard model module.
- * @module model/RegisterCard
+ * The AclCheckResponseModel model module.
+ * @module model/AclCheckResponseModel
  */
-class RegisterCard {
+class AclCheckResponseModel {
     /**
-     * Constructs a new <code>RegisterCard</code>.
-     * @alias module:model/RegisterCard
-     * @param cardnumber {String} The primary number of the card.
-     * @param expmonth {Number} The expiry month of the card.
-     * @param expyear {Number} The expiry year of the card.
+     * Constructs a new <code>AclCheckResponseModel</code>.
+     * @alias module:model/AclCheckResponseModel
      */
-    constructor(cardnumber, expmonth, expyear) { 
+    constructor() { 
         
-        RegisterCard.initialize(this, cardnumber, expmonth, expyear);
+        AclCheckResponseModel.initialize(this);
     }
 
     /**
@@ -34,37 +31,31 @@ class RegisterCard {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, cardnumber, expmonth, expyear) { 
-        obj['cardnumber'] = cardnumber;
-        obj['expmonth'] = expmonth;
-        obj['expyear'] = expyear;
+    static initialize(obj) { 
     }
 
     /**
-     * Constructs a <code>RegisterCard</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>AclCheckResponseModel</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/RegisterCard} obj Optional instance to populate.
-     * @return {module:model/RegisterCard} The populated <code>RegisterCard</code> instance.
+     * @param {module:model/AclCheckResponseModel} obj Optional instance to populate.
+     * @return {module:model/AclCheckResponseModel} The populated <code>AclCheckResponseModel</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new RegisterCard();
+            obj = obj || new AclCheckResponseModel();
 
-            if (data.hasOwnProperty('cardnumber')) {
-                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
+            if (data.hasOwnProperty('acl')) {
+                obj['acl'] = ApiClient.convertToType(data['acl'], 'String');
             }
-            if (data.hasOwnProperty('expmonth')) {
-                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
+            if (data.hasOwnProperty('cache')) {
+                obj['cache'] = ApiClient.convertToType(data['cache'], 'Boolean');
             }
-            if (data.hasOwnProperty('expyear')) {
-                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
+            if (data.hasOwnProperty('ip')) {
+                obj['ip'] = ApiClient.convertToType(data['ip'], 'String');
             }
-            if (data.hasOwnProperty('default')) {
-                obj['default'] = ApiClient.convertToType(data['default'], 'Boolean');
-            }
-            if (data.hasOwnProperty('name_on_card')) {
-                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
+            if (data.hasOwnProperty('provider')) {
+                obj['provider'] = ApiClient.convertToType(data['provider'], 'String');
             }
         }
         return obj;
@@ -74,39 +65,33 @@ class RegisterCard {
 }
 
 /**
- * The primary number of the card.
- * @member {String} cardnumber
+ * The name or value of the acl which was found to match the ip address.
+ * @member {String} acl
  */
-RegisterCard.prototype['cardnumber'] = undefined;
+AclCheckResponseModel.prototype['acl'] = undefined;
 
 /**
- * The expiry month of the card.
- * @member {Number} expmonth
+ * Whether the ACL was returned via a cached instance.
+ * @member {Boolean} cache
  */
-RegisterCard.prototype['expmonth'] = undefined;
+AclCheckResponseModel.prototype['cache'] = undefined;
 
 /**
- * The expiry year of the card.
- * @member {Number} expyear
+ * The IP address used in the lookup.
+ * @member {String} ip
  */
-RegisterCard.prototype['expyear'] = undefined;
+AclCheckResponseModel.prototype['ip'] = undefined;
 
 /**
- * Determines whether the card should be the new default card.
- * @member {Boolean} default
+ * The source provider of the ACL.
+ * @member {String} provider
  */
-RegisterCard.prototype['default'] = undefined;
-
-/**
- * The card holder name as it appears on the card. The value is required if the account is to be used for 3dsv2 processing, otherwise it is optional.
- * @member {String} name_on_card
- */
-RegisterCard.prototype['name_on_card'] = undefined;
+AclCheckResponseModel.prototype['provider'] = undefined;
 
 
 
 
 
 
-export default RegisterCard;
+export default AclCheckResponseModel;
 

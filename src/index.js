@@ -15,6 +15,8 @@ import ApiClient from './ApiClient';
 import AccountCreate from './model/AccountCreate';
 import AccountStatus from './model/AccountStatus';
 import Acknowledgement from './model/Acknowledgement';
+import AclCheckRequest from './model/AclCheckRequest';
+import AclCheckResponseModel from './model/AclCheckResponseModel';
 import AirlineAdvice from './model/AirlineAdvice';
 import AirlineSegment from './model/AirlineSegment';
 import AuthReference from './model/AuthReference';
@@ -22,10 +24,13 @@ import AuthReferences from './model/AuthReferences';
 import AuthRequest from './model/AuthRequest';
 import AuthResponse from './model/AuthResponse';
 import AuthenRequired from './model/AuthenRequired';
+import Batch from './model/Batch';
 import BatchReportRequest from './model/BatchReportRequest';
 import BatchReportResponseModel from './model/BatchReportResponseModel';
 import BatchTransaction from './model/BatchTransaction';
 import BatchTransactionResultModel from './model/BatchTransactionResultModel';
+import Bin from './model/Bin';
+import BinLookup from './model/BinLookup';
 import CResAuthRequest from './model/CResAuthRequest';
 import CaptureRequest from './model/CaptureRequest';
 import Card from './model/Card';
@@ -118,6 +123,18 @@ export {
     Acknowledgement,
 
     /**
+     * The AclCheckRequest model constructor.
+     * @property {module:model/AclCheckRequest}
+     */
+    AclCheckRequest,
+
+    /**
+     * The AclCheckResponseModel model constructor.
+     * @property {module:model/AclCheckResponseModel}
+     */
+    AclCheckResponseModel,
+
+    /**
      * The AirlineAdvice model constructor.
      * @property {module:model/AirlineAdvice}
      */
@@ -160,6 +177,12 @@ export {
     AuthenRequired,
 
     /**
+     * The Batch model constructor.
+     * @property {module:model/Batch}
+     */
+    Batch,
+
+    /**
      * The BatchReportRequest model constructor.
      * @property {module:model/BatchReportRequest}
      */
@@ -182,6 +205,18 @@ export {
      * @property {module:model/BatchTransactionResultModel}
      */
     BatchTransactionResultModel,
+
+    /**
+     * The Bin model constructor.
+     * @property {module:model/Bin}
+     */
+    Bin,
+
+    /**
+     * The BinLookup model constructor.
+     * @property {module:model/BinLookup}
+     */
+    BinLookup,
 
     /**
      * The CResAuthRequest model constructor.

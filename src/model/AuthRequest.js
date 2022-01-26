@@ -89,9 +89,6 @@ class AuthRequest {
             if (data.hasOwnProperty('bill_to')) {
                 obj['bill_to'] = ContactDetails.constructFromObject(data['bill_to']);
             }
-            if (data.hasOwnProperty('card_holder_name')) {
-                obj['card_holder_name'] = ApiClient.convertToType(data['card_holder_name'], 'String');
-            }
             if (data.hasOwnProperty('csc')) {
                 obj['csc'] = ApiClient.convertToType(data['csc'], 'String');
             }
@@ -112,6 +109,9 @@ class AuthRequest {
             }
             if (data.hasOwnProperty('mcc6012')) {
                 obj['mcc6012'] = MCC6012.constructFromObject(data['mcc6012']);
+            }
+            if (data.hasOwnProperty('name_on_card')) {
+                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
             }
             if (data.hasOwnProperty('ship_to')) {
                 obj['ship_to'] = ContactDetails.constructFromObject(data['ship_to']);
@@ -185,12 +185,6 @@ AuthRequest.prototype['avs_postcode_policy'] = undefined;
 AuthRequest.prototype['bill_to'] = undefined;
 
 /**
- * The card holder name as appears on the card such as MR N E BODY. Required for some acquirers. 
- * @member {String} card_holder_name
- */
-AuthRequest.prototype['card_holder_name'] = undefined;
-
-/**
  * The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify posession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
  * @member {String} csc
  */
@@ -229,6 +223,12 @@ AuthRequest.prototype['match_avsa'] = undefined;
  * @member {module:model/MCC6012} mcc6012
  */
 AuthRequest.prototype['mcc6012'] = undefined;
+
+/**
+ * The card holder name as appears on the card such as MR N E BODY. Required for some acquirers. 
+ * @member {String} name_on_card
+ */
+AuthRequest.prototype['name_on_card'] = undefined;
 
 /**
  * @member {module:model/ContactDetails} ship_to

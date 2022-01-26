@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // instance = new Citypay Api Client.BatchProcessingApi();
+    // instance = new Citypay Api Client.AclCheckResponseModel();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,37 +46,37 @@
       object[property] = value;
   }
 
-  describe('BatchProcessingApi', function() {
-    describe('batchProcessRequest', function() {
-      it('should call batchProcessRequest successfully', function(done) {
-        //uncomment below and update the code to test batchProcessRequest
-        //instance.batchProcessRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe('AclCheckResponseModel', function() {
+    it('should create an instance of AclCheckResponseModel', function() {
+      // uncomment below and update the code to test AclCheckResponseModel
+      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //expect(instance).to.be.a(Citypay Api Client.AclCheckResponseModel);
     });
-    describe('checkBatchStatusRequest', function() {
-      it('should call checkBatchStatusRequest successfully', function(done) {
-        //uncomment below and update the code to test checkBatchStatusRequest
-        //instance.checkBatchStatusRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property acl (base name: "acl")', function() {
+      // uncomment below and update the code to test the property acl
+      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //expect(instance).to.be();
     });
-    describe('getBatchReportRequest', function() {
-      it('should call getBatchReportRequest successfully', function(done) {
-        //uncomment below and update the code to test getBatchReportRequest
-        //instance.getBatchReportRequest(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property cache (base name: "cache")', function() {
+      // uncomment below and update the code to test the property cache
+      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //expect(instance).to.be();
     });
+
+    it('should have the property ip (base name: "ip")', function() {
+      // uncomment below and update the code to test the property ip
+      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property provider (base name: "provider")', function() {
+      // uncomment below and update the code to test the property provider
+      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

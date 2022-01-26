@@ -1,9 +1,9 @@
-# Citypay Api Client.CheckBatchStatusResponse
+# Citypay Api Client.BinLookup
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**batches** | [**[Batch]**](Batch.md) |  | [optional] 
+**bin** | **Number** | A bin value to use for lookup. | 
 
 
