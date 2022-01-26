@@ -1,10 +1,11 @@
+require('dotenv').config();
+
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
-
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -41,18 +42,17 @@ function uuidv4() {
                 let ping = new citypay_api_client.Ping();
                 ping.identifier = uuidv4();
                 let ack = await new citypay_api_client.OperationalApi(client).pingRequest(ping);
-                expect(ack.code === "044")
-                expect(ack.identifier === ping.identifier);
+                expect(ack.code).to.be.equal("044")
+                expect(ack.identifier).to.be.equal(ping.identifier);
             });
 
             it('should list merchants', async () => {
                 let resp = await new citypay_api_client.OperationalApi(client).listMerchantsRequest(client_id);
-                expect(resp.client_id === client_id)
-                expect(resp.merchants.length > 2)
+                expect(resp.clientid).to.be.equal(client_id)
+                expect(resp.merchants.length).to.be.greaterThan(2)
             })
 
         });
-
 
         describe('Can run payment calls', () => {
 
@@ -66,20 +66,55 @@ function uuidv4() {
                     expyear: 2030,
                     csc: "012",
                     identifier: uuid,
-                    merchantid: merchant_id
+                    merchantid: merchant_id,
+                    threedsecure: new citypay_api_client.ThreeDSecure.constructFromObject({
+                        tds_policy: "2"
+                    })
                 });
                 let decision = await new citypay_api_client.PaymentProcessingApi(client).authorisationRequest(rq);
-                expect(decision.isAuthenRequired()).to.be(false);
-                expect(decision.isChallengeRequired()).to.be(false);
-                expect(decision.isAuthResponse()).to.be(true);
+                expect(decision.isAuthenRequired()).to.be.equal(false);
+                expect(decision.isChallengeRequired()).to.be.equal(false);
+                expect(decision.isAuthResponse()).to.be.equal(true);
 
                 let result = decision.AuthResponse;
-                expect(result.result_code).to.be("001");
-                expect(result.identifier).to.be(uuid);
-                expect(result.authcode).to.be("A12345");
-                expect(result.amount).to.be(1395);
+                expect(result.result_code).to.be.equal("001");
+                expect(result.identifier).to.be.equal(uuid);
+                expect(result.authcode).to.be.equal("A12345");
+                expect(result.amount).to.be.equal(1395);
 
 
+            });
+
+        });
+
+        describe('Can run payment calls 3DSv2', () => {
+
+            it('should authorise 3DSv2', async () => {
+
+                let uuid = uuidv4();
+                let rq = new citypay_api_client.AuthRequest.constructFromObject({
+                    amount: 1396,
+                    cardnumber: "4000 0000 0000 0002",
+                    expmonth: 12,
+                    expyear: 2030,
+                    csc: "123",
+                    identifier: uuid,
+                    merchantid: merchant_id,
+                    trans_type: "A",
+                    threedsecure: new citypay_api_client.ThreeDSecure.constructFromObject({
+                        merchant_termurl:"https://citypay.com/acs/return",
+                        cp_bx: "eyJhIjoiRkFwSCIsImMiOjI0LCJpIjoid3dIOTExTlBKSkdBRVhVZCIsImoiOmZhbHNlLCJsIjoiZW4tVVMiLCJoIjoxNDQwLCJ3IjoyNTYwLCJ0IjowLCJ1IjoiTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTFfMl8zKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODkuMC40Mzg5LjgyIFNhZmFyaS81MzcuMzYiLCJ2IjoiMS4wLjAifQ"
+                    })
+                });
+
+                let decision = await new citypay_api_client.PaymentProcessingApi(client).authorisationRequest(rq);
+                expect(decision.isAuthenRequired()).to.equal(false);
+                expect(decision.isChallengeRequired()).to.equal(true);
+                expect(decision.isAuthResponse()).to.equal(false);
+
+                let result = decision.RequestChallenged;
+                expect(result.creq).to.not.equal(null);
+                expect(result.identifier).to.not.equal(null);
             });
 
         });
@@ -103,27 +138,27 @@ function uuidv4() {
                     postcode: "JE2 3QA"
                 });
                 let result = await api.accountCreate(ac)
-                expect(result.account_id).to.be(cha_id);
-                expect(result.contact.address1).to.be("7 Esplanade");
+                expect(result.account_id).to.equal(cha_id);
+                expect(result.contact.address1).to.equal("7 Esplanade");
 
                 result = await api.accountCardRegisterRequest(cha_id,
-                    new citypay_api_client.RegisterCard.constructFromObject({
-                        cardnumber: "4000 0000 0000 0002",
-                        expmonth: "12",
-                        expyear: "2030"
-                    })
+                  new citypay_api_client.RegisterCard.constructFromObject({
+                      cardnumber: "4000 0000 0000 0002",
+                      expmonth: "12",
+                      expyear: "2030"
+                  })
                 )
-                expect(result.account_id).to.be(cha_id);
-                expect(result.cards.length).to.be(1);
-                expect(result.cards[0].expmonth).to.be(12);
-                expect(result.cards[0].expyear).to.be(2030);
+                expect(result.account_id).to.equal(cha_id);
+                expect(result.cards.length).to.equal(1);
+                expect(result.cards[0].expmonth).to.equal(12);
+                expect(result.cards[0].expyear).to.equal(2030);
 
                 result = await api.accountRetrieveRequest(cha_id);
-                expect(result.account_id).to.be(cha_id);
-                expect(result.contact.address1).to.be("7 Esplanade");
-                expect(result.cards.length).to.be(1);
-                expect(result.cards[0].expmonth).to.be(12);
-                expect(result.cards[0].expyear).to.be(2030);
+                expect(result.account_id).to.equal(cha_id);
+                expect(result.contact.address1).to.equal("7 Esplanade");
+                expect(result.cards.length).to.equal(1);
+                expect(result.cards[0].expmonth).to.equal(12);
+                expect(result.cards[0].expyear).to.equal(2030);
 
                 let identifier = uuidv4();
                 let cr = new citypay_api_client.ChargeRequest.constructFromObject({
@@ -131,22 +166,25 @@ function uuidv4() {
                     identifier: identifier,
                     merchantid: merchant_id,
                     token: result.cards[0].token,
-                    csc: "012"
+                    csc: "012",
+                    threedsecure: new citypay_api_client.ThreeDSecure.constructFromObject({
+                        tds_policy: "2"
+                    })
                 });
                 let auth = await api.chargeRequest(cr);
-                expect(auth.isAuthenRequired()).to.be(false);
-                expect(auth.isChallengeRequired()).to.be(false);
-                expect(auth.isAuthResponse()).to.be(true);
+                expect(auth.isAuthenRequired()).to.equal(false);
+                expect(auth.isChallengeRequired()).to.equal(false);
+                expect(auth.isAuthResponse()).to.equal(true);
 
                 let ar = auth.AuthResponse;
-                expect(ar.identifier).to.be(identifier);
-                expect(ar.result_code).to.be("001");
-                expect(ar.amount).to.be(7801);
-                expect(ar.authcode).to.be("A12345");
+                expect(ar.identifier).to.equal(identifier);
+                expect(ar.result_code).to.equal("001");
+                expect(ar.amount).to.equal(7801);
+                expect(ar.authcode).to.equal("A12345");
 
 
                 let ack = await api.accountDeleteRequest(cha_id);
-                expect(ack.code).to.be("001");
+                expect(ack.code).to.equal("001");
 
             });
 
