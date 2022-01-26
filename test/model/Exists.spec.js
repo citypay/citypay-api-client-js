@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.Exists();
+    // // instance = new Citypay Api Client.Exists();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,25 +49,25 @@
   describe('Exists', function() {
     it('should create an instance of Exists', function() {
       // uncomment below and update the code to test Exists
-      //var instance = new Citypay Api Client.Exists();
+      //var // instance = new Citypay Api Client.Exists();
       //expect(instance).to.be.a(Citypay Api Client.Exists);
     });
 
     it('should have the property exists (base name: "exists")', function() {
       // uncomment below and update the code to test the property exists
-      //var instance = new Citypay Api Client.Exists();
+      //var // instance = new Citypay Api Client.Exists();
       //expect(instance).to.be();
     });
 
     it('should have the property active (base name: "active")', function() {
       // uncomment below and update the code to test the property active
-      //var instance = new Citypay Api Client.Exists();
+      //var // instance = new Citypay Api Client.Exists();
       //expect(instance).to.be();
     });
 
     it('should have the property last_modified (base name: "last_modified")', function() {
       // uncomment below and update the code to test the property last_modified
-      //var instance = new Citypay Api Client.Exists();
+      //var // instance = new Citypay Api Client.Exists();
       //expect(instance).to.be();
     });
 

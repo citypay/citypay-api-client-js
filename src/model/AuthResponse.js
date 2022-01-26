@@ -20,10 +20,14 @@ class AuthResponse {
     /**
      * Constructs a new <code>AuthResponse</code>.
      * @alias module:model/AuthResponse
+     * @param merchantid {Number} The merchant id that processed this transaction.
+     * @param result {Number} An integer result that indicates the outcome of the transaction. The Code value below maps to the result value  <table> <tr> <th>Code</th> <th>Abbrev</th> <th>Description</th> </tr> <tr><td>0</td><td>Declined</td><td>Declined</td></tr> <tr><td>1</td><td>Accepted</td><td>Accepted</td></tr> <tr><td>2</td><td>Rejected</td><td>Rejected</td></tr> <tr><td>3</td><td>Not Attempted</td><td>Not Attempted</td></tr> <tr><td>4</td><td>Referred</td><td>Referred</td></tr> <tr><td>5</td><td>PinRetry</td><td>Perform PIN Retry</td></tr> <tr><td>6</td><td>ForSigVer</td><td>Force Signature Verification</td></tr> <tr><td>7</td><td>Hold</td><td>Hold</td></tr> <tr><td>8</td><td>SecErr</td><td>Security Error</td></tr> <tr><td>9</td><td>CallAcq</td><td>Call Acquirer</td></tr> <tr><td>10</td><td>DNH</td><td>Do Not Honour</td></tr> <tr><td>11</td><td>RtnCrd</td><td>Retain Card</td></tr> <tr><td>12</td><td>ExprdCrd</td><td>Expired Card</td></tr> <tr><td>13</td><td>InvldCrd</td><td>Invalid Card No</td></tr> <tr><td>14</td><td>PinExcd</td><td>Pin Tries Exceeded</td></tr> <tr><td>15</td><td>PinInvld</td><td>Pin Invalid</td></tr> <tr><td>16</td><td>AuthReq</td><td>Authentication Required</td></tr> <tr><td>17</td><td>AuthenFail</td><td>Authentication Failed</td></tr> <tr><td>18</td><td>Verified</td><td>Card Verified</td></tr> <tr><td>19</td><td>Cancelled</td><td>Cancelled</td></tr> <tr><td>20</td><td>Un</td><td>Unknown</td></tr> </table> 
+     * @param result_code {String} The result code as defined in the Response Codes Reference for example 000 is an accepted live transaction whilst 001 is an accepted test transaction. Result codes identify the source of success and failure.  Codes may start with an alpha character i.e. C001 indicating a type of error such as a card validation error. 
+     * @param result_message {String} The message regarding the result which provides further narrative to the result code. 
      */
-    constructor() { 
+    constructor(merchantid, result, result_code, result_message) { 
         
-        AuthResponse.initialize(this);
+        AuthResponse.initialize(this, merchantid, result, result_code, result_message);
     }
 
     /**
@@ -31,7 +35,11 @@ class AuthResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj) { 
+    static initialize(obj, merchantid, result, result_code, result_message) { 
+        obj['merchantid'] = merchantid;
+        obj['result'] = result;
+        obj['result_code'] = result_code;
+        obj['result_message'] = result_message;
     }
 
     /**
@@ -45,6 +53,18 @@ class AuthResponse {
         if (data) {
             obj = obj || new AuthResponse();
 
+            if (data.hasOwnProperty('merchantid')) {
+                obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
+            }
+            if (data.hasOwnProperty('result')) {
+                obj['result'] = ApiClient.convertToType(data['result'], 'Number');
+            }
+            if (data.hasOwnProperty('result_code')) {
+                obj['result_code'] = ApiClient.convertToType(data['result_code'], 'String');
+            }
+            if (data.hasOwnProperty('result_message')) {
+                obj['result_message'] = ApiClient.convertToType(data['result_message'], 'String');
+            }
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
@@ -102,18 +122,6 @@ class AuthResponse {
             if (data.hasOwnProperty('maskedpan')) {
                 obj['maskedpan'] = ApiClient.convertToType(data['maskedpan'], 'String');
             }
-            if (data.hasOwnProperty('merchantid')) {
-                obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
-            }
-            if (data.hasOwnProperty('result')) {
-                obj['result'] = ApiClient.convertToType(data['result'], 'Number');
-            }
-            if (data.hasOwnProperty('result_code')) {
-                obj['result_code'] = ApiClient.convertToType(data['result_code'], 'String');
-            }
-            if (data.hasOwnProperty('result_message')) {
-                obj['result_message'] = ApiClient.convertToType(data['result_message'], 'String');
-            }
             if (data.hasOwnProperty('scheme')) {
                 obj['scheme'] = ApiClient.convertToType(data['scheme'], 'String');
             }
@@ -132,6 +140,30 @@ class AuthResponse {
 
 
 }
+
+/**
+ * The merchant id that processed this transaction.
+ * @member {Number} merchantid
+ */
+AuthResponse.prototype['merchantid'] = undefined;
+
+/**
+ * An integer result that indicates the outcome of the transaction. The Code value below maps to the result value  <table> <tr> <th>Code</th> <th>Abbrev</th> <th>Description</th> </tr> <tr><td>0</td><td>Declined</td><td>Declined</td></tr> <tr><td>1</td><td>Accepted</td><td>Accepted</td></tr> <tr><td>2</td><td>Rejected</td><td>Rejected</td></tr> <tr><td>3</td><td>Not Attempted</td><td>Not Attempted</td></tr> <tr><td>4</td><td>Referred</td><td>Referred</td></tr> <tr><td>5</td><td>PinRetry</td><td>Perform PIN Retry</td></tr> <tr><td>6</td><td>ForSigVer</td><td>Force Signature Verification</td></tr> <tr><td>7</td><td>Hold</td><td>Hold</td></tr> <tr><td>8</td><td>SecErr</td><td>Security Error</td></tr> <tr><td>9</td><td>CallAcq</td><td>Call Acquirer</td></tr> <tr><td>10</td><td>DNH</td><td>Do Not Honour</td></tr> <tr><td>11</td><td>RtnCrd</td><td>Retain Card</td></tr> <tr><td>12</td><td>ExprdCrd</td><td>Expired Card</td></tr> <tr><td>13</td><td>InvldCrd</td><td>Invalid Card No</td></tr> <tr><td>14</td><td>PinExcd</td><td>Pin Tries Exceeded</td></tr> <tr><td>15</td><td>PinInvld</td><td>Pin Invalid</td></tr> <tr><td>16</td><td>AuthReq</td><td>Authentication Required</td></tr> <tr><td>17</td><td>AuthenFail</td><td>Authentication Failed</td></tr> <tr><td>18</td><td>Verified</td><td>Card Verified</td></tr> <tr><td>19</td><td>Cancelled</td><td>Cancelled</td></tr> <tr><td>20</td><td>Un</td><td>Unknown</td></tr> </table> 
+ * @member {Number} result
+ */
+AuthResponse.prototype['result'] = undefined;
+
+/**
+ * The result code as defined in the Response Codes Reference for example 000 is an accepted live transaction whilst 001 is an accepted test transaction. Result codes identify the source of success and failure.  Codes may start with an alpha character i.e. C001 indicating a type of error such as a card validation error. 
+ * @member {String} result_code
+ */
+AuthResponse.prototype['result_code'] = undefined;
+
+/**
+ * The message regarding the result which provides further narrative to the result code. 
+ * @member {String} result_message
+ */
+AuthResponse.prototype['result_message'] = undefined;
 
 /**
  * The amount of the transaction processed.
@@ -246,30 +278,6 @@ AuthResponse.prototype['live'] = undefined;
  * @member {String} maskedpan
  */
 AuthResponse.prototype['maskedpan'] = undefined;
-
-/**
- * The merchant id that processed this transaction.
- * @member {Number} merchantid
- */
-AuthResponse.prototype['merchantid'] = undefined;
-
-/**
- * An integer result that indicates the outcome of the transaction. The Code value below maps to the result value  <table> <tr> <th>Code</th> <th>Abbrev</th> <th>Description</th> </tr> <tr><td>0</td><td>Declined</td><td>Declined</td></tr> <tr><td>1</td><td>Accepted</td><td>Accepted</td></tr> <tr><td>2</td><td>Rejected</td><td>Rejected</td></tr> <tr><td>3</td><td>Not Attempted</td><td>Not Attempted</td></tr> <tr><td>4</td><td>Referred</td><td>Referred</td></tr> <tr><td>5</td><td>PinRetry</td><td>Perform PIN Retry</td></tr> <tr><td>6</td><td>ForSigVer</td><td>Force Signature Verification</td></tr> <tr><td>7</td><td>Hold</td><td>Hold</td></tr> <tr><td>8</td><td>SecErr</td><td>Security Error</td></tr> <tr><td>9</td><td>CallAcq</td><td>Call Acquirer</td></tr> <tr><td>10</td><td>DNH</td><td>Do Not Honour</td></tr> <tr><td>11</td><td>RtnCrd</td><td>Retain Card</td></tr> <tr><td>12</td><td>ExprdCrd</td><td>Expired Card</td></tr> <tr><td>13</td><td>InvldCrd</td><td>Invalid Card No</td></tr> <tr><td>14</td><td>PinExcd</td><td>Pin Tries Exceeded</td></tr> <tr><td>15</td><td>PinInvld</td><td>Pin Invalid</td></tr> <tr><td>16</td><td>AuthReq</td><td>Authentication Required</td></tr> <tr><td>17</td><td>AuthenFail</td><td>Authentication Failed</td></tr> <tr><td>18</td><td>Verified</td><td>Card Verified</td></tr> <tr><td>19</td><td>Cancelled</td><td>Cancelled</td></tr> <tr><td>20</td><td>Un</td><td>Unknown</td></tr> </table> 
- * @member {Number} result
- */
-AuthResponse.prototype['result'] = undefined;
-
-/**
- * The result code as defined in the Response Codes Reference for example 000 is an accepted live transaction whilst 001 is an accepted test transaction. Result codes identify the source of success and failure.  Codes may start with an alpha character i.e. C001 indicating a type of error such as a card validation error. 
- * @member {String} result_code
- */
-AuthResponse.prototype['result_code'] = undefined;
-
-/**
- * The message regarding the result which provides further narrative to the result code. 
- * @member {String} result_message
- */
-AuthResponse.prototype['result_message'] = undefined;
 
 /**
  * A name of the card scheme of the transaction that processed the transaction such as Visa or MasterCard. 

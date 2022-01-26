@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.CheckBatchStatus();
+    // // instance = new Citypay Api Client.CheckBatchStatus();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,19 +49,19 @@
   describe('CheckBatchStatus', function() {
     it('should create an instance of CheckBatchStatus', function() {
       // uncomment below and update the code to test CheckBatchStatus
-      //var instance = new Citypay Api Client.CheckBatchStatus();
+      //var // instance = new Citypay Api Client.CheckBatchStatus();
       //expect(instance).to.be.a(Citypay Api Client.CheckBatchStatus);
     });
 
     it('should have the property batch_id (base name: "batch_id")', function() {
       // uncomment below and update the code to test the property batch_id
-      //var instance = new Citypay Api Client.CheckBatchStatus();
+      //var // instance = new Citypay Api Client.CheckBatchStatus();
       //expect(instance).to.be();
     });
 
     it('should have the property account_id (base name: "account_id")', function() {
       // uncomment below and update the code to test the property account_id
-      //var instance = new Citypay Api Client.CheckBatchStatus();
+      //var // instance = new Citypay Api Client.CheckBatchStatus();
       //expect(instance).to.be();
     });
 

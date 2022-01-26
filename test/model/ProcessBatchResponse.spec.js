@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.ProcessBatchResponse();
+    // // instance = new Citypay Api Client.ProcessBatchResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,19 +49,19 @@
   describe('ProcessBatchResponse', function() {
     it('should create an instance of ProcessBatchResponse', function() {
       // uncomment below and update the code to test ProcessBatchResponse
-      //var instance = new Citypay Api Client.ProcessBatchResponse();
+      //var // instance = new Citypay Api Client.ProcessBatchResponse();
       //expect(instance).to.be.a(Citypay Api Client.ProcessBatchResponse);
     });
 
     it('should have the property valid (base name: "valid")', function() {
       // uncomment below and update the code to test the property valid
-      //var instance = new Citypay Api Client.ProcessBatchResponse();
+      //var // instance = new Citypay Api Client.ProcessBatchResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instance = new Citypay Api Client.ProcessBatchResponse();
+      //var // instance = new Citypay Api Client.ProcessBatchResponse();
       //expect(instance).to.be();
     });
 

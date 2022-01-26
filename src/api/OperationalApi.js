@@ -13,6 +13,8 @@
 
 import ApiClient from "../ApiClient";
 import Acknowledgement from '../model/Acknowledgement';
+import AclCheckRequest from '../model/AclCheckRequest';
+import AclCheckResponseModel from '../model/AclCheckResponseModel';
 import Error from '../model/Error';
 import ListMerchantsResponse from '../model/ListMerchantsResponse';
 import Ping from '../model/Ping';
@@ -34,6 +36,53 @@ export default class OperationalApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+
+    /**
+     * ACL Check Request
+     * Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+     * @param {module:model/AclCheckRequest} acl_check_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AclCheckResponseModel} and HTTP response
+     */
+    aclCheckRequestWithHttpInfo(acl_check_request) {
+      let postBody = acl_check_request;
+      // verify the required parameter 'acl_check_request' is set
+      if (acl_check_request === undefined || acl_check_request === null) {
+        throw new Error("Missing the required parameter 'acl_check_request' when calling aclCheckRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = AclCheckResponseModel;
+      return this.apiClient.callApi(
+        '/acl/check', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * ACL Check Request
+     * Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+     * @param {module:model/AclCheckRequest} acl_check_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AclCheckResponseModel}
+     */
+    aclCheckRequest(acl_check_request) {
+      return this.aclCheckRequestWithHttpInfo(acl_check_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
 
 
     /**

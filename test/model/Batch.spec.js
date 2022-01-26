@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // instance = new Citypay Api Client.Bin();
+    // instance = new Citypay Api Client.Batch();
   });
 
   var getProperty = function(object, getter, property) {
@@ -46,64 +46,28 @@
       object[property] = value;
   }
 
-  describe('Bin', function() {
-    it('should create an instance of Bin', function() {
-      // uncomment below and update the code to test Bin
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be.a(Citypay Api Client.Bin);
+  describe('Batch', function() {
+    it('should create an instance of Batch', function() {
+      // uncomment below and update the code to test Batch
+      //var // instance = new Citypay Api Client.Batch();
+      //expect(instance).to.be.a(Citypay Api Client.Batch);
     });
 
-    it('should have the property bin_commercial (base name: "bin_commercial")', function() {
-      // uncomment below and update the code to test the property bin_commercial
-      //var // // instance = new Citypay Api Client.Bin();
+    it('should have the property batch_date (base name: "batch_date")', function() {
+      // uncomment below and update the code to test the property batch_date
+      //var // instance = new Citypay Api Client.Batch();
       //expect(instance).to.be();
     });
 
-    it('should have the property bin_corporate (base name: "bin_corporate")', function() {
-      // uncomment below and update the code to test the property bin_corporate
-      //var // // instance = new Citypay Api Client.Bin();
+    it('should have the property batch_status (base name: "batch_status")', function() {
+      // uncomment below and update the code to test the property batch_status
+      //var // instance = new Citypay Api Client.Batch();
       //expect(instance).to.be();
     });
 
-    it('should have the property bin_country_issued (base name: "bin_country_issued")', function() {
-      // uncomment below and update the code to test the property bin_country_issued
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bin_credit (base name: "bin_credit")', function() {
-      // uncomment below and update the code to test the property bin_credit
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bin_currency (base name: "bin_currency")', function() {
-      // uncomment below and update the code to test the property bin_currency
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bin_debit (base name: "bin_debit")', function() {
-      // uncomment below and update the code to test the property bin_debit
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bin_description (base name: "bin_description")', function() {
-      // uncomment below and update the code to test the property bin_description
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property bin_eu (base name: "bin_eu")', function() {
-      // uncomment below and update the code to test the property bin_eu
-      //var // // instance = new Citypay Api Client.Bin();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property scheme (base name: "scheme")', function() {
-      // uncomment below and update the code to test the property scheme
-      //var // // instance = new Citypay Api Client.Bin();
+    it('should have the property batch_id (base name: "batch_id")', function() {
+      // uncomment below and update the code to test the property batch_id
+      //var // instance = new Citypay Api Client.Batch();
       //expect(instance).to.be();
     });
 

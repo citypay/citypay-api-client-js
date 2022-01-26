@@ -20,7 +20,7 @@ class CheckBatchStatus {
     /**
      * Constructs a new <code>CheckBatchStatus</code>.
      * @alias module:model/CheckBatchStatus
-     * @param batch_id {Number} The batch id to obtain the status for.
+     * @param batch_id {Array.<Number>} 
      */
     constructor(batch_id) { 
         
@@ -48,10 +48,10 @@ class CheckBatchStatus {
             obj = obj || new CheckBatchStatus();
 
             if (data.hasOwnProperty('batch_id')) {
-                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], 'Number');
+                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], ['Number']);
             }
-            if (data.hasOwnProperty('account_id')) {
-                obj['account_id'] = ApiClient.convertToType(data['account_id'], 'String');
+            if (data.hasOwnProperty('client_account_id')) {
+                obj['client_account_id'] = ApiClient.convertToType(data['client_account_id'], 'String');
             }
         }
         return obj;
@@ -61,16 +61,15 @@ class CheckBatchStatus {
 }
 
 /**
- * The batch id to obtain the status for.
- * @member {Number} batch_id
+ * @member {Array.<Number>} batch_id
  */
 CheckBatchStatus.prototype['batch_id'] = undefined;
 
 /**
  * The batch account id to obtain the batch for. Defaults to your client id if not provided.
- * @member {String} account_id
+ * @member {String} client_account_id
  */
-CheckBatchStatus.prototype['account_id'] = undefined;
+CheckBatchStatus.prototype['client_account_id'] = undefined;
 
 
 

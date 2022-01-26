@@ -96,6 +96,9 @@ class Card {
             if (data.hasOwnProperty('last4digits')) {
                 obj['last4digits'] = ApiClient.convertToType(data['last4digits'], 'String');
             }
+            if (data.hasOwnProperty('name_on_card')) {
+                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
+            }
             if (data.hasOwnProperty('scheme')) {
                 obj['scheme'] = ApiClient.convertToType(data['scheme'], 'String');
             }
@@ -210,6 +213,12 @@ Card.prototype['label2'] = undefined;
  * @member {String} last4digits
  */
 Card.prototype['last4digits'] = undefined;
+
+/**
+ * The name on the card.
+ * @member {String} name_on_card
+ */
+Card.prototype['name_on_card'] = undefined;
 
 /**
  * The scheme that issued the card.

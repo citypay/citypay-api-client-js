@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.BatchTransactionResultModel();
+    // // instance = new Citypay Api Client.BatchTransactionResultModel();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,67 +49,67 @@
   describe('BatchTransactionResultModel', function() {
     it('should create an instance of BatchTransactionResultModel', function() {
       // uncomment below and update the code to test BatchTransactionResultModel
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be.a(Citypay Api Client.BatchTransactionResultModel);
     });
 
     it('should have the property account_id (base name: "account_id")', function() {
       // uncomment below and update the code to test the property account_id
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property identifier (base name: "identifier")', function() {
       // uncomment below and update the code to test the property identifier
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property merchantid (base name: "merchantid")', function() {
       // uncomment below and update the code to test the property merchantid
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property amount (base name: "amount")', function() {
       // uncomment below and update the code to test the property amount
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property authcode (base name: "authcode")', function() {
       // uncomment below and update the code to test the property authcode
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property authorised (base name: "authorised")', function() {
       // uncomment below and update the code to test the property authorised
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property maskedpan (base name: "maskedpan")', function() {
       // uncomment below and update the code to test the property maskedpan
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property result (base name: "result")', function() {
       // uncomment below and update the code to test the property result
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 
     it('should have the property scheme (base name: "scheme")', function() {
       // uncomment below and update the code to test the property scheme
-      //var instance = new Citypay Api Client.BatchTransactionResultModel();
+      //var // instance = new Citypay Api Client.BatchTransactionResultModel();
       //expect(instance).to.be();
     });
 

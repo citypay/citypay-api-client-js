@@ -21,16 +21,16 @@ class BatchReportResponseModel {
     /**
      * Constructs a new <code>BatchReportResponseModel</code>.
      * @alias module:model/BatchReportResponseModel
-     * @param account_id {String} The batch account id that the batch was processed with.
      * @param amount {Number} The total amount that the batch contains.
      * @param batch_date {Date} The date and time of the batch in ISO-8601 format.
-     * @param batch_id {Number} The batch id specified in the batch processing request.
-     * @param batch_status {String} The status of the batch. Possible values are.
+     * @param batch_id {Array.<Number>} 
+     * @param batch_status {String} The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
+     * @param client_account_id {String} The batch account id that the batch was processed with.
      * @param transactions {Array.<module:model/BatchTransactionResultModel>} 
      */
-    constructor(account_id, amount, batch_date, batch_id, batch_status, transactions) { 
+    constructor(amount, batch_date, batch_id, batch_status, client_account_id, transactions) { 
         
-        BatchReportResponseModel.initialize(this, account_id, amount, batch_date, batch_id, batch_status, transactions);
+        BatchReportResponseModel.initialize(this, amount, batch_date, batch_id, batch_status, client_account_id, transactions);
     }
 
     /**
@@ -38,12 +38,12 @@ class BatchReportResponseModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, account_id, amount, batch_date, batch_id, batch_status, transactions) { 
-        obj['account_id'] = account_id;
+    static initialize(obj, amount, batch_date, batch_id, batch_status, client_account_id, transactions) { 
         obj['amount'] = amount;
         obj['batch_date'] = batch_date;
         obj['batch_id'] = batch_id;
         obj['batch_status'] = batch_status;
+        obj['client_account_id'] = client_account_id;
         obj['transactions'] = transactions;
     }
 
@@ -58,9 +58,6 @@ class BatchReportResponseModel {
         if (data) {
             obj = obj || new BatchReportResponseModel();
 
-            if (data.hasOwnProperty('account_id')) {
-                obj['account_id'] = ApiClient.convertToType(data['account_id'], 'String');
-            }
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
@@ -68,10 +65,13 @@ class BatchReportResponseModel {
                 obj['batch_date'] = ApiClient.convertToType(data['batch_date'], 'Date');
             }
             if (data.hasOwnProperty('batch_id')) {
-                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], 'Number');
+                obj['batch_id'] = ApiClient.convertToType(data['batch_id'], ['Number']);
             }
             if (data.hasOwnProperty('batch_status')) {
                 obj['batch_status'] = ApiClient.convertToType(data['batch_status'], 'String');
+            }
+            if (data.hasOwnProperty('client_account_id')) {
+                obj['client_account_id'] = ApiClient.convertToType(data['client_account_id'], 'String');
             }
             if (data.hasOwnProperty('transactions')) {
                 obj['transactions'] = ApiClient.convertToType(data['transactions'], [BatchTransactionResultModel]);
@@ -82,12 +82,6 @@ class BatchReportResponseModel {
 
 
 }
-
-/**
- * The batch account id that the batch was processed with.
- * @member {String} account_id
- */
-BatchReportResponseModel.prototype['account_id'] = undefined;
 
 /**
  * The total amount that the batch contains.
@@ -102,16 +96,21 @@ BatchReportResponseModel.prototype['amount'] = undefined;
 BatchReportResponseModel.prototype['batch_date'] = undefined;
 
 /**
- * The batch id specified in the batch processing request.
- * @member {Number} batch_id
+ * @member {Array.<Number>} batch_id
  */
 BatchReportResponseModel.prototype['batch_id'] = undefined;
 
 /**
- * The status of the batch. Possible values are.
+ * The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
  * @member {String} batch_status
  */
 BatchReportResponseModel.prototype['batch_status'] = undefined;
+
+/**
+ * The batch account id that the batch was processed with.
+ * @member {String} client_account_id
+ */
+BatchReportResponseModel.prototype['client_account_id'] = undefined;
 
 /**
  * @member {Array.<module:model/BatchTransactionResultModel>} transactions

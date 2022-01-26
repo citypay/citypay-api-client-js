@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.BatchTransaction();
+    // // instance = new Citypay Api Client.BatchTransaction();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,31 +49,31 @@
   describe('BatchTransaction', function() {
     it('should create an instance of BatchTransaction', function() {
       // uncomment below and update the code to test BatchTransaction
-      //var instance = new Citypay Api Client.BatchTransaction();
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be.a(Citypay Api Client.BatchTransaction);
     });
 
     it('should have the property account_id (base name: "account_id")', function() {
       // uncomment below and update the code to test the property account_id
-      //var instance = new Citypay Api Client.BatchTransaction();
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 
     it('should have the property amount (base name: "amount")', function() {
       // uncomment below and update the code to test the property amount
-      //var instance = new Citypay Api Client.BatchTransaction();
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 
     it('should have the property identifier (base name: "identifier")', function() {
       // uncomment below and update the code to test the property identifier
-      //var instance = new Citypay Api Client.BatchTransaction();
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 
     it('should have the property merchantid (base name: "merchantid")', function() {
       // uncomment below and update the code to test the property merchantid
-      //var instance = new Citypay Api Client.BatchTransaction();
+      //var // instance = new Citypay Api Client.BatchTransaction();
       //expect(instance).to.be();
     });
 

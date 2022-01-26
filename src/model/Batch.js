@@ -11,23 +11,21 @@
  */
 
 import ApiClient from '../ApiClient';
-import BatchTransaction from './BatchTransaction';
 
 /**
- * The ProcessBatchRequest model module.
- * @module model/ProcessBatchRequest
+ * The Batch model module.
+ * @module model/Batch
  */
-class ProcessBatchRequest {
+class Batch {
     /**
-     * Constructs a new <code>ProcessBatchRequest</code>.
-     * @alias module:model/ProcessBatchRequest
-     * @param batch_date {Date} The date and time that the file was created in ISO-8601 format.
-     * @param batch_id {Array.<Number>} 
-     * @param transactions {Array.<module:model/BatchTransaction>} 
+     * Constructs a new <code>Batch</code>.
+     * @alias module:model/Batch
+     * @param batch_date {Date} The date that the file was created in ISO-8601 format.
+     * @param batch_status {String} The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
      */
-    constructor(batch_date, batch_id, transactions) { 
+    constructor(batch_date, batch_status) { 
         
-        ProcessBatchRequest.initialize(this, batch_date, batch_id, transactions);
+        Batch.initialize(this, batch_date, batch_status);
     }
 
     /**
@@ -35,34 +33,30 @@ class ProcessBatchRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, batch_date, batch_id, transactions) { 
+    static initialize(obj, batch_date, batch_status) { 
         obj['batch_date'] = batch_date;
-        obj['batch_id'] = batch_id;
-        obj['transactions'] = transactions;
+        obj['batch_status'] = batch_status;
     }
 
     /**
-     * Constructs a <code>ProcessBatchRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>Batch</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/ProcessBatchRequest} obj Optional instance to populate.
-     * @return {module:model/ProcessBatchRequest} The populated <code>ProcessBatchRequest</code> instance.
+     * @param {module:model/Batch} obj Optional instance to populate.
+     * @return {module:model/Batch} The populated <code>Batch</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new ProcessBatchRequest();
+            obj = obj || new Batch();
 
             if (data.hasOwnProperty('batch_date')) {
                 obj['batch_date'] = ApiClient.convertToType(data['batch_date'], 'Date');
             }
+            if (data.hasOwnProperty('batch_status')) {
+                obj['batch_status'] = ApiClient.convertToType(data['batch_status'], 'String');
+            }
             if (data.hasOwnProperty('batch_id')) {
                 obj['batch_id'] = ApiClient.convertToType(data['batch_id'], ['Number']);
-            }
-            if (data.hasOwnProperty('transactions')) {
-                obj['transactions'] = ApiClient.convertToType(data['transactions'], [BatchTransaction]);
-            }
-            if (data.hasOwnProperty('client_account_id')) {
-                obj['client_account_id'] = ApiClient.convertToType(data['client_account_id'], 'String');
             }
         }
         return obj;
@@ -72,31 +66,26 @@ class ProcessBatchRequest {
 }
 
 /**
- * The date and time that the file was created in ISO-8601 format.
+ * The date that the file was created in ISO-8601 format.
  * @member {Date} batch_date
  */
-ProcessBatchRequest.prototype['batch_date'] = undefined;
+Batch.prototype['batch_date'] = undefined;
+
+/**
+ * The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
+ * @member {String} batch_status
+ */
+Batch.prototype['batch_status'] = undefined;
 
 /**
  * @member {Array.<Number>} batch_id
  */
-ProcessBatchRequest.prototype['batch_id'] = undefined;
-
-/**
- * @member {Array.<module:model/BatchTransaction>} transactions
- */
-ProcessBatchRequest.prototype['transactions'] = undefined;
-
-/**
- * The batch account id to process the batch for. Defaults to your client id if not provided.
- * @member {String} client_account_id
- */
-ProcessBatchRequest.prototype['client_account_id'] = undefined;
+Batch.prototype['batch_id'] = undefined;
 
 
 
 
 
 
-export default ProcessBatchRequest;
+export default Batch;
 

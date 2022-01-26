@@ -15,6 +15,8 @@ import ApiClient from './ApiClient';
 import AccountCreate from './model/AccountCreate';
 import AccountStatus from './model/AccountStatus';
 import Acknowledgement from './model/Acknowledgement';
+import AclCheckRequest from './model/AclCheckRequest';
+import AclCheckResponseModel from './model/AclCheckResponseModel';
 import AirlineAdvice from './model/AirlineAdvice';
 import AirlineSegment from './model/AirlineSegment';
 import AuthReference from './model/AuthReference';
@@ -22,6 +24,7 @@ import AuthReferences from './model/AuthReferences';
 import AuthRequest from './model/AuthRequest';
 import AuthResponse from './model/AuthResponse';
 import AuthenRequired from './model/AuthenRequired';
+import Batch from './model/Batch';
 import BatchReportRequest from './model/BatchReportRequest';
 import BatchReportResponseModel from './model/BatchReportResponseModel';
 import BatchTransaction from './model/BatchTransaction';
@@ -120,6 +123,18 @@ export {
     Acknowledgement,
 
     /**
+     * The AclCheckRequest model constructor.
+     * @property {module:model/AclCheckRequest}
+     */
+    AclCheckRequest,
+
+    /**
+     * The AclCheckResponseModel model constructor.
+     * @property {module:model/AclCheckResponseModel}
+     */
+    AclCheckResponseModel,
+
+    /**
      * The AirlineAdvice model constructor.
      * @property {module:model/AirlineAdvice}
      */
@@ -160,6 +175,12 @@ export {
      * @property {module:model/AuthenRequired}
      */
     AuthenRequired,
+
+    /**
+     * The Batch model constructor.
+     * @property {module:model/Batch}
+     */
+    Batch,
 
     /**
      * The BatchReportRequest model constructor.
