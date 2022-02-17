@@ -1,5 +1,10 @@
 require('dotenv').config();
 
+const _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+const { CResAuthRequest } = require('../dist');
+
+const _superagent = _interopRequireDefault(require("superagent"));
+
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -18,7 +23,7 @@ function uuidv4() {
         // Browser globals (root is window)
         factory(root.expect, root.citypay_api_client);
     }
-}(this, function (expect, citypay_api_client) {
+}(this, function (expect,  citypay_api_client) {
     'use strict';
 
     const client_id = process.env.CP_CLIENT_ID;
@@ -112,9 +117,46 @@ function uuidv4() {
                 expect(decision.isChallengeRequired()).to.equal(true);
                 expect(decision.isAuthResponse()).to.equal(false);
 
-                let result = decision.RequestChallenged;
-                expect(result.creq).to.not.equal(null);
-                expect(result.identifier).to.not.equal(null);
+                if(decision.isChallengeRequired()) {
+                    let result = decision.RequestChallenged;
+                    expect(result.acs_url).to.not.equal(null);
+                    expect(result.creq).to.not.equal(null);
+                    expect(result.threedserver_trans_id).to.not.equal(null);
+
+                    const content = {
+                        threeDSSessionData: result.threedserver_trans_id,
+                        creq: result.creq
+                    }
+
+                    const request = (0, _superagent["default"])("POST",
+                      "https://sandbox.citypay.com/3dsv2/acs");
+
+
+                    const resultRequest = await request.send(content).set('Content-Type',
+                      'application/json');
+
+                    const cResAuthRequest = resultRequest['body'];
+
+                    if(cResAuthRequest) {
+                        expect(cResAuthRequest['acsTransID']).not.to.be.empty();
+                        expect(cResAuthRequest['messageType']).not.to.be.empty();
+                        expect(cResAuthRequest['messageVersion']).not.to.be.empty();
+                        expect(cResAuthRequest['threeDSServerTransID']).not.to.be.empty();
+                        expect(cResAuthRequest['transStatus']).not.to.be.empty();
+
+                        const cResAuthRequestString = JSON.stringify(cResAuthRequest);
+
+                        const cResAuthRequestString64 = new CResAuthRequest.constructFromObject({cres: Buffer.from(cResAuthRequestString).toString('base64')});
+
+                        const cResRequestResponse = await new citypay_api_client.PaymentProcessingApi(
+                          client).cResRequest(cResAuthRequestString64);
+
+                        expect(cResRequestResponse.amount).to.be.equal(1396);
+                        expect(cResRequestResponse.authcode).to.be.equal("A12345");
+                        expect(cResRequestResponse.authen_result).to.be.equal("Y");
+                        expect(cResRequestResponse.authorised).to.be.equal(true);
+                    }
+                }
             });
 
         });
@@ -181,7 +223,6 @@ function uuidv4() {
                 expect(ar.result_code).to.equal("001");
                 expect(ar.amount).to.equal(7801);
                 expect(ar.authcode).to.equal("A12345");
-
 
                 let ack = await api.accountDeleteRequest(cha_id);
                 expect(ack.code).to.equal("001");
