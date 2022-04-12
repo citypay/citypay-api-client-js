@@ -1,9 +1,10 @@
 require('dotenv').config();
 
 const _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-const { CResAuthRequest } = require('../dist');
 
 const _superagent = _interopRequireDefault(require("superagent"));
+
+const { Digest } = require('../src/utils/Digest');
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -87,7 +88,7 @@ function uuidv4() {
                 expect(result.authcode).to.be.equal("A12345");
                 expect(result.amount).to.be.equal(1395);
 
-
+                expect(Digest.validateDigest(result, licence_key)).to.be.equal(true);
             });
 
         });
@@ -146,7 +147,7 @@ function uuidv4() {
 
                         const cResAuthRequestString = JSON.stringify(cResAuthRequest);
 
-                        const cResAuthRequestString64 = new CResAuthRequest.constructFromObject({cres: Buffer.from(cResAuthRequestString).toString('base64')});
+                        const cResAuthRequestString64 = new citypay_api_client.CResAuthRequest.constructFromObject({cres: Buffer.from(cResAuthRequestString).toString('base64')});
 
                         const cResRequestResponse = await new citypay_api_client.PaymentProcessingApi(
                           client).cResRequest(cResAuthRequestString64);
