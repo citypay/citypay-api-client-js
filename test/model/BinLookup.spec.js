@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.BinLookup();
+    // // instance = new Citypay Api Client.BinLookup();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,13 +49,13 @@
   describe('BinLookup', function() {
     it('should create an instance of BinLookup', function() {
       // uncomment below and update the code to test BinLookup
-      //var // // // instance = new Citypay Api Client.BinLookup();
+      //var // // instance = new Citypay Api Client.BinLookup();
       //expect(instance).to.be.a(Citypay Api Client.BinLookup);
     });
 
     it('should have the property bin (base name: "bin")', function() {
       // uncomment below and update the code to test the property bin
-      //var // // // instance = new Citypay Api Client.BinLookup();
+      //var // // instance = new Citypay Api Client.BinLookup();
       //expect(instance).to.be();
     });
 

@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.BatchReportResponseModel();
+    // // instance = new Citypay Api Client.BatchReportResponseModel();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,43 +49,43 @@
   describe('BatchReportResponseModel', function() {
     it('should create an instance of BatchReportResponseModel', function() {
       // uncomment below and update the code to test BatchReportResponseModel
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be.a(Citypay Api Client.BatchReportResponseModel);
     });
 
     it('should have the property account_id (base name: "account_id")', function() {
       // uncomment below and update the code to test the property account_id
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property amount (base name: "amount")', function() {
       // uncomment below and update the code to test the property amount
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property batch_date (base name: "batch_date")', function() {
       // uncomment below and update the code to test the property batch_date
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property batch_id (base name: "batch_id")', function() {
       // uncomment below and update the code to test the property batch_id
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property batch_status (base name: "batch_status")', function() {
       // uncomment below and update the code to test the property batch_status
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property transactions (base name: "transactions")', function() {
       // uncomment below and update the code to test the property transactions
-      //var // // instance = new Citypay Api Client.BatchReportResponseModel();
+      //var // instance = new Citypay Api Client.BatchReportResponseModel();
       //expect(instance).to.be();
     });
 

@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // instance = new Citypay Api Client.AclCheckRequest();
+    // instance = new Citypay Api Client.AclCheckRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,13 +49,13 @@
   describe('AclCheckRequest', function() {
     it('should create an instance of AclCheckRequest', function() {
       // uncomment below and update the code to test AclCheckRequest
-      //var // // instance = new Citypay Api Client.AclCheckRequest();
+      //var // instance = new Citypay Api Client.AclCheckRequest();
       //expect(instance).to.be.a(Citypay Api Client.AclCheckRequest);
     });
 
     it('should have the property ip (base name: "ip")', function() {
       // uncomment below and update the code to test the property ip
-      //var // // instance = new Citypay Api Client.AclCheckRequest();
+      //var // instance = new Citypay Api Client.AclCheckRequest();
       //expect(instance).to.be();
     });
 
