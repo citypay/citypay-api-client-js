@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security <aside class=\"notice\">   Before we begin a reminder that your application will need to adhere to PCI-DSS standards to operate safely   and to meet requirements set out by Visa and MasterCard and the PCI Security Standards Council including: </aside>  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -15,19 +15,22 @@ import ApiClient from "../ApiClient";
 import Acknowledgement from '../model/Acknowledgement';
 import AclCheckRequest from '../model/AclCheckRequest';
 import AclCheckResponseModel from '../model/AclCheckResponseModel';
+import DomainKeyCheckRequest from '../model/DomainKeyCheckRequest';
+import DomainKeyRequest from '../model/DomainKeyRequest';
+import DomainKeyResponse from '../model/DomainKeyResponse';
 import Error from '../model/Error';
 import ListMerchantsResponse from '../model/ListMerchantsResponse';
 import Ping from '../model/Ping';
 
 /**
-* Operational service.
-* @module api/OperationalApi
+* OperationalFunctionsApi service.
+* @module api/OperationalFunctionsApi
 */
-export default class OperationalApi {
+export default class OperationalFunctionsApi {
 
     /**
-    * Constructs a new OperationalApi. 
-    * @alias module:api/OperationalApi
+    * Constructs a new OperationalFunctionsApi. 
+    * @alias module:api/OperationalFunctionsApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -65,7 +68,7 @@ export default class OperationalApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = AclCheckResponseModel;
       return this.apiClient.callApi(
-        '/acl/check', 'POST',
+        '/v6/acl/check', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -79,6 +82,100 @@ export default class OperationalApi {
      */
     aclCheckRequest(acl_check_request) {
       return this.aclCheckRequestWithHttpInfo(acl_check_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Domain Key Check Request
+     * Checks the contents of a `domain key`. Can be used for operational processes to ensure that the properties of a  domain key meet their expectations. 
+     * @param {module:model/DomainKeyCheckRequest} domain_key_check_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DomainKeyResponse} and HTTP response
+     */
+    domainKeyCheckRequestWithHttpInfo(domain_key_check_request) {
+      let postBody = domain_key_check_request;
+      // verify the required parameter 'domain_key_check_request' is set
+      if (domain_key_check_request === undefined || domain_key_check_request === null) {
+        throw new Error("Missing the required parameter 'domain_key_check_request' when calling domainKeyCheckRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = DomainKeyResponse;
+      return this.apiClient.callApi(
+        '/dk/check', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Domain Key Check Request
+     * Checks the contents of a `domain key`. Can be used for operational processes to ensure that the properties of a  domain key meet their expectations. 
+     * @param {module:model/DomainKeyCheckRequest} domain_key_check_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DomainKeyResponse}
+     */
+    domainKeyCheckRequest(domain_key_check_request) {
+      return this.domainKeyCheckRequestWithHttpInfo(domain_key_check_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Domain Key Generation Request
+     * Generates a domain key based on the permissions of the calling `api-key`. Domain keys can be used in _Direct Post_ and `XHR` calls to the API services. 
+     * @param {module:model/DomainKeyRequest} domain_key_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/DomainKeyResponse} and HTTP response
+     */
+    domainKeyGenRequestWithHttpInfo(domain_key_request) {
+      let postBody = domain_key_request;
+      // verify the required parameter 'domain_key_request' is set
+      if (domain_key_request === undefined || domain_key_request === null) {
+        throw new Error("Missing the required parameter 'domain_key_request' when calling domainKeyGenRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = DomainKeyResponse;
+      return this.apiClient.callApi(
+        '/dk/gen', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Domain Key Generation Request
+     * Generates a domain key based on the permissions of the calling `api-key`. Domain keys can be used in _Direct Post_ and `XHR` calls to the API services. 
+     * @param {module:model/DomainKeyRequest} domain_key_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/DomainKeyResponse}
+     */
+    domainKeyGenRequest(domain_key_request) {
+      return this.domainKeyGenRequestWithHttpInfo(domain_key_request)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -113,7 +210,7 @@ export default class OperationalApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = ListMerchantsResponse;
       return this.apiClient.callApi(
-        '/merchants/{clientid}', 'GET',
+        '/v6/merchants/{clientid}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -155,12 +252,12 @@ export default class OperationalApi {
       let formParams = {
       };
 
-      let authNames = ['cp-api-key'];
-      let contentTypes = ['application/json', 'text/xml'];
-      let accepts = ['application/json', 'text/xml'];
+      let authNames = ['cp-api-key', 'cp-domain-key'];
+      let contentTypes = ['application/json', 'application/x-www-form-urlencoded', 'text/xml'];
+      let accepts = ['application/x-www-form-urlencoded', 'application/json', 'text/xml'];
       let returnType = Acknowledgement;
       return this.apiClient.callApi(
-        '/ping', 'POST',
+        '/v6/ping', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );

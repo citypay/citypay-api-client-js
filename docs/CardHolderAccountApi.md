@@ -1,19 +1,19 @@
 # Citypay Api Client.CardHolderAccountApi
 
-All URIs are relative to *https://api.citypay.com/v6*
+All URIs are relative to *https://api.citypay.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**accountCardDeleteRequest**](CardHolderAccountApi.md#accountCardDeleteRequest) | **DELETE** /account/{accountid}/card/{cardId} | Card Deletion
-[**accountCardRegisterRequest**](CardHolderAccountApi.md#accountCardRegisterRequest) | **POST** /account/{accountid}/register | Card Registration
-[**accountCardStatusRequest**](CardHolderAccountApi.md#accountCardStatusRequest) | **POST** /account/{accountid}/card/{cardId}/status | Card Status
-[**accountChangeContactRequest**](CardHolderAccountApi.md#accountChangeContactRequest) | **POST** /account/{accountid}/contact | Contact Details Update
-[**accountCreate**](CardHolderAccountApi.md#accountCreate) | **POST** /account/create | Account Create
-[**accountDeleteRequest**](CardHolderAccountApi.md#accountDeleteRequest) | **DELETE** /account/{accountid} | Account Deletion
-[**accountExistsRequest**](CardHolderAccountApi.md#accountExistsRequest) | **GET** /account-exists/{accountid} | Account Exists
-[**accountRetrieveRequest**](CardHolderAccountApi.md#accountRetrieveRequest) | **GET** /account/{accountid} | Account Retrieval
-[**accountStatusRequest**](CardHolderAccountApi.md#accountStatusRequest) | **POST** /account/{accountid}/status | Account Status
-[**chargeRequest**](CardHolderAccountApi.md#chargeRequest) | **POST** /charge | Charge
+[**accountCardDeleteRequest**](CardHolderAccountApi.md#accountCardDeleteRequest) | **DELETE** /v6/account/{accountid}/card/{cardId} | Card Deletion
+[**accountCardRegisterRequest**](CardHolderAccountApi.md#accountCardRegisterRequest) | **POST** /v6/account/{accountid}/register | Card Registration
+[**accountCardStatusRequest**](CardHolderAccountApi.md#accountCardStatusRequest) | **POST** /v6/account/{accountid}/card/{cardId}/status | Card Status
+[**accountChangeContactRequest**](CardHolderAccountApi.md#accountChangeContactRequest) | **POST** /v6/account/{accountid}/contact | Contact Details Update
+[**accountCreate**](CardHolderAccountApi.md#accountCreate) | **POST** /v6/account/create | Account Create
+[**accountDeleteRequest**](CardHolderAccountApi.md#accountDeleteRequest) | **DELETE** /v6/account/{accountid} | Account Deletion
+[**accountExistsRequest**](CardHolderAccountApi.md#accountExistsRequest) | **GET** /v6/account-exists/{accountid} | Account Exists
+[**accountRetrieveRequest**](CardHolderAccountApi.md#accountRetrieveRequest) | **GET** /v6/account/{accountid} | Account Retrieval
+[**accountStatusRequest**](CardHolderAccountApi.md#accountStatusRequest) | **POST** /v6/account/{accountid}/status | Account Status
+[**chargeRequest**](CardHolderAccountApi.md#chargeRequest) | **POST** /v6/charge | Charge
 
 
 
@@ -327,7 +327,7 @@ Name | Type | Description  | Notes
 
 Account Exists
 
-Checks that an account exists and is active by providing the account id as a url parameter  Checks that an account exists and is active by providing the account id as a url parameter. 
+Checks that an account exists and is active by providing the account id as a url parameter. 
 
 ### Example
 

@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security <aside class=\"notice\">   Before we begin a reminder that your application will need to adhere to PCI-DSS standards to operate safely   and to meet requirements set out by Visa and MasterCard and the PCI Security Standards Council including: </aside>  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -28,14 +28,14 @@ import RetrieveRequest from '../model/RetrieveRequest';
 import VoidRequest from '../model/VoidRequest';
 
 /**
-* PaymentProcessing service.
-* @module api/PaymentProcessingApi
+* AuthorisationAndPaymentApi service.
+* @module api/AuthorisationAndPaymentApi
 */
-export default class PaymentProcessingApi {
+export default class AuthorisationAndPaymentApi {
 
     /**
-    * Constructs a new PaymentProcessingApi. 
-    * @alias module:api/PaymentProcessingApi
+    * Constructs a new AuthorisationAndPaymentApi. 
+    * @alias module:api/AuthorisationAndPaymentApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -73,7 +73,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = Decision;
       return this.apiClient.callApi(
-        '/authorise', 'POST',
+        '/v6/authorise', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -120,7 +120,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = Bin;
       return this.apiClient.callApi(
-        '/bin', 'POST',
+        '/v6/bin', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -167,7 +167,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = AuthResponse;
       return this.apiClient.callApi(
-        '/cres', 'POST',
+        '/v6/cres', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -214,7 +214,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = Acknowledgement;
       return this.apiClient.callApi(
-        '/capture', 'POST',
+        '/v6/capture', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -261,7 +261,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = AuthResponse;
       return this.apiClient.callApi(
-        '/pares', 'POST',
+        '/v6/pares', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -308,7 +308,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = AuthResponse;
       return this.apiClient.callApi(
-        '/refund', 'POST',
+        '/v6/refund', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -355,7 +355,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = AuthReferences;
       return this.apiClient.callApi(
-        '/retrieve', 'POST',
+        '/v6/retrieve', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -402,7 +402,7 @@ export default class PaymentProcessingApi {
       let accepts = ['application/json', 'text/xml'];
       let returnType = Acknowledgement;
       return this.apiClient.callApi(
-        '/void', 'POST',
+        '/v6/void', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );

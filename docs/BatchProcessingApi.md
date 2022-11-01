@@ -1,12 +1,12 @@
 # Citypay Api Client.BatchProcessingApi
 
-All URIs are relative to *https://api.citypay.com/v6*
+All URIs are relative to *https://api.citypay.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batchProcessRequest**](BatchProcessingApi.md#batchProcessRequest) | **POST** /batch/process | Batch Process Request
-[**checkBatchStatusRequest**](BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /batch/status | CheckBatchStatus
-[**getBatchReportRequest**](BatchProcessingApi.md#getBatchReportRequest) | **POST** /batch/retrieve | BatchReportRequest
+[**batchProcessRequest**](BatchProcessingApi.md#batchProcessRequest) | **POST** /v6/batch/process | Batch Process Request
+[**batchReportRequest**](BatchProcessingApi.md#batchReportRequest) | **POST** /v6/batch/retrieve | BatchReportRequest
+[**checkBatchStatusRequest**](BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /v6/batch/status | CheckBatchStatus
 
 
 
@@ -59,6 +59,55 @@ Name | Type | Description  | Notes
 - **Accept**: application/json, text/xml
 
 
+## batchReportRequest
+
+> BatchReportResponseModel batchReportRequest(batch_report_request)
+
+BatchReportRequest
+
+The operation is used to retrieve a report of the result of a batch process.
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.BatchProcessingApi();
+let batch_report_request = new CityPay.BatchReportRequest(); // BatchReportRequest | 
+apiInstance.batchReportRequest(batch_report_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **batch_report_request** | [**BatchReportRequest**](BatchReportRequest.md)|  | 
+
+### Return type
+
+[**BatchReportResponseModel**](BatchReportResponseModel.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
+
+
 ## checkBatchStatusRequest
 
 > CheckBatchStatusResponse checkBatchStatusRequest(check_batch_status)
@@ -97,55 +146,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CheckBatchStatusResponse**](CheckBatchStatusResponse.md)
-
-### Authorization
-
-[cp-api-key](../README.md#cp-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, text/xml
-- **Accept**: application/json, text/xml
-
-
-## getBatchReportRequest
-
-> BatchReportResponseModel getBatchReportRequest(batch_report_request)
-
-BatchReportRequest
-
-The operation is used to retrieve a report of the result of a batch process.
-
-### Example
-
-```javascript
-import CityPay from 'citypay-api';
-let client = new CityPay.ApiClient({
-    "sandbox": true,
-    "client_id": process.env.CP_CLIENT_ID,
-    "licence_key": process.env.CP_LICENCE_KEY
-})
-
-let apiInstance = new CityPay.BatchProcessingApi();
-let batch_report_request = new CityPay.BatchReportRequest(); // BatchReportRequest | 
-apiInstance.getBatchReportRequest(batch_report_request).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **batch_report_request** | [**BatchReportRequest**](BatchReportRequest.md)|  | 
-
-### Return type
-
-[**BatchReportResponseModel**](BatchReportResponseModel.md)
 
 ### Authorization
 

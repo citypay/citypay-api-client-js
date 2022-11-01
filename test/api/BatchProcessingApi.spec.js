@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // instance = new Citypay Api Client.BatchProcessingApi();
+    // // // instance = new Citypay Api Client.BatchProcessingApi();
   });
 
   var getProperty = function(object, getter, property) {
