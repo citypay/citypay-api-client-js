@@ -3,7 +3,6 @@ require('dotenv').config();
 const _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 const _superagent = _interopRequireDefault(require("superagent"));
-
 const { Digest } = require('../src/utils/Digest');
 
 function uuidv4() {

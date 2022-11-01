@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security <aside class=\"notice\">   Before we begin a reminder that your application will need to adhere to PCI-DSS standards to operate safely   and to meet requirements set out by Visa and MasterCard and the PCI Security Standards Council including: </aside>  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -92,31 +92,31 @@ class ContactDetails {
 }
 
 /**
- * The first line of the address for the card holder.
+ * The first line of the address for the shipping contact.
  * @member {String} address1
  */
 ContactDetails.prototype['address1'] = undefined;
 
 /**
- * The second line of the address for the card holder.
+ * The second line of the address for the shipping contact.
  * @member {String} address2
  */
 ContactDetails.prototype['address2'] = undefined;
 
 /**
- * The third line of the address for the card holder.
+ * The third line of the address for the shipping contact.
  * @member {String} address3
  */
 ContactDetails.prototype['address3'] = undefined;
 
 /**
- * The area such as city, department, parish for the card holder.
+ * The area such as city, department, parish for the shipping contact.
  * @member {String} area
  */
 ContactDetails.prototype['area'] = undefined;
 
 /**
- * The company name for the card holder if the contact is a corporate contact.
+ * The company name for the shipping contact if the contact is a corporate contact.
  * @member {String} company
  */
 ContactDetails.prototype['company'] = undefined;
@@ -128,25 +128,25 @@ ContactDetails.prototype['company'] = undefined;
 ContactDetails.prototype['country'] = undefined;
 
 /**
- * An email address for the card holder which may be used for correspondence.
+ * An email address for the shipping contact which may be used for correspondence.
  * @member {String} email
  */
 ContactDetails.prototype['email'] = undefined;
 
 /**
- * The first name  of the card holder.
+ * The first name  of the shipping contact.
  * @member {String} firstname
  */
 ContactDetails.prototype['firstname'] = undefined;
 
 /**
- * The last name or surname of the card holder.
+ * The last name or surname of the shipping contact.
  * @member {String} lastname
  */
 ContactDetails.prototype['lastname'] = undefined;
 
 /**
- * A mobile number for the card holder the mobile number is often required by delivery companies to ensure they are able to be in contact when required.
+ * A mobile number for the shipping contact the mobile number is often required by delivery companies to ensure they are able to be in contact when required.
  * @member {String} mobile_no
  */
 ContactDetails.prototype['mobile_no'] = undefined;
@@ -158,13 +158,13 @@ ContactDetails.prototype['mobile_no'] = undefined;
 ContactDetails.prototype['postcode'] = undefined;
 
 /**
- * A telephone number for the card holder.
+ * A telephone number for the shipping contact.
  * @member {String} telephone_no
  */
 ContactDetails.prototype['telephone_no'] = undefined;
 
 /**
- * A title for the card holder such as Mr, Mrs, Ms, M. Mme. etc.
+ * A title for the shipping contact such as Mr, Mrs, Ms, M. Mme. etc.
  * @member {String} title
  */
 ContactDetails.prototype['title'] = undefined;

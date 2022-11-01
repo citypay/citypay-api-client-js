@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security <aside class=\"notice\">   Before we begin a reminder that your application will need to adhere to PCI-DSS standards to operate safely   and to meet requirements set out by Visa and MasterCard and the PCI Security Standards Council including: </aside>  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities.
  *
  * Contact: support@citypay.com
  *
@@ -10,7 +10,7 @@
  *
  */
 
-
+import ApiKey from "./model/ApiKey";
 import ApiClient from './ApiClient';
 import AccountCreate from './model/AccountCreate';
 import AccountStatus from './model/AccountStatus';
@@ -41,13 +41,41 @@ import CheckBatchStatus from './model/CheckBatchStatus';
 import CheckBatchStatusResponse from './model/CheckBatchStatusResponse';
 import ContactDetails from './model/ContactDetails';
 import Decision from './model/Decision';
+import DirectPostRequest from './model/DirectPostRequest';
+import DirectTokenAuthRequest from './model/DirectTokenAuthRequest';
+import DomainKeyCheckRequest from './model/DomainKeyCheckRequest';
+import DomainKeyRequest from './model/DomainKeyRequest';
+import DomainKeyResponse from './model/DomainKeyResponse';
 import Error from './model/Error';
+import EventDataModel from './model/EventDataModel';
 import Exists from './model/Exists';
 import ExternalMPI from './model/ExternalMPI';
 import ListMerchantsResponse from './model/ListMerchantsResponse';
 import MCC6012 from './model/MCC6012';
 import Merchant from './model/Merchant';
 import PaResAuthRequest from './model/PaResAuthRequest';
+import PaylinkAddress from './model/PaylinkAddress';
+import PaylinkAdjustmentRequest from './model/PaylinkAdjustmentRequest';
+import PaylinkAttachmentRequest from './model/PaylinkAttachmentRequest';
+import PaylinkAttachmentResult from './model/PaylinkAttachmentResult';
+import PaylinkBillPaymentTokenRequest from './model/PaylinkBillPaymentTokenRequest';
+import PaylinkCardHolder from './model/PaylinkCardHolder';
+import PaylinkCart from './model/PaylinkCart';
+import PaylinkCartItemModel from './model/PaylinkCartItemModel';
+import PaylinkConfig from './model/PaylinkConfig';
+import PaylinkCustomParam from './model/PaylinkCustomParam';
+import PaylinkEmailNotificationPath from './model/PaylinkEmailNotificationPath';
+import PaylinkErrorCode from './model/PaylinkErrorCode';
+import PaylinkFieldGuardModel from './model/PaylinkFieldGuardModel';
+import PaylinkPartPayments from './model/PaylinkPartPayments';
+import PaylinkSMSNotificationPath from './model/PaylinkSMSNotificationPath';
+import PaylinkStateEvent from './model/PaylinkStateEvent';
+import PaylinkTokenCreated from './model/PaylinkTokenCreated';
+import PaylinkTokenRequestModel from './model/PaylinkTokenRequestModel';
+import PaylinkTokenStatus from './model/PaylinkTokenStatus';
+import PaylinkTokenStatusChangeRequest from './model/PaylinkTokenStatusChangeRequest';
+import PaylinkTokenStatusChangeResponse from './model/PaylinkTokenStatusChangeResponse';
+import PaylinkUI from './model/PaylinkUI';
 import Ping from './model/Ping';
 import ProcessBatchRequest from './model/ProcessBatchRequest';
 import ProcessBatchResponse from './model/ProcessBatchResponse';
@@ -56,12 +84,14 @@ import RegisterCard from './model/RegisterCard';
 import RequestChallenged from './model/RequestChallenged';
 import RetrieveRequest from './model/RetrieveRequest';
 import ThreeDSecure from './model/ThreeDSecure';
+import TokenisationResponseModel from './model/TokenisationResponseModel';
 import VoidRequest from './model/VoidRequest';
+import AuthorisationAndPaymentApi from './api/AuthorisationAndPaymentApi';
 import BatchProcessingApi from './api/BatchProcessingApi';
 import CardHolderAccountApi from './api/CardHolderAccountApi';
-import OperationalApi from './api/OperationalApi';
-import PaymentProcessingApi from './api/PaymentProcessingApi';
-import ApiKey from "./model/ApiKey";
+import DirectPostApi from './api/DirectPostApi';
+import OperationalFunctionsApi from './api/OperationalFunctionsApi';
+import PaylinkApi from './api/PaylinkApi';
 
 
 /**
@@ -279,10 +309,46 @@ export {
     Decision,
 
     /**
+     * The DirectPostRequest model constructor.
+     * @property {module:model/DirectPostRequest}
+     */
+    DirectPostRequest,
+
+    /**
+     * The DirectTokenAuthRequest model constructor.
+     * @property {module:model/DirectTokenAuthRequest}
+     */
+    DirectTokenAuthRequest,
+
+    /**
+     * The DomainKeyCheckRequest model constructor.
+     * @property {module:model/DomainKeyCheckRequest}
+     */
+    DomainKeyCheckRequest,
+
+    /**
+     * The DomainKeyRequest model constructor.
+     * @property {module:model/DomainKeyRequest}
+     */
+    DomainKeyRequest,
+
+    /**
+     * The DomainKeyResponse model constructor.
+     * @property {module:model/DomainKeyResponse}
+     */
+    DomainKeyResponse,
+
+    /**
      * The Error model constructor.
      * @property {module:model/Error}
      */
     Error,
+
+    /**
+     * The EventDataModel model constructor.
+     * @property {module:model/EventDataModel}
+     */
+    EventDataModel,
 
     /**
      * The Exists model constructor.
@@ -319,6 +385,138 @@ export {
      * @property {module:model/PaResAuthRequest}
      */
     PaResAuthRequest,
+
+    /**
+     * The PaylinkAddress model constructor.
+     * @property {module:model/PaylinkAddress}
+     */
+    PaylinkAddress,
+
+    /**
+     * The PaylinkAdjustmentRequest model constructor.
+     * @property {module:model/PaylinkAdjustmentRequest}
+     */
+    PaylinkAdjustmentRequest,
+
+    /**
+     * The PaylinkAttachmentRequest model constructor.
+     * @property {module:model/PaylinkAttachmentRequest}
+     */
+    PaylinkAttachmentRequest,
+
+    /**
+     * The PaylinkAttachmentResult model constructor.
+     * @property {module:model/PaylinkAttachmentResult}
+     */
+    PaylinkAttachmentResult,
+
+    /**
+     * The PaylinkBillPaymentTokenRequest model constructor.
+     * @property {module:model/PaylinkBillPaymentTokenRequest}
+     */
+    PaylinkBillPaymentTokenRequest,
+
+    /**
+     * The PaylinkCardHolder model constructor.
+     * @property {module:model/PaylinkCardHolder}
+     */
+    PaylinkCardHolder,
+
+    /**
+     * The PaylinkCart model constructor.
+     * @property {module:model/PaylinkCart}
+     */
+    PaylinkCart,
+
+    /**
+     * The PaylinkCartItemModel model constructor.
+     * @property {module:model/PaylinkCartItemModel}
+     */
+    PaylinkCartItemModel,
+
+    /**
+     * The PaylinkConfig model constructor.
+     * @property {module:model/PaylinkConfig}
+     */
+    PaylinkConfig,
+
+    /**
+     * The PaylinkCustomParam model constructor.
+     * @property {module:model/PaylinkCustomParam}
+     */
+    PaylinkCustomParam,
+
+    /**
+     * The PaylinkEmailNotificationPath model constructor.
+     * @property {module:model/PaylinkEmailNotificationPath}
+     */
+    PaylinkEmailNotificationPath,
+
+    /**
+     * The PaylinkErrorCode model constructor.
+     * @property {module:model/PaylinkErrorCode}
+     */
+    PaylinkErrorCode,
+
+    /**
+     * The PaylinkFieldGuardModel model constructor.
+     * @property {module:model/PaylinkFieldGuardModel}
+     */
+    PaylinkFieldGuardModel,
+
+    /**
+     * The PaylinkPartPayments model constructor.
+     * @property {module:model/PaylinkPartPayments}
+     */
+    PaylinkPartPayments,
+
+    /**
+     * The PaylinkSMSNotificationPath model constructor.
+     * @property {module:model/PaylinkSMSNotificationPath}
+     */
+    PaylinkSMSNotificationPath,
+
+    /**
+     * The PaylinkStateEvent model constructor.
+     * @property {module:model/PaylinkStateEvent}
+     */
+    PaylinkStateEvent,
+
+    /**
+     * The PaylinkTokenCreated model constructor.
+     * @property {module:model/PaylinkTokenCreated}
+     */
+    PaylinkTokenCreated,
+
+    /**
+     * The PaylinkTokenRequestModel model constructor.
+     * @property {module:model/PaylinkTokenRequestModel}
+     */
+    PaylinkTokenRequestModel,
+
+    /**
+     * The PaylinkTokenStatus model constructor.
+     * @property {module:model/PaylinkTokenStatus}
+     */
+    PaylinkTokenStatus,
+
+    /**
+     * The PaylinkTokenStatusChangeRequest model constructor.
+     * @property {module:model/PaylinkTokenStatusChangeRequest}
+     */
+    PaylinkTokenStatusChangeRequest,
+
+    /**
+     * The PaylinkTokenStatusChangeResponse model constructor.
+     * @property {module:model/PaylinkTokenStatusChangeResponse}
+     */
+    PaylinkTokenStatusChangeResponse,
+
+    /**
+     * The PaylinkUI model constructor.
+     * @property {module:model/PaylinkUI}
+     */
+    PaylinkUI,
 
     /**
      * The Ping model constructor.
@@ -369,10 +567,22 @@ export {
     ThreeDSecure,
 
     /**
+     * The TokenisationResponseModel model constructor.
+     * @property {module:model/TokenisationResponseModel}
+     */
+    TokenisationResponseModel,
+
+    /**
      * The VoidRequest model constructor.
      * @property {module:model/VoidRequest}
      */
     VoidRequest,
+
+    /**
+    * The AuthorisationAndPaymentApi service constructor.
+    * @property {module:api/AuthorisationAndPaymentApi}
+    */
+    AuthorisationAndPaymentApi,
 
     /**
     * The BatchProcessingApi service constructor.
@@ -387,14 +597,20 @@ export {
     CardHolderAccountApi,
 
     /**
-    * The OperationalApi service constructor.
-    * @property {module:api/OperationalApi}
+    * The DirectPostApi service constructor.
+    * @property {module:api/DirectPostApi}
     */
-    OperationalApi,
+    DirectPostApi,
 
     /**
-    * The PaymentProcessingApi service constructor.
-    * @property {module:api/PaymentProcessingApi}
+    * The OperationalFunctionsApi service constructor.
+    * @property {module:api/OperationalFunctionsApi}
     */
-    PaymentProcessingApi
+    OperationalFunctionsApi,
+
+    /**
+    * The PaylinkApi service constructor.
+    * @property {module:api/PaylinkApi}
+    */
+    PaylinkApi
 };

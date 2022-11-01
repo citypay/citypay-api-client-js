@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // instance = new Citypay Api Client.AclCheckResponseModel();
+    // // instance = new Citypay Api Client.AclCheckResponseModel();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,31 +49,31 @@
   describe('AclCheckResponseModel', function() {
     it('should create an instance of AclCheckResponseModel', function() {
       // uncomment below and update the code to test AclCheckResponseModel
-      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //var // // instance = new Citypay Api Client.AclCheckResponseModel();
       //expect(instance).to.be.a(Citypay Api Client.AclCheckResponseModel);
     });
 
     it('should have the property acl (base name: "acl")', function() {
       // uncomment below and update the code to test the property acl
-      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //var // // instance = new Citypay Api Client.AclCheckResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property cache (base name: "cache")', function() {
       // uncomment below and update the code to test the property cache
-      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //var // // instance = new Citypay Api Client.AclCheckResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property ip (base name: "ip")', function() {
       // uncomment below and update the code to test the property ip
-      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //var // // instance = new Citypay Api Client.AclCheckResponseModel();
       //expect(instance).to.be();
     });
 
     it('should have the property provider (base name: "provider")', function() {
       // uncomment below and update the code to test the property provider
-      //var // instance = new Citypay Api Client.AclCheckResponseModel();
+      //var // // instance = new Citypay Api Client.AclCheckResponseModel();
       //expect(instance).to.be();
     });
 
