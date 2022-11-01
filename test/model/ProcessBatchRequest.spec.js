@@ -27,7 +27,7 @@
   var instance;
 
   beforeEach(function() {
-    // // // instance = new Citypay Api Client.ProcessBatchRequest();
+    // // instance = new Citypay Api Client.ProcessBatchRequest();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,31 +49,31 @@
   describe('ProcessBatchRequest', function() {
     it('should create an instance of ProcessBatchRequest', function() {
       // uncomment below and update the code to test ProcessBatchRequest
-      //var // // instance = new Citypay Api Client.ProcessBatchRequest();
+      //var // instance = new Citypay Api Client.ProcessBatchRequest();
       //expect(instance).to.be.a(Citypay Api Client.ProcessBatchRequest);
     });
 
     it('should have the property batch_date (base name: "batch_date")', function() {
       // uncomment below and update the code to test the property batch_date
-      //var // // instance = new Citypay Api Client.ProcessBatchRequest();
+      //var // instance = new Citypay Api Client.ProcessBatchRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property batch_id (base name: "batch_id")', function() {
       // uncomment below and update the code to test the property batch_id
-      //var // // instance = new Citypay Api Client.ProcessBatchRequest();
+      //var // instance = new Citypay Api Client.ProcessBatchRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property transactions (base name: "transactions")', function() {
       // uncomment below and update the code to test the property transactions
-      //var // // instance = new Citypay Api Client.ProcessBatchRequest();
+      //var // instance = new Citypay Api Client.ProcessBatchRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property account_id (base name: "account_id")', function() {
       // uncomment below and update the code to test the property account_id
-      //var // // instance = new Citypay Api Client.ProcessBatchRequest();
+      //var // instance = new Citypay Api Client.ProcessBatchRequest();
       //expect(instance).to.be();
     });
 
