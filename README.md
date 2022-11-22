@@ -127,14 +127,21 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```javascript
 import CityPay from 'citypay-api';
 
+let client = new CityPay.ApiClient({
+  "sandbox": true,
+  "client_id": process.env.CP_CLIENT_ID,
+  "licence_key": process.env.CP_LICENCE_KEY
+});
+
 let auth_request = new CityPay.AuthRequest();
 auth_request.identifier = "example1";
 
-new CityPay.PaymentProcessingApi().authorisationRequest(auth_request).then((data) => {
-    console.log('API called successfully. Returned data: ' + data);
+new CityPay.AuthorisationAndPaymentApi(client).authorisationRequest(auth_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
-    console.error(error);
+  console.error(error);
 });
+
 ```
 
 ## Documentation for API Endpoints
