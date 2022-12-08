@@ -91,8 +91,62 @@ class PaylinkTokenRequestModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkTokenRequestModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkTokenRequestModel</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkTokenRequestModel.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['accountno'] && !(typeof data['accountno'] === 'string' || data['accountno'] instanceof String)) {
+            throw new Error("Expected the field `accountno` to be a primitive type in the JSON string but got " + data['accountno']);
+        }
+        // validate the optional field `cardholder`
+        if (data['cardholder']) { // data not null
+          PaylinkCardHolder.validateJSON(data['cardholder']);
+        }
+        // validate the optional field `cart`
+        if (data['cart']) { // data not null
+          PaylinkCart.validateJSON(data['cart']);
+        }
+        // ensure the json data is a string
+        if (data['client_version'] && !(typeof data['client_version'] === 'string' || data['client_version'] instanceof String)) {
+            throw new Error("Expected the field `client_version` to be a primitive type in the JSON string but got " + data['client_version']);
+        }
+        // validate the optional field `config`
+        if (data['config']) { // data not null
+          PaylinkConfig.validateJSON(data['config']);
+        }
+        // ensure the json data is a string
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
+        }
+        // ensure the json data is a string
+        if (data['subscription_id'] && !(typeof data['subscription_id'] === 'string' || data['subscription_id'] instanceof String)) {
+            throw new Error("Expected the field `subscription_id` to be a primitive type in the JSON string but got " + data['subscription_id']);
+        }
+        // ensure the json data is a string
+        if (data['tx_type'] && !(typeof data['tx_type'] === 'string' || data['tx_type'] instanceof String)) {
+            throw new Error("Expected the field `tx_type` to be a primitive type in the JSON string but got " + data['tx_type']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkTokenRequestModel.RequiredProperties = ["amount", "identifier", "merchantid"];
 
 /**
  * Specifies the intended value of the transaction in the lowest denomination with no spacing characters or decimal point. This is the net total to be processed. An example of £74.95 would be presented as 7495.

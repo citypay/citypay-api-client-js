@@ -61,8 +61,24 @@ class PaylinkUI {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkUI</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkUI</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['form_auto_complete'] && !(typeof data['form_auto_complete'] === 'string' || data['form_auto_complete'] instanceof String)) {
+            throw new Error("Expected the field `form_auto_complete` to be a primitive type in the JSON string but got " + data['form_auto_complete']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * whether the address is forced as mandatory.

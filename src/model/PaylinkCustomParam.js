@@ -81,8 +81,54 @@ class PaylinkCustomParam {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkCustomParam</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkCustomParam</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkCustomParam.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
+        if (data['field_type'] && !(typeof data['field_type'] === 'string' || data['field_type'] instanceof String)) {
+            throw new Error("Expected the field `field_type` to be a primitive type in the JSON string but got " + data['field_type']);
+        }
+        // ensure the json data is a string
+        if (data['group'] && !(typeof data['group'] === 'string' || data['group'] instanceof String)) {
+            throw new Error("Expected the field `group` to be a primitive type in the JSON string but got " + data['group']);
+        }
+        // ensure the json data is a string
+        if (data['label'] && !(typeof data['label'] === 'string' || data['label'] instanceof String)) {
+            throw new Error("Expected the field `label` to be a primitive type in the JSON string but got " + data['label']);
+        }
+        // ensure the json data is a string
+        if (data['pattern'] && !(typeof data['pattern'] === 'string' || data['pattern'] instanceof String)) {
+            throw new Error("Expected the field `pattern` to be a primitive type in the JSON string but got " + data['pattern']);
+        }
+        // ensure the json data is a string
+        if (data['placeholder'] && !(typeof data['placeholder'] === 'string' || data['placeholder'] instanceof String)) {
+            throw new Error("Expected the field `placeholder` to be a primitive type in the JSON string but got " + data['placeholder']);
+        }
+        // ensure the json data is a string
+        if (data['value'] && !(typeof data['value'] === 'string' || data['value'] instanceof String)) {
+            throw new Error("Expected the field `value` to be a primitive type in the JSON string but got " + data['value']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkCustomParam.RequiredProperties = ["name"];
 
 /**
  * the name of the custom parameter used to converse with the submitter.

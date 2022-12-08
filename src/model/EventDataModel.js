@@ -64,8 +64,32 @@ class EventDataModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>EventDataModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>EventDataModel</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['event_id'] && !(typeof data['event_id'] === 'string' || data['event_id'] instanceof String)) {
+            throw new Error("Expected the field `event_id` to be a primitive type in the JSON string but got " + data['event_id']);
+        }
+        // ensure the json data is a string
+        if (data['event_organiser_id'] && !(typeof data['event_organiser_id'] === 'string' || data['event_organiser_id'] instanceof String)) {
+            throw new Error("Expected the field `event_organiser_id` to be a primitive type in the JSON string but got " + data['event_organiser_id']);
+        }
+        // ensure the json data is a string
+        if (data['payment_type'] && !(typeof data['payment_type'] === 'string' || data['payment_type'] instanceof String)) {
+            throw new Error("Expected the field `payment_type` to be a primitive type in the JSON string but got " + data['payment_type']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The date when the event ends in ISO format (yyyy-MM-dd).

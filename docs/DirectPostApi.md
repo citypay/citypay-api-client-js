@@ -118,7 +118,7 @@ No authorization required
 
 Direct Post Auth Request
 
-Used to initiate a direct post request transaction flow.  &lt;pre class&#x3D;\&quot;inline-code language-bash\&quot;&gt; &lt;code&gt; curl https://api.citypay.com/v6/direct?cp-domain-key&#x3D;n834ytqp84y... \\  -d \&quot;amount&#x3D;7500&amp;identifier&#x3D;example_trans&amp;cardnumber&#x3D;4000000000000002&amp;expmonth&#x3D;9&amp;expyear&#x3D;2028&amp;bill_to_postcode&#x3D;L1+7ZW &lt;/code&gt; &lt;/pre&gt;. 
+Used to initiate a direct post request transaction flow.  &lt;pre class&#x3D;\&quot;inline-code language-bash\&quot;&gt; &lt;code&gt; curl https://api.citypay.com/direct/auth?cp-domain-key&#x3D;n834ytqp84y... \\  -d \&quot;amount&#x3D;7500&amp;identifier&#x3D;example_trans&amp;cardnumber&#x3D;4000000000000002&amp;expmonth&#x3D;9&amp;expyear&#x3D;2028&amp;bill_to_postcode&#x3D;L1+7ZW &lt;/code&gt; &lt;/pre&gt;. 
 
 ### Example
 

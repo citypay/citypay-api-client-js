@@ -68,8 +68,34 @@ class DomainKeyResponse {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>DomainKeyResponse</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DomainKeyResponse</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of DomainKeyResponse.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['domain'])) {
+            throw new Error("Expected the field `domain` to be an array in the JSON data but got " + data['domain']);
+        }
+        // ensure the json data is a string
+        if (data['domain_key'] && !(typeof data['domain_key'] === 'string' || data['domain_key'] instanceof String)) {
+            throw new Error("Expected the field `domain_key` to be a primitive type in the JSON string but got " + data['domain_key']);
+        }
+
+        return true;
+    }
+
 
 }
+
+DomainKeyResponse.RequiredProperties = ["domain", "merchantid"];
 
 /**
  * @member {Array.<String>} domain

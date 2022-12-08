@@ -61,8 +61,32 @@ class AclCheckResponseModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AclCheckResponseModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AclCheckResponseModel</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['acl'] && !(typeof data['acl'] === 'string' || data['acl'] instanceof String)) {
+            throw new Error("Expected the field `acl` to be a primitive type in the JSON string but got " + data['acl']);
+        }
+        // ensure the json data is a string
+        if (data['ip'] && !(typeof data['ip'] === 'string' || data['ip'] instanceof String)) {
+            throw new Error("Expected the field `ip` to be a primitive type in the JSON string but got " + data['ip']);
+        }
+        // ensure the json data is a string
+        if (data['provider'] && !(typeof data['provider'] === 'string' || data['provider'] instanceof String)) {
+            throw new Error("Expected the field `provider` to be a primitive type in the JSON string but got " + data['provider']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The name or value of the acl which was found to match the ip address.

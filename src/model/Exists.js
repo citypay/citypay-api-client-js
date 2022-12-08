@@ -60,8 +60,26 @@ class Exists {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>Exists</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Exists</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of Exists.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+
+        return true;
+    }
+
 
 }
+
+Exists.RequiredProperties = ["exists"];
 
 /**
  * Boolean value whether the entity exists.

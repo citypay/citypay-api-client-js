@@ -73,8 +73,40 @@ class PaylinkCartItemModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkCartItemModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkCartItemModel</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['brand'] && !(typeof data['brand'] === 'string' || data['brand'] instanceof String)) {
+            throw new Error("Expected the field `brand` to be a primitive type in the JSON string but got " + data['brand']);
+        }
+        // ensure the json data is a string
+        if (data['category'] && !(typeof data['category'] === 'string' || data['category'] instanceof String)) {
+            throw new Error("Expected the field `category` to be a primitive type in the JSON string but got " + data['category']);
+        }
+        // ensure the json data is a string
+        if (data['label'] && !(typeof data['label'] === 'string' || data['label'] instanceof String)) {
+            throw new Error("Expected the field `label` to be a primitive type in the JSON string but got " + data['label']);
+        }
+        // ensure the json data is a string
+        if (data['sku'] && !(typeof data['sku'] === 'string' || data['sku'] instanceof String)) {
+            throw new Error("Expected the field `sku` to be a primitive type in the JSON string but got " + data['sku']);
+        }
+        // ensure the json data is a string
+        if (data['variant'] && !(typeof data['variant'] === 'string' || data['variant'] instanceof String)) {
+            throw new Error("Expected the field `variant` to be a primitive type in the JSON string but got " + data['variant']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The net amount of the item. The Paylink Payment Form does not multiply this figure by the value provided by the count value for the cart item, this is principally to avoid rounding errors to introduce discrepancies between the value of the goods charged for and the total amount represented by the collection of cart items.

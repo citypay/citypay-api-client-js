@@ -61,8 +61,36 @@ class MCC6012 {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>MCC6012</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>MCC6012</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['recipient_account'] && !(typeof data['recipient_account'] === 'string' || data['recipient_account'] instanceof String)) {
+            throw new Error("Expected the field `recipient_account` to be a primitive type in the JSON string but got " + data['recipient_account']);
+        }
+        // ensure the json data is a string
+        if (data['recipient_dob'] && !(typeof data['recipient_dob'] === 'string' || data['recipient_dob'] instanceof String)) {
+            throw new Error("Expected the field `recipient_dob` to be a primitive type in the JSON string but got " + data['recipient_dob']);
+        }
+        // ensure the json data is a string
+        if (data['recipient_lastname'] && !(typeof data['recipient_lastname'] === 'string' || data['recipient_lastname'] instanceof String)) {
+            throw new Error("Expected the field `recipient_lastname` to be a primitive type in the JSON string but got " + data['recipient_lastname']);
+        }
+        // ensure the json data is a string
+        if (data['recipient_postcode'] && !(typeof data['recipient_postcode'] === 'string' || data['recipient_postcode'] instanceof String)) {
+            throw new Error("Expected the field `recipient_postcode` to be a primitive type in the JSON string but got " + data['recipient_postcode']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The account number of the recipient.

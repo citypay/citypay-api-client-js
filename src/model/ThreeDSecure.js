@@ -88,8 +88,68 @@ class ThreeDSecure {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>ThreeDSecure</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ThreeDSecure</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['accept_headers'] && !(typeof data['accept_headers'] === 'string' || data['accept_headers'] instanceof String)) {
+            throw new Error("Expected the field `accept_headers` to be a primitive type in the JSON string but got " + data['accept_headers']);
+        }
+        // ensure the json data is a string
+        if (data['browserColorDepth'] && !(typeof data['browserColorDepth'] === 'string' || data['browserColorDepth'] instanceof String)) {
+            throw new Error("Expected the field `browserColorDepth` to be a primitive type in the JSON string but got " + data['browserColorDepth']);
+        }
+        // ensure the json data is a string
+        if (data['browserIP'] && !(typeof data['browserIP'] === 'string' || data['browserIP'] instanceof String)) {
+            throw new Error("Expected the field `browserIP` to be a primitive type in the JSON string but got " + data['browserIP']);
+        }
+        // ensure the json data is a string
+        if (data['browserJavaEnabled'] && !(typeof data['browserJavaEnabled'] === 'string' || data['browserJavaEnabled'] instanceof String)) {
+            throw new Error("Expected the field `browserJavaEnabled` to be a primitive type in the JSON string but got " + data['browserJavaEnabled']);
+        }
+        // ensure the json data is a string
+        if (data['browserLanguage'] && !(typeof data['browserLanguage'] === 'string' || data['browserLanguage'] instanceof String)) {
+            throw new Error("Expected the field `browserLanguage` to be a primitive type in the JSON string but got " + data['browserLanguage']);
+        }
+        // ensure the json data is a string
+        if (data['browserScreenHeight'] && !(typeof data['browserScreenHeight'] === 'string' || data['browserScreenHeight'] instanceof String)) {
+            throw new Error("Expected the field `browserScreenHeight` to be a primitive type in the JSON string but got " + data['browserScreenHeight']);
+        }
+        // ensure the json data is a string
+        if (data['browserScreenWidth'] && !(typeof data['browserScreenWidth'] === 'string' || data['browserScreenWidth'] instanceof String)) {
+            throw new Error("Expected the field `browserScreenWidth` to be a primitive type in the JSON string but got " + data['browserScreenWidth']);
+        }
+        // ensure the json data is a string
+        if (data['browserTZ'] && !(typeof data['browserTZ'] === 'string' || data['browserTZ'] instanceof String)) {
+            throw new Error("Expected the field `browserTZ` to be a primitive type in the JSON string but got " + data['browserTZ']);
+        }
+        // ensure the json data is a string
+        if (data['cp_bx'] && !(typeof data['cp_bx'] === 'string' || data['cp_bx'] instanceof String)) {
+            throw new Error("Expected the field `cp_bx` to be a primitive type in the JSON string but got " + data['cp_bx']);
+        }
+        // ensure the json data is a string
+        if (data['merchant_termurl'] && !(typeof data['merchant_termurl'] === 'string' || data['merchant_termurl'] instanceof String)) {
+            throw new Error("Expected the field `merchant_termurl` to be a primitive type in the JSON string but got " + data['merchant_termurl']);
+        }
+        // ensure the json data is a string
+        if (data['tds_policy'] && !(typeof data['tds_policy'] === 'string' || data['tds_policy'] instanceof String)) {
+            throw new Error("Expected the field `tds_policy` to be a primitive type in the JSON string but got " + data['tds_policy']);
+        }
+        // ensure the json data is a string
+        if (data['user_agent'] && !(typeof data['user_agent'] === 'string' || data['user_agent'] instanceof String)) {
+            throw new Error("Expected the field `user_agent` to be a primitive type in the JSON string but got " + data['user_agent']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * Required for 3DSv1. Optional if the `cp_bx` value is provided otherwise required for 3Dv2 processing operating in browser authentication mode.  The `cp_bx` value will override any value supplied to this field.  The content of the HTTP accept header as sent to the merchant from the cardholder's user agent.  This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 

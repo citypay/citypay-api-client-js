@@ -62,8 +62,30 @@ class Batch {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>Batch</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Batch</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of Batch.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['batch_status'] && !(typeof data['batch_status'] === 'string' || data['batch_status'] instanceof String)) {
+            throw new Error("Expected the field `batch_status` to be a primitive type in the JSON string but got " + data['batch_status']);
+        }
+
+        return true;
+    }
+
 
 }
+
+Batch.RequiredProperties = ["batch_date", "batch_status"];
 
 /**
  * The date that the file was created in ISO-8601 format.

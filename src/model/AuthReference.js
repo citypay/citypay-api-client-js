@@ -91,8 +91,60 @@ class AuthReference {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AuthReference</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AuthReference</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['amount'] && !(typeof data['amount'] === 'string' || data['amount'] instanceof String)) {
+            throw new Error("Expected the field `amount` to be a primitive type in the JSON string but got " + data['amount']);
+        }
+        // ensure the json data is a string
+        if (data['atrn'] && !(typeof data['atrn'] === 'string' || data['atrn'] instanceof String)) {
+            throw new Error("Expected the field `atrn` to be a primitive type in the JSON string but got " + data['atrn']);
+        }
+        // ensure the json data is a string
+        if (data['authcode'] && !(typeof data['authcode'] === 'string' || data['authcode'] instanceof String)) {
+            throw new Error("Expected the field `authcode` to be a primitive type in the JSON string but got " + data['authcode']);
+        }
+        // ensure the json data is a string
+        if (data['batchno'] && !(typeof data['batchno'] === 'string' || data['batchno'] instanceof String)) {
+            throw new Error("Expected the field `batchno` to be a primitive type in the JSON string but got " + data['batchno']);
+        }
+        // ensure the json data is a string
+        if (data['currency'] && !(typeof data['currency'] === 'string' || data['currency'] instanceof String)) {
+            throw new Error("Expected the field `currency` to be a primitive type in the JSON string but got " + data['currency']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
+            throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
+        }
+        // ensure the json data is a string
+        if (data['result'] && !(typeof data['result'] === 'string' || data['result'] instanceof String)) {
+            throw new Error("Expected the field `result` to be a primitive type in the JSON string but got " + data['result']);
+        }
+        // ensure the json data is a string
+        if (data['trans_status'] && !(typeof data['trans_status'] === 'string' || data['trans_status'] instanceof String)) {
+            throw new Error("Expected the field `trans_status` to be a primitive type in the JSON string but got " + data['trans_status']);
+        }
+        // ensure the json data is a string
+        if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
+            throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The amount of the transaction in decimal currency format.

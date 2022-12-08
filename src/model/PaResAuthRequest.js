@@ -59,8 +59,34 @@ class PaResAuthRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaResAuthRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaResAuthRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaResAuthRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['md'] && !(typeof data['md'] === 'string' || data['md'] instanceof String)) {
+            throw new Error("Expected the field `md` to be a primitive type in the JSON string but got " + data['md']);
+        }
+        // ensure the json data is a string
+        if (data['pares'] && !(typeof data['pares'] === 'string' || data['pares'] instanceof String)) {
+            throw new Error("Expected the field `pares` to be a primitive type in the JSON string but got " + data['pares']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaResAuthRequest.RequiredProperties = ["md", "pares"];
 
 /**
  * The Merchant Data (MD) which is a unique ID to reference the authentication session.  This value will be created by CityPay when required. When responding from the ACS, this value will be returned by the ACS. 

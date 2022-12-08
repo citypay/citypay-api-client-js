@@ -97,8 +97,54 @@ class BatchTransactionResultModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>BatchTransactionResultModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BatchTransactionResultModel</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of BatchTransactionResultModel.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['account_id'] && !(typeof data['account_id'] === 'string' || data['account_id'] instanceof String)) {
+            throw new Error("Expected the field `account_id` to be a primitive type in the JSON string but got " + data['account_id']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['message'] && !(typeof data['message'] === 'string' || data['message'] instanceof String)) {
+            throw new Error("Expected the field `message` to be a primitive type in the JSON string but got " + data['message']);
+        }
+        // ensure the json data is a string
+        if (data['result_code'] && !(typeof data['result_code'] === 'string' || data['result_code'] instanceof String)) {
+            throw new Error("Expected the field `result_code` to be a primitive type in the JSON string but got " + data['result_code']);
+        }
+        // ensure the json data is a string
+        if (data['authcode'] && !(typeof data['authcode'] === 'string' || data['authcode'] instanceof String)) {
+            throw new Error("Expected the field `authcode` to be a primitive type in the JSON string but got " + data['authcode']);
+        }
+        // ensure the json data is a string
+        if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
+            throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+
+        return true;
+    }
+
 
 }
+
+BatchTransactionResultModel.RequiredProperties = ["account_id", "identifier", "merchantid", "message", "result", "result_code"];
 
 /**
  * The card holder account id used for the transaction.

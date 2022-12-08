@@ -57,8 +57,30 @@ class BatchReportRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>BatchReportRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BatchReportRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of BatchReportRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['client_account_id'] && !(typeof data['client_account_id'] === 'string' || data['client_account_id'] instanceof String)) {
+            throw new Error("Expected the field `client_account_id` to be a primitive type in the JSON string but got " + data['client_account_id']);
+        }
+
+        return true;
+    }
+
 
 }
+
+BatchReportRequest.RequiredProperties = ["batch_id"];
 
 /**
  * The batch id specified in the batch processing request.

@@ -45,21 +45,71 @@ class PaylinkFieldGuardModel {
         if (data) {
             obj = obj || new PaylinkFieldGuardModel();
 
+            if (data.hasOwnProperty('field_type')) {
+                obj['field_type'] = ApiClient.convertToType(data['field_type'], 'String');
+            }
             if (data.hasOwnProperty('label')) {
                 obj['label'] = ApiClient.convertToType(data['label'], 'String');
+            }
+            if (data.hasOwnProperty('maxlen')) {
+                obj['maxlen'] = ApiClient.convertToType(data['maxlen'], 'Number');
+            }
+            if (data.hasOwnProperty('minlen')) {
+                obj['minlen'] = ApiClient.convertToType(data['minlen'], 'Number');
             }
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
-            if (data.hasOwnProperty('type')) {
-                obj['type'] = ApiClient.convertToType(data['type'], 'String');
+            if (data.hasOwnProperty('regex')) {
+                obj['regex'] = ApiClient.convertToType(data['regex'], 'String');
+            }
+            if (data.hasOwnProperty('value')) {
+                obj['value'] = ApiClient.convertToType(data['value'], 'String');
             }
         }
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkFieldGuardModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkFieldGuardModel</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['field_type'] && !(typeof data['field_type'] === 'string' || data['field_type'] instanceof String)) {
+            throw new Error("Expected the field `field_type` to be a primitive type in the JSON string but got " + data['field_type']);
+        }
+        // ensure the json data is a string
+        if (data['label'] && !(typeof data['label'] === 'string' || data['label'] instanceof String)) {
+            throw new Error("Expected the field `label` to be a primitive type in the JSON string but got " + data['label']);
+        }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
+        if (data['regex'] && !(typeof data['regex'] === 'string' || data['regex'] instanceof String)) {
+            throw new Error("Expected the field `regex` to be a primitive type in the JSON string but got " + data['regex']);
+        }
+        // ensure the json data is a string
+        if (data['value'] && !(typeof data['value'] === 'string' || data['value'] instanceof String)) {
+            throw new Error("Expected the field `value` to be a primitive type in the JSON string but got " + data['value']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
+
+/**
+ * A type of HTML element that should be displayed such as text, password, url. Any HTML5 input type value may be supplied.
+ * @member {String} field_type
+ */
+PaylinkFieldGuardModel.prototype['field_type'] = undefined;
 
 /**
  * A label for the field guard to display on the authentication page.
@@ -68,16 +118,34 @@ class PaylinkFieldGuardModel {
 PaylinkFieldGuardModel.prototype['label'] = undefined;
 
 /**
+ * A maximum length of any value supplied in the field guard form. Used for validating entry.
+ * @member {Number} maxlen
+ */
+PaylinkFieldGuardModel.prototype['maxlen'] = undefined;
+
+/**
+ * A minimum length of any value supplied in the field guard form. Used for validating entry.
+ * @member {Number} minlen
+ */
+PaylinkFieldGuardModel.prototype['minlen'] = undefined;
+
+/**
  * A field name which is used to refer to a field which is guarded.
  * @member {String} name
  */
 PaylinkFieldGuardModel.prototype['name'] = undefined;
 
 /**
- * A type of HTML element that should be displayed such as text, password, url. Any HTML5 input type value may be supplied.
- * @member {String} type
+ * A JavaScript regular expression value which can be used to validate the data provided in the field guard entry form. Used for validating entry.
+ * @member {String} regex
  */
-PaylinkFieldGuardModel.prototype['type'] = undefined;
+PaylinkFieldGuardModel.prototype['regex'] = undefined;
+
+/**
+ * A value directly associated with the field guard. Any value provided at this level will be considered as sensitive and not logged.
+ * @member {String} value
+ */
+PaylinkFieldGuardModel.prototype['value'] = undefined;
 
 
 

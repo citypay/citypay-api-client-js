@@ -57,8 +57,34 @@ class CheckBatchStatus {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>CheckBatchStatus</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CheckBatchStatus</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of CheckBatchStatus.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['batch_id'])) {
+            throw new Error("Expected the field `batch_id` to be an array in the JSON data but got " + data['batch_id']);
+        }
+        // ensure the json data is a string
+        if (data['client_account_id'] && !(typeof data['client_account_id'] === 'string' || data['client_account_id'] instanceof String)) {
+            throw new Error("Expected the field `client_account_id` to be a primitive type in the JSON string but got " + data['client_account_id']);
+        }
+
+        return true;
+    }
+
 
 }
+
+CheckBatchStatus.RequiredProperties = ["batch_id"];
 
 /**
  * @member {Array.<Number>} batch_id

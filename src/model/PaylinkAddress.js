@@ -70,8 +70,48 @@ class PaylinkAddress {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkAddress</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkAddress</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['address1'] && !(typeof data['address1'] === 'string' || data['address1'] instanceof String)) {
+            throw new Error("Expected the field `address1` to be a primitive type in the JSON string but got " + data['address1']);
+        }
+        // ensure the json data is a string
+        if (data['address2'] && !(typeof data['address2'] === 'string' || data['address2'] instanceof String)) {
+            throw new Error("Expected the field `address2` to be a primitive type in the JSON string but got " + data['address2']);
+        }
+        // ensure the json data is a string
+        if (data['address3'] && !(typeof data['address3'] === 'string' || data['address3'] instanceof String)) {
+            throw new Error("Expected the field `address3` to be a primitive type in the JSON string but got " + data['address3']);
+        }
+        // ensure the json data is a string
+        if (data['area'] && !(typeof data['area'] === 'string' || data['area'] instanceof String)) {
+            throw new Error("Expected the field `area` to be a primitive type in the JSON string but got " + data['area']);
+        }
+        // ensure the json data is a string
+        if (data['country'] && !(typeof data['country'] === 'string' || data['country'] instanceof String)) {
+            throw new Error("Expected the field `country` to be a primitive type in the JSON string but got " + data['country']);
+        }
+        // ensure the json data is a string
+        if (data['label'] && !(typeof data['label'] === 'string' || data['label'] instanceof String)) {
+            throw new Error("Expected the field `label` to be a primitive type in the JSON string but got " + data['label']);
+        }
+        // ensure the json data is a string
+        if (data['postcode'] && !(typeof data['postcode'] === 'string' || data['postcode'] instanceof String)) {
+            throw new Error("Expected the field `postcode` to be a primitive type in the JSON string but got " + data['postcode']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The first line of the address.

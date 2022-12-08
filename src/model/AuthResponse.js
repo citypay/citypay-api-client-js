@@ -138,8 +138,98 @@ class AuthResponse {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AuthResponse</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AuthResponse</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of AuthResponse.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['result_code'] && !(typeof data['result_code'] === 'string' || data['result_code'] instanceof String)) {
+            throw new Error("Expected the field `result_code` to be a primitive type in the JSON string but got " + data['result_code']);
+        }
+        // ensure the json data is a string
+        if (data['result_message'] && !(typeof data['result_message'] === 'string' || data['result_message'] instanceof String)) {
+            throw new Error("Expected the field `result_message` to be a primitive type in the JSON string but got " + data['result_message']);
+        }
+        // ensure the json data is a string
+        if (data['atrn'] && !(typeof data['atrn'] === 'string' || data['atrn'] instanceof String)) {
+            throw new Error("Expected the field `atrn` to be a primitive type in the JSON string but got " + data['atrn']);
+        }
+        // ensure the json data is a string
+        if (data['atsd'] && !(typeof data['atsd'] === 'string' || data['atsd'] instanceof String)) {
+            throw new Error("Expected the field `atsd` to be a primitive type in the JSON string but got " + data['atsd']);
+        }
+        // ensure the json data is a string
+        if (data['authcode'] && !(typeof data['authcode'] === 'string' || data['authcode'] instanceof String)) {
+            throw new Error("Expected the field `authcode` to be a primitive type in the JSON string but got " + data['authcode']);
+        }
+        // ensure the json data is a string
+        if (data['authen_result'] && !(typeof data['authen_result'] === 'string' || data['authen_result'] instanceof String)) {
+            throw new Error("Expected the field `authen_result` to be a primitive type in the JSON string but got " + data['authen_result']);
+        }
+        // ensure the json data is a string
+        if (data['avs_result'] && !(typeof data['avs_result'] === 'string' || data['avs_result'] instanceof String)) {
+            throw new Error("Expected the field `avs_result` to be a primitive type in the JSON string but got " + data['avs_result']);
+        }
+        // ensure the json data is a string
+        if (data['bin_description'] && !(typeof data['bin_description'] === 'string' || data['bin_description'] instanceof String)) {
+            throw new Error("Expected the field `bin_description` to be a primitive type in the JSON string but got " + data['bin_description']);
+        }
+        // ensure the json data is a string
+        if (data['cavv'] && !(typeof data['cavv'] === 'string' || data['cavv'] instanceof String)) {
+            throw new Error("Expected the field `cavv` to be a primitive type in the JSON string but got " + data['cavv']);
+        }
+        // ensure the json data is a string
+        if (data['context'] && !(typeof data['context'] === 'string' || data['context'] instanceof String)) {
+            throw new Error("Expected the field `context` to be a primitive type in the JSON string but got " + data['context']);
+        }
+        // ensure the json data is a string
+        if (data['csc_result'] && !(typeof data['csc_result'] === 'string' || data['csc_result'] instanceof String)) {
+            throw new Error("Expected the field `csc_result` to be a primitive type in the JSON string but got " + data['csc_result']);
+        }
+        // ensure the json data is a string
+        if (data['currency'] && !(typeof data['currency'] === 'string' || data['currency'] instanceof String)) {
+            throw new Error("Expected the field `currency` to be a primitive type in the JSON string but got " + data['currency']);
+        }
+        // ensure the json data is a string
+        if (data['eci'] && !(typeof data['eci'] === 'string' || data['eci'] instanceof String)) {
+            throw new Error("Expected the field `eci` to be a primitive type in the JSON string but got " + data['eci']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
+            throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+        // ensure the json data is a string
+        if (data['sha256'] && !(typeof data['sha256'] === 'string' || data['sha256'] instanceof String)) {
+            throw new Error("Expected the field `sha256` to be a primitive type in the JSON string but got " + data['sha256']);
+        }
+        // ensure the json data is a string
+        if (data['trans_status'] && !(typeof data['trans_status'] === 'string' || data['trans_status'] instanceof String)) {
+            throw new Error("Expected the field `trans_status` to be a primitive type in the JSON string but got " + data['trans_status']);
+        }
+
+        return true;
+    }
+
 
 }
+
+AuthResponse.RequiredProperties = ["merchantid", "result", "result_code", "result_message"];
 
 /**
  * The merchant id that processed this transaction.

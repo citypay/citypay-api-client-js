@@ -58,12 +58,52 @@ class PaylinkAttachmentRequest {
             if (data.hasOwnProperty('data')) {
                 obj['data'] = ApiClient.convertToType(data['data'], 'String');
             }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
+            if (data.hasOwnProperty('retention')) {
+                obj['retention'] = ApiClient.convertToType(data['retention'], 'Number');
+            }
         }
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkAttachmentRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkAttachmentRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkAttachmentRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['filename'] && !(typeof data['filename'] === 'string' || data['filename'] instanceof String)) {
+            throw new Error("Expected the field `filename` to be a primitive type in the JSON string but got " + data['filename']);
+        }
+        // ensure the json data is a string
+        if (data['mime_type'] && !(typeof data['mime_type'] === 'string' || data['mime_type'] instanceof String)) {
+            throw new Error("Expected the field `mime_type` to be a primitive type in the JSON string but got " + data['mime_type']);
+        }
+        // ensure the json data is a string
+        if (data['data'] && !(typeof data['data'] === 'string' || data['data'] instanceof String)) {
+            throw new Error("Expected the field `data` to be a primitive type in the JSON string but got " + data['data']);
+        }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkAttachmentRequest.RequiredProperties = ["filename", "mime_type"];
 
 /**
  * The name of the attachment normally taken from the filename. You should not include the filename path as appropriate.
@@ -82,6 +122,18 @@ PaylinkAttachmentRequest.prototype['mime_type'] = undefined;
  * @member {String} data
  */
 PaylinkAttachmentRequest.prototype['data'] = undefined;
+
+/**
+ * A name for the file to identify it to the card holder when it is displayed in the payment form. For example Invoice, Statement.
+ * @member {String} name
+ */
+PaylinkAttachmentRequest.prototype['name'] = undefined;
+
+/**
+ * The retention period in days of the attachment. Defaults to 180 days.
+ * @member {Number} retention
+ */
+PaylinkAttachmentRequest.prototype['retention'] = undefined;
 
 
 

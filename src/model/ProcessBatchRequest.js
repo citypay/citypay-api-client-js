@@ -68,8 +68,40 @@ class ProcessBatchRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>ProcessBatchRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ProcessBatchRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of ProcessBatchRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        if (data['transactions']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['transactions'])) {
+                throw new Error("Expected the field `transactions` to be an array in the JSON data but got " + data['transactions']);
+            }
+            // validate the optional field `transactions` (array)
+            for (const item of data['transactions']) {
+                BatchTransaction.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['client_account_id'] && !(typeof data['client_account_id'] === 'string' || data['client_account_id'] instanceof String)) {
+            throw new Error("Expected the field `client_account_id` to be a primitive type in the JSON string but got " + data['client_account_id']);
+        }
+
+        return true;
+    }
+
 
 }
+
+ProcessBatchRequest.RequiredProperties = ["batch_date", "batch_id", "transactions"];
 
 /**
  * The date and time that the file was created in ISO-8601 format.

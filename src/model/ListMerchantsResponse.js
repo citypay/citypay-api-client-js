@@ -59,8 +59,38 @@ class ListMerchantsResponse {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>ListMerchantsResponse</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ListMerchantsResponse</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['client_name'] && !(typeof data['client_name'] === 'string' || data['client_name'] instanceof String)) {
+            throw new Error("Expected the field `client_name` to be a primitive type in the JSON string but got " + data['client_name']);
+        }
+        // ensure the json data is a string
+        if (data['clientid'] && !(typeof data['clientid'] === 'string' || data['clientid'] instanceof String)) {
+            throw new Error("Expected the field `clientid` to be a primitive type in the JSON string but got " + data['clientid']);
+        }
+        if (data['merchants']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['merchants'])) {
+                throw new Error("Expected the field `merchants` to be an array in the JSON data but got " + data['merchants']);
+            }
+            // validate the optional field `merchants` (array)
+            for (const item of data['merchants']) {
+                Merchant.validateJsonObject(item);
+            };
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The client name that was requested.

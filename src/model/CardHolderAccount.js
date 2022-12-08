@@ -82,8 +82,56 @@ class CardHolderAccount {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>CardHolderAccount</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CardHolderAccount</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of CardHolderAccount.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['account_id'] && !(typeof data['account_id'] === 'string' || data['account_id'] instanceof String)) {
+            throw new Error("Expected the field `account_id` to be a primitive type in the JSON string but got " + data['account_id']);
+        }
+        // validate the optional field `contact`
+        if (data['contact']) { // data not null
+          ContactDetails.validateJSON(data['contact']);
+        }
+        if (data['cards']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['cards'])) {
+                throw new Error("Expected the field `cards` to be an array in the JSON data but got " + data['cards']);
+            }
+            // validate the optional field `cards` (array)
+            for (const item of data['cards']) {
+                Card.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['default_card_id'] && !(typeof data['default_card_id'] === 'string' || data['default_card_id'] instanceof String)) {
+            throw new Error("Expected the field `default_card_id` to be a primitive type in the JSON string but got " + data['default_card_id']);
+        }
+        // ensure the json data is a string
+        if (data['status'] && !(typeof data['status'] === 'string' || data['status'] instanceof String)) {
+            throw new Error("Expected the field `status` to be a primitive type in the JSON string but got " + data['status']);
+        }
+        // ensure the json data is a string
+        if (data['unique_id'] && !(typeof data['unique_id'] === 'string' || data['unique_id'] instanceof String)) {
+            throw new Error("Expected the field `unique_id` to be a primitive type in the JSON string but got " + data['unique_id']);
+        }
+
+        return true;
+    }
+
 
 }
+
+CardHolderAccount.RequiredProperties = ["account_id", "contact"];
 
 /**
  * The account id of the card holder account provided by the merchant which uniquely identifies the account. 

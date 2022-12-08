@@ -79,8 +79,52 @@ class TokenisationResponseModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>TokenisationResponseModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>TokenisationResponseModel</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['authen_result'] && !(typeof data['authen_result'] === 'string' || data['authen_result'] instanceof String)) {
+            throw new Error("Expected the field `authen_result` to be a primitive type in the JSON string but got " + data['authen_result']);
+        }
+        // ensure the json data is a string
+        if (data['bin_description'] && !(typeof data['bin_description'] === 'string' || data['bin_description'] instanceof String)) {
+            throw new Error("Expected the field `bin_description` to be a primitive type in the JSON string but got " + data['bin_description']);
+        }
+        // ensure the json data is a string
+        if (data['eci'] && !(typeof data['eci'] === 'string' || data['eci'] instanceof String)) {
+            throw new Error("Expected the field `eci` to be a primitive type in the JSON string but got " + data['eci']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
+            throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+        // ensure the json data is a string
+        if (data['sig_id'] && !(typeof data['sig_id'] === 'string' || data['sig_id'] instanceof String)) {
+            throw new Error("Expected the field `sig_id` to be a primitive type in the JSON string but got " + data['sig_id']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The result of any authentication using 3d_secure authorisation against ecommerce transactions. Values are:  <table> <tr> <th>Value</th> <th>Description</th> </tr> <tr> <td>Y</td> <td>Authentication Successful. The Cardholder's password was successfully validated.</td> </tr> <tr> <td>N</td> <td>Authentication Failed. Customer failed or cancelled authentication, transaction denied.</td> </tr> <tr> <td>A</td> <td>Attempts Processing Performed Authentication could not be completed but a proof of authentication attempt (CAVV) was generated.</td> </tr> <tr> <td>U</td> <td>Authentication Could Not Be Performed Authentication could not be completed, due to technical or other problem.</td> </tr> </table> 

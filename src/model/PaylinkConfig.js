@@ -119,8 +119,104 @@ class PaylinkConfig {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkConfig</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkConfig</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['acs_mode'] && !(typeof data['acs_mode'] === 'string' || data['acs_mode'] instanceof String)) {
+            throw new Error("Expected the field `acs_mode` to be a primitive type in the JSON string but got " + data['acs_mode']);
+        }
+        if (data['custom_params']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['custom_params'])) {
+                throw new Error("Expected the field `custom_params` to be an array in the JSON data but got " + data['custom_params']);
+            }
+            // validate the optional field `custom_params` (array)
+            for (const item of data['custom_params']) {
+                PaylinkCustomParam.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['descriptor'] && !(typeof data['descriptor'] === 'string' || data['descriptor'] instanceof String)) {
+            throw new Error("Expected the field `descriptor` to be a primitive type in the JSON string but got " + data['descriptor']);
+        }
+        // ensure the json data is a string
+        if (data['expire_in'] && !(typeof data['expire_in'] === 'string' || data['expire_in'] instanceof String)) {
+            throw new Error("Expected the field `expire_in` to be a primitive type in the JSON string but got " + data['expire_in']);
+        }
+        if (data['field_guard']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['field_guard'])) {
+                throw new Error("Expected the field `field_guard` to be an array in the JSON data but got " + data['field_guard']);
+            }
+            // validate the optional field `field_guard` (array)
+            for (const item of data['field_guard']) {
+                PaylinkFieldGuardModel.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['lock_params'])) {
+            throw new Error("Expected the field `lock_params` to be an array in the JSON data but got " + data['lock_params']);
+        }
+        // ensure the json data is a string
+        if (data['merch_logo'] && !(typeof data['merch_logo'] === 'string' || data['merch_logo'] instanceof String)) {
+            throw new Error("Expected the field `merch_logo` to be a primitive type in the JSON string but got " + data['merch_logo']);
+        }
+        // ensure the json data is a string
+        if (data['merch_terms'] && !(typeof data['merch_terms'] === 'string' || data['merch_terms'] instanceof String)) {
+            throw new Error("Expected the field `merch_terms` to be a primitive type in the JSON string but got " + data['merch_terms']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['options'])) {
+            throw new Error("Expected the field `options` to be an array in the JSON data but got " + data['options']);
+        }
+        // validate the optional field `part_payments`
+        if (data['part_payments']) { // data not null
+          PaylinkPartPayments.validateJSON(data['part_payments']);
+        }
+        // ensure the json data is a string
+        if (data['postback'] && !(typeof data['postback'] === 'string' || data['postback'] instanceof String)) {
+            throw new Error("Expected the field `postback` to be a primitive type in the JSON string but got " + data['postback']);
+        }
+        // ensure the json data is a string
+        if (data['postback_password'] && !(typeof data['postback_password'] === 'string' || data['postback_password'] instanceof String)) {
+            throw new Error("Expected the field `postback_password` to be a primitive type in the JSON string but got " + data['postback_password']);
+        }
+        // ensure the json data is a string
+        if (data['postback_policy'] && !(typeof data['postback_policy'] === 'string' || data['postback_policy'] instanceof String)) {
+            throw new Error("Expected the field `postback_policy` to be a primitive type in the JSON string but got " + data['postback_policy']);
+        }
+        // ensure the json data is a string
+        if (data['postback_username'] && !(typeof data['postback_username'] === 'string' || data['postback_username'] instanceof String)) {
+            throw new Error("Expected the field `postback_username` to be a primitive type in the JSON string but got " + data['postback_username']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_failure'] && !(typeof data['redirect_failure'] === 'string' || data['redirect_failure'] instanceof String)) {
+            throw new Error("Expected the field `redirect_failure` to be a primitive type in the JSON string but got " + data['redirect_failure']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_success'] && !(typeof data['redirect_success'] === 'string' || data['redirect_success'] instanceof String)) {
+            throw new Error("Expected the field `redirect_success` to be a primitive type in the JSON string but got " + data['redirect_success']);
+        }
+        // ensure the json data is a string
+        if (data['renderer'] && !(typeof data['renderer'] === 'string' || data['renderer'] instanceof String)) {
+            throw new Error("Expected the field `renderer` to be a primitive type in the JSON string but got " + data['renderer']);
+        }
+        // validate the optional field `ui`
+        if (data['ui']) { // data not null
+          PaylinkUI.validateJSON(data['ui']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * Specifies the approach to be adopted by the Paylink form when displaying a 3-D Secure challenge window. The values may be  iframe: shows the 3-D Secure ACS in an iframe dialog, neatly embedding it in Paylink. This provides a more seamless flow for the cardholder who is able to validate and authenticate their card using a dialog provided by their card issuer.  inline: an inline mode transfers the full browser window to the authentication server, allowing the payment cardholder to see their payment card issuer's URL and the certificate status in the browser. If you request an iframe mode and the browser width is deemed as being small (< 768px) then an inline mode will be enforced. This is to ensure that mobile users have an improved user experience. 

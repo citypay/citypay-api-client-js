@@ -99,8 +99,80 @@ class PaylinkTokenCreated {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkTokenCreated</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkTokenCreated</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkTokenCreated.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
+            throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+        // validate the optional field `attachments`
+        if (data['attachments']) { // data not null
+          PaylinkAttachmentResult.validateJSON(data['attachments']);
+        }
+        // ensure the json data is a string
+        if (data['bps'] && !(typeof data['bps'] === 'string' || data['bps'] instanceof String)) {
+            throw new Error("Expected the field `bps` to be a primitive type in the JSON string but got " + data['bps']);
+        }
+        if (data['errors']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['errors'])) {
+                throw new Error("Expected the field `errors` to be an array in the JSON data but got " + data['errors']);
+            }
+            // validate the optional field `errors` (array)
+            for (const item of data['errors']) {
+                PaylinkErrorCode.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['mode'] && !(typeof data['mode'] === 'string' || data['mode'] instanceof String)) {
+            throw new Error("Expected the field `mode` to be a primitive type in the JSON string but got " + data['mode']);
+        }
+        // ensure the json data is a string
+        if (data['qr_code'] && !(typeof data['qr_code'] === 'string' || data['qr_code'] instanceof String)) {
+            throw new Error("Expected the field `qr_code` to be a primitive type in the JSON string but got " + data['qr_code']);
+        }
+        // ensure the json data is a string
+        if (data['server_version'] && !(typeof data['server_version'] === 'string' || data['server_version'] instanceof String)) {
+            throw new Error("Expected the field `server_version` to be a primitive type in the JSON string but got " + data['server_version']);
+        }
+        // ensure the json data is a string
+        if (data['source'] && !(typeof data['source'] === 'string' || data['source'] instanceof String)) {
+            throw new Error("Expected the field `source` to be a primitive type in the JSON string but got " + data['source']);
+        }
+        // ensure the json data is a string
+        if (data['url'] && !(typeof data['url'] === 'string' || data['url'] instanceof String)) {
+            throw new Error("Expected the field `url` to be a primitive type in the JSON string but got " + data['url']);
+        }
+        // ensure the json data is a string
+        if (data['usc'] && !(typeof data['usc'] === 'string' || data['usc'] instanceof String)) {
+            throw new Error("Expected the field `usc` to be a primitive type in the JSON string but got " + data['usc']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkTokenCreated.RequiredProperties = ["id", "result", "token"];
 
 /**
  * A unique id of the request.
