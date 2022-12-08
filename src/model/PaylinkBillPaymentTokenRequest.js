@@ -54,6 +54,9 @@ class PaylinkBillPaymentTokenRequest {
             if (data.hasOwnProperty('request')) {
                 obj['request'] = PaylinkTokenRequestModel.constructFromObject(data['request']);
             }
+            if (data.hasOwnProperty('addressee')) {
+                obj['addressee'] = ApiClient.convertToType(data['addressee'], 'String');
+            }
             if (data.hasOwnProperty('attachments')) {
                 obj['attachments'] = ApiClient.convertToType(data['attachments'], [PaylinkAttachmentRequest]);
             }
@@ -66,6 +69,9 @@ class PaylinkBillPaymentTokenRequest {
             if (data.hasOwnProperty('email_notification_path')) {
                 obj['email_notification_path'] = PaylinkEmailNotificationPath.constructFromObject(data['email_notification_path']);
             }
+            if (data.hasOwnProperty('memo')) {
+                obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
+            }
             if (data.hasOwnProperty('sms_notification_path')) {
                 obj['sms_notification_path'] = PaylinkSMSNotificationPath.constructFromObject(data['sms_notification_path']);
             }
@@ -73,13 +79,71 @@ class PaylinkBillPaymentTokenRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkBillPaymentTokenRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkBillPaymentTokenRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkBillPaymentTokenRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // validate the optional field `request`
+        if (data['request']) { // data not null
+          PaylinkTokenRequestModel.validateJSON(data['request']);
+        }
+        // ensure the json data is a string
+        if (data['addressee'] && !(typeof data['addressee'] === 'string' || data['addressee'] instanceof String)) {
+            throw new Error("Expected the field `addressee` to be a primitive type in the JSON string but got " + data['addressee']);
+        }
+        if (data['attachments']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['attachments'])) {
+                throw new Error("Expected the field `attachments` to be an array in the JSON data but got " + data['attachments']);
+            }
+            // validate the optional field `attachments` (array)
+            for (const item of data['attachments']) {
+                PaylinkAttachmentRequest.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['descriptor'] && !(typeof data['descriptor'] === 'string' || data['descriptor'] instanceof String)) {
+            throw new Error("Expected the field `descriptor` to be a primitive type in the JSON string but got " + data['descriptor']);
+        }
+        // validate the optional field `email_notification_path`
+        if (data['email_notification_path']) { // data not null
+          PaylinkEmailNotificationPath.validateJSON(data['email_notification_path']);
+        }
+        // ensure the json data is a string
+        if (data['memo'] && !(typeof data['memo'] === 'string' || data['memo'] instanceof String)) {
+            throw new Error("Expected the field `memo` to be a primitive type in the JSON string but got " + data['memo']);
+        }
+        // validate the optional field `sms_notification_path`
+        if (data['sms_notification_path']) { // data not null
+          PaylinkSMSNotificationPath.validateJSON(data['sms_notification_path']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkBillPaymentTokenRequest.RequiredProperties = ["request"];
 
 /**
  * @member {module:model/PaylinkTokenRequestModel} request
  */
 PaylinkBillPaymentTokenRequest.prototype['request'] = undefined;
+
+/**
+ * Who the bill payment request intended for. This should be a readable name such as a person or company.
+ * @member {String} addressee
+ */
+PaylinkBillPaymentTokenRequest.prototype['addressee'] = undefined;
 
 /**
  * @member {Array.<module:model/PaylinkAttachmentRequest>} attachments
@@ -102,6 +166,12 @@ PaylinkBillPaymentTokenRequest.prototype['due'] = undefined;
  * @member {module:model/PaylinkEmailNotificationPath} email_notification_path
  */
 PaylinkBillPaymentTokenRequest.prototype['email_notification_path'] = undefined;
+
+/**
+ * A memo that can be added to the payment page and email to provide to the customer.
+ * @member {String} memo
+ */
+PaylinkBillPaymentTokenRequest.prototype['memo'] = undefined;
 
 /**
  * @member {module:model/PaylinkSMSNotificationPath} sms_notification_path

@@ -58,8 +58,28 @@ class PaylinkAdjustmentRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkAdjustmentRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkAdjustmentRequest</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['reason'] && !(typeof data['reason'] === 'string' || data['reason'] instanceof String)) {
+            throw new Error("Expected the field `reason` to be a primitive type in the JSON string but got " + data['reason']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * An amount to adjust to.

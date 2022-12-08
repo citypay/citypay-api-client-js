@@ -64,8 +64,32 @@ class RequestChallenged {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>RequestChallenged</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>RequestChallenged</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['acs_url'] && !(typeof data['acs_url'] === 'string' || data['acs_url'] instanceof String)) {
+            throw new Error("Expected the field `acs_url` to be a primitive type in the JSON string but got " + data['acs_url']);
+        }
+        // ensure the json data is a string
+        if (data['creq'] && !(typeof data['creq'] === 'string' || data['creq'] instanceof String)) {
+            throw new Error("Expected the field `creq` to be a primitive type in the JSON string but got " + data['creq']);
+        }
+        // ensure the json data is a string
+        if (data['threedserver_trans_id'] && !(typeof data['threedserver_trans_id'] === 'string' || data['threedserver_trans_id'] instanceof String)) {
+            throw new Error("Expected the field `threedserver_trans_id` to be a primitive type in the JSON string but got " + data['threedserver_trans_id']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The url of the Access Control Server (ACS) to forward the user to. 

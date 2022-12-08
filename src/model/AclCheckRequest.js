@@ -54,8 +54,30 @@ class AclCheckRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AclCheckRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AclCheckRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of AclCheckRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['ip'] && !(typeof data['ip'] === 'string' || data['ip'] instanceof String)) {
+            throw new Error("Expected the field `ip` to be a primitive type in the JSON string but got " + data['ip']);
+        }
+
+        return true;
+    }
+
 
 }
+
+AclCheckRequest.RequiredProperties = ["ip"];
 
 /**
  * An ip address to check for an ACL against. The address should be a publicly routable IPv4 address.

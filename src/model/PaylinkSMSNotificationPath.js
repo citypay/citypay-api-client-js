@@ -57,8 +57,34 @@ class PaylinkSMSNotificationPath {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkSMSNotificationPath</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkSMSNotificationPath</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkSMSNotificationPath.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['to'] && !(typeof data['to'] === 'string' || data['to'] instanceof String)) {
+            throw new Error("Expected the field `to` to be a primitive type in the JSON string but got " + data['to']);
+        }
+        // ensure the json data is a string
+        if (data['template'] && !(typeof data['template'] === 'string' || data['template'] instanceof String)) {
+            throw new Error("Expected the field `template` to be a primitive type in the JSON string but got " + data['template']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkSMSNotificationPath.RequiredProperties = ["to"];
 
 /**
  * The phone number in [E.164](https://en.wikipedia.org/wiki/E.164) format to send the message to.

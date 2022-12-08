@@ -61,8 +61,36 @@ class DirectTokenAuthRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>DirectTokenAuthRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DirectTokenAuthRequest</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['nonce'] && !(typeof data['nonce'] === 'string' || data['nonce'] instanceof String)) {
+            throw new Error("Expected the field `nonce` to be a primitive type in the JSON string but got " + data['nonce']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_failure'] && !(typeof data['redirect_failure'] === 'string' || data['redirect_failure'] instanceof String)) {
+            throw new Error("Expected the field `redirect_failure` to be a primitive type in the JSON string but got " + data['redirect_failure']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_success'] && !(typeof data['redirect_success'] === 'string' || data['redirect_success'] instanceof String)) {
+            throw new Error("Expected the field `redirect_success` to be a primitive type in the JSON string but got " + data['redirect_success']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * A random value string which is provided to the API to perform a digest. The value will be used by its UTF-8 byte representation of any digest function. 

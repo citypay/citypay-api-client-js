@@ -103,8 +103,78 @@ class ChargeRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>ChargeRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ChargeRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of ChargeRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+        // ensure the json data is a string
+        if (data['avs_postcode_policy'] && !(typeof data['avs_postcode_policy'] === 'string' || data['avs_postcode_policy'] instanceof String)) {
+            throw new Error("Expected the field `avs_postcode_policy` to be a primitive type in the JSON string but got " + data['avs_postcode_policy']);
+        }
+        // ensure the json data is a string
+        if (data['cardholder_agreement'] && !(typeof data['cardholder_agreement'] === 'string' || data['cardholder_agreement'] instanceof String)) {
+            throw new Error("Expected the field `cardholder_agreement` to be a primitive type in the JSON string but got " + data['cardholder_agreement']);
+        }
+        // ensure the json data is a string
+        if (data['csc'] && !(typeof data['csc'] === 'string' || data['csc'] instanceof String)) {
+            throw new Error("Expected the field `csc` to be a primitive type in the JSON string but got " + data['csc']);
+        }
+        // ensure the json data is a string
+        if (data['csc_policy'] && !(typeof data['csc_policy'] === 'string' || data['csc_policy'] instanceof String)) {
+            throw new Error("Expected the field `csc_policy` to be a primitive type in the JSON string but got " + data['csc_policy']);
+        }
+        // ensure the json data is a string
+        if (data['currency'] && !(typeof data['currency'] === 'string' || data['currency'] instanceof String)) {
+            throw new Error("Expected the field `currency` to be a primitive type in the JSON string but got " + data['currency']);
+        }
+        // ensure the json data is a string
+        if (data['duplicate_policy'] && !(typeof data['duplicate_policy'] === 'string' || data['duplicate_policy'] instanceof String)) {
+            throw new Error("Expected the field `duplicate_policy` to be a primitive type in the JSON string but got " + data['duplicate_policy']);
+        }
+        // ensure the json data is a string
+        if (data['initiation'] && !(typeof data['initiation'] === 'string' || data['initiation'] instanceof String)) {
+            throw new Error("Expected the field `initiation` to be a primitive type in the JSON string but got " + data['initiation']);
+        }
+        // ensure the json data is a string
+        if (data['match_avsa'] && !(typeof data['match_avsa'] === 'string' || data['match_avsa'] instanceof String)) {
+            throw new Error("Expected the field `match_avsa` to be a primitive type in the JSON string but got " + data['match_avsa']);
+        }
+        // validate the optional field `threedsecure`
+        if (data['threedsecure']) { // data not null
+          ThreeDSecure.validateJSON(data['threedsecure']);
+        }
+        // ensure the json data is a string
+        if (data['trans_info'] && !(typeof data['trans_info'] === 'string' || data['trans_info'] instanceof String)) {
+            throw new Error("Expected the field `trans_info` to be a primitive type in the JSON string but got " + data['trans_info']);
+        }
+        // ensure the json data is a string
+        if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
+            throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
+        }
+
+        return true;
+    }
+
 
 }
+
+ChargeRequest.RequiredProperties = ["amount", "identifier", "merchantid", "token"];
 
 /**
  * The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 

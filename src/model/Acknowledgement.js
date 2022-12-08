@@ -61,8 +61,36 @@ class Acknowledgement {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>Acknowledgement</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Acknowledgement</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['code'] && !(typeof data['code'] === 'string' || data['code'] instanceof String)) {
+            throw new Error("Expected the field `code` to be a primitive type in the JSON string but got " + data['code']);
+        }
+        // ensure the json data is a string
+        if (data['context'] && !(typeof data['context'] === 'string' || data['context'] instanceof String)) {
+            throw new Error("Expected the field `context` to be a primitive type in the JSON string but got " + data['context']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['message'] && !(typeof data['message'] === 'string' || data['message'] instanceof String)) {
+            throw new Error("Expected the field `message` to be a primitive type in the JSON string but got " + data['message']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * A response code providing a result of the process.

@@ -71,8 +71,42 @@ class PaylinkCart {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkCart</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkCart</code>.
+     */
+    static validateJSON(data) {
+        if (data['contents']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['contents'])) {
+                throw new Error("Expected the field `contents` to be an array in the JSON data but got " + data['contents']);
+            }
+            // validate the optional field `contents` (array)
+            for (const item of data['contents']) {
+                PaylinkCartItemModel.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['coupon'] && !(typeof data['coupon'] === 'string' || data['coupon'] instanceof String)) {
+            throw new Error("Expected the field `coupon` to be a primitive type in the JSON string but got " + data['coupon']);
+        }
+        // ensure the json data is a string
+        if (data['product_description'] && !(typeof data['product_description'] === 'string' || data['product_description'] instanceof String)) {
+            throw new Error("Expected the field `product_description` to be a primitive type in the JSON string but got " + data['product_description']);
+        }
+        // ensure the json data is a string
+        if (data['product_information'] && !(typeof data['product_information'] === 'string' || data['product_information'] instanceof String)) {
+            throw new Error("Expected the field `product_information` to be a primitive type in the JSON string but got " + data['product_information']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * @member {Array.<module:model/PaylinkCartItemModel>} contents

@@ -83,8 +83,50 @@ class AirlineSegment {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AirlineSegment</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AirlineSegment</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of AirlineSegment.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['arrival_location_code'] && !(typeof data['arrival_location_code'] === 'string' || data['arrival_location_code'] instanceof String)) {
+            throw new Error("Expected the field `arrival_location_code` to be a primitive type in the JSON string but got " + data['arrival_location_code']);
+        }
+        // ensure the json data is a string
+        if (data['carrier_code'] && !(typeof data['carrier_code'] === 'string' || data['carrier_code'] instanceof String)) {
+            throw new Error("Expected the field `carrier_code` to be a primitive type in the JSON string but got " + data['carrier_code']);
+        }
+        // ensure the json data is a string
+        if (data['class_service_code'] && !(typeof data['class_service_code'] === 'string' || data['class_service_code'] instanceof String)) {
+            throw new Error("Expected the field `class_service_code` to be a primitive type in the JSON string but got " + data['class_service_code']);
+        }
+        // ensure the json data is a string
+        if (data['flight_number'] && !(typeof data['flight_number'] === 'string' || data['flight_number'] instanceof String)) {
+            throw new Error("Expected the field `flight_number` to be a primitive type in the JSON string but got " + data['flight_number']);
+        }
+        // ensure the json data is a string
+        if (data['departure_location_code'] && !(typeof data['departure_location_code'] === 'string' || data['departure_location_code'] instanceof String)) {
+            throw new Error("Expected the field `departure_location_code` to be a primitive type in the JSON string but got " + data['departure_location_code']);
+        }
+        // ensure the json data is a string
+        if (data['stop_over_indicator'] && !(typeof data['stop_over_indicator'] === 'string' || data['stop_over_indicator'] instanceof String)) {
+            throw new Error("Expected the field `stop_over_indicator` to be a primitive type in the JSON string but got " + data['stop_over_indicator']);
+        }
+
+        return true;
+    }
+
 
 }
+
+AirlineSegment.RequiredProperties = ["arrival_location_code", "carrier_code", "class_service_code", "departure_date", "flight_number"];
 
 /**
  * A standard airline routing code (airport code or location identifier) applicable to the arrival portion of this segment. 

@@ -70,8 +70,34 @@ class RegisterCard {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>RegisterCard</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>RegisterCard</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of RegisterCard.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
+            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
+        }
+        // ensure the json data is a string
+        if (data['name_on_card'] && !(typeof data['name_on_card'] === 'string' || data['name_on_card'] instanceof String)) {
+            throw new Error("Expected the field `name_on_card` to be a primitive type in the JSON string but got " + data['name_on_card']);
+        }
+
+        return true;
+    }
+
 
 }
+
+RegisterCard.RequiredProperties = ["cardnumber", "expmonth", "expyear"];
 
 /**
  * The primary number of the card.

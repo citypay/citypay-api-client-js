@@ -134,8 +134,54 @@ class PaylinkTokenStatus {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkTokenStatus</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkTokenStatus</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['auth_code'] && !(typeof data['auth_code'] === 'string' || data['auth_code'] instanceof String)) {
+            throw new Error("Expected the field `auth_code` to be a primitive type in the JSON string but got " + data['auth_code']);
+        }
+        // ensure the json data is a string
+        if (data['card'] && !(typeof data['card'] === 'string' || data['card'] instanceof String)) {
+            throw new Error("Expected the field `card` to be a primitive type in the JSON string but got " + data['card']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['last_payment_result'] && !(typeof data['last_payment_result'] === 'string' || data['last_payment_result'] instanceof String)) {
+            throw new Error("Expected the field `last_payment_result` to be a primitive type in the JSON string but got " + data['last_payment_result']);
+        }
+        // ensure the json data is a string
+        if (data['mid'] && !(typeof data['mid'] === 'string' || data['mid'] instanceof String)) {
+            throw new Error("Expected the field `mid` to be a primitive type in the JSON string but got " + data['mid']);
+        }
+        if (data['state_history']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['state_history'])) {
+                throw new Error("Expected the field `state_history` to be an array in the JSON data but got " + data['state_history']);
+            }
+            // validate the optional field `state_history` (array)
+            for (const item of data['state_history']) {
+                PaylinkStateEvent.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * the amount that has been paid against the session.

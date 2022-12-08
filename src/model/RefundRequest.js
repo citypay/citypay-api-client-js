@@ -72,8 +72,34 @@ class RefundRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>RefundRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>RefundRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of RefundRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['trans_info'] && !(typeof data['trans_info'] === 'string' || data['trans_info'] instanceof String)) {
+            throw new Error("Expected the field `trans_info` to be a primitive type in the JSON string but got " + data['trans_info']);
+        }
+
+        return true;
+    }
+
 
 }
+
+RefundRequest.RequiredProperties = ["amount", "identifier", "merchantid", "refund_ref"];
 
 /**
  * The amount to refund in the lowest unit of currency with a variable length to a maximum of 12 digits.  The amount should be the total amount required to refund for the transaction up to the original processed amount.  No decimal points are to be included and no divisional characters such as 1,024.  For example with GBP £1,021.95 the amount value is 102195. 

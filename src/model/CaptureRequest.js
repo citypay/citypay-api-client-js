@@ -71,8 +71,38 @@ class CaptureRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>CaptureRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CaptureRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of CaptureRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // validate the optional field `airline_data`
+        if (data['airline_data']) { // data not null
+          AirlineAdvice.validateJSON(data['airline_data']);
+        }
+        // validate the optional field `event_management`
+        if (data['event_management']) { // data not null
+          EventDataModel.validateJSON(data['event_management']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+
+        return true;
+    }
+
 
 }
+
+CaptureRequest.RequiredProperties = ["merchantid"];
 
 /**
  * Identifies the merchant account to perform the capture for.

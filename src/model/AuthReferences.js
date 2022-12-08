@@ -53,8 +53,30 @@ class AuthReferences {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AuthReferences</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AuthReferences</code>.
+     */
+    static validateJSON(data) {
+        if (data['auths']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['auths'])) {
+                throw new Error("Expected the field `auths` to be an array in the JSON data but got " + data['auths']);
+            }
+            // validate the optional field `auths` (array)
+            for (const item of data['auths']) {
+                AuthReference.validateJsonObject(item);
+            };
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * @member {Array.<module:model/AuthReference>} auths

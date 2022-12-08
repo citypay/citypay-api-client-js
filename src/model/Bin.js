@@ -76,8 +76,36 @@ class Bin {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>Bin</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Bin</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['bin_country_issued'] && !(typeof data['bin_country_issued'] === 'string' || data['bin_country_issued'] instanceof String)) {
+            throw new Error("Expected the field `bin_country_issued` to be a primitive type in the JSON string but got " + data['bin_country_issued']);
+        }
+        // ensure the json data is a string
+        if (data['bin_currency'] && !(typeof data['bin_currency'] === 'string' || data['bin_currency'] instanceof String)) {
+            throw new Error("Expected the field `bin_currency` to be a primitive type in the JSON string but got " + data['bin_currency']);
+        }
+        // ensure the json data is a string
+        if (data['bin_description'] && !(typeof data['bin_description'] === 'string' || data['bin_description'] instanceof String)) {
+            throw new Error("Expected the field `bin_description` to be a primitive type in the JSON string but got " + data['bin_description']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * Defines whether the card is a commercial card.

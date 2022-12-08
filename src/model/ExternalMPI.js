@@ -64,8 +64,36 @@ class ExternalMPI {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>ExternalMPI</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ExternalMPI</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['authen_result'] && !(typeof data['authen_result'] === 'string' || data['authen_result'] instanceof String)) {
+            throw new Error("Expected the field `authen_result` to be a primitive type in the JSON string but got " + data['authen_result']);
+        }
+        // ensure the json data is a string
+        if (data['cavv'] && !(typeof data['cavv'] === 'string' || data['cavv'] instanceof String)) {
+            throw new Error("Expected the field `cavv` to be a primitive type in the JSON string but got " + data['cavv']);
+        }
+        // ensure the json data is a string
+        if (data['enrolled'] && !(typeof data['enrolled'] === 'string' || data['enrolled'] instanceof String)) {
+            throw new Error("Expected the field `enrolled` to be a primitive type in the JSON string but got " + data['enrolled']);
+        }
+        // ensure the json data is a string
+        if (data['xid'] && !(typeof data['xid'] === 'string' || data['xid'] instanceof String)) {
+            throw new Error("Expected the field `xid` to be a primitive type in the JSON string but got " + data['xid']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The authentication result available from the MPI.

@@ -58,8 +58,40 @@ class PaylinkTokenStatusChangeResponse {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkTokenStatusChangeResponse</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkTokenStatusChangeResponse</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkTokenStatusChangeResponse.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        if (data['tokens']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['tokens'])) {
+                throw new Error("Expected the field `tokens` to be an array in the JSON data but got " + data['tokens']);
+            }
+            // validate the optional field `tokens` (array)
+            for (const item of data['tokens']) {
+                PaylinkTokenStatus.validateJsonObject(item);
+            };
+        }
+        // ensure the json data is a string
+        if (data['nextToken'] && !(typeof data['nextToken'] === 'string' || data['nextToken'] instanceof String)) {
+            throw new Error("Expected the field `nextToken` to be a primitive type in the JSON string but got " + data['nextToken']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkTokenStatusChangeResponse.RequiredProperties = ["tokens"];
 
 /**
  * @member {Array.<module:model/PaylinkTokenStatus>} tokens

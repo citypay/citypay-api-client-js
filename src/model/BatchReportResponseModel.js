@@ -80,8 +80,44 @@ class BatchReportResponseModel {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>BatchReportResponseModel</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BatchReportResponseModel</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of BatchReportResponseModel.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['batch_status'] && !(typeof data['batch_status'] === 'string' || data['batch_status'] instanceof String)) {
+            throw new Error("Expected the field `batch_status` to be a primitive type in the JSON string but got " + data['batch_status']);
+        }
+        // ensure the json data is a string
+        if (data['client_account_id'] && !(typeof data['client_account_id'] === 'string' || data['client_account_id'] instanceof String)) {
+            throw new Error("Expected the field `client_account_id` to be a primitive type in the JSON string but got " + data['client_account_id']);
+        }
+        if (data['transactions']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['transactions'])) {
+                throw new Error("Expected the field `transactions` to be an array in the JSON data but got " + data['transactions']);
+            }
+            // validate the optional field `transactions` (array)
+            for (const item of data['transactions']) {
+                BatchTransactionResultModel.validateJsonObject(item);
+            };
+        }
+
+        return true;
+    }
+
 
 }
+
+BatchReportResponseModel.RequiredProperties = ["amount", "batch_date", "batch_id", "batch_status", "client_account_id", "transactions"];
 
 /**
  * The total amount that the batch contains.

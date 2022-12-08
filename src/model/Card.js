@@ -109,8 +109,64 @@ class Card {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>Card</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Card</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['bin_country_issued'] && !(typeof data['bin_country_issued'] === 'string' || data['bin_country_issued'] instanceof String)) {
+            throw new Error("Expected the field `bin_country_issued` to be a primitive type in the JSON string but got " + data['bin_country_issued']);
+        }
+        // ensure the json data is a string
+        if (data['bin_currency'] && !(typeof data['bin_currency'] === 'string' || data['bin_currency'] instanceof String)) {
+            throw new Error("Expected the field `bin_currency` to be a primitive type in the JSON string but got " + data['bin_currency']);
+        }
+        // ensure the json data is a string
+        if (data['bin_description'] && !(typeof data['bin_description'] === 'string' || data['bin_description'] instanceof String)) {
+            throw new Error("Expected the field `bin_description` to be a primitive type in the JSON string but got " + data['bin_description']);
+        }
+        // ensure the json data is a string
+        if (data['card_id'] && !(typeof data['card_id'] === 'string' || data['card_id'] instanceof String)) {
+            throw new Error("Expected the field `card_id` to be a primitive type in the JSON string but got " + data['card_id']);
+        }
+        // ensure the json data is a string
+        if (data['card_status'] && !(typeof data['card_status'] === 'string' || data['card_status'] instanceof String)) {
+            throw new Error("Expected the field `card_status` to be a primitive type in the JSON string but got " + data['card_status']);
+        }
+        // ensure the json data is a string
+        if (data['label'] && !(typeof data['label'] === 'string' || data['label'] instanceof String)) {
+            throw new Error("Expected the field `label` to be a primitive type in the JSON string but got " + data['label']);
+        }
+        // ensure the json data is a string
+        if (data['label2'] && !(typeof data['label2'] === 'string' || data['label2'] instanceof String)) {
+            throw new Error("Expected the field `label2` to be a primitive type in the JSON string but got " + data['label2']);
+        }
+        // ensure the json data is a string
+        if (data['last4digits'] && !(typeof data['last4digits'] === 'string' || data['last4digits'] instanceof String)) {
+            throw new Error("Expected the field `last4digits` to be a primitive type in the JSON string but got " + data['last4digits']);
+        }
+        // ensure the json data is a string
+        if (data['name_on_card'] && !(typeof data['name_on_card'] === 'string' || data['name_on_card'] instanceof String)) {
+            throw new Error("Expected the field `name_on_card` to be a primitive type in the JSON string but got " + data['name_on_card']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * Defines whether the card is a commercial card.

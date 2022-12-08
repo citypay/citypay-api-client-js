@@ -62,8 +62,30 @@ class DomainKeyRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>DomainKeyRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DomainKeyRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of DomainKeyRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['domain'])) {
+            throw new Error("Expected the field `domain` to be an array in the JSON data but got " + data['domain']);
+        }
+
+        return true;
+    }
+
 
 }
+
+DomainKeyRequest.RequiredProperties = ["domain", "merchantid"];
 
 /**
  * @member {Array.<String>} domain

@@ -58,8 +58,32 @@ class AuthenRequired {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AuthenRequired</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AuthenRequired</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['acs_url'] && !(typeof data['acs_url'] === 'string' || data['acs_url'] instanceof String)) {
+            throw new Error("Expected the field `acs_url` to be a primitive type in the JSON string but got " + data['acs_url']);
+        }
+        // ensure the json data is a string
+        if (data['md'] && !(typeof data['md'] === 'string' || data['md'] instanceof String)) {
+            throw new Error("Expected the field `md` to be a primitive type in the JSON string but got " + data['md']);
+        }
+        // ensure the json data is a string
+        if (data['pareq'] && !(typeof data['pareq'] === 'string' || data['pareq'] instanceof String)) {
+            throw new Error("Expected the field `pareq` to be a primitive type in the JSON string but got " + data['pareq']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The url of the Access Control Server (ACS) to forward the user to. 

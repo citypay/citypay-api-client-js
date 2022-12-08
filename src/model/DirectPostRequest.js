@@ -126,8 +126,98 @@ class DirectPostRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>DirectPostRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DirectPostRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of DirectPostRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
+            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
+        }
+        // ensure the json data is a string
+        if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
+            throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['mac'] && !(typeof data['mac'] === 'string' || data['mac'] instanceof String)) {
+            throw new Error("Expected the field `mac` to be a primitive type in the JSON string but got " + data['mac']);
+        }
+        // ensure the json data is a string
+        if (data['avs_postcode_policy'] && !(typeof data['avs_postcode_policy'] === 'string' || data['avs_postcode_policy'] instanceof String)) {
+            throw new Error("Expected the field `avs_postcode_policy` to be a primitive type in the JSON string but got " + data['avs_postcode_policy']);
+        }
+        // validate the optional field `bill_to`
+        if (data['bill_to']) { // data not null
+          ContactDetails.validateJSON(data['bill_to']);
+        }
+        // ensure the json data is a string
+        if (data['csc'] && !(typeof data['csc'] === 'string' || data['csc'] instanceof String)) {
+            throw new Error("Expected the field `csc` to be a primitive type in the JSON string but got " + data['csc']);
+        }
+        // ensure the json data is a string
+        if (data['csc_policy'] && !(typeof data['csc_policy'] === 'string' || data['csc_policy'] instanceof String)) {
+            throw new Error("Expected the field `csc_policy` to be a primitive type in the JSON string but got " + data['csc_policy']);
+        }
+        // ensure the json data is a string
+        if (data['currency'] && !(typeof data['currency'] === 'string' || data['currency'] instanceof String)) {
+            throw new Error("Expected the field `currency` to be a primitive type in the JSON string but got " + data['currency']);
+        }
+        // ensure the json data is a string
+        if (data['duplicate_policy'] && !(typeof data['duplicate_policy'] === 'string' || data['duplicate_policy'] instanceof String)) {
+            throw new Error("Expected the field `duplicate_policy` to be a primitive type in the JSON string but got " + data['duplicate_policy']);
+        }
+        // ensure the json data is a string
+        if (data['match_avsa'] && !(typeof data['match_avsa'] === 'string' || data['match_avsa'] instanceof String)) {
+            throw new Error("Expected the field `match_avsa` to be a primitive type in the JSON string but got " + data['match_avsa']);
+        }
+        // ensure the json data is a string
+        if (data['name_on_card'] && !(typeof data['name_on_card'] === 'string' || data['name_on_card'] instanceof String)) {
+            throw new Error("Expected the field `name_on_card` to be a primitive type in the JSON string but got " + data['name_on_card']);
+        }
+        // ensure the json data is a string
+        if (data['nonce'] && !(typeof data['nonce'] === 'string' || data['nonce'] instanceof String)) {
+            throw new Error("Expected the field `nonce` to be a primitive type in the JSON string but got " + data['nonce']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_failure'] && !(typeof data['redirect_failure'] === 'string' || data['redirect_failure'] instanceof String)) {
+            throw new Error("Expected the field `redirect_failure` to be a primitive type in the JSON string but got " + data['redirect_failure']);
+        }
+        // ensure the json data is a string
+        if (data['redirect_success'] && !(typeof data['redirect_success'] === 'string' || data['redirect_success'] instanceof String)) {
+            throw new Error("Expected the field `redirect_success` to be a primitive type in the JSON string but got " + data['redirect_success']);
+        }
+        // validate the optional field `ship_to`
+        if (data['ship_to']) { // data not null
+          ContactDetails.validateJSON(data['ship_to']);
+        }
+        // validate the optional field `threedsecure`
+        if (data['threedsecure']) { // data not null
+          ThreeDSecure.validateJSON(data['threedsecure']);
+        }
+        // ensure the json data is a string
+        if (data['trans_info'] && !(typeof data['trans_info'] === 'string' || data['trans_info'] instanceof String)) {
+            throw new Error("Expected the field `trans_info` to be a primitive type in the JSON string but got " + data['trans_info']);
+        }
+        // ensure the json data is a string
+        if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
+            throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
+        }
+
+        return true;
+    }
+
 
 }
+
+DirectPostRequest.RequiredProperties = ["amount", "cardnumber", "expmonth", "expyear", "identifier", "mac"];
 
 /**
  * The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 

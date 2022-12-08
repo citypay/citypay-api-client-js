@@ -114,8 +114,70 @@ class AirlineAdvice {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>AirlineAdvice</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AirlineAdvice</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of AirlineAdvice.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['carrier_name'] && !(typeof data['carrier_name'] === 'string' || data['carrier_name'] instanceof String)) {
+            throw new Error("Expected the field `carrier_name` to be a primitive type in the JSON string but got " + data['carrier_name']);
+        }
+        // validate the optional field `segment1`
+        if (data['segment1']) { // data not null
+          AirlineSegment.validateJSON(data['segment1']);
+        }
+        // ensure the json data is a string
+        if (data['ticket_issue_city'] && !(typeof data['ticket_issue_city'] === 'string' || data['ticket_issue_city'] instanceof String)) {
+            throw new Error("Expected the field `ticket_issue_city` to be a primitive type in the JSON string but got " + data['ticket_issue_city']);
+        }
+        // ensure the json data is a string
+        if (data['ticket_issue_name'] && !(typeof data['ticket_issue_name'] === 'string' || data['ticket_issue_name'] instanceof String)) {
+            throw new Error("Expected the field `ticket_issue_name` to be a primitive type in the JSON string but got " + data['ticket_issue_name']);
+        }
+        // ensure the json data is a string
+        if (data['ticket_no'] && !(typeof data['ticket_no'] === 'string' || data['ticket_no'] instanceof String)) {
+            throw new Error("Expected the field `ticket_no` to be a primitive type in the JSON string but got " + data['ticket_no']);
+        }
+        // ensure the json data is a string
+        if (data['transaction_type'] && !(typeof data['transaction_type'] === 'string' || data['transaction_type'] instanceof String)) {
+            throw new Error("Expected the field `transaction_type` to be a primitive type in the JSON string but got " + data['transaction_type']);
+        }
+        // ensure the json data is a string
+        if (data['original_ticket_no'] && !(typeof data['original_ticket_no'] === 'string' || data['original_ticket_no'] instanceof String)) {
+            throw new Error("Expected the field `original_ticket_no` to be a primitive type in the JSON string but got " + data['original_ticket_no']);
+        }
+        // ensure the json data is a string
+        if (data['passenger_name'] && !(typeof data['passenger_name'] === 'string' || data['passenger_name'] instanceof String)) {
+            throw new Error("Expected the field `passenger_name` to be a primitive type in the JSON string but got " + data['passenger_name']);
+        }
+        // validate the optional field `segment2`
+        if (data['segment2']) { // data not null
+          AirlineSegment.validateJSON(data['segment2']);
+        }
+        // validate the optional field `segment3`
+        if (data['segment3']) { // data not null
+          AirlineSegment.validateJSON(data['segment3']);
+        }
+        // validate the optional field `segment4`
+        if (data['segment4']) { // data not null
+          AirlineSegment.validateJSON(data['segment4']);
+        }
+
+        return true;
+    }
+
 
 }
+
+AirlineAdvice.RequiredProperties = ["carrier_name", "number_in_party", "segment1", "ticket_issue_city", "ticket_issue_date", "ticket_issue_name", "ticket_no", "transaction_type"];
 
 /**
  * The name of the airline carrier that generated the tickets for airline travel.

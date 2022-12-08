@@ -52,8 +52,24 @@ class CResAuthRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>CResAuthRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CResAuthRequest</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['cres'] && !(typeof data['cres'] === 'string' || data['cres'] instanceof String)) {
+            throw new Error("Expected the field `cres` to be a primitive type in the JSON string but got " + data['cres']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * The challenge response data forwarded by the ACS in 3D-Secure V2 processing. Data should be forwarded to CityPay unchanged for subsequent authorisation and processing. 

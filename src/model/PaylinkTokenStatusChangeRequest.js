@@ -68,8 +68,34 @@ class PaylinkTokenStatusChangeRequest {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkTokenStatusChangeRequest</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkTokenStatusChangeRequest</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkTokenStatusChangeRequest.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['nextToken'] && !(typeof data['nextToken'] === 'string' || data['nextToken'] instanceof String)) {
+            throw new Error("Expected the field `nextToken` to be a primitive type in the JSON string but got " + data['nextToken']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['orderBy'])) {
+            throw new Error("Expected the field `orderBy` to be an array in the JSON data but got " + data['orderBy']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkTokenStatusChangeRequest.RequiredProperties = ["after", "merchantid"];
 
 /**
  * identifies the date and time to lookup changes after.

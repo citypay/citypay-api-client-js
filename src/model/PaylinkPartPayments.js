@@ -67,8 +67,44 @@ class PaylinkPartPayments {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkPartPayments</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkPartPayments</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['enabled'] && !(typeof data['enabled'] === 'string' || data['enabled'] instanceof String)) {
+            throw new Error("Expected the field `enabled` to be a primitive type in the JSON string but got " + data['enabled']);
+        }
+        // ensure the json data is a string
+        if (data['floor'] && !(typeof data['floor'] === 'string' || data['floor'] instanceof String)) {
+            throw new Error("Expected the field `floor` to be a primitive type in the JSON string but got " + data['floor']);
+        }
+        // ensure the json data is a string
+        if (data['max'] && !(typeof data['max'] === 'string' || data['max'] instanceof String)) {
+            throw new Error("Expected the field `max` to be a primitive type in the JSON string but got " + data['max']);
+        }
+        // ensure the json data is a string
+        if (data['max_rate'] && !(typeof data['max_rate'] === 'string' || data['max_rate'] instanceof String)) {
+            throw new Error("Expected the field `max_rate` to be a primitive type in the JSON string but got " + data['max_rate']);
+        }
+        // ensure the json data is a string
+        if (data['min'] && !(typeof data['min'] === 'string' || data['min'] instanceof String)) {
+            throw new Error("Expected the field `min` to be a primitive type in the JSON string but got " + data['min']);
+        }
+        // ensure the json data is a string
+        if (data['min_rate'] && !(typeof data['min_rate'] === 'string' || data['min_rate'] instanceof String)) {
+            throw new Error("Expected the field `min_rate` to be a primitive type in the JSON string but got " + data['min_rate']);
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * Determines if part payments is enabled. Default is false.

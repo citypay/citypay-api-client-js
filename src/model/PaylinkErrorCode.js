@@ -59,8 +59,34 @@ class PaylinkErrorCode {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkErrorCode</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkErrorCode</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkErrorCode.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is a string
+        if (data['code'] && !(typeof data['code'] === 'string' || data['code'] instanceof String)) {
+            throw new Error("Expected the field `code` to be a primitive type in the JSON string but got " + data['code']);
+        }
+        // ensure the json data is a string
+        if (data['msg'] && !(typeof data['msg'] === 'string' || data['msg'] instanceof String)) {
+            throw new Error("Expected the field `msg` to be a primitive type in the JSON string but got " + data['msg']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkErrorCode.RequiredProperties = ["code", "msg"];
 
 /**
  * An error code identifying the error.

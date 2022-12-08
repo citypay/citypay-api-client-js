@@ -66,8 +66,46 @@ class PaylinkEmailNotificationPath {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>PaylinkEmailNotificationPath</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkEmailNotificationPath</code>.
+     */
+    static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of PaylinkEmailNotificationPath.RequiredProperties) {
+            if (!data[property]) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['to'])) {
+            throw new Error("Expected the field `to` to be an array in the JSON data but got " + data['to']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['bcc'])) {
+            throw new Error("Expected the field `bcc` to be an array in the JSON data but got " + data['bcc']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['cc'])) {
+            throw new Error("Expected the field `cc` to be an array in the JSON data but got " + data['cc']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['reply_to'])) {
+            throw new Error("Expected the field `reply_to` to be an array in the JSON data but got " + data['reply_to']);
+        }
+        // ensure the json data is a string
+        if (data['template'] && !(typeof data['template'] === 'string' || data['template'] instanceof String)) {
+            throw new Error("Expected the field `template` to be a primitive type in the JSON string but got " + data['template']);
+        }
+
+        return true;
+    }
+
 
 }
+
+PaylinkEmailNotificationPath.RequiredProperties = ["to"];
 
 /**
  * @member {Array.<String>} to

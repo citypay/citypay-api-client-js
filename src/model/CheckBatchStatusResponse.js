@@ -53,8 +53,30 @@ class CheckBatchStatusResponse {
         return obj;
     }
 
+    /**
+     * Validates the JSON data with respect to <code>CheckBatchStatusResponse</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CheckBatchStatusResponse</code>.
+     */
+    static validateJSON(data) {
+        if (data['batches']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['batches'])) {
+                throw new Error("Expected the field `batches` to be an array in the JSON data but got " + data['batches']);
+            }
+            // validate the optional field `batches` (array)
+            for (const item of data['batches']) {
+                Batch.validateJsonObject(item);
+            };
+        }
+
+        return true;
+    }
+
 
 }
+
+
 
 /**
  * @member {Array.<module:model/Batch>} batches
