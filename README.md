@@ -1,6 +1,6 @@
 # citypay-api
 
-[![Build Status](https://api.travis-ci.com/citypay/citypay-api-client-js.svg?branch=master)](https://app.travis-ci.com/github/citypay/citypay-api-client-js)
+[![Build Status](https://github.com/citypay/citypay-api-client-js/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/citypay/citypay-api-client-js/actions/workflows/npm-publish.yml)
 Citypay Api Client - JavaScript client for citypay-api
 
 This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It
