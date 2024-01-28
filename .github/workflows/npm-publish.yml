@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - run: npm test
         env:
           CP_CLIENT_ID: ${{secrets.CP_CLIENT_ID}}
@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: npm test
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
