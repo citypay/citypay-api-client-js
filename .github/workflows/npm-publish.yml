@@ -29,20 +29,3 @@ jobs:
           CP_CLIENT_ID: ${{secrets.CP_CLIENT_ID}}
           CP_MERCHANT_ID: ${{secrets.CP_MERCHANT_ID}}
           CP_LICENCE_KEY: ${{secrets.CP_LICENCE_KEY}}
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm test
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          CP_CLIENT_ID: ${{secrets.CP_CLIENT_ID}}
-          CP_MERCHANT_ID: ${{secrets.CP_MERCHANT_ID}}
-          CP_LICENCE_KEY: ${{secrets.CP_LICENCE_KEY}}
