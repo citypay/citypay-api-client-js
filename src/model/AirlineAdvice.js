@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokenized payments using cardholder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](https://citypay.github.io/api-docs/payment-api/#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive cardholder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -22,7 +22,6 @@ class AirlineAdvice {
      * Constructs a new <code>AirlineAdvice</code>.
      * @alias module:model/AirlineAdvice
      * @param carrier_name {String} The name of the airline carrier that generated the tickets for airline travel.
-     * @param number_in_party {Number} The number of people in the party.
      * @param segment1 {module:model/AirlineSegment} 
      * @param ticket_issue_city {String} The name of the city town or village where the transaction took place.
      * @param ticket_issue_date {Date} The date the ticket was issued in ISO Date format (yyyy-MM-dd).
@@ -30,9 +29,9 @@ class AirlineAdvice {
      * @param ticket_no {String} This must be a valid ticket number, i.e. numeric (the first 3 digits must represent the valid IATA plate carrier code). The final check digit should be validated prior to submission. On credit charges, this field should contain the number of the original ticket, and not of a replacement. 
      * @param transaction_type {String} This field contains the Transaction Type code assigned to this transaction. Valid codes include:   - `TKT` = Ticket Purchase   - `REF` = Refund   - `EXC` = Exchange Ticket   - `MSC` = Miscellaneous (non-Ticket Purchase- and non-Exchange Ticket-related transactions only). 
      */
-    constructor(carrier_name, number_in_party, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type) { 
+    constructor(carrier_name, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type) { 
         
-        AirlineAdvice.initialize(this, carrier_name, number_in_party, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type);
+        AirlineAdvice.initialize(this, carrier_name, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type);
     }
 
     /**
@@ -40,9 +39,8 @@ class AirlineAdvice {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, carrier_name, number_in_party, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type) { 
+    static initialize(obj, carrier_name, segment1, ticket_issue_city, ticket_issue_date, ticket_issue_name, ticket_no, transaction_type) { 
         obj['carrier_name'] = carrier_name;
-        obj['number_in_party'] = number_in_party;
         obj['segment1'] = segment1;
         obj['ticket_issue_city'] = ticket_issue_city;
         obj['ticket_issue_date'] = ticket_issue_date;
@@ -64,9 +62,6 @@ class AirlineAdvice {
 
             if (data.hasOwnProperty('carrier_name')) {
                 obj['carrier_name'] = ApiClient.convertToType(data['carrier_name'], 'String');
-            }
-            if (data.hasOwnProperty('number_in_party')) {
-                obj['number_in_party'] = ApiClient.convertToType(data['number_in_party'], 'Number');
             }
             if (data.hasOwnProperty('segment1')) {
                 obj['segment1'] = AirlineSegment.constructFromObject(data['segment1']);
@@ -94,6 +89,9 @@ class AirlineAdvice {
             }
             if (data.hasOwnProperty('no_air_segments')) {
                 obj['no_air_segments'] = ApiClient.convertToType(data['no_air_segments'], 'Number');
+            }
+            if (data.hasOwnProperty('number_in_party')) {
+                obj['number_in_party'] = ApiClient.convertToType(data['number_in_party'], 'Number');
             }
             if (data.hasOwnProperty('original_ticket_no')) {
                 obj['original_ticket_no'] = ApiClient.convertToType(data['original_ticket_no'], 'String');
@@ -177,19 +175,13 @@ class AirlineAdvice {
 
 }
 
-AirlineAdvice.RequiredProperties = ["carrier_name", "number_in_party", "segment1", "ticket_issue_city", "ticket_issue_date", "ticket_issue_name", "ticket_no", "transaction_type"];
+AirlineAdvice.RequiredProperties = ["carrier_name", "segment1", "ticket_issue_city", "ticket_issue_date", "ticket_issue_name", "ticket_no", "transaction_type"];
 
 /**
  * The name of the airline carrier that generated the tickets for airline travel.
  * @member {String} carrier_name
  */
 AirlineAdvice.prototype['carrier_name'] = undefined;
-
-/**
- * The number of people in the party.
- * @member {Number} number_in_party
- */
-AirlineAdvice.prototype['number_in_party'] = undefined;
 
 /**
  * @member {module:model/AirlineSegment} segment1
@@ -243,6 +235,12 @@ AirlineAdvice.prototype['eticket_indicator'] = undefined;
  * @member {Number} no_air_segments
  */
 AirlineAdvice.prototype['no_air_segments'] = undefined;
+
+/**
+ * The number of people in the party.
+ * @member {Number} number_in_party
+ */
+AirlineAdvice.prototype['number_in_party'] = undefined;
 
 /**
  * Required if transaction type is EXC.

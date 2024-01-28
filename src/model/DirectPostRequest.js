@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokenized payments using cardholder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](https://citypay.github.io/api-docs/payment-api/#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive cardholder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -113,6 +113,9 @@ class DirectPostRequest {
             if (data.hasOwnProperty('ship_to')) {
                 obj['ship_to'] = ContactDetails.constructFromObject(data['ship_to']);
             }
+            if (data.hasOwnProperty('tag')) {
+                obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
+            }
             if (data.hasOwnProperty('threedsecure')) {
                 obj['threedsecure'] = ThreeDSecure.constructFromObject(data['threedsecure']);
             }
@@ -197,6 +200,10 @@ class DirectPostRequest {
         // validate the optional field `ship_to`
         if (data['ship_to']) { // data not null
           ContactDetails.validateJSON(data['ship_to']);
+        }
+        // ensure the json data is a string
+        if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
+            throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
         }
         // validate the optional field `threedsecure`
         if (data['threedsecure']) { // data not null
@@ -324,6 +331,12 @@ DirectPostRequest.prototype['redirect_success'] = undefined;
  * @member {module:model/ContactDetails} ship_to
  */
 DirectPostRequest.prototype['ship_to'] = undefined;
+
+/**
+ * A \"tag\" is a label that you can attach to a payment authorization. Tags can help you group transactions together based on certain criteria, like a work job or a ticket number. They can also assist in filtering transactions when you're generating reports.  Multiple Tags You can add more than one tag to a transaction by separating them with commas.  Limitations There is a maximum limit of 3 tags that can be added to a single transaction. Each tag can be no longer than 20 characters and alphanumeric with no spaces.  Example: Let's say you're a software company and you have different teams working on various projects. When a team makes a purchase or incurs an expense, they can tag the transaction with the project name, the team name, and the type of expense.  Project Name: Project_X Team Name: Team_A Type of Expense: Hardware So, the tag for a transaction might look like: Project_X,Team_A,Hardware  This way, when you're looking at your financial reports, you can easily filter transactions based on these tags to see how much each project or team is spending on different types of expenses. 
+ * @member {String} tag
+ */
+DirectPostRequest.prototype['tag'] = undefined;
 
 /**
  * @member {module:model/ThreeDSecure} threedsecure

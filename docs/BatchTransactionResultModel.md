@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **authcode** | **String** | The authorisation code of a successful transaction. | [optional] 
 **datetime** | **Date** | The datetime that the transaction was processed. | [optional] 
 **maskedpan** | **String** | A masked value of the card number used for processing displaying limited values that can be used on a receipt.  | [optional] 
-**scheme** | **String** | A name of the card scheme of the transaction that processed the transaction such as Visa or MasterCard.  | [optional] 
+**scheme** | **String** | The name of the card scheme of the transaction that processed the transaction such as Visa or MasterCard.  | [optional] 
+**scheme_id** | **String** | The name of the card scheme of the transaction such as VI or MC.  | [optional] 
+**scheme_logo** | **String** | A url containing a logo of the card scheme.  | [optional] 
 **transno** | **Number** | The resulting transaction number, ordered incrementally from 1 for every merchant_id. The value will default to less than 1 for transactions that do not have a transaction number issued.  | [optional] 
 
 

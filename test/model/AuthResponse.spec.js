@@ -11,174 +11,217 @@
  */
 
 (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD.
-        define(['expect.js', process.cwd() + '/src/index'], factory);
-    } else if (typeof module === 'object' && module.exports) {
-        // CommonJS-like environments that support module.exports, like Node.
-        factory(require('expect.js'), require(process.cwd() + '/src/index'));
-    } else {
-        // Browser globals (root is window)
-        factory(root.expect, root.citypay_api_client);
-    }
+  if (typeof define === 'function' && define.amd) {
+    // AMD.
+    define(['expect.js', process.cwd() + '/src/index'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    factory(require('expect.js'), require(process.cwd() + '/src/index'));
+  } else {
+    // Browser globals (root is window)
+    factory(root.expect, root.citypay_api_client);
+  }
 }(this, function (expect, citypay_api_client) {
-    'use strict';
+  'use strict';
 
-    let json = {
-        "AuthResponse": {
-            "amount": 5500,
-            "atrn": "atrn1",
-            "atsd": "a",
-            "authcode": "12345",
-            "authen_result": "R",
-            "authorised": true,
-            "avs_result": "G",
-            "bin_commercial": false,
-            "bin_debit": false,
-            "bin_description": "bin_desc",
-            "cavv": "cavvvvvvvvvvvvv",
-            "context": "20200812075906AAAGV4",
-            "csc_result": "C",
-            "currency": "GBP",
-            "datetime": "2020-08-12T07:59:11Z",
-            "eci": "0",
-            "identifier": "ident1",
-            "live": true,
-            "maskedpan": "400000******0002",
-            "merchantid": 12345,
-            "result": 1,
-            "result_code": "000",
-            "result_message": "System: Accepted Transaction",
-            "scheme": "VISA_BUSINESS",
-            "sha256": "abcdefg",
-            "trans_status": "P",
-            "transno": 74875
-        }
+  let json = {
+    "AuthResponse": {
+      "amount": 5500,
+      "atrn": "atrn1",
+      "atsd": "a",
+      "authcode": "12345",
+      "authen_result": "R",
+      "authorised": true,
+      "avs_result": "G",
+      "bin_commercial": false,
+      "bin_debit": false,
+      "bin_description": "bin_desc",
+      "cavv": "cavvvvvvvvvvvvv",
+      "context": "20200812075906AAAGV4",
+      "csc_result": "C",
+      "currency": "GBP",
+      "datetime": "2020-08-12T07:59:11Z",
+      "eci": "0",
+      "identifier": "ident1",
+      "live": true,
+      "maskedpan": "400000******0002",
+      "merchantid": 12345,
+      "result": 1,
+      "result_code": "000",
+      "result_message": "System: Accepted Transaction",
+      "scheme": "VISA_BUSINESS",
+      "sha256": "abcdefg",
+      "trans_status": "P",
+      "transno": 74875
     }
+  }
 
-    let instance;
+  let authResponseWithNoIdent = {
+    "AuthResponse": {
+      "amount": 0,
+      "atrn": "",
+      "atsd": "",
+      "authcode": "",
+      "authen_result": "",
+      "authorised": false,
+      "avs_result": " ",
+      "bin_commercial": false,
+      "bin_debit": false,
+      "bin_description": "",
+      "cavv": "",
+      "context": "PC.0.A5298ef695b",
+      "csc_result": " ",
+      "currency": "---",
+      "datetime": "1969-12-31T23:59:59Z",
+      "eci": "0",
+      "identifier": "",
+      "live": true,
+      "maskedpan": "N/A",
+      "merchantid": 0,
+      "result": 3,
+      "result_code": "P030",
+      "result_message": "Request Error: Authorisation invalid (203: Data element not in the required format or value is invalid as defined in Table A.1. threeDSSessionData)",
+      "scheme": "",
+      "sha256": "",
+      "trans_status": "_",
+      "transno": -1
+    }
+  }
 
-    beforeEach(function () {
-        instance = new citypay_api_client.ApiClient.instance.deserialize({
-            status: 200,
-            body: json
-        }, citypay_api_client.AuthResponse);
+  let instance, instanceWithNoIdent;
+
+  beforeEach(function () {
+    instance = new citypay_api_client.ApiClient.instance.deserialize({
+      status: 200,
+      body: json
+    }, citypay_api_client.AuthResponse);
+
+    instanceWithNoIdent = new citypay_api_client.ApiClient.instance.deserialize({
+      status: 200,
+      body: authResponseWithNoIdent
+    }, citypay_api_client.AuthResponse);
+  });
+
+  describe('AuthResponse', function () {
+    it('should create an instance of AuthResponse', function () {
+      expect(instance).to.be.a(citypay_api_client.AuthResponse);
     });
 
-
-    describe('AuthResponse', function () {
-        it('should create an instance of AuthResponse', function () {
-            expect(instance).to.be.a(citypay_api_client.AuthResponse);
-        });
-
-        it('should have the property amount (base name: "amount")', function () {
-            expect(instance.amount).to.be(5500);
-        });
-
-        it('should have the property atrn (base name: "atrn")', function () {
-            expect(instance.atrn).to.be("atrn1");
-        });
-
-        it('should have the property atsd (base name: "atsd")', function () {
-            expect(instance.atsd).to.be("a");
-        });
-
-        it('should have the property authcode (base name: "authcode")', function () {
-            expect(instance.authcode).to.be("12345");
-        });
-
-        it('should have the property authen_result (base name: "authen_result")', function () {
-            expect(instance.authen_result).to.be("R");
-        });
-
-        it('should have the property authorised (base name: "authorised")', function () {
-            expect(instance.authorised).to.be(true);
-        });
-
-        it('should have the property avs_result (base name: "avs_result")', function () {
-            expect(instance.avs_result).to.be("G");
-        });
-
-        it('should have the property bin_commercial (base name: "bin_commercial")', function () {
-            expect(instance.bin_commercial).to.be(false);
-        });
-
-        it('should have the property bin_debit (base name: "bin_debit")', function () {
-            expect(instance.bin_debit).to.be(false);
-        });
-
-        it('should have the property bin_description (base name: "bin_description")', function () {
-            expect(instance.bin_description).to.be("bin_desc");
-        });
-
-        it('should have the property cavv (base name: "cavv")', function () {
-            expect(instance.cavv).to.be("cavvvvvvvvvvvvv");
-        });
-
-        it('should have the property context (base name: "context")', function () {
-            expect(instance.context).to.be("20200812075906AAAGV4");
-        });
-
-        it('should have the property csc_result (base name: "csc_result")', function () {
-            expect(instance.csc_result).to.be("C");
-        });
-
-        it('should have the property currency (base name: "currency")', function () {
-            expect(instance.currency).to.be("GBP");
-        });
-
-        it('should have the property datetime (base name: "datetime")', function () {
-            expect(instance.datetime.toISOString()).to.be(new Date("2020-08-12T07:59:11Z").toISOString());
-        });
-
-        it('should have the property eci (base name: "eci")', function () {
-            expect(instance.eci).to.be("0");
-        });
-
-        it('should have the property identifier (base name: "identifier")', function () {
-            expect(instance.identifier).to.be("ident1");
-        });
-
-        it('should have the property live (base name: "live")', function () {
-            expect(instance.live).to.be(true);
-        });
-
-        it('should have the property maskedpan (base name: "maskedpan")', function () {
-            expect(instance.maskedpan).to.be("400000******0002");
-        });
-
-        it('should have the property merchantid (base name: "merchantid")', function () {
-            expect(instance.merchantid).to.be(12345);
-        });
-
-        it('should have the property result (base name: "result")', function () {
-            expect(instance.result).to.be(1);
-        });
-
-        it('should have the property result_code (base name: "result_code")', function () {
-            expect(instance.result_code).to.be("000");
-        });
-
-        it('should have the property result_message (base name: "result_message")', function () {
-            expect(instance.result_message).to.be("System: Accepted Transaction");
-        });
-
-        it('should have the property scheme (base name: "scheme")', function () {
-            expect(instance.scheme).to.be("VISA_BUSINESS");
-        });
-
-        it('should have the property sha256 (base name: "sha256")', function () {
-            expect(instance.sha256).to.be("abcdefg");
-        });
-
-        it('should have the property trans_status (base name: "trans_status")', function () {
-            expect(instance.trans_status).to.be("P");
-        });
-
-        it('should have the property transno (base name: "transno")', function () {
-            expect(instance.transno).to.be(74875);
-        });
-
+    it('should have the property amount (base name: "amount")', function () {
+      expect(instance.amount).to.be(5500);
     });
+
+    it('should have the property atrn (base name: "atrn")', function () {
+      expect(instance.atrn).to.be("atrn1");
+    });
+
+    it('should have the property atsd (base name: "atsd")', function () {
+      expect(instance.atsd).to.be("a");
+    });
+
+    it('should have the property authcode (base name: "authcode")', function () {
+      expect(instance.authcode).to.be("12345");
+    });
+
+    it('should have the property authen_result (base name: "authen_result")', function () {
+      expect(instance.authen_result).to.be("R");
+    });
+
+    it('should have the property authorised (base name: "authorised")', function () {
+      expect(instance.authorised).to.be(true);
+    });
+
+    it('should have the property avs_result (base name: "avs_result")', function () {
+      expect(instance.avs_result).to.be("G");
+    });
+
+    it('should have the property bin_commercial (base name: "bin_commercial")', function () {
+      expect(instance.bin_commercial).to.be(false);
+    });
+
+    it('should have the property bin_debit (base name: "bin_debit")', function () {
+      expect(instance.bin_debit).to.be(false);
+    });
+
+    it('should have the property bin_description (base name: "bin_description")', function () {
+      expect(instance.bin_description).to.be("bin_desc");
+    });
+
+    it('should have the property cavv (base name: "cavv")', function () {
+      expect(instance.cavv).to.be("cavvvvvvvvvvvvv");
+    });
+
+    it('should have the property context (base name: "context")', function () {
+      expect(instance.context).to.be("20200812075906AAAGV4");
+    });
+
+    it('should have the property csc_result (base name: "csc_result")', function () {
+      expect(instance.csc_result).to.be("C");
+    });
+
+    it('should have the property currency (base name: "currency")', function () {
+      expect(instance.currency).to.be("GBP");
+    });
+
+    it('should have the property datetime (base name: "datetime")', function () {
+      expect(instance.datetime.toISOString()).to.be(new Date("2020-08-12T07:59:11Z").toISOString());
+    });
+
+    it('should have the property eci (base name: "eci")', function () {
+      expect(instance.eci).to.be("0");
+    });
+
+    it('should have the property identifier (base name: "identifier")', function () {
+      expect(instance.identifier).to.be("ident1");
+    });
+
+    it('should have the property live (base name: "live")', function () {
+      expect(instance.live).to.be(true);
+    });
+
+    it('should have the property maskedpan (base name: "maskedpan")', function () {
+      expect(instance.maskedpan).to.be("400000******0002");
+    });
+
+    it('should have the property merchantid (base name: "merchantid")', function () {
+      expect(instance.merchantid).to.be(12345);
+    });
+
+    it('should have the property result (base name: "result")', function () {
+      expect(instance.result).to.be(1);
+    });
+
+    it('should have the property result_code (base name: "result_code")', function () {
+      expect(instance.result_code).to.be("000");
+    });
+
+    it('should have the property result_message (base name: "result_message")', function () {
+      expect(instance.result_message).to.be("System: Accepted Transaction");
+    });
+
+    it('should have the property scheme (base name: "scheme")', function () {
+      expect(instance.scheme).to.be("VISA_BUSINESS");
+    });
+
+    it('should have the property sha256 (base name: "sha256")', function () {
+      expect(instance.sha256).to.be("abcdefg");
+    });
+
+    it('should have the property trans_status (base name: "trans_status")', function () {
+      expect(instance.trans_status).to.be("P");
+    });
+
+    it('should have the property transno (base name: "transno")', function () {
+      expect(instance.transno).to.be(74875);
+    });
+
+    it('should have resultCode P030', function () {
+      expect(instanceWithNoIdent.result_code).to.be("P030");
+    });
+
+    it('should have the value of result equals to 3', function () {
+      expect(instanceWithNoIdent.result).to.be(3);
+    });
+  });
 
 }));

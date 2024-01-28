@@ -1,6 +1,6 @@
 /**
  * CityPay Payment API
- *  This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokinsed payments using Card Holder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive card holder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+ *  This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokenized payments using cardholder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](https://citypay.github.io/api-docs/payment-api/#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive cardholder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
  *
  * Contact: support@citypay.com
  *
@@ -42,8 +42,8 @@ export default class DirectPostApi {
      * Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
      * @param {String} uuid An identifier used to track the CReq/CRes cycle.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.cres The CRES from the ACS.
-     * @param {String} opts.three_ds_session_data The session data from the ACS.
+     * @param {String} [cres] The CRES from the ACS.
+     * @param {String} [three_ds_session_data] The session data from the ACS.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthResponse} and HTTP response
      */
     directCResAuthRequestWithHttpInfo(uuid, opts) {
@@ -99,8 +99,8 @@ export default class DirectPostApi {
      * Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
      * @param {String} uuid An identifier used to track the CReq/CRes cycle.
      * @param {Object} opts Optional parameters
-     * @param {String} opts.cres The CRES from the ACS.
-     * @param {String} opts.three_ds_session_data The session data from the ACS.
+     * @param {String} [cres] The CRES from the ACS.
+     * @param {String} [three_ds_session_data] The session data from the ACS.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/TokenisationResponseModel} and HTTP response
      */
     directCResTokeniseRequestWithHttpInfo(uuid, opts) {
@@ -173,7 +173,7 @@ export default class DirectPostApi {
       let formParams = {
       };
 
-      let authNames = ['cp-api-key', 'cp-domain-key'];
+      let authNames = ['cp-domain-key', 'cp-api-key'];
       let contentTypes = ['application/json', 'application/x-www-form-urlencoded', 'text/xml'];
       let accepts = ['application/json', 'application/xml', 'application/x-www-form-urlencoded', 'text/xml'];
       let returnType = AuthResponse;
@@ -220,7 +220,7 @@ export default class DirectPostApi {
       let formParams = {
       };
 
-      let authNames = ['cp-api-key', 'cp-domain-key'];
+      let authNames = ['cp-domain-key', 'cp-api-key'];
       let contentTypes = ['application/json', 'application/x-www-form-urlencoded', 'text/xml'];
       let accepts = ['application/json', 'application/xml', 'application/x-www-form-urlencoded', 'text/xml'];
       let returnType = AuthResponse;
@@ -267,7 +267,7 @@ export default class DirectPostApi {
       let formParams = {
       };
 
-      let authNames = ['cp-api-key', 'cp-domain-key'];
+      let authNames = ['cp-domain-key', 'cp-api-key'];
       let contentTypes = ['application/json', 'application/x-www-form-urlencoded', 'text/xml'];
       let accepts = ['application/json', 'application/xml', 'application/x-www-form-urlencoded', 'text/xml'];
       let returnType = AuthResponse;
