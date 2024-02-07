@@ -139,18 +139,9 @@ function uuidv4() {
                 const resultRequest = await request.send(content).set('Content-Type',
                     'application/json');
 
-                const cResAuthRequest = resultRequest['body'];
-
-                if (cResAuthRequest) {
-                    expect(cResAuthRequest['acsTransID']).not.to.be.empty();
-                    expect(cResAuthRequest['messageType']).not.to.be.empty();
-                    expect(cResAuthRequest['messageVersion']).not.to.be.empty();
-                    expect(cResAuthRequest['threeDSServerTransID']).not.to.be.empty();
-                    expect(cResAuthRequest['transStatus']).not.to.be.empty();
-
-                    const cResAuthRequestString = JSON.stringify(cResAuthRequest);
-
-                    const cResAuthRequestString64 = new citypay_api_client.CResAuthRequest.constructFromObject({cres: Buffer.from(cResAuthRequestString).toString('base64')});
+                const cresResponse = resultRequest['body'];
+                if (cresResponse) {
+                    const cResAuthRequestString64 = new citypay_api_client.CResAuthRequest.constructFromObject({cres: cresResponse['cres']});
 
                     const cResRequestResponse = await new citypay_api_client.AuthorisationAndPaymentApi(
                         client).cResRequest(cResAuthRequestString64);

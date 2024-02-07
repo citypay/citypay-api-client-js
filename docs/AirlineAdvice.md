@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **carrier_name** | **String** | The name of the airline carrier that generated the tickets for airline travel. | 
-**number_in_party** | **Number** | The number of people in the party. | 
 **segment1** | [**AirlineSegment**](AirlineSegment.md) |  | 
 **ticket_issue_city** | **String** | The name of the city town or village where the transaction took place. | 
 **ticket_issue_date** | **Date** | The date the ticket was issued in ISO Date format (yyyy-MM-dd). | 
@@ -15,6 +14,7 @@ Name | Type | Description | Notes
 **conjunction_ticket_indicator** | **Boolean** | true if a conjunction ticket (with additional coupons) was issued for an itinerary with more than four segments. Defaults to false.  | [optional] 
 **eticket_indicator** | **Boolean** | The Electronic Ticket Indicator, a code that indicates if an electronic ticket was issued.  Defaults to true. | [optional] 
 **no_air_segments** | **Number** | A value that indicates the number of air travel segments included on this ticket.  Valid entries include the numerals “0” through “4”. Required only if the transaction type is TKT or EXC.  | [optional] 
+**number_in_party** | **Number** | The number of people in the party. | [optional] 
 **original_ticket_no** | **String** | Required if transaction type is EXC. | [optional] 
 **passenger_name** | **String** | The name of the passenger when the traveller is not the card member that purchased the ticket. Required only if the transaction type is TKT or EXC. | [optional] 
 **segment2** | [**AirlineSegment**](AirlineSegment.md) |  | [optional] 
