@@ -5,8 +5,8 @@ All URIs are relative to *https://api.citypay.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batchProcessRequest**](BatchProcessingApi.md#batchProcessRequest) | **POST** /v6/batch/process | Batch Process Request
-[**batchRetrieveRequest**](BatchProcessingApi.md#batchRetrieveRequest) | **POST** /v6/batch/retrieve | BatchReportRequest
-[**checkBatchStatusRequest**](BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /v6/batch/status | CheckBatchStatus
+[**batchRetrieveRequest**](BatchProcessingApi.md#batchRetrieveRequest) | **POST** /v6/batch/retrieve | Batch Retrieve Request
+[**checkBatchStatusRequest**](BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /v6/batch/status | Check Batch Status
 
 
 
@@ -67,9 +67,9 @@ Name | Type | Description  | Notes
 
 > BatchReportResponseModel batchRetrieveRequest(batch_report_request)
 
-BatchReportRequest
+Batch Retrieve Request
 
-The report for a given batch.
+Obtains a batch and installment (BIS) report for a given batch id.
 
 ### Example
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 > CheckBatchStatusResponse checkBatchStatusRequest(check_batch_status)
 
-CheckBatchStatus
+Check Batch Status
 
 The operation is used to retrieve the status of a batch process.
 

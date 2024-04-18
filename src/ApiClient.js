@@ -17,7 +17,7 @@ import ApiKey from "./model/ApiKey";
 
 /**
 * @module ApiClient
-* @version 1.2.3
+* @version 1.3.0
 */
 
 /**
@@ -32,7 +32,7 @@ class ApiClient {
 
         this.config = config || {};
 
-        this.version = "1.2.3";
+        this.version = "1.3.0";
 
         /**
          * The base URL against which to resolve every API call's (relative) path.
@@ -275,23 +275,23 @@ class ApiClient {
     * @param {Object} request The request object created by a <code>superagent()</code> call.
     * @param {Array.<String>} authNames An array of authentication method names.
     */
-    applyAuthToRequest(request, authNames) {
-        authNames.forEach((authName) => {
+    async applyAuthToRequest(request, authNames) {
+        for (const authName of authNames) {
             var auth = this.authentications[authName];
             if (authName === 'cp-api-key') {
 
                 // if we have a domain key... ignore this type
                 if (this.config.domain_key) {
-                    return;
+                    continue;
                 }
 
-                auth.apiKey = new ApiKey(this.config.client_id, this.config.licence_key).generateApiKey();
+                auth.apiKey = await new ApiKey(this.config.client_id, this.config.licence_key, this.basePath).generateApiKey();
             }
 
             if (authName === 'cp-domain-key') {
 
                 if (this.config.client_id) {
-                    return;
+                    continue;
                 }
 
                 auth = {
@@ -338,7 +338,7 @@ class ApiClient {
                 default:
                     throw new Error('Unknown authentication type: ' + auth.type);
             }
-        });
+        }
     }
 
    /**
@@ -384,121 +384,120 @@ class ApiClient {
     * @param {String} apiBasePath base path defined in the operation/path level to override the default one
     * @returns {Promise} A {@link https://www.promisejs.org/|Promise} object.
     */
-    callApi(path, httpMethod, pathParams,
-        queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
-        returnType, apiBasePath) {
+   async callApi(path, httpMethod, pathParams,
+                 queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
+                 returnType, apiBasePath) {
 
-        var url = this.buildUrl(path, pathParams, apiBasePath);
-        var request = superagent(httpMethod, url);
+       var url = this.buildUrl(path, pathParams, apiBasePath);
+       var request = superagent(httpMethod, url);
 
-        if (this.plugins !== null) {
-            for (var index in this.plugins) {
-                if (this.plugins.hasOwnProperty(index)) {
-                    request.use(this.plugins[index])
-                }
-            }
-        }
+       if (this.plugins !== null) {
+           for (var index in this.plugins) {
+               if (this.plugins.hasOwnProperty(index)) {
+                   request.use(this.plugins[index])
+               }
+           }
+       }
 
-        // apply authentications
-        this.applyAuthToRequest(request, authNames);
+       // apply authentications
+       await this.applyAuthToRequest(request, authNames);
 
-        // set query parameters
-        if (httpMethod.toUpperCase() === 'GET' && this.cache === false) {
-            queryParams['_'] = new Date().getTime();
-        }
+       // set query parameters
+       if (httpMethod.toUpperCase() === 'GET' && this.cache === false) {
+           queryParams['_'] = new Date().getTime();
+       }
 
-        request.query(this.normalizeParams(queryParams));
+       request.query(this.normalizeParams(queryParams));
 
-        // set header parameters
-        request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
+       // set header parameters
+       request.set(this.defaultHeaders).set(this.normalizeParams(headerParams));
 
-        // set requestAgent if it is set by user
-        if (this.requestAgent) {
-          request.agent(this.requestAgent);
-        }
+       // set requestAgent if it is set by user
+       if (this.requestAgent) {
+           request.agent(this.requestAgent);
+       }
 
-        // set request timeout
-        request.timeout(this.timeout);
+       // set request timeout
+       request.timeout(this.timeout);
 
-        var contentType = this.jsonPreferredMime(contentTypes);
-        if (contentType) {
-            // Issue with superagent and multipart/form-data (https://github.com/visionmedia/superagent/issues/746)
-            if(contentType != 'multipart/form-data') {
-                request.type(contentType);
-            }
-        }
+       var contentType = this.jsonPreferredMime(contentTypes);
+       if (contentType) {
+           // Issue with superagent and multipart/form-data (https://github.com/visionmedia/superagent/issues/746)
+           if (contentType != 'multipart/form-data') {
+               request.type(contentType);
+           }
+       }
 
-        if (contentType === 'application/x-www-form-urlencoded') {
-            request.send(querystring.stringify(this.normalizeParams(formParams)));
-        } else if (contentType == 'multipart/form-data') {
-            var _formParams = this.normalizeParams(formParams);
-            for (var key in _formParams) {
-                if (_formParams.hasOwnProperty(key)) {
-                    if (this.isFileParam(_formParams[key])) {
-                        // file field
-                        request.attach(key, _formParams[key]);
-                    } else {
-                        request.field(key, _formParams[key]);
-                    }
-                }
-            }
-        } else if (bodyParam !== null && bodyParam !== undefined) {
-            if (!request.header['Content-Type']) {
-                request.type('application/json');
-            }
-            request.send(bodyParam);
-        }
+       if (contentType === 'application/x-www-form-urlencoded') {
+           request.send(querystring.stringify(this.normalizeParams(formParams)));
+       } else if (contentType == 'multipart/form-data') {
+           var _formParams = this.normalizeParams(formParams);
+           for (var key in _formParams) {
+               if (_formParams.hasOwnProperty(key)) {
+                   if (this.isFileParam(_formParams[key])) {
+                       // file field
+                       request.attach(key, _formParams[key]);
+                   } else {
+                       request.field(key, _formParams[key]);
+                   }
+               }
+           }
+       } else if (bodyParam !== null && bodyParam !== undefined) {
+           if (!request.header['Content-Type']) {
+               request.type('application/json');
+           }
+           request.send(bodyParam);
+       }
 
-        var accept = this.jsonPreferredMime(accepts);
-        if (accept) {
-            request.accept(accept);
-        }
+       var accept = this.jsonPreferredMime(accepts);
+       if (accept) {
+           request.accept(accept);
+       }
 
-        if (returnType === 'Blob') {
-          request.responseType('blob');
-        } else if (returnType === 'String') {
-          request.responseType('string');
-        }
+       if (returnType === 'Blob') {
+           request.responseType('blob');
+       } else if (returnType === 'String') {
+           request.responseType('string');
+       }
 
-        // Attach previously saved cookies, if enabled
-        if (this.enableCookies){
-            if (typeof window === 'undefined') {
-                this.agent._attachCookies(request);
-            }
-            else {
-                request.withCredentials();
-            }
-        }
+       // Attach previously saved cookies, if enabled
+       if (this.enableCookies) {
+           if (typeof window === 'undefined') {
+               this.agent._attachCookies(request);
+           } else {
+               request.withCredentials();
+           }
+       }
 
-        return new Promise((resolve, reject) => {
-            request.end((error, response) => {
-                if (error) {
-                    var err = {};
-                    if (response) {
-                        err.status = response.status;
-                        err.statusText = response.statusText;
-                        err.body = response.body;
-                        err.response = response;
-                    }
-                    err.error = error;
+       return new Promise((resolve, reject) => {
+           request.end((error, response) => {
+               if (error) {
+                   var err = {};
+                   if (response) {
+                       err.status = response.status;
+                       err.statusText = response.statusText;
+                       err.body = response.body;
+                       err.response = response;
+                   }
+                   err.error = error;
 
-                    reject(err);
-                } else {
-                    try {
-                        var data = this.deserialize(response, returnType);
-                        if (this.enableCookies && typeof window === 'undefined'){
-                            this.agent._saveCookies(response);
-                        }
+                   reject(err);
+               } else {
+                   try {
+                       var data = this.deserialize(response, returnType);
+                       if (this.enableCookies && typeof window === 'undefined') {
+                           this.agent._saveCookies(response);
+                       }
 
-                        resolve({data, response});
-                    } catch (err) {
-                        reject(err);
-                    }
-                }
-            });
-        });
+                       resolve({ data, response });
+                   } catch (err) {
+                       reject(err);
+                   }
+               }
+           });
+       });
 
-    }
+   }
 
     /**
     * Parses an ISO-8601 string representation of a date value.

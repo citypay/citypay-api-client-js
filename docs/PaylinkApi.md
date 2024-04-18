@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**tokenPurgeAttachmentsRequest**](PaylinkApi.md#tokenPurgeAttachmentsRequest) | **PUT** /paylink/{token}/purge-attachments | Purges any attachments for a Paylink Token
 [**tokenReconciledRequest**](PaylinkApi.md#tokenReconciledRequest) | **PUT** /paylink/{token}/reconciled | Reconcile Paylink Token
 [**tokenReopenRequest**](PaylinkApi.md#tokenReopenRequest) | **PUT** /paylink/{token}/reopen | Reopen Paylink Token
+[**tokenResendNotificationRequest**](PaylinkApi.md#tokenResendNotificationRequest) | **POST** /paylink/{token}/resend-notification | Resend a notification for Paylink Token
 [**tokenStatusRequest**](PaylinkApi.md#tokenStatusRequest) | **GET** /paylink/{token}/status | Paylink Token Status
 
 
@@ -583,6 +584,57 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
+## tokenResendNotificationRequest
+
+> Acknowledgement tokenResendNotificationRequest(token, paylink_resend_notification_request)
+
+Resend a notification for Paylink Token
+
+Resend a notification for Paylink Token.
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.PaylinkApi();
+let token = "token_example"; // String | The token returned by the create token process.
+let paylink_resend_notification_request = new CityPay.PaylinkResendNotificationRequest(); // PaylinkResendNotificationRequest | 
+apiInstance.tokenResendNotificationRequest(token, paylink_resend_notification_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token** | **String**| The token returned by the create token process. | 
+ **paylink_resend_notification_request** | [**PaylinkResendNotificationRequest**](PaylinkResendNotificationRequest.md)|  | 
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
 - **Accept**: application/json, text/xml
 
 
