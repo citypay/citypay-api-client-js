@@ -17,7 +17,7 @@ import ApiKey from "./model/ApiKey";
 
 /**
 * @module ApiClient
-* @version 1.3.0
+* @version 1.3.1
 */
 
 /**
@@ -32,7 +32,7 @@ class ApiClient {
 
         this.config = config || {};
 
-        this.version = "1.3.0";
+        this.version = "1.3.1";
 
         /**
          * The base URL against which to resolve every API call's (relative) path.
@@ -99,6 +99,11 @@ class ApiClient {
          */
         this.plugins = null;
 
+    }
+
+    withAccessToken(accessToken) {
+        this.accessToken = accessToken;
+        return this;
     }
 
     /**
@@ -276,6 +281,11 @@ class ApiClient {
     * @param {Array.<String>} authNames An array of authentication method names.
     */
     async applyAuthToRequest(request, authNames) {
+
+        if (this.accessToken) {
+            request.set({'Authorization': 'Bearer ' + this.accessToken});
+        }
+
         for (const authName of authNames) {
             var auth = this.authentications[authName];
             if (authName === 'cp-api-key') {
@@ -285,7 +295,7 @@ class ApiClient {
                     continue;
                 }
 
-                auth.apiKey = await new ApiKey(this.config.client_id, this.config.licence_key, this.basePath).generateApiKey();
+                auth.apiKey = await new ApiKey(this.config.client_id, this.config.licence_key, this.config.subject, this.basePath).generateApiKey();
             }
 
             if (authName === 'cp-domain-key') {
@@ -295,7 +305,7 @@ class ApiClient {
                 }
 
                 auth = {
-                    type: 'bearer',
+                    type: 'apiKey',
                     accessToken: this.config.domain_key
                 };
             }

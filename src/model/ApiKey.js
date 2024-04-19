@@ -4,9 +4,10 @@
 
 class ApiKey {
 
-  constructor(client_id, licence_key, host) {
+  constructor(client_id, licence_key, subject, host) {
     this.client_id = client_id;
     this.licence_key = licence_key;
+    this.subject = subject;
     this.host = host;
   }
 
@@ -14,6 +15,10 @@ class ApiKey {
     const data = {
       "clientid": this.client_id,
       "licencekey": this.licence_key
+    }
+
+    if (this.subject) {
+      data.subject = this.subject;
     }
 
     const response = await fetch(`${this.host}/v6/authenticate`, {
