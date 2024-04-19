@@ -101,6 +101,11 @@ class ApiClient {
 
     }
 
+    withAccessToken(accessToken) {
+        this.accessToken = accessToken;
+        return this;
+    }
+
     /**
     * Returns a string representation for an actual parameter.
     * @param param The actual parameter.
@@ -276,6 +281,11 @@ class ApiClient {
     * @param {Array.<String>} authNames An array of authentication method names.
     */
     async applyAuthToRequest(request, authNames) {
+
+        if (this.accessToken) {
+            request.set({'Authorization': 'Bearer ' + this.accessToken});
+        }
+
         for (const authName of authNames) {
             var auth = this.authentications[authName];
             if (authName === 'cp-api-key') {
@@ -285,7 +295,7 @@ class ApiClient {
                     continue;
                 }
 
-                auth.apiKey = await new ApiKey(this.config.client_id, this.config.licence_key, this.basePath).generateApiKey();
+                auth.apiKey = await new ApiKey(this.config.client_id, this.config.licence_key, this.config.subject, this.basePath).generateApiKey();
             }
 
             if (authName === 'cp-domain-key') {
@@ -295,7 +305,7 @@ class ApiClient {
                 }
 
                 auth = {
-                    type: 'bearer',
+                    type: 'apiKey',
                     accessToken: this.config.domain_key
                 };
             }

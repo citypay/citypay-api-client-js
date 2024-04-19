@@ -39,9 +39,12 @@ function uuidv4() {
         client = new citypay_api_client.ApiClient({
             "sandbox": true,
             "client_id": client_id,
-            "licence_key": licence_key
+            "licence_key": licence_key,
+            // "subject": subject
             // "domain_key": "xyz..."
         });
+        // .withAccessToken("....")
+
     });
 
 
