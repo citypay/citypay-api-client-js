@@ -1,37 +1,43 @@
 # citypay-api
 
-[![Build Status](https://github.com/citypay/citypay-api-client-js/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/citypay/citypay-api-client-js/actions/workflows/npm-publish.yml)
 Citypay Api Client - JavaScript client for citypay-api
 
-This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It
-provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing,
-3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and
-Completion processing. The API is also capable of tokenized payments using cardholder Accounts.
+Welcome to the CityPay API, a robust HTTP API payment solution designed for seamless server-to-server 
+transactional processing. Our API facilitates a wide array of payment operations, catering to diverse business needs. 
+Whether you're integrating Internet payments, handling Mail Order/Telephone Order (MOTO) transactions, managing 
+Subscriptions with Recurring and Continuous Authority payments, or navigating the complexities of 3-D Secure 
+authentication, our API is equipped to support your requirements. Additionally, we offer functionalities for 
+Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids, and Completion processing, alongside the capability 
+for tokenised payments.
 
-## Compliance and Security
-Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by 
-Visa and MasterCard and the PCI Security Standards Council. These include
+## Compliance and Security Overview
+<aside class=\"notice\">
+  Ensuring the security of payment transactions and compliance with industry standards is paramount. Our API is 
+  designed with stringent security measures and compliance protocols to safeguard sensitive information and meet 
+  the rigorous requirements of Visa, MasterCard, and the PCI Security Standards Council.
+</aside>
 
-* Data must be collected using TLS version 1.2 using [strong cryptography](https://citypay.github.io/api-docs/payment-api/#enabled-tls-ciphers). We will not accept calls to our API at
-  lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments
-  as part of our compliance program.
-* The application must not store sensitive cardholder data (CHD) such as the card security code (CSC) or
-  primary access number (PAN)
-* The application must not display the full card number on receipts, it is recommended to mask the PAN
-  and show the last 4 digits. The API will return this for you for ease of receipt creation
-* If you are developing a website, you will be required to perform regular scans on the network where you host the
-  application to meet your compliance obligations
-* You will be required to be PCI Compliant and the application must adhere to the security standard. Further information
-  is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/)
-* The API verifies that the request is for a valid account and originates from a trusted source using the remote IP
-  address. Our application firewalls analyse data that may be an attempt to break a large number of security common
-  security vulnerabilities.
+### Key Compliance and Security Measures
+
+* **TLS Encryption**: All data transmissions must utilise TLS version 1.2 or higher, employing [strong cryptography](#enabled-tls-ciphers). Our infrastructure strictly enforces this requirement to maintain the integrity and confidentiality of data in transit. We conduct regular scans and assessments of our TLS endpoints to identify and mitigate vulnerabilities.
+* **Data Storage Prohibitions**: Storing sensitive cardholder data (CHD), such as the card security code (CSC) or primary account number (PAN), is strictly prohibited. Our API is designed to minimize your exposure to sensitive data, thereby reducing your compliance burden.
+* **Data Masking**: For consumer protection and compliance, full card numbers must not be displayed on receipts or any customer-facing materials. Our API automatically masks PANs, displaying only the last four digits to facilitate safe receipt generation.
+* **Network Scans**: If your application is web-based, regular scans of your hosting environment are mandatory to identify and rectify potential vulnerabilities. This proactive measure is crucial for maintaining a secure and compliant online presence.
+* **PCI Compliance**: Adherence to PCI DSS standards is not optional; it's a requirement for operating securely and legally in the payments ecosystem. For detailed information on compliance requirements and resources, please visit the PCI Security Standards Council website [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/).
+* **Request Validation**: Our API includes mechanisms to verify the legitimacy of each request, ensuring it pertains to a valid account and originates from a trusted source. We leverage remote IP address verification alongside sophisticated application firewall technologies to thwart a wide array of common security threats.
+
+## Getting Started
+Before integrating with the CityPay API, ensure your application and development practices align with the outlined compliance and security measures. This preparatory step is crucial for a smooth integration process and the long-term success of your payment processing operations.
+
+For further details on API endpoints, request/response formats, and code examples, proceed to the subsequent sections of our documentation. Our aim is to provide you with all the necessary tools and information to integrate our payment processing capabilities seamlessly into your application.
+
+Thank you for choosing CityPay API. We look forward to supporting your payment processing needs with our secure, compliant, and versatile API solution.
 
 This SDK is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: 6.6.23
-- Package version: 1.2.3
-- Build date: 2024-01-25T13:04:21.931808711Z[Etc/UTC]
+- API version: 6.6.34
+- Package version: 1.3.0
+- Build date: 2024-04-18T15:27:31.535191765Z[Etc/UTC]
 - Build package: org.openapitools.codegen.languages.JavascriptClientCodegen
 For more information, please visit [https://www.citypay.com/contacts/](https://www.citypay.com/contacts/)
 
@@ -147,13 +153,14 @@ Class | Method | HTTP request | Description
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**binRangeLookupRequest**](docs/AuthorisationAndPaymentApi.md#binRangeLookupRequest) | **POST** /v6/bin | Bin Lookup
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**cResRequest**](docs/AuthorisationAndPaymentApi.md#cResRequest) | **POST** /v6/cres | CRes
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**captureRequest**](docs/AuthorisationAndPaymentApi.md#captureRequest) | **POST** /v6/capture | Capture
+*Citypay Api Client.AuthorisationAndPaymentApi* | [**createPaymentIntent**](docs/AuthorisationAndPaymentApi.md#createPaymentIntent) | **POST** /v6/intent/create | Create a Payment Intent
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**paResRequest**](docs/AuthorisationAndPaymentApi.md#paResRequest) | **POST** /v6/pares | PaRes
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**refundRequest**](docs/AuthorisationAndPaymentApi.md#refundRequest) | **POST** /v6/refund | Refund
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**retrievalRequest**](docs/AuthorisationAndPaymentApi.md#retrievalRequest) | **POST** /v6/retrieve | Retrieval
 *Citypay Api Client.AuthorisationAndPaymentApi* | [**voidRequest**](docs/AuthorisationAndPaymentApi.md#voidRequest) | **POST** /v6/void | Void
 *Citypay Api Client.BatchProcessingApi* | [**batchProcessRequest**](docs/BatchProcessingApi.md#batchProcessRequest) | **POST** /v6/batch/process | Batch Process Request
-*Citypay Api Client.BatchProcessingApi* | [**batchRetrieveRequest**](docs/BatchProcessingApi.md#batchRetrieveRequest) | **POST** /v6/batch/retrieve | BatchReportRequest
-*Citypay Api Client.BatchProcessingApi* | [**checkBatchStatusRequest**](docs/BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /v6/batch/status | CheckBatchStatus
+*Citypay Api Client.BatchProcessingApi* | [**batchRetrieveRequest**](docs/BatchProcessingApi.md#batchRetrieveRequest) | **POST** /v6/batch/retrieve | Batch Retrieve Request
+*Citypay Api Client.BatchProcessingApi* | [**checkBatchStatusRequest**](docs/BatchProcessingApi.md#checkBatchStatusRequest) | **POST** /v6/batch/status | Check Batch Status
 *Citypay Api Client.CardHolderAccountApi* | [**accountCardDeleteRequest**](docs/CardHolderAccountApi.md#accountCardDeleteRequest) | **DELETE** /v6/account/{accountid}/card/{cardId} | Card Deletion
 *Citypay Api Client.CardHolderAccountApi* | [**accountCardRegisterRequest**](docs/CardHolderAccountApi.md#accountCardRegisterRequest) | **POST** /v6/account/{accountid}/register | Card Registration
 *Citypay Api Client.CardHolderAccountApi* | [**accountCardStatusRequest**](docs/CardHolderAccountApi.md#accountCardStatusRequest) | **POST** /v6/account/{accountid}/card/{cardId}/status | Card Status
@@ -182,7 +189,13 @@ Class | Method | HTTP request | Description
 *Citypay Api Client.PaylinkApi* | [**tokenPurgeAttachmentsRequest**](docs/PaylinkApi.md#tokenPurgeAttachmentsRequest) | **PUT** /paylink/{token}/purge-attachments | Purges any attachments for a Paylink Token
 *Citypay Api Client.PaylinkApi* | [**tokenReconciledRequest**](docs/PaylinkApi.md#tokenReconciledRequest) | **PUT** /paylink/{token}/reconciled | Reconcile Paylink Token
 *Citypay Api Client.PaylinkApi* | [**tokenReopenRequest**](docs/PaylinkApi.md#tokenReopenRequest) | **PUT** /paylink/{token}/reopen | Reopen Paylink Token
+*Citypay Api Client.PaylinkApi* | [**tokenResendNotificationRequest**](docs/PaylinkApi.md#tokenResendNotificationRequest) | **POST** /paylink/{token}/resend-notification | Resend a notification for Paylink Token
 *Citypay Api Client.PaylinkApi* | [**tokenStatusRequest**](docs/PaylinkApi.md#tokenStatusRequest) | **GET** /paylink/{token}/status | Paylink Token Status
+*Citypay Api Client.ReportingApi* | [**batchedTransactionReportRequest**](docs/ReportingApi.md#batchedTransactionReportRequest) | **POST** /v6/merchant-batch/{merchantid}/{batch_no}/transactions | Batch Transaction Report Request
+*Citypay Api Client.ReportingApi* | [**merchantBatchReportRequest**](docs/ReportingApi.md#merchantBatchReportRequest) | **POST** /v6/merchant-batch/report | Merchant Batch Report Request
+*Citypay Api Client.ReportingApi* | [**merchantBatchRequest**](docs/ReportingApi.md#merchantBatchRequest) | **GET** /v6/merchant-batch/{merchantid}/{batch_no} | Merchant Batch Request
+*Citypay Api Client.ReportingApi* | [**remittanceRangeReport**](docs/ReportingApi.md#remittanceRangeReport) | **POST** /v6/remittance/report/{clientid} | Remittance Report Request
+*Citypay Api Client.ReportingApi* | [**remittanceReportRequest**](docs/ReportingApi.md#remittanceReportRequest) | **GET** /v6/remittance/report/{clientid}/{date} | Remittance Date Report Request
 
 
 ## Documentation for Models
@@ -203,6 +216,8 @@ Class | Method | HTTP request | Description
  - [Citypay Api Client.BatchReportRequest](docs/BatchReportRequest.md)
  - [Citypay Api Client.BatchReportResponseModel](docs/BatchReportResponseModel.md)
  - [Citypay Api Client.BatchTransaction](docs/BatchTransaction.md)
+ - [Citypay Api Client.BatchTransactionReportRequest](docs/BatchTransactionReportRequest.md)
+ - [Citypay Api Client.BatchTransactionReportResponse](docs/BatchTransactionReportResponse.md)
  - [Citypay Api Client.BatchTransactionResultModel](docs/BatchTransactionResultModel.md)
  - [Citypay Api Client.Bin](docs/Bin.md)
  - [Citypay Api Client.BinLookup](docs/BinLookup.md)
@@ -228,6 +243,10 @@ Class | Method | HTTP request | Description
  - [Citypay Api Client.ListMerchantsResponse](docs/ListMerchantsResponse.md)
  - [Citypay Api Client.MCC6012](docs/MCC6012.md)
  - [Citypay Api Client.Merchant](docs/Merchant.md)
+ - [Citypay Api Client.MerchantBatchReportResponse](docs/MerchantBatchReportResponse.md)
+ - [Citypay Api Client.MerchantBatchRequest](docs/MerchantBatchRequest.md)
+ - [Citypay Api Client.MerchantBatchResponse](docs/MerchantBatchResponse.md)
+ - [Citypay Api Client.NetSummaryResponse](docs/NetSummaryResponse.md)
  - [Citypay Api Client.PaResAuthRequest](docs/PaResAuthRequest.md)
  - [Citypay Api Client.PaylinkAddress](docs/PaylinkAddress.md)
  - [Citypay Api Client.PaylinkAdjustmentRequest](docs/PaylinkAdjustmentRequest.md)
@@ -243,6 +262,7 @@ Class | Method | HTTP request | Description
  - [Citypay Api Client.PaylinkErrorCode](docs/PaylinkErrorCode.md)
  - [Citypay Api Client.PaylinkFieldGuardModel](docs/PaylinkFieldGuardModel.md)
  - [Citypay Api Client.PaylinkPartPayments](docs/PaylinkPartPayments.md)
+ - [Citypay Api Client.PaylinkResendNotificationRequest](docs/PaylinkResendNotificationRequest.md)
  - [Citypay Api Client.PaylinkSMSNotificationPath](docs/PaylinkSMSNotificationPath.md)
  - [Citypay Api Client.PaylinkStateEvent](docs/PaylinkStateEvent.md)
  - [Citypay Api Client.PaylinkTokenCreated](docs/PaylinkTokenCreated.md)
@@ -251,11 +271,17 @@ Class | Method | HTTP request | Description
  - [Citypay Api Client.PaylinkTokenStatusChangeRequest](docs/PaylinkTokenStatusChangeRequest.md)
  - [Citypay Api Client.PaylinkTokenStatusChangeResponse](docs/PaylinkTokenStatusChangeResponse.md)
  - [Citypay Api Client.PaylinkUI](docs/PaylinkUI.md)
+ - [Citypay Api Client.PaymentIntent](docs/PaymentIntent.md)
+ - [Citypay Api Client.PaymentIntentReference](docs/PaymentIntentReference.md)
  - [Citypay Api Client.Ping](docs/Ping.md)
  - [Citypay Api Client.ProcessBatchRequest](docs/ProcessBatchRequest.md)
  - [Citypay Api Client.ProcessBatchResponse](docs/ProcessBatchResponse.md)
  - [Citypay Api Client.RefundRequest](docs/RefundRequest.md)
  - [Citypay Api Client.RegisterCard](docs/RegisterCard.md)
+ - [Citypay Api Client.RemittanceData](docs/RemittanceData.md)
+ - [Citypay Api Client.RemittanceReportRequest](docs/RemittanceReportRequest.md)
+ - [Citypay Api Client.RemittanceReportResponse](docs/RemittanceReportResponse.md)
+ - [Citypay Api Client.RemittedClientData](docs/RemittedClientData.md)
  - [Citypay Api Client.RequestChallenged](docs/RequestChallenged.md)
  - [Citypay Api Client.RetrieveRequest](docs/RetrieveRequest.md)
  - [Citypay Api Client.ThreeDSecure](docs/ThreeDSecure.md)
