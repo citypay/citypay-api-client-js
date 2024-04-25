@@ -27,30 +27,6 @@
 
     describe('Decision', function () {
 
-
-        it('should have the property authen_required (base name: "AuthenRequired")', function () {
-            let json = {
-                "AuthenRequired": {
-                    "acs_url": "https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B",
-                    "md": "0000000000000000000022",
-                    "pareq": "eJxVUm1v2yAQ/itWv8dg/B5dmJyfw=="
-                }
-            }
-            let decision = new citypay_api_client.ApiClient.instance.deserialize({
-                status: 200,
-                body: json
-            }, citypay_api_client.Decision);
-
-            expect(decision['AuthenRequired']).to.be.a(citypay_api_client.AuthenRequired);
-            expect(decision.hasOwnProperty('AuthResponse')).to.be(false);
-            expect(decision.hasOwnProperty('RequestChallenged')).to.be(false);
-
-            let ar = decision.AuthenRequired;
-            expect(ar.acs_url).to.be("https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B");
-            expect(ar.md).to.be("0000000000000000000022");
-            expect(ar.pareq).to.be("eJxVUm1v2yAQ/itWv8dg/B5dmJyfw==");
-        });
-
         it('should have the property auth_response (base name: "AuthResponse")', function () {
             let json = {
                 "AuthResponse": {

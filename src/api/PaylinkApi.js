@@ -97,6 +97,54 @@ export default class PaylinkApi {
 
 
     /**
+     * Cancel a Paylink Token
+     * Marks a Paylink Token as cancelled. This cancels the Token for any future request for processing.
+     * @param {String} token The token returned by the create token process.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
+     */
+    tokenCancelRequestWithHttpInfo(token) {
+      let postBody = null;
+      // verify the required parameter 'token' is set
+      if (token === undefined || token === null) {
+        throw new Error("Missing the required parameter 'token' when calling tokenCancelRequest");
+      }
+
+      let pathParams = {
+        'token': token
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = [];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Acknowledgement;
+      return this.apiClient.callApi(
+        '/paylink/{token}/cancel', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Cancel a Paylink Token
+     * Marks a Paylink Token as cancelled. This cancels the Token for any future request for processing.
+     * @param {String} token The token returned by the create token process.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
+     */
+    tokenCancelRequest(token) {
+      return this.tokenCancelRequestWithHttpInfo(token)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Paylink Token Audit
      * Allows for the changes to a pre-existing token.
      * @param {module:model/PaylinkTokenStatusChangeRequest} paylink_token_status_change_request 

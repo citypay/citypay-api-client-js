@@ -18,10 +18,7 @@ Method | HTTP request | Description
 
 Handles a CRes response from ACS, returning back the result of authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
-value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
-perform a `Direct Post` integration who wish to handle the challenge flow themselves.
-
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid &#x60;threeDSSessionData&#x60; value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a &#x60;Direct Post&#x60; integration who wish to handle the challenge flow themselves. 
 
 ### Example
 
@@ -71,10 +68,7 @@ No authorization required
 
 Handles a CRes response from ACS, returning back a token for future authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
-value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
-perform a `Direct Post` integration who wish to handle the challenge flow themselves.
-
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid &#x60;threeDSSessionData&#x60; value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a &#x60;Direct Post&#x60; integration who wish to handle the challenge flow themselves. 
 
 ### Example
 
@@ -124,15 +118,7 @@ No authorization required
 
 Direct Post Auth Request
 
-Used to initiate a direct post request transaction flow.
-
-<pre class="inline-code language-bash">
-<code>
-curl https://api.citypay.com/direct/auth?cp-domain-key=n834ytqp84y... \
- -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
-</code>
-</pre>.
-
+Used to initiate a direct post request transaction flow. 
 
 ### Example
 
@@ -185,15 +171,7 @@ Name | Type | Description  | Notes
 
 Direct Post Tokenise Request
 
-Used to initiate a direct post request transaction flow.
-
-<pre class="inline-code language-bash">
-<code>
-curl https://api.citypay.com/v6/direct?cp-domain-key=n834ytqp84y... \
- -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
-</code>
-</pre>.
-
+Used to initiate a direct post request transaction flow. 
 
 ### Example
 
@@ -246,9 +224,7 @@ Name | Type | Description  | Notes
 
 Direct Post Token Request
 
-Perform a request for authorisation for a previously generated token. This flow will return an authorisation
-response stating that the transaction was approved or declined.
-
+Perform a request for authorisation for a previously generated token. This flow will return an authorisation response stating that the transaction was approved or declined. 
 
 ### Example
 

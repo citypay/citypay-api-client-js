@@ -13,19 +13,17 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The PaylinkAttachmentResult model module.
- * @module model/PaylinkAttachmentResult
+ * The MerchantBatchReportRequest model module.
+ * @module model/MerchantBatchReportRequest
  */
-class PaylinkAttachmentResult {
+class MerchantBatchReportRequest {
     /**
-     * Constructs a new <code>PaylinkAttachmentResult</code>.
-     * @alias module:model/PaylinkAttachmentResult
-     * @param name {String} The name of the attachment.
-     * @param result {String} The result of an uploaded attachment such as `OK` or `UPLOAD`.
+     * Constructs a new <code>MerchantBatchReportRequest</code>.
+     * @alias module:model/MerchantBatchReportRequest
      */
-    constructor(name, result) { 
+    constructor() { 
         
-        PaylinkAttachmentResult.initialize(this, name, result);
+        MerchantBatchReportRequest.initialize(this);
     }
 
     /**
@@ -33,58 +31,59 @@ class PaylinkAttachmentResult {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, name, result) { 
-        obj['name'] = name;
-        obj['result'] = result;
+    static initialize(obj) { 
     }
 
     /**
-     * Constructs a <code>PaylinkAttachmentResult</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>MerchantBatchReportRequest</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/PaylinkAttachmentResult} obj Optional instance to populate.
-     * @return {module:model/PaylinkAttachmentResult} The populated <code>PaylinkAttachmentResult</code> instance.
+     * @param {module:model/MerchantBatchReportRequest} obj Optional instance to populate.
+     * @return {module:model/MerchantBatchReportRequest} The populated <code>MerchantBatchReportRequest</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new PaylinkAttachmentResult();
+            obj = obj || new MerchantBatchReportRequest();
 
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            if (data.hasOwnProperty('date_from')) {
+                obj['date_from'] = ApiClient.convertToType(data['date_from'], 'Date');
             }
-            if (data.hasOwnProperty('result')) {
-                obj['result'] = ApiClient.convertToType(data['result'], 'String');
+            if (data.hasOwnProperty('date_until')) {
+                obj['date_until'] = ApiClient.convertToType(data['date_until'], 'Date');
             }
-            if (data.hasOwnProperty('url')) {
-                obj['url'] = ApiClient.convertToType(data['url'], 'String');
+            if (data.hasOwnProperty('maxResults')) {
+                obj['maxResults'] = ApiClient.convertToType(data['maxResults'], 'Number');
+            }
+            if (data.hasOwnProperty('merchant_id')) {
+                obj['merchant_id'] = ApiClient.convertToType(data['merchant_id'], ['Number']);
+            }
+            if (data.hasOwnProperty('nextToken')) {
+                obj['nextToken'] = ApiClient.convertToType(data['nextToken'], 'String');
+            }
+            if (data.hasOwnProperty('orderBy')) {
+                obj['orderBy'] = ApiClient.convertToType(data['orderBy'], 'String');
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>PaylinkAttachmentResult</code>.
+     * Validates the JSON data with respect to <code>MerchantBatchReportRequest</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaylinkAttachmentResult</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>MerchantBatchReportRequest</code>.
      */
     static validateJSON(data) {
-        // check to make sure all required properties are present in the JSON string
-        for (const property of PaylinkAttachmentResult.RequiredProperties) {
-            if (!data.hasOwnProperty(property)) {
-                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
-            }
+        // ensure the json data is an array
+        if (!Array.isArray(data['merchant_id'])) {
+            throw new Error("Expected the field `merchant_id` to be an array in the JSON data but got " + data['merchant_id']);
         }
         // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        if (data['nextToken'] && !(typeof data['nextToken'] === 'string' || data['nextToken'] instanceof String)) {
+            throw new Error("Expected the field `nextToken` to be a primitive type in the JSON string but got " + data['nextToken']);
         }
         // ensure the json data is a string
-        if (data['result'] && !(typeof data['result'] === 'string' || data['result'] instanceof String)) {
-            throw new Error("Expected the field `result` to be a primitive type in the JSON string but got " + data['result']);
-        }
-        // ensure the json data is a string
-        if (data['url'] && !(typeof data['url'] === 'string' || data['url'] instanceof String)) {
-            throw new Error("Expected the field `url` to be a primitive type in the JSON string but got " + data['url']);
+        if (data['orderBy'] && !(typeof data['orderBy'] === 'string' || data['orderBy'] instanceof String)) {
+            throw new Error("Expected the field `orderBy` to be a primitive type in the JSON string but got " + data['orderBy']);
         }
 
         return true;
@@ -93,30 +92,47 @@ class PaylinkAttachmentResult {
 
 }
 
-PaylinkAttachmentResult.RequiredProperties = ["name", "result"];
+
 
 /**
- * The name of the attachment.
- * @member {String} name
+ * Start date (YYYY-MM-DD) for batch retrieval range, inclusive. Maximum value is 3 years ago.
+ * @member {Date} date_from
  */
-PaylinkAttachmentResult.prototype['name'] = undefined;
+MerchantBatchReportRequest.prototype['date_from'] = undefined;
 
 /**
- * The result of an uploaded attachment such as `OK` or `UPLOAD`.
- * @member {String} result
+ * End date (YYYY-MM-DD) for batch retrieval range, inclusive.
+ * @member {Date} date_until
  */
-PaylinkAttachmentResult.prototype['result'] = undefined;
+MerchantBatchReportRequest.prototype['date_until'] = undefined;
 
 /**
- * If the attachment is to be uploaded, a URL that can be used for Multipart upload of the attachment.
- * @member {String} url
+ * The maximum number of results to return in a single response. This value is used to limit the size of data returned by the API, enhancing performance and manageability. Values should be between 5 and 250.
+ * @member {Number} maxResults
  */
-PaylinkAttachmentResult.prototype['url'] = undefined;
+MerchantBatchReportRequest.prototype['maxResults'] = undefined;
+
+/**
+ * @member {Array.<Number>} merchant_id
+ */
+MerchantBatchReportRequest.prototype['merchant_id'] = undefined;
+
+/**
+ * A token that identifies the starting point of the page of results to be returned. An empty value indicates the start of the dataset. When supplied, it is validated and used to fetch the subsequent page of results. This token is typically obtained from the response of a previous pagination request.
+ * @member {String} nextToken
+ */
+MerchantBatchReportRequest.prototype['nextToken'] = undefined;
+
+/**
+ * Specifies the field by which results are ordered. Available fields are [merchant_id,batch_no,net_amount]. By default, fields are ordered by OrderByExpression(merchant_id,ASC),OrderByExpression(batch_no,ASC). To order in descending order, prefix with '-' or suffix with ' DESC'.
+ * @member {String} orderBy
+ */
+MerchantBatchReportRequest.prototype['orderBy'] = undefined;
 
 
 
 
 
 
-export default PaylinkAttachmentResult;
+export default MerchantBatchReportRequest;
 

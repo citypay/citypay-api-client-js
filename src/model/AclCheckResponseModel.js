@@ -107,7 +107,7 @@ AclCheckResponseModel.prototype['cache'] = undefined;
 AclCheckResponseModel.prototype['ip'] = undefined;
 
 /**
- * The source provider of the ACL.
+ * The source provider of the ACL such as cloud, subnet, country or IP based.
  * @member {String} provider
  */
 AclCheckResponseModel.prototype['provider'] = undefined;
