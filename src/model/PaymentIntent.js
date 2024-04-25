@@ -81,7 +81,7 @@ class PaymentIntent {
                 obj['ship_to'] = ContactDetails.constructFromObject(data['ship_to']);
             }
             if (data.hasOwnProperty('tag')) {
-                obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
+                obj['tag'] = ApiClient.convertToType(data['tag'], ['String']);
             }
             if (data.hasOwnProperty('trans_info')) {
                 obj['trans_info'] = ApiClient.convertToType(data['trans_info'], 'String');
@@ -101,7 +101,7 @@ class PaymentIntent {
     static validateJSON(data) {
         // check to make sure all required properties are present in the JSON string
         for (const property of PaymentIntent.RequiredProperties) {
-            if (!data[property]) {
+            if (!data.hasOwnProperty(property)) {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
@@ -141,9 +141,9 @@ class PaymentIntent {
         if (data['ship_to']) { // data not null
           ContactDetails.validateJSON(data['ship_to']);
         }
-        // ensure the json data is a string
-        if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
-            throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
+        // ensure the json data is an array
+        if (!Array.isArray(data['tag'])) {
+            throw new Error("Expected the field `tag` to be an array in the JSON data but got " + data['tag']);
         }
         // ensure the json data is a string
         if (data['trans_info'] && !(typeof data['trans_info'] === 'string' || data['trans_info'] instanceof String)) {
@@ -175,7 +175,7 @@ PaymentIntent.prototype['amount'] = undefined;
 PaymentIntent.prototype['identifier'] = undefined;
 
 /**
- * A policy value which determines whether an AVS postcode policy is enforced or bypassed.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS postcode numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the postcode did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send postcode details for authorisation. 
+ * A policy value which determines whether an AVS postcode policy is enforced or bypassed.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS postcode numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the postcode did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send postcode details for authorisation. 
  * @member {String} avs_postcode_policy
  */
 PaymentIntent.prototype['avs_postcode_policy'] = undefined;
@@ -186,13 +186,13 @@ PaymentIntent.prototype['avs_postcode_policy'] = undefined;
 PaymentIntent.prototype['bill_to'] = undefined;
 
 /**
- * The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify posession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
+ * The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify possession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
  * @member {String} csc
  */
 PaymentIntent.prototype['csc'] = undefined;
 
 /**
- * A policy value which determines whether a CSC policy is enforced or bypassed.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the CSC value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the CSC did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send the CSC details for authorisation. 
+ * A policy value which determines whether a CSC policy is enforced or bypassed.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the CSC value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the CSC did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send the CSC details for authorisation. 
  * @member {String} csc_policy
  */
 PaymentIntent.prototype['csc_policy'] = undefined;
@@ -204,13 +204,13 @@ PaymentIntent.prototype['csc_policy'] = undefined;
 PaymentIntent.prototype['currency'] = undefined;
 
 /**
- * A policy value which determines whether a duplication policy is enforced or bypassed. A duplication check has a window of time set against your account within which it can action. If a previous transaction with matching values occurred within the window, any subsequent transaction will result in a T001 result.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be checked for duplication within the duplication window.   `2` to bypass. Transactions that are bypassed will not be checked for duplication within the duplication window.   `3` to ignore. Transactions that are ignored will have the same affect as bypass. 
+ * A policy value which determines whether a duplication policy is enforced or bypassed. A duplication check has a window of time set against your account within which it can action. If a previous transaction with matching values occurred within the window, any subsequent transaction will result in a T001 result.  Values are   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be checked for duplication within the duplication window.   `2` to bypass. Transactions that are bypassed will not be checked for duplication within the duplication window.   `3` to ignore. Transactions that are ignored will have the same affect as bypass. 
  * @member {String} duplicate_policy
  */
 PaymentIntent.prototype['duplicate_policy'] = undefined;
 
 /**
- * A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
+ * A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
  * @member {String} match_avsa
  */
 PaymentIntent.prototype['match_avsa'] = undefined;
@@ -221,8 +221,7 @@ PaymentIntent.prototype['match_avsa'] = undefined;
 PaymentIntent.prototype['ship_to'] = undefined;
 
 /**
- * A \"tag\" is a label that you can attach to a payment authorization. Tags can help you group transactions together based on certain criteria, like a work job or a ticket number. They can also assist in filtering transactions when you're generating reports.  Multiple Tags You can add more than one tag to a transaction by separating them with commas.  Limitations There is a maximum limit of 3 tags that can be added to a single transaction. Each tag can be no longer than 20 characters and alphanumeric with no spaces.  Example: Let's say you're a software company and you have different teams working on various projects. When a team makes a purchase or incurs an expense, they can tag the transaction with the project name, the team name, and the type of expense.  Project Name: Project_X Team Name: Team_A Type of Expense: Hardware So, the tag for a transaction might look like: Project_X,Team_A,Hardware  This way, when you're looking at your financial reports, you can easily filter transactions based on these tags to see how much each project or team is spending on different types of expenses. 
- * @member {String} tag
+ * @member {Array.<String>} tag
  */
 PaymentIntent.prototype['tag'] = undefined;
 

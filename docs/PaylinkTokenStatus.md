@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **is_validated** | **Boolean** | whether the token generation was successfully validated. | [optional] 
 **last_event_date_time** | **Date** | the date and time that the session last had an event actioned against it. | [optional] 
 **last_payment_result** | **String** | the result of the last payment if one exists. | [optional] 
-**mid** | **String** | identifies the merchant account. | [optional] 
+**mid** | **Number** | identifies the merchant account. | [optional] 
 **payment_attempts_count** | **Number** | the number of attempts made to pay. | [optional] 
 **state_history** | [**[PaylinkStateEvent]**](PaylinkStateEvent.md) |  | [optional] 
 **token** | **String** | the token value which uniquely identifies the session. | [optional] 

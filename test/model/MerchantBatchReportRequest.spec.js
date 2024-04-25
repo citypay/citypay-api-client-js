@@ -10,85 +10,85 @@
  *
  */
 
-import ApiClient from '../ApiClient';
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD.
+    define(['expect.js', process.cwd()+'/src/index'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    factory(require('expect.js'), require(process.cwd()+'/src/index'));
+  } else {
+    // Browser globals (root is window)
+    factory(root.expect, root.citypay_api_client);
+  }
+}(this, function(expect, citypay_api_client) {
+  'use strict';
 
-/**
- * The AclCheckRequest model module.
- * @module model/AclCheckRequest
- */
-class AclCheckRequest {
-    /**
-     * Constructs a new <code>AclCheckRequest</code>.
-     * @alias module:model/AclCheckRequest
-     * @param ip {String} An ip address to check for an ACL against. The address should be a publicly routable IPv4 address.
-     */
-    constructor(ip) { 
-        
-        AclCheckRequest.initialize(this, ip);
-    }
+  var instance;
 
-    /**
-     * Initializes the fields of this object.
-     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
-     * Only for internal use.
-     */
-    static initialize(obj, ip) { 
-        obj['ip'] = ip;
-    }
+  beforeEach(function() {
+    // instance = new Citypay Api Client.MerchantBatchReportRequest();
+  });
 
-    /**
-     * Constructs a <code>AclCheckRequest</code> from a plain JavaScript object, optionally creating a new instance.
-     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
-     * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/AclCheckRequest} obj Optional instance to populate.
-     * @return {module:model/AclCheckRequest} The populated <code>AclCheckRequest</code> instance.
-     */
-    static constructFromObject(data, obj) {
-        if (data) {
-            obj = obj || new AclCheckRequest();
+  var getProperty = function(object, getter, property) {
+    // Use getter method if present; otherwise, get the property directly.
+    if (typeof object[getter] === 'function')
+      return object[getter]();
+    else
+      return object[property];
+  }
 
-            if (data.hasOwnProperty('ip')) {
-                obj['ip'] = ApiClient.convertToType(data['ip'], 'String');
-            }
-        }
-        return obj;
-    }
+  var setProperty = function(object, setter, property, value) {
+    // Use setter method if present; otherwise, set the property directly.
+    if (typeof object[setter] === 'function')
+      object[setter](value);
+    else
+      object[property] = value;
+  }
 
-    /**
-     * Validates the JSON data with respect to <code>AclCheckRequest</code>.
-     * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AclCheckRequest</code>.
-     */
-    static validateJSON(data) {
-        // check to make sure all required properties are present in the JSON string
-        for (const property of AclCheckRequest.RequiredProperties) {
-            if (!data.hasOwnProperty(property)) {
-                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
-            }
-        }
-        // ensure the json data is a string
-        if (data['ip'] && !(typeof data['ip'] === 'string' || data['ip'] instanceof String)) {
-            throw new Error("Expected the field `ip` to be a primitive type in the JSON string but got " + data['ip']);
-        }
+  describe('MerchantBatchReportRequest', function() {
+    it('should create an instance of MerchantBatchReportRequest', function() {
+      // uncomment below and update the code to test MerchantBatchReportRequest
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be.a(Citypay Api Client.MerchantBatchReportRequest);
+    });
 
-        return true;
-    }
+    it('should have the property date_from (base name: "date_from")', function() {
+      // uncomment below and update the code to test the property date_from
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
+    it('should have the property date_until (base name: "date_until")', function() {
+      // uncomment below and update the code to test the property date_until
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
-}
+    it('should have the property max_results (base name: "maxResults")', function() {
+      // uncomment below and update the code to test the property max_results
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
-AclCheckRequest.RequiredProperties = ["ip"];
+    it('should have the property merchant_id (base name: "merchant_id")', function() {
+      // uncomment below and update the code to test the property merchant_id
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
-/**
- * An ip address to check for an ACL against. The address should be a publicly routable IPv4 address.
- * @member {String} ip
- */
-AclCheckRequest.prototype['ip'] = undefined;
+    it('should have the property next_token (base name: "nextToken")', function() {
+      // uncomment below and update the code to test the property next_token
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
+    it('should have the property order_by (base name: "orderBy")', function() {
+      // uncomment below and update the code to test the property order_by
+      //var // instance = new Citypay Api Client.MerchantBatchReportRequest();
+      //expect(instance).to.be();
+    });
 
+  });
 
-
-
-
-export default AclCheckRequest;
-
+}));

@@ -48,9 +48,12 @@ export default class CardHolderAccountApi {
      * Deletes a card from the account. The card will be marked for deletion before a subsequent purge will clear the card permanently. 
      * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
      * @param {String} card_id The id of the card that is presented by a call to retrieve a card holder account.
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} [force] Requests that the item is forced immediately.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
      */
-    accountCardDeleteRequestWithHttpInfo(accountid, card_id) {
+    accountCardDeleteRequestWithHttpInfo(accountid, card_id, opts) {
+      opts = opts || {};
       let postBody = null;
       // verify the required parameter 'accountid' is set
       if (accountid === undefined || accountid === null) {
@@ -66,6 +69,7 @@ export default class CardHolderAccountApi {
         'cardId': card_id
       };
       let queryParams = {
+        'force': opts['force']
       };
       let headerParams = {
       };
@@ -88,10 +92,12 @@ export default class CardHolderAccountApi {
      * Deletes a card from the account. The card will be marked for deletion before a subsequent purge will clear the card permanently. 
      * @param {String} accountid The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
      * @param {String} card_id The id of the card that is presented by a call to retrieve a card holder account.
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.force Requests that the item is forced immediately.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
      */
-    accountCardDeleteRequest(accountid, card_id) {
-      return this.accountCardDeleteRequestWithHttpInfo(accountid, card_id)
+    accountCardDeleteRequest(accountid, card_id, opts) {
+      return this.accountCardDeleteRequestWithHttpInfo(accountid, card_id, opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

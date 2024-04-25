@@ -52,7 +52,7 @@ class PaylinkStateEvent {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('state')) {
-                obj['state'] = ApiClient.convertToType(data['state'], 'Date');
+                obj['state'] = ApiClient.convertToType(data['state'], 'String');
             }
         }
         return obj;
@@ -67,6 +67,10 @@ class PaylinkStateEvent {
         // ensure the json data is a string
         if (data['message'] && !(typeof data['message'] === 'string' || data['message'] instanceof String)) {
             throw new Error("Expected the field `message` to be a primitive type in the JSON string but got " + data['message']);
+        }
+        // ensure the json data is a string
+        if (data['state'] && !(typeof data['state'] === 'string' || data['state'] instanceof String)) {
+            throw new Error("Expected the field `state` to be a primitive type in the JSON string but got " + data['state']);
         }
 
         return true;
@@ -91,7 +95,7 @@ PaylinkStateEvent.prototype['message'] = undefined;
 
 /**
  * The name of the event that was actioned.
- * @member {Date} state
+ * @member {String} state
  */
 PaylinkStateEvent.prototype['state'] = undefined;
 

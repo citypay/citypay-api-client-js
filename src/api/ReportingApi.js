@@ -15,8 +15,8 @@ import ApiClient from "../ApiClient";
 import BatchTransactionReportRequest from '../model/BatchTransactionReportRequest';
 import BatchTransactionReportResponse from '../model/BatchTransactionReportResponse';
 import Error from '../model/Error';
+import MerchantBatchReportRequest from '../model/MerchantBatchReportRequest';
 import MerchantBatchReportResponse from '../model/MerchantBatchReportResponse';
-import MerchantBatchRequest from '../model/MerchantBatchRequest';
 import MerchantBatchResponse from '../model/MerchantBatchResponse';
 import RemittanceReportRequest from '../model/RemittanceReportRequest';
 import RemittanceReportResponse from '../model/RemittanceReportResponse';
@@ -105,14 +105,14 @@ export default class ReportingApi {
     /**
      * Merchant Batch Report Request
      * Retrieves a report of merchant batches within a specified date range.  Batches, which aggregate daily processing activities, are typically generated at `00:00` each day.  These batches play a crucial role in the settlement of funds by summarising daily transactions. 
-     * @param {module:model/MerchantBatchRequest} merchant_batch_request 
+     * @param {module:model/MerchantBatchReportRequest} merchant_batch_report_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/MerchantBatchReportResponse} and HTTP response
      */
-    merchantBatchReportRequestWithHttpInfo(merchant_batch_request) {
-      let postBody = merchant_batch_request;
-      // verify the required parameter 'merchant_batch_request' is set
-      if (merchant_batch_request === undefined || merchant_batch_request === null) {
-        throw new Error("Missing the required parameter 'merchant_batch_request' when calling merchantBatchReportRequest");
+    merchantBatchReportRequestWithHttpInfo(merchant_batch_report_request) {
+      let postBody = merchant_batch_report_request;
+      // verify the required parameter 'merchant_batch_report_request' is set
+      if (merchant_batch_report_request === undefined || merchant_batch_report_request === null) {
+        throw new Error("Missing the required parameter 'merchant_batch_report_request' when calling merchantBatchReportRequest");
       }
 
       let pathParams = {
@@ -138,11 +138,11 @@ export default class ReportingApi {
     /**
      * Merchant Batch Report Request
      * Retrieves a report of merchant batches within a specified date range.  Batches, which aggregate daily processing activities, are typically generated at `00:00` each day.  These batches play a crucial role in the settlement of funds by summarising daily transactions. 
-     * @param {module:model/MerchantBatchRequest} merchant_batch_request 
+     * @param {module:model/MerchantBatchReportRequest} merchant_batch_report_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/MerchantBatchReportResponse}
      */
-    merchantBatchReportRequest(merchant_batch_request) {
-      return this.merchantBatchReportRequestWithHttpInfo(merchant_batch_request)
+    merchantBatchReportRequest(merchant_batch_report_request) {
+      return this.merchantBatchReportRequestWithHttpInfo(merchant_batch_report_request)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

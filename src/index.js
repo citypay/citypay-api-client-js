@@ -24,7 +24,6 @@ import AuthReference from './model/AuthReference';
 import AuthReferences from './model/AuthReferences';
 import AuthRequest from './model/AuthRequest';
 import AuthResponse from './model/AuthResponse';
-import AuthenRequired from './model/AuthenRequired';
 import Batch from './model/Batch';
 import BatchReportRequest from './model/BatchReportRequest';
 import BatchReportResponseModel from './model/BatchReportResponseModel';
@@ -56,8 +55,8 @@ import ExternalMPI from './model/ExternalMPI';
 import ListMerchantsResponse from './model/ListMerchantsResponse';
 import MCC6012 from './model/MCC6012';
 import Merchant from './model/Merchant';
+import MerchantBatchReportRequest from './model/MerchantBatchReportRequest';
 import MerchantBatchReportResponse from './model/MerchantBatchReportResponse';
-import MerchantBatchRequest from './model/MerchantBatchRequest';
 import MerchantBatchResponse from './model/MerchantBatchResponse';
 import NetSummaryResponse from './model/NetSummaryResponse';
 import PaResAuthRequest from './model/PaResAuthRequest';
@@ -214,12 +213,6 @@ export {
      * @property {module:model/AuthResponse}
      */
     AuthResponse,
-
-    /**
-     * The AuthenRequired model constructor.
-     * @property {module:model/AuthenRequired}
-     */
-    AuthenRequired,
 
     /**
      * The Batch model constructor.
@@ -408,16 +401,16 @@ export {
     Merchant,
 
     /**
+     * The MerchantBatchReportRequest model constructor.
+     * @property {module:model/MerchantBatchReportRequest}
+     */
+    MerchantBatchReportRequest,
+
+    /**
      * The MerchantBatchReportResponse model constructor.
      * @property {module:model/MerchantBatchReportResponse}
      */
     MerchantBatchReportResponse,
-
-    /**
-     * The MerchantBatchRequest model constructor.
-     * @property {module:model/MerchantBatchRequest}
-     */
-    MerchantBatchRequest,
 
     /**
      * The MerchantBatchResponse model constructor.

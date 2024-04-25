@@ -116,7 +116,7 @@ class PaylinkTokenStatus {
                 obj['last_payment_result'] = ApiClient.convertToType(data['last_payment_result'], 'String');
             }
             if (data.hasOwnProperty('mid')) {
-                obj['mid'] = ApiClient.convertToType(data['mid'], 'String');
+                obj['mid'] = ApiClient.convertToType(data['mid'], 'Number');
             }
             if (data.hasOwnProperty('payment_attempts_count')) {
                 obj['payment_attempts_count'] = ApiClient.convertToType(data['payment_attempts_count'], 'Number');
@@ -155,10 +155,6 @@ class PaylinkTokenStatus {
         // ensure the json data is a string
         if (data['last_payment_result'] && !(typeof data['last_payment_result'] === 'string' || data['last_payment_result'] instanceof String)) {
             throw new Error("Expected the field `last_payment_result` to be a primitive type in the JSON string but got " + data['last_payment_result']);
-        }
-        // ensure the json data is a string
-        if (data['mid'] && !(typeof data['mid'] === 'string' || data['mid'] instanceof String)) {
-            throw new Error("Expected the field `mid` to be a primitive type in the JSON string but got " + data['mid']);
         }
         if (data['state_history']) { // data not null
             // ensure the json data is an array
@@ -323,7 +319,7 @@ PaylinkTokenStatus.prototype['last_payment_result'] = undefined;
 
 /**
  * identifies the merchant account.
- * @member {String} mid
+ * @member {Number} mid
  */
 PaylinkTokenStatus.prototype['mid'] = undefined;
 
