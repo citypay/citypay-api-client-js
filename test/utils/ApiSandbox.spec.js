@@ -2,6 +2,7 @@ const {Digest} = require('../../src/utils/Digest');
 const should = require("should");
 require('dotenv').config();
 const _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+const {stringify} = require("mocha/lib/utils");
 
 const _superagent = _interopRequireDefault(require("superagent"));
 
@@ -116,7 +117,7 @@ function uuidv4() {
                 trans_type: "A",
                 threedsecure: new citypay_api_client.ThreeDSecure.constructFromObject({
                     merchant_termurl: "https://citypay.com/acs/return",
-                    cp_bx: "eyJhIjoiRkFwSCIsImMiOjI0LCJpIjoid3dIOTExTlBKSkdBRVhVZCIsImoiOmZhbHNlLCJsIjoiZW4tVVMiLCJoIjoxNDQwLCJ3IjoyNTYwLCJ0IjowLCJ1IjoiTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTFfMl8zKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODkuMC40Mzg5LjgyIFNhZmFyaS81MzcuMzYiLCJ2IjoiMS4wLjAifQ"
+                    cp_bx: "eyJhY3NUcmFuc0lEIjoiNzM3YjAzMmMtODZhNC00NGRiLThmN2QtNjQ2Mzk5MjUyYmYwIiwiY2hhbGxlbmdlV2luZG93U2l6ZSI6IjA1IiwibWVzc2FnZUV4dGVuc2lvbiI6W3sibmFtZSI6IkNQIFRlc3QgQUNTMiBFeHRlbnNpb24iLCJpZCI6IkNQMDAwMDAwMDEtMDAyIiwiY3JpdGljYWxpdHlJbmRpY2F0b3IiOmZhbHNlLCJkYXRhIjp7Im5vdGlmaWNhdGlvblVybCI6Imh0dHBzOi8vcGF5bWVudHMuY2l0eXBheS5jb20vVWxkV1RGcEdYZy9ORFF6TXpBNU56a3pPRGN5TWpnek9ESTBNelUvYWNzUmV0dXJuP2lmbT1mYWxzZSIsIm1pZCI6NjA1MjM3MDUsIm1hc2tlZFBhbiI6IjQ2MjI5NCoqKioqKjEwMjIiLCJzY2hlbWVMb2dvIjoiaHR0cHM6Ly9jZG4uY2l0eXBheS5jb20vaW1nL2NzL3Zpc2EtbG9nby5zdmciLCJleHBpcnkiOiIxMi8yMDI1IiwiYW1vdW50IjoiMC4wMSIsImRhdGV0aW1lIjoxNzUxNTM1MDA3NDUxLCJjYXRlZ29yeSI6IjAxIn19XSwibWVzc2FnZVR5cGUiOiJDUmVxIiwibWVzc2FnZVZlcnNpb24iOiIyLjIuMCIsInRocmVlRFNTZXJ2ZXJUcmFuc0lEIjoiNjg2NjRkOWYtMDM5Yi00M2QyLWEwOTAtODRiOTAwMDAwMTNjIn0"
                 })
             });
 
@@ -131,28 +132,31 @@ function uuidv4() {
                 expect(result.creq).to.not.equal(null);
                 expect(result.threedserver_trans_id).to.not.equal(null);
 
-                const content = {
-                    threeDSSessionData: result.threedserver_trans_id,
-                    creq: result.creq
-                }
+                const content = new URLSearchParams({
+                    transStatus: "Y",
+                    reason: "01",
+                    creq: result.creq,
+                    threeDSSessionData: result.threedserver_trans_id
+                }).toString();
 
-                const request = (0, _superagent["default"])("POST", "https://sandbox.citypay.com/3dsv2/acs");
+                const request = _superagent.default("POST", "https://sandbox.citypay.com/3dsv2/gen-rreq");
 
+                const resultRequest = await request
+                    .send(content)
+                    .set('Content-Type', 'application/x-www-form-urlencoded');
 
-                const resultRequest = await request.send(content).set('Content-Type',
-                    'application/json');
+                const cresResponse = resultRequest.body;
+                if (cresResponse && cresResponse.cres) {
+                    const cResAuthRequestString64 = new citypay_api_client.CResAuthRequest.constructFromObject({cres: cresResponse.cres});
 
-                const cresResponse = resultRequest['body'];
-                if (cresResponse) {
-                    const cResAuthRequestString64 = new citypay_api_client.CResAuthRequest.constructFromObject({cres: cresResponse['cres']});
-
-                    const cResRequestResponse = await new citypay_api_client.AuthorisationAndPaymentApi(
-                        client).cResRequest(cResAuthRequestString64);
+                    const cResRequestResponse = await new citypay_api_client.AuthorisationAndPaymentApi(client).cResRequest(cResAuthRequestString64);
 
                     expect(cResRequestResponse.amount).to.be.equal(1396);
                     expect(cResRequestResponse.authcode).to.be.equal("A12345");
                     expect(cResRequestResponse.authen_result).to.be.equal("Y");
                     expect(cResRequestResponse.authorised).to.be.equal(true);
+                } else {
+                    throw new Error('Cres not found in response: ' + JSON.stringify(cresResponse));
                 }
             }
         });
@@ -168,7 +172,7 @@ function uuidv4() {
             let api = new citypay_api_client.CardHolderAccountApi(client)
             let ac = new citypay_api_client.AccountCreate(cha_id);
             ac.contact = new citypay_api_client.ContactDetails.constructFromObject({
-                address1: "7 Esplanade",
+                address1: "Mielles House",
                 area: "St Helier",
                 company: "CityPay Limited",
                 country: "JE",
@@ -179,7 +183,7 @@ function uuidv4() {
             });
             let result = await api.accountCreate(ac)
             expect(result.account_id).to.equal(cha_id);
-            expect(result.contact.address1).to.equal("7 Esplanade");
+            expect(result.contact.address1).to.equal("Mielles House");
 
             result = await api.accountCardRegisterRequest(cha_id,
                 new citypay_api_client.RegisterCard.constructFromObject({
@@ -195,7 +199,7 @@ function uuidv4() {
 
             result = await api.accountRetrieveRequest(cha_id);
             expect(result.account_id).to.equal(cha_id);
-            expect(result.contact.address1).to.equal("7 Esplanade");
+            expect(result.contact.address1).to.equal("Mielles House");
             expect(result.cards.length).to.equal(1);
             expect(result.cards[0].expmonth).to.equal(12);
             expect(result.cards[0].expyear).to.equal(2030);
