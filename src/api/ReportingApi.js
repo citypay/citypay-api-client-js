@@ -21,6 +21,7 @@ import MerchantBatchResponse from '../model/MerchantBatchResponse';
 import RemittanceReportRequest from '../model/RemittanceReportRequest';
 import RemittanceReportResponse from '../model/RemittanceReportResponse';
 import RemittedClientData from '../model/RemittedClientData';
+import TransactionReportRequest from '../model/TransactionReportRequest';
 
 /**
 * ReportingApi service.
@@ -307,6 +308,53 @@ export default class ReportingApi {
      */
     remittanceReportRequest(clientid, date) {
       return this.remittanceReportRequestWithHttpInfo(clientid, date)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Transaction Report Request
+     * Retrieve a paginated report of transaction activity within a specified time range. Supports filters by transaction type,  result state, merchant ID, and allows field selection or predefined response modes for optimal data handling. 
+     * @param {module:model/TransactionReportRequest} transaction_report_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/BatchTransactionReportResponse} and HTTP response
+     */
+    transactionReportRequestWithHttpInfo(transaction_report_request) {
+      let postBody = transaction_report_request;
+      // verify the required parameter 'transaction_report_request' is set
+      if (transaction_report_request === undefined || transaction_report_request === null) {
+        throw new Error("Missing the required parameter 'transaction_report_request' when calling transactionReportRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = BatchTransactionReportResponse;
+      return this.apiClient.callApi(
+        '/v6/transactions', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Transaction Report Request
+     * Retrieve a paginated report of transaction activity within a specified time range. Supports filters by transaction type,  result state, merchant ID, and allows field selection or predefined response modes for optimal data handling. 
+     * @param {module:model/TransactionReportRequest} transaction_report_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/BatchTransactionReportResponse}
+     */
+    transactionReportRequest(transaction_report_request) {
+      return this.transactionReportRequestWithHttpInfo(transaction_report_request)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

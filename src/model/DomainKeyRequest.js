@@ -58,6 +58,9 @@ class DomainKeyRequest {
             if (data.hasOwnProperty('live')) {
                 obj['live'] = ApiClient.convertToType(data['live'], 'Boolean');
             }
+            if (data.hasOwnProperty('nonce')) {
+                obj['nonce'] = ApiClient.convertToType(data['nonce'], 'String');
+            }
         }
         return obj;
     }
@@ -77,6 +80,10 @@ class DomainKeyRequest {
         // ensure the json data is an array
         if (!Array.isArray(data['domain'])) {
             throw new Error("Expected the field `domain` to be an array in the JSON data but got " + data['domain']);
+        }
+        // ensure the json data is a string
+        if (data['nonce'] && !(typeof data['nonce'] === 'string' || data['nonce'] instanceof String)) {
+            throw new Error("Expected the field `nonce` to be a primitive type in the JSON string but got " + data['nonce']);
         }
 
         return true;
@@ -103,6 +110,12 @@ DomainKeyRequest.prototype['merchantid'] = undefined;
  * @member {Boolean} live
  */
 DomainKeyRequest.prototype['live'] = undefined;
+
+/**
+ * Specifies a random value for integrity. The value is used to generate the domain key to provide further integrity to the key. 
+ * @member {String} nonce
+ */
+DomainKeyRequest.prototype['nonce'] = undefined;
 
 
 

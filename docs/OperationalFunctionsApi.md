@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**domainKeyGenRequest**](OperationalFunctionsApi.md#domainKeyGenRequest) | **POST** /dk/gen | Domain Key Generation Request
 [**listMerchantsRequest**](OperationalFunctionsApi.md#listMerchantsRequest) | **GET** /v6/merchants/{clientid} | List Merchants Request
 [**pingRequest**](OperationalFunctionsApi.md#pingRequest) | **POST** /v6/ping | Ping Request
+[**registerTempKey**](OperationalFunctionsApi.md#registerTempKey) | **POST** /v6/permissions/register-temp-ip | Register Temp Key
 
 
 
@@ -18,7 +19,9 @@ Method | HTTP request | Description
 
 ACL Check Request
 
-Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and
+services such as AWS or Azure to check that those addresses are listed in the ACLs.
+
 
 ### Example
 
@@ -67,7 +70,9 @@ Name | Type | Description  | Notes
 
 Domain Key Check Request
 
-Checks the contents of a &#x60;domain key&#x60;. Can be used for operational processes to ensure that the properties of a  domain key meet their expectations. 
+Checks the contents of a `domain key`. Can be used for operational processes to ensure that the properties of a 
+domain key meet their expectations.
+
 
 ### Example
 
@@ -116,7 +121,9 @@ Name | Type | Description  | Notes
 
 Domain Key Generation Request
 
-Generates a domain key based on the permissions of the calling &#x60;api-key&#x60;. Domain keys can be used in _Direct Post_ and &#x60;XHR&#x60; calls to the API services. 
+Generates a domain key based on the permissions of the calling `api-key`. Domain keys can be used in _Direct Post_ and
+`XHR` calls to the API services.
+
 
 ### Example
 
@@ -165,7 +172,14 @@ Name | Type | Description  | Notes
 
 List Merchants Request
 
-An operational request to list current merchants for a client.  ### Sorting  Sorting can be performed by include a query parameter i.e. &#x60;/merchants/?sort&#x3D;merchantid&#x60;  Fields that can be sorted are &#x60;merchantid&#x60; or &#x60;name&#x60;. 
+An operational request to list current merchants for a client.
+
+### Sorting
+
+Sorting can be performed by include a query parameter i.e. `/merchants/?sort=merchantid`
+
+Fields that can be sorted are `merchantid` or `name`.
+
 
 ### Example
 
@@ -214,7 +228,14 @@ Name | Type | Description  | Notes
 
 Ping Request
 
-A ping request which performs a connection and authentication test to the CityPay API server. The request will return a standard Acknowledgement with a response code &#x60;044&#x60; to signify a successful ping.  The ping call is useful to confirm that you will be able to access  the API from behind any firewalls and that the permission model is granting access from your source. 
+A ping request which performs a connection and authentication test to the CityPay API server. The request
+will return a standard Acknowledgement with a response code `044` to signify a successful
+ping.
+
+The ping call is useful to confirm that you will be able to access 
+the API from behind any firewalls and that the permission
+model is granting access from your source.
+
 
 ### Example
 
@@ -259,4 +280,53 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, text/xml
 - **Accept**: application/x-www-form-urlencoded, application/json, text/xml
+
+
+## registerTempKey
+
+> Acknowledgement registerTempKey(register_ip_model)
+
+Register Temp Key
+
+Registers a temporary licence key.
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.OperationalFunctionsApi();
+let register_ip_model = new CityPay.RegisterIpModel(); // RegisterIpModel | 
+apiInstance.registerTempKey(register_ip_model).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **register_ip_model** | [**RegisterIpModel**](RegisterIpModel.md)|  | 
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
 

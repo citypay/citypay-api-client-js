@@ -63,7 +63,7 @@ class PaylinkTokenCreated {
                 obj['token'] = ApiClient.convertToType(data['token'], 'String');
             }
             if (data.hasOwnProperty('attachments')) {
-                obj['attachments'] = PaylinkAttachmentResult.constructFromObject(data['attachments']);
+                obj['attachments'] = ApiClient.convertToType(data['attachments'], [PaylinkAttachmentResult]);
             }
             if (data.hasOwnProperty('bps')) {
                 obj['bps'] = ApiClient.convertToType(data['bps'], 'String');
@@ -76,6 +76,9 @@ class PaylinkTokenCreated {
             }
             if (data.hasOwnProperty('identifier')) {
                 obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
+            }
+            if (data.hasOwnProperty('merchantid')) {
+                obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
             }
             if (data.hasOwnProperty('mode')) {
                 obj['mode'] = ApiClient.convertToType(data['mode'], 'String');
@@ -119,9 +122,15 @@ class PaylinkTokenCreated {
         if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
             throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
         }
-        // validate the optional field `attachments`
         if (data['attachments']) { // data not null
-          PaylinkAttachmentResult.validateJSON(data['attachments']);
+            // ensure the json data is an array
+            if (!Array.isArray(data['attachments'])) {
+                throw new Error("Expected the field `attachments` to be an array in the JSON data but got " + data['attachments']);
+            }
+            // validate the optional field `attachments` (array)
+            for (const item of data['attachments']) {
+                PaylinkAttachmentResult.validateJSON(item);
+            };
         }
         // ensure the json data is a string
         if (data['bps'] && !(typeof data['bps'] === 'string' || data['bps'] instanceof String)) {
@@ -193,7 +202,7 @@ PaylinkTokenCreated.prototype['result'] = undefined;
 PaylinkTokenCreated.prototype['token'] = undefined;
 
 /**
- * @member {module:model/PaylinkAttachmentResult} attachments
+ * @member {Array.<module:model/PaylinkAttachmentResult>} attachments
  */
 PaylinkTokenCreated.prototype['attachments'] = undefined;
 
@@ -219,6 +228,12 @@ PaylinkTokenCreated.prototype['errors'] = undefined;
  * @member {String} identifier
  */
 PaylinkTokenCreated.prototype['identifier'] = undefined;
+
+/**
+ * The merchant id of the token.
+ * @member {Number} merchantid
+ */
+PaylinkTokenCreated.prototype['merchantid'] = undefined;
 
 /**
  * Determines whether the token is `live` or `test`.

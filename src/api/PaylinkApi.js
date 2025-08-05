@@ -43,6 +43,54 @@ export default class PaylinkApi {
 
 
     /**
+     * Close Paylink Token
+     * Closes a paylink token that was previously created.
+     * @param {String} token The token returned by the create token process.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
+     */
+    paylinkTokenCloseRequestWithHttpInfo(token) {
+      let postBody = null;
+      // verify the required parameter 'token' is set
+      if (token === undefined || token === null) {
+        throw new Error("Missing the required parameter 'token' when calling paylinkTokenCloseRequest");
+      }
+
+      let pathParams = {
+        'token': token
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = [];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Acknowledgement;
+      return this.apiClient.callApi(
+        '/paylink/{token}/close', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Close Paylink Token
+     * Closes a paylink token that was previously created.
+     * @param {String} token The token returned by the create token process.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
+     */
+    paylinkTokenCloseRequest(token) {
+      return this.paylinkTokenCloseRequestWithHttpInfo(token)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Paylink Token Adjustment
      * Adjusts a TokenRequest's amount value when for instance   1. a Token is created and the shopping cart is updated 2. an invoice is adjusted either due to part payment or due to increased incurred costs. 
      * @param {String} token The token returned by the create token process.
@@ -90,6 +138,61 @@ export default class PaylinkApi {
      */
     tokenAdjustmentRequest(token, paylink_adjustment_request) {
       return this.tokenAdjustmentRequestWithHttpInfo(token, paylink_adjustment_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Checks an attachment status
+     * The `TokenAttachmentStatus` processes a request to check the status of a Paylink BPS attachment,  verifying its successful upload and returning metadata such as the MD5 hash, upload time,  and content type to ensure file integrity and correctness. 
+     * @param {String} token The token returned by the create token process.
+     * @param {String} attachment The attachemnt name requested.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
+     */
+    tokenAttachmentStatusWithHttpInfo(token, attachment) {
+      let postBody = null;
+      // verify the required parameter 'token' is set
+      if (token === undefined || token === null) {
+        throw new Error("Missing the required parameter 'token' when calling tokenAttachmentStatus");
+      }
+      // verify the required parameter 'attachment' is set
+      if (attachment === undefined || attachment === null) {
+        throw new Error("Missing the required parameter 'attachment' when calling tokenAttachmentStatus");
+      }
+
+      let pathParams = {
+        'token': token,
+        'attachment': attachment
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = [];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Acknowledgement;
+      return this.apiClient.callApi(
+        '/paylink/{token}/attachment-status/{attachment}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Checks an attachment status
+     * The `TokenAttachmentStatus` processes a request to check the status of a Paylink BPS attachment,  verifying its successful upload and returning metadata such as the MD5 hash, upload time,  and content type to ensure file integrity and correctness. 
+     * @param {String} token The token returned by the create token process.
+     * @param {String} attachment The attachemnt name requested.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
+     */
+    tokenAttachmentStatus(token, attachment) {
+      return this.tokenAttachmentStatusWithHttpInfo(token, attachment)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -185,54 +288,6 @@ export default class PaylinkApi {
      */
     tokenChangesRequest(paylink_token_status_change_request) {
       return this.tokenChangesRequestWithHttpInfo(paylink_token_status_change_request)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Close Paylink Token
-     * Marks a Paylink Token as closed. This closes the Token for any future action and the Token will not appear in any status request calls. 
-     * @param {String} token The token returned by the create token process.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
-     */
-    tokenCloseRequestWithHttpInfo(token) {
-      let postBody = null;
-      // verify the required parameter 'token' is set
-      if (token === undefined || token === null) {
-        throw new Error("Missing the required parameter 'token' when calling tokenCloseRequest");
-      }
-
-      let pathParams = {
-        'token': token
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['cp-api-key'];
-      let contentTypes = [];
-      let accepts = ['application/json', 'text/xml'];
-      let returnType = Acknowledgement;
-      return this.apiClient.callApi(
-        '/paylink/{token}/close', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
-      );
-    }
-
-    /**
-     * Close Paylink Token
-     * Marks a Paylink Token as closed. This closes the Token for any future action and the Token will not appear in any status request calls. 
-     * @param {String} token The token returned by the create token process.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
-     */
-    tokenCloseRequest(token) {
-      return this.tokenCloseRequestWithHttpInfo(token)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

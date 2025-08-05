@@ -27,15 +27,12 @@ class AuthRequest {
      * Constructs a new <code>AuthRequest</code>.
      * @alias module:model/AuthRequest
      * @param amount {Number} The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 
-     * @param cardnumber {String} The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
-     * @param expmonth {Number} The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
-     * @param expyear {Number} The year of expiry of the card. 
      * @param identifier {String} The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
      * @param merchantid {Number} Identifies the merchant account to perform processing for.
      */
-    constructor(amount, cardnumber, expmonth, expyear, identifier, merchantid) { 
+    constructor(amount, identifier, merchantid) { 
         
-        AuthRequest.initialize(this, amount, cardnumber, expmonth, expyear, identifier, merchantid);
+        AuthRequest.initialize(this, amount, identifier, merchantid);
     }
 
     /**
@@ -43,11 +40,8 @@ class AuthRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, amount, cardnumber, expmonth, expyear, identifier, merchantid) { 
+    static initialize(obj, amount, identifier, merchantid) { 
         obj['amount'] = amount;
-        obj['cardnumber'] = cardnumber;
-        obj['expmonth'] = expmonth;
-        obj['expyear'] = expyear;
         obj['identifier'] = identifier;
         obj['merchantid'] = merchantid;
     }
@@ -66,15 +60,6 @@ class AuthRequest {
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
-            if (data.hasOwnProperty('cardnumber')) {
-                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
-            }
-            if (data.hasOwnProperty('expmonth')) {
-                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
-            }
-            if (data.hasOwnProperty('expyear')) {
-                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
-            }
             if (data.hasOwnProperty('identifier')) {
                 obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
             }
@@ -89,6 +74,15 @@ class AuthRequest {
             }
             if (data.hasOwnProperty('bill_to')) {
                 obj['bill_to'] = ContactDetails.constructFromObject(data['bill_to']);
+            }
+            if (data.hasOwnProperty('cardholder_agreement')) {
+                obj['cardholder_agreement'] = ApiClient.convertToType(data['cardholder_agreement'], 'String');
+            }
+            if (data.hasOwnProperty('cardnumber')) {
+                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
+            }
+            if (data.hasOwnProperty('cp_card_token')) {
+                obj['cp_card_token'] = ApiClient.convertToType(data['cp_card_token'], 'String');
             }
             if (data.hasOwnProperty('csc')) {
                 obj['csc'] = ApiClient.convertToType(data['csc'], 'String');
@@ -105,8 +99,17 @@ class AuthRequest {
             if (data.hasOwnProperty('event_management')) {
                 obj['event_management'] = EventDataModel.constructFromObject(data['event_management']);
             }
+            if (data.hasOwnProperty('expmonth')) {
+                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
+            }
+            if (data.hasOwnProperty('expyear')) {
+                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
+            }
             if (data.hasOwnProperty('external_mpi')) {
                 obj['external_mpi'] = ExternalMPI.constructFromObject(data['external_mpi']);
+            }
+            if (data.hasOwnProperty('initiation')) {
+                obj['initiation'] = ApiClient.convertToType(data['initiation'], 'String');
             }
             if (data.hasOwnProperty('match_avsa')) {
                 obj['match_avsa'] = ApiClient.convertToType(data['match_avsa'], 'String');
@@ -117,11 +120,20 @@ class AuthRequest {
             if (data.hasOwnProperty('name_on_card')) {
                 obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
             }
+            if (data.hasOwnProperty('payment_intent_id')) {
+                obj['payment_intent_id'] = ApiClient.convertToType(data['payment_intent_id'], 'String');
+            }
+            if (data.hasOwnProperty('pre_auth')) {
+                obj['pre_auth'] = ApiClient.convertToType(data['pre_auth'], 'String');
+            }
             if (data.hasOwnProperty('ship_to')) {
                 obj['ship_to'] = ContactDetails.constructFromObject(data['ship_to']);
             }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], ['String']);
+            }
+            if (data.hasOwnProperty('threeds_token')) {
+                obj['threeds_token'] = ApiClient.convertToType(data['threeds_token'], 'String');
             }
             if (data.hasOwnProperty('threedsecure')) {
                 obj['threedsecure'] = ThreeDSecure.constructFromObject(data['threedsecure']);
@@ -131,6 +143,9 @@ class AuthRequest {
             }
             if (data.hasOwnProperty('trans_type')) {
                 obj['trans_type'] = ApiClient.convertToType(data['trans_type'], 'String');
+            }
+            if (data.hasOwnProperty('uuid')) {
+                obj['uuid'] = ApiClient.convertToType(data['uuid'], 'String');
             }
         }
         return obj;
@@ -149,10 +164,6 @@ class AuthRequest {
             }
         }
         // ensure the json data is a string
-        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
-            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
-        }
-        // ensure the json data is a string
         if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
             throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
         }
@@ -167,6 +178,18 @@ class AuthRequest {
         // validate the optional field `bill_to`
         if (data['bill_to']) { // data not null
           ContactDetails.validateJSON(data['bill_to']);
+        }
+        // ensure the json data is a string
+        if (data['cardholder_agreement'] && !(typeof data['cardholder_agreement'] === 'string' || data['cardholder_agreement'] instanceof String)) {
+            throw new Error("Expected the field `cardholder_agreement` to be a primitive type in the JSON string but got " + data['cardholder_agreement']);
+        }
+        // ensure the json data is a string
+        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
+            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
+        }
+        // ensure the json data is a string
+        if (data['cp_card_token'] && !(typeof data['cp_card_token'] === 'string' || data['cp_card_token'] instanceof String)) {
+            throw new Error("Expected the field `cp_card_token` to be a primitive type in the JSON string but got " + data['cp_card_token']);
         }
         // ensure the json data is a string
         if (data['csc'] && !(typeof data['csc'] === 'string' || data['csc'] instanceof String)) {
@@ -193,6 +216,10 @@ class AuthRequest {
           ExternalMPI.validateJSON(data['external_mpi']);
         }
         // ensure the json data is a string
+        if (data['initiation'] && !(typeof data['initiation'] === 'string' || data['initiation'] instanceof String)) {
+            throw new Error("Expected the field `initiation` to be a primitive type in the JSON string but got " + data['initiation']);
+        }
+        // ensure the json data is a string
         if (data['match_avsa'] && !(typeof data['match_avsa'] === 'string' || data['match_avsa'] instanceof String)) {
             throw new Error("Expected the field `match_avsa` to be a primitive type in the JSON string but got " + data['match_avsa']);
         }
@@ -204,6 +231,14 @@ class AuthRequest {
         if (data['name_on_card'] && !(typeof data['name_on_card'] === 'string' || data['name_on_card'] instanceof String)) {
             throw new Error("Expected the field `name_on_card` to be a primitive type in the JSON string but got " + data['name_on_card']);
         }
+        // ensure the json data is a string
+        if (data['payment_intent_id'] && !(typeof data['payment_intent_id'] === 'string' || data['payment_intent_id'] instanceof String)) {
+            throw new Error("Expected the field `payment_intent_id` to be a primitive type in the JSON string but got " + data['payment_intent_id']);
+        }
+        // ensure the json data is a string
+        if (data['pre_auth'] && !(typeof data['pre_auth'] === 'string' || data['pre_auth'] instanceof String)) {
+            throw new Error("Expected the field `pre_auth` to be a primitive type in the JSON string but got " + data['pre_auth']);
+        }
         // validate the optional field `ship_to`
         if (data['ship_to']) { // data not null
           ContactDetails.validateJSON(data['ship_to']);
@@ -211,6 +246,10 @@ class AuthRequest {
         // ensure the json data is an array
         if (!Array.isArray(data['tag'])) {
             throw new Error("Expected the field `tag` to be an array in the JSON data but got " + data['tag']);
+        }
+        // ensure the json data is a string
+        if (data['threeds_token'] && !(typeof data['threeds_token'] === 'string' || data['threeds_token'] instanceof String)) {
+            throw new Error("Expected the field `threeds_token` to be a primitive type in the JSON string but got " + data['threeds_token']);
         }
         // validate the optional field `threedsecure`
         if (data['threedsecure']) { // data not null
@@ -224,6 +263,10 @@ class AuthRequest {
         if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
             throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
         }
+        // ensure the json data is a string
+        if (data['uuid'] && !(typeof data['uuid'] === 'string' || data['uuid'] instanceof String)) {
+            throw new Error("Expected the field `uuid` to be a primitive type in the JSON string but got " + data['uuid']);
+        }
 
         return true;
     }
@@ -231,31 +274,13 @@ class AuthRequest {
 
 }
 
-AuthRequest.RequiredProperties = ["amount", "cardnumber", "expmonth", "expyear", "identifier", "merchantid"];
+AuthRequest.RequiredProperties = ["amount", "identifier", "merchantid"];
 
 /**
  * The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 
  * @member {Number} amount
  */
 AuthRequest.prototype['amount'] = undefined;
-
-/**
- * The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
- * @member {String} cardnumber
- */
-AuthRequest.prototype['cardnumber'] = undefined;
-
-/**
- * The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
- * @member {Number} expmonth
- */
-AuthRequest.prototype['expmonth'] = undefined;
-
-/**
- * The year of expiry of the card. 
- * @member {Number} expyear
- */
-AuthRequest.prototype['expyear'] = undefined;
 
 /**
  * The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
@@ -284,6 +309,24 @@ AuthRequest.prototype['avs_postcode_policy'] = undefined;
  * @member {module:model/ContactDetails} bill_to
  */
 AuthRequest.prototype['bill_to'] = undefined;
+
+/**
+ * Merchant-initiated transactions (MITs) are payments you trigger, where the cardholder has previously consented to you carrying out such payments. These may be scheduled (such as recurring payments and installments) or unscheduled (like account top-ups triggered by balance thresholds and no-show charges).  Scheduled These are regular payments using stored card details, like installments or a monthly subscription fee.  - `I` Instalment - A single purchase of goods or services billed to a cardholder in multiple transactions, over a period of time agreed by the cardholder and you.  - `R` Recurring - Transactions processed at fixed, regular intervals not to exceed one year between transactions, representing an agreement between a cardholder and you to purchase goods or services provided over a period of time.  Unscheduled These are payments using stored card details that do not occur on a regular schedule, like top-ups for a digital wallet triggered by the balance falling below a certain threshold.  - `A` Reauthorisation - a purchase made after the original purchase. A common scenario is delayed/split shipments.  - `C` Unscheduled Payment - A transaction using a stored credential for a fixed or variable amount that does not occur on a scheduled or regularly occurring transaction date. This includes account top-ups triggered by balance thresholds.  - `D` Delayed Charge - A delayed charge is typically used in hotel, cruise lines and vehicle rental environments to perform a supplemental account charge after original services are rendered.  - `L` Incremental - An incremental authorisation is typically found in hotel and car rental environments, where the cardholder has agreed to pay for any service incurred during the duration of the contract. An incremental authorisation is where you need to seek authorisation of further funds in addition to what you have originally requested. A common scenario is additional services charged to the contract, such as extending a stay in a hotel.  - `S` Resubmission - When the original purchase occurred, but you were not able to get authorisation at the time the goods or services were provided. It should be only used where the goods or services have already been provided, but the authorisation request is declined for insufficient funds.  - `X` No-show - A no-show is a transaction where you are enabled to charge for services which the cardholder entered into an agreement to purchase, but the cardholder did not meet the terms of the agreement.  - `N` Not Applicable - For all other transactions the value will be not applicable. 
+ * @member {String} cardholder_agreement
+ */
+AuthRequest.prototype['cardholder_agreement'] = undefined;
+
+/**
+ * The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
+ * @member {String} cardnumber
+ */
+AuthRequest.prototype['cardnumber'] = undefined;
+
+/**
+ * The card token previously stored and created by the /tokenise route.
+ * @member {String} cp_card_token
+ */
+AuthRequest.prototype['cp_card_token'] = undefined;
 
 /**
  * The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify possession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
@@ -315,9 +358,27 @@ AuthRequest.prototype['duplicate_policy'] = undefined;
 AuthRequest.prototype['event_management'] = undefined;
 
 /**
+ * The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
+ * @member {Number} expmonth
+ */
+AuthRequest.prototype['expmonth'] = undefined;
+
+/**
+ * The year of expiry of the card. 
+ * @member {Number} expyear
+ */
+AuthRequest.prototype['expyear'] = undefined;
+
+/**
  * @member {module:model/ExternalMPI} external_mpi
  */
 AuthRequest.prototype['external_mpi'] = undefined;
+
+/**
+ * Transactions charged using the API are defined as:  **Cardholder Initiated**: A _cardholder initiated transaction_ (CIT) is where the cardholder selects the card for use for a purchase using previously stored details. An example would be a customer buying an item from your website after being present with their saved card details at checkout.  **Merchant Intiated**: A _merchant initiated transaction_ (MIT) is an authorisation initiated where you as the  merchant submit a cardholders previously stored details without the cardholder's participation. An example would  be a subscription to a membership scheme to debit their card monthly.  MITs have different reasons such as reauthorisation, delayed, unscheduled, incremental, recurring, instalment, no-show or resubmission.  The following values apply   - `M` - specifies that the transaction is initiated by the merchant   - `C` - specifies that the transaction is initiated by the cardholder  Where transactions are merchant initiated, a valid cardholder agreement must be defined. 
+ * @member {String} initiation
+ */
+AuthRequest.prototype['initiation'] = undefined;
 
 /**
  * A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
@@ -337,6 +398,18 @@ AuthRequest.prototype['mcc6012'] = undefined;
 AuthRequest.prototype['name_on_card'] = undefined;
 
 /**
+ * A payment intent id previously registered that this transaction is linked to.
+ * @member {String} payment_intent_id
+ */
+AuthRequest.prototype['payment_intent_id'] = undefined;
+
+/**
+ * A policy value which determines whether a pre auth policy is enforced or bypassed.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy.  Enforces pre-authorisation when it does not pre-auth by default.   `2` to bypass. Bypasses pre-authorisation when it is enabled to pre auth by default.   `3` to ignore. The same as the default policy (0). Although it currently mirrors the default, this option is included for compatibility with other policies. 
+ * @member {String} pre_auth
+ */
+AuthRequest.prototype['pre_auth'] = undefined;
+
+/**
  * @member {module:model/ContactDetails} ship_to
  */
 AuthRequest.prototype['ship_to'] = undefined;
@@ -345,6 +418,12 @@ AuthRequest.prototype['ship_to'] = undefined;
  * @member {Array.<String>} tag
  */
 AuthRequest.prototype['tag'] = undefined;
+
+/**
+ * The threedsecure token generated by a call to /areq which may or may not be challenged.
+ * @member {String} threeds_token
+ */
+AuthRequest.prototype['threeds_token'] = undefined;
 
 /**
  * @member {module:model/ThreeDSecure} threedsecure
@@ -362,6 +441,12 @@ AuthRequest.prototype['trans_info'] = undefined;
  * @member {String} trans_type
  */
 AuthRequest.prototype['trans_type'] = undefined;
+
+/**
+ * A uuid for the session. The value tracks through 3ds session and therefore should be a valid v4 uuid.
+ * @member {String} uuid
+ */
+AuthRequest.prototype['uuid'] = undefined;
 
 
 

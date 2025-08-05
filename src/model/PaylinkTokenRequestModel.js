@@ -84,6 +84,9 @@ class PaylinkTokenRequestModel {
             if (data.hasOwnProperty('email')) {
                 obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
+            if (data.hasOwnProperty('payment_intent_id')) {
+                obj['payment_intent_id'] = ApiClient.convertToType(data['payment_intent_id'], 'String');
+            }
             if (data.hasOwnProperty('recurring')) {
                 obj['recurring'] = ApiClient.convertToType(data['recurring'], 'Boolean');
             }
@@ -142,6 +145,10 @@ class PaylinkTokenRequestModel {
             throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
         }
         // ensure the json data is a string
+        if (data['payment_intent_id'] && !(typeof data['payment_intent_id'] === 'string' || data['payment_intent_id'] instanceof String)) {
+            throw new Error("Expected the field `payment_intent_id` to be a primitive type in the JSON string but got " + data['payment_intent_id']);
+        }
+        // ensure the json data is a string
         if (data['subscription_id'] && !(typeof data['subscription_id'] === 'string' || data['subscription_id'] instanceof String)) {
             throw new Error("Expected the field `subscription_id` to be a primitive type in the JSON string but got " + data['subscription_id']);
         }
@@ -177,7 +184,7 @@ PaylinkTokenRequestModel.prototype['identifier'] = undefined;
 PaylinkTokenRequestModel.prototype['merchantid'] = undefined;
 
 /**
- * Specifies an alpha-numeric account number that the Paylink service uses when creating a Cardholder Account. The value should be no longer than 20 characters in length.
+ * To be able to use credential on file (COF) services. A cardholder account may be created once the payment has been authorised, this is then stored \"on file\" for subsequent charging for example re-authorisation, unscheduled payment, delayed charges, incremental authorisation, recurring payments, resubmission or no-show style agreements.  Specifies an alpha-numeric account number that the Paylink service uses when creating a Cardholder Account. The value should be no longer than 20 characters in length. 
  * @member {String} accountno
  */
 PaylinkTokenRequestModel.prototype['accountno'] = undefined;
@@ -214,6 +221,12 @@ PaylinkTokenRequestModel.prototype['currency'] = undefined;
  * @member {String} email
  */
 PaylinkTokenRequestModel.prototype['email'] = undefined;
+
+/**
+ * A payment intent id already previously registered for this token.
+ * @member {String} payment_intent_id
+ */
+PaylinkTokenRequestModel.prototype['payment_intent_id'] = undefined;
 
 /**
  * True if the intent of this cardholder initiated transaction is to establish a recurring payment model, processable as merchant initiated transactions.

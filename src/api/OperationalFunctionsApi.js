@@ -21,6 +21,7 @@ import DomainKeyResponse from '../model/DomainKeyResponse';
 import Error from '../model/Error';
 import ListMerchantsResponse from '../model/ListMerchantsResponse';
 import Ping from '../model/Ping';
+import RegisterIpModel from '../model/RegisterIpModel';
 
 /**
 * OperationalFunctionsApi service.
@@ -271,6 +272,53 @@ export default class OperationalFunctionsApi {
      */
     pingRequest(ping) {
       return this.pingRequestWithHttpInfo(ping)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Register Temp Key
+     * Registers a temporary licence key.
+     * @param {module:model/RegisterIpModel} register_ip_model 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Acknowledgement} and HTTP response
+     */
+    registerTempKeyWithHttpInfo(register_ip_model) {
+      let postBody = register_ip_model;
+      // verify the required parameter 'register_ip_model' is set
+      if (register_ip_model === undefined || register_ip_model === null) {
+        throw new Error("Missing the required parameter 'register_ip_model' when calling registerTempKey");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Acknowledgement;
+      return this.apiClient.callApi(
+        '/v6/permissions/register-temp-ip', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Register Temp Key
+     * Registers a temporary licence key.
+     * @param {module:model/RegisterIpModel} register_ip_model 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Acknowledgement}
+     */
+    registerTempKey(register_ip_model) {
+      return this.registerTempKeyWithHttpInfo(register_ip_model)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

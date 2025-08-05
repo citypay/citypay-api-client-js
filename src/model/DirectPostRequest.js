@@ -23,15 +23,12 @@ class DirectPostRequest {
      * Constructs a new <code>DirectPostRequest</code>.
      * @alias module:model/DirectPostRequest
      * @param amount {Number} The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 
-     * @param cardnumber {String} The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
-     * @param expmonth {Number} The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
-     * @param expyear {Number} The year of expiry of the card. 
      * @param identifier {String} The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
      * @param mac {String} A message authentication code ensures the data is authentic and that the intended amount has not been tampered with. The mac value is generated using a hash-based mac value. The following algorithm is used. - A key (k) is derived from your licence key - A value (v) is produced by concatenating the nonce, amount value and identifier, such as a purchase   with nonce `0123456789ABCDEF` an amount of £275.95 and an identifier of OD-12345678 would become   `0123456789ABCDEF27595OD-12345678` and extracting the UTF-8 byte values - The result from HMAC_SHA256(k, v) is hex-encoded (upper-case) - For instance, a licence key of `LK123456789`, a nonce of `0123456789ABCDEF`, an amount of `27595` and an identifier of `OD-12345678`  would generate a MAC of `163DBAB194D743866A9BCC7FC9C8A88FCD99C6BBBF08D619291212D1B91EE12E`. 
      */
-    constructor(amount, cardnumber, expmonth, expyear, identifier, mac) { 
+    constructor(amount, identifier, mac) { 
         
-        DirectPostRequest.initialize(this, amount, cardnumber, expmonth, expyear, identifier, mac);
+        DirectPostRequest.initialize(this, amount, identifier, mac);
     }
 
     /**
@@ -39,11 +36,8 @@ class DirectPostRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, amount, cardnumber, expmonth, expyear, identifier, mac) { 
+    static initialize(obj, amount, identifier, mac) { 
         obj['amount'] = amount;
-        obj['cardnumber'] = cardnumber;
-        obj['expmonth'] = expmonth;
-        obj['expyear'] = expyear;
         obj['identifier'] = identifier;
         obj['mac'] = mac;
     }
@@ -62,15 +56,6 @@ class DirectPostRequest {
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
-            if (data.hasOwnProperty('cardnumber')) {
-                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
-            }
-            if (data.hasOwnProperty('expmonth')) {
-                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
-            }
-            if (data.hasOwnProperty('expyear')) {
-                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
-            }
             if (data.hasOwnProperty('identifier')) {
                 obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
             }
@@ -82,6 +67,9 @@ class DirectPostRequest {
             }
             if (data.hasOwnProperty('bill_to')) {
                 obj['bill_to'] = ContactDetails.constructFromObject(data['bill_to']);
+            }
+            if (data.hasOwnProperty('cardnumber')) {
+                obj['cardnumber'] = ApiClient.convertToType(data['cardnumber'], 'String');
             }
             if (data.hasOwnProperty('csc')) {
                 obj['csc'] = ApiClient.convertToType(data['csc'], 'String');
@@ -95,6 +83,12 @@ class DirectPostRequest {
             if (data.hasOwnProperty('duplicate_policy')) {
                 obj['duplicate_policy'] = ApiClient.convertToType(data['duplicate_policy'], 'String');
             }
+            if (data.hasOwnProperty('expmonth')) {
+                obj['expmonth'] = ApiClient.convertToType(data['expmonth'], 'Number');
+            }
+            if (data.hasOwnProperty('expyear')) {
+                obj['expyear'] = ApiClient.convertToType(data['expyear'], 'Number');
+            }
             if (data.hasOwnProperty('match_avsa')) {
                 obj['match_avsa'] = ApiClient.convertToType(data['match_avsa'], 'String');
             }
@@ -103,6 +97,9 @@ class DirectPostRequest {
             }
             if (data.hasOwnProperty('nonce')) {
                 obj['nonce'] = ApiClient.convertToType(data['nonce'], 'String');
+            }
+            if (data.hasOwnProperty('pre_auth')) {
+                obj['pre_auth'] = ApiClient.convertToType(data['pre_auth'], 'String');
             }
             if (data.hasOwnProperty('redirect_failure')) {
                 obj['redirect_failure'] = ApiClient.convertToType(data['redirect_failure'], 'String');
@@ -125,6 +122,9 @@ class DirectPostRequest {
             if (data.hasOwnProperty('trans_type')) {
                 obj['trans_type'] = ApiClient.convertToType(data['trans_type'], 'String');
             }
+            if (data.hasOwnProperty('uuid')) {
+                obj['uuid'] = ApiClient.convertToType(data['uuid'], 'String');
+            }
         }
         return obj;
     }
@@ -142,10 +142,6 @@ class DirectPostRequest {
             }
         }
         // ensure the json data is a string
-        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
-            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
-        }
-        // ensure the json data is a string
         if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
             throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
         }
@@ -160,6 +156,10 @@ class DirectPostRequest {
         // validate the optional field `bill_to`
         if (data['bill_to']) { // data not null
           ContactDetails.validateJSON(data['bill_to']);
+        }
+        // ensure the json data is a string
+        if (data['cardnumber'] && !(typeof data['cardnumber'] === 'string' || data['cardnumber'] instanceof String)) {
+            throw new Error("Expected the field `cardnumber` to be a primitive type in the JSON string but got " + data['cardnumber']);
         }
         // ensure the json data is a string
         if (data['csc'] && !(typeof data['csc'] === 'string' || data['csc'] instanceof String)) {
@@ -190,6 +190,10 @@ class DirectPostRequest {
             throw new Error("Expected the field `nonce` to be a primitive type in the JSON string but got " + data['nonce']);
         }
         // ensure the json data is a string
+        if (data['pre_auth'] && !(typeof data['pre_auth'] === 'string' || data['pre_auth'] instanceof String)) {
+            throw new Error("Expected the field `pre_auth` to be a primitive type in the JSON string but got " + data['pre_auth']);
+        }
+        // ensure the json data is a string
         if (data['redirect_failure'] && !(typeof data['redirect_failure'] === 'string' || data['redirect_failure'] instanceof String)) {
             throw new Error("Expected the field `redirect_failure` to be a primitive type in the JSON string but got " + data['redirect_failure']);
         }
@@ -217,6 +221,10 @@ class DirectPostRequest {
         if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
             throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
         }
+        // ensure the json data is a string
+        if (data['uuid'] && !(typeof data['uuid'] === 'string' || data['uuid'] instanceof String)) {
+            throw new Error("Expected the field `uuid` to be a primitive type in the JSON string but got " + data['uuid']);
+        }
 
         return true;
     }
@@ -224,31 +232,13 @@ class DirectPostRequest {
 
 }
 
-DirectPostRequest.RequiredProperties = ["amount", "cardnumber", "expmonth", "expyear", "identifier", "mac"];
+DirectPostRequest.RequiredProperties = ["amount", "identifier", "mac"];
 
 /**
  * The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 
  * @member {Number} amount
  */
 DirectPostRequest.prototype['amount'] = undefined;
-
-/**
- * The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
- * @member {String} cardnumber
- */
-DirectPostRequest.prototype['cardnumber'] = undefined;
-
-/**
- * The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
- * @member {Number} expmonth
- */
-DirectPostRequest.prototype['expmonth'] = undefined;
-
-/**
- * The year of expiry of the card. 
- * @member {Number} expyear
- */
-DirectPostRequest.prototype['expyear'] = undefined;
 
 /**
  * The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
@@ -272,6 +262,12 @@ DirectPostRequest.prototype['avs_postcode_policy'] = undefined;
  * @member {module:model/ContactDetails} bill_to
  */
 DirectPostRequest.prototype['bill_to'] = undefined;
+
+/**
+ * The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
+ * @member {String} cardnumber
+ */
+DirectPostRequest.prototype['cardnumber'] = undefined;
 
 /**
  * The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify possession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
@@ -298,6 +294,18 @@ DirectPostRequest.prototype['currency'] = undefined;
 DirectPostRequest.prototype['duplicate_policy'] = undefined;
 
 /**
+ * The month of expiry of the card. The month value should be a numerical value between 1 and 12. 
+ * @member {Number} expmonth
+ */
+DirectPostRequest.prototype['expmonth'] = undefined;
+
+/**
+ * The year of expiry of the card. 
+ * @member {Number} expyear
+ */
+DirectPostRequest.prototype['expyear'] = undefined;
+
+/**
  * A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
  * @member {String} match_avsa
  */
@@ -314,6 +322,12 @@ DirectPostRequest.prototype['name_on_card'] = undefined;
  * @member {String} nonce
  */
 DirectPostRequest.prototype['nonce'] = undefined;
+
+/**
+ * A policy value which determines whether a pre auth policy is enforced or bypassed.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy.  Enforces pre-authorisation when it does not pre-auth by default.   `2` to bypass. Bypasses pre-authorisation when it is enabled to pre auth by default.   `3` to ignore. The same as the default policy (0). Although it currently mirrors the default, this option is included for compatibility with other policies. 
+ * @member {String} pre_auth
+ */
+DirectPostRequest.prototype['pre_auth'] = undefined;
 
 /**
  * The URL used to redirect back to your site when a transaction has been rejected or declined. Required if a url-encoded request. 
@@ -353,6 +367,12 @@ DirectPostRequest.prototype['trans_info'] = undefined;
  * @member {String} trans_type
  */
 DirectPostRequest.prototype['trans_type'] = undefined;
+
+/**
+ * A uuid for the session. The value tracks through 3ds session and therefore should be a valid v4 uuid.
+ * @member {String} uuid
+ */
+DirectPostRequest.prototype['uuid'] = undefined;
 
 
 

@@ -1,21 +1,23 @@
 {
   "name": "citypay-api",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "JavaScript ECMAScript 6 client for the CityPay API",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
     "prepare": "npm run build",
-    "test": "mocha --require @babel/register --recursive --timeout 20000"
+    "test": "mocha --require dotenv/config --require @babel/register --recursive --timeout 20000"
   },
   "browser": {
     "fs": false
   },
   "dependencies": {
     "@babel/cli": "^7.19.3",
+    "@babel/runtime": "^7.28.2",
     "crypto-js": "^4.2.0",
-    "superagent": "^5.3.0"
+    "superagent": "^5.3.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -35,10 +37,10 @@
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/plugin-transform-runtime": "^7.28.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "dotenv": "^16.4.5",
+    "dotenv": "^17.2.1",
     "expect.js": "^0.3.1",
     "mocha": "^10.1.0",
     "should": "^13.2.3",

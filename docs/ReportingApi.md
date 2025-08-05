@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**merchantBatchRequest**](ReportingApi.md#merchantBatchRequest) | **GET** /v6/merchant-batch/{merchantid}/{batch_no} | Merchant Batch Request
 [**remittanceRangeReport**](ReportingApi.md#remittanceRangeReport) | **POST** /v6/remittance/report/{clientid} | Remittance Report Request
 [**remittanceReportRequest**](ReportingApi.md#remittanceReportRequest) | **GET** /v6/remittance/report/{clientid}/{date} | Remittance Date Report Request
+[**transactionReportRequest**](ReportingApi.md#transactionReportRequest) | **POST** /v6/transactions | Transaction Report Request
 
 
 
@@ -71,7 +72,10 @@ Name | Type | Description  | Notes
 
 Merchant Batch Report Request
 
-Retrieves a report of merchant batches within a specified date range.  Batches, which aggregate daily processing activities, are typically generated at &#x60;00:00&#x60; each day.  These batches play a crucial role in the settlement of funds by summarising daily transactions. 
+Retrieves a report of merchant batches within a specified date range. 
+Batches, which aggregate daily processing activities, are typically generated at `00:00` each day. 
+These batches play a crucial role in the settlement of funds by summarising daily transactions.
+
 
 ### Example
 
@@ -171,7 +175,12 @@ Name | Type | Description  | Notes
 
 Remittance Report Request
 
-Fetches remittance reports for financial transactions within a specified date range, covering all client-related activities. This report consolidates all batches disbursed to a client, with each remittance summarising the aggregation of batches leading up to settlement. Additionally, the net remittance amount presented in the final settlement will reflect any deductions made by the acquirer. 
+Fetches remittance reports for financial transactions within a specified date range,
+covering all client-related activities. This report consolidates all batches disbursed to a
+client, with each remittance summarising the aggregation of batches leading up to settlement.
+Additionally, the net remittance amount presented in the final settlement will reflect any
+deductions made by the acquirer.
+
 
 ### Example
 
@@ -222,7 +231,15 @@ Name | Type | Description  | Notes
 
 Remittance Date Report Request
 
-Fetches remittance reports for financial transactions for a given date,  covering all client-related activities. This report consolidates all batches disbursed to a  client, with each remittance summarising the aggregation of batches leading up to settlement.  Additionally, the net remittance amount presented in the final settlement will reflect any  deductions made by the acquirer.  The process also supports the notion of *today* deferring the date to today&#39;s date or *latest* reflecting the latest remittance date available. 
+Fetches remittance reports for financial transactions for a given date, 
+covering all client-related activities. This report consolidates all batches disbursed to a 
+client, with each remittance summarising the aggregation of batches leading up to settlement. 
+Additionally, the net remittance amount presented in the final settlement will reflect any 
+deductions made by the acquirer.
+
+The process also supports the notion of *today* deferring the date to today's date or *latest* reflecting the
+latest remittance date available.
+
 
 ### Example
 
@@ -264,5 +281,56 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
+## transactionReportRequest
+
+> BatchTransactionReportResponse transactionReportRequest(transaction_report_request)
+
+Transaction Report Request
+
+Retrieve a paginated report of transaction activity within a specified time range. Supports filters by transaction type, 
+result state, merchant ID, and allows field selection or predefined response modes for optimal data handling.
+
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.ReportingApi();
+let transaction_report_request = new CityPay.TransactionReportRequest(); // TransactionReportRequest | 
+apiInstance.transactionReportRequest(transaction_report_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **transaction_report_request** | [**TransactionReportRequest**](TransactionReportRequest.md)|  | 
+
+### Return type
+
+[**BatchTransactionReportResponse**](BatchTransactionReportResponse.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
 - **Accept**: application/json, text/xml
 
