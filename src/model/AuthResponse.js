@@ -113,6 +113,12 @@ class AuthResponse {
             if (data.hasOwnProperty('eci')) {
                 obj['eci'] = ApiClient.convertToType(data['eci'], 'String');
             }
+            if (data.hasOwnProperty('external-ref')) {
+                obj['external-ref'] = ApiClient.convertToType(data['external-ref'], 'String');
+            }
+            if (data.hasOwnProperty('external-ref-source')) {
+                obj['external-ref-source'] = ApiClient.convertToType(data['external-ref-source'], 'String');
+            }
             if (data.hasOwnProperty('identifier')) {
                 obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
             }
@@ -121,6 +127,9 @@ class AuthResponse {
             }
             if (data.hasOwnProperty('maskedpan')) {
                 obj['maskedpan'] = ApiClient.convertToType(data['maskedpan'], 'String');
+            }
+            if (data.hasOwnProperty('payment_intent_id')) {
+                obj['payment_intent_id'] = ApiClient.convertToType(data['payment_intent_id'], 'String');
             }
             if (data.hasOwnProperty('scheme')) {
                 obj['scheme'] = ApiClient.convertToType(data['scheme'], 'String');
@@ -209,12 +218,24 @@ class AuthResponse {
             throw new Error("Expected the field `eci` to be a primitive type in the JSON string but got " + data['eci']);
         }
         // ensure the json data is a string
+        if (data['external-ref'] && !(typeof data['external-ref'] === 'string' || data['external-ref'] instanceof String)) {
+            throw new Error("Expected the field `external-ref` to be a primitive type in the JSON string but got " + data['external-ref']);
+        }
+        // ensure the json data is a string
+        if (data['external-ref-source'] && !(typeof data['external-ref-source'] === 'string' || data['external-ref-source'] instanceof String)) {
+            throw new Error("Expected the field `external-ref-source` to be a primitive type in the JSON string but got " + data['external-ref-source']);
+        }
+        // ensure the json data is a string
         if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
             throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
         }
         // ensure the json data is a string
         if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
             throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
+        }
+        // ensure the json data is a string
+        if (data['payment_intent_id'] && !(typeof data['payment_intent_id'] === 'string' || data['payment_intent_id'] instanceof String)) {
+            throw new Error("Expected the field `payment_intent_id` to be a primitive type in the JSON string but got " + data['payment_intent_id']);
         }
         // ensure the json data is a string
         if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
@@ -330,7 +351,7 @@ AuthResponse.prototype['bin_debit'] = undefined;
 AuthResponse.prototype['bin_description'] = undefined;
 
 /**
- * The cardholder authentication verification value which can be returned for verification purposes of the authenticated  transaction for dispute realisation. 
+ * The cardholder authentication verification value which can be returned for verification purposes of the authenticated  transaction for dispute realisation. The value is considered sensitive in the realm of PCI-3DS and is masked. 
  * @member {String} cavv
  */
 AuthResponse.prototype['cavv'] = undefined;
@@ -366,6 +387,18 @@ AuthResponse.prototype['datetime'] = undefined;
 AuthResponse.prototype['eci'] = undefined;
 
 /**
+ * An external ref if supplied.
+ * @member {String} external-ref
+ */
+AuthResponse.prototype['external-ref'] = undefined;
+
+/**
+ * An external ref source if supplied.
+ * @member {String} external-ref-source
+ */
+AuthResponse.prototype['external-ref-source'] = undefined;
+
+/**
  * The identifier provided within the request.
  * @member {String} identifier
  */
@@ -382,6 +415,12 @@ AuthResponse.prototype['live'] = undefined;
  * @member {String} maskedpan
  */
 AuthResponse.prototype['maskedpan'] = undefined;
+
+/**
+ * A payment intent id for the authorisation if it exists.
+ * @member {String} payment_intent_id
+ */
+AuthResponse.prototype['payment_intent_id'] = undefined;
 
 /**
  * The name of the card scheme of the transaction that processed the transaction such as Visa or MasterCard. 

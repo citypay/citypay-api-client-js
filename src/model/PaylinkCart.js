@@ -120,7 +120,7 @@ PaylinkCart.prototype['contents'] = undefined;
 PaylinkCart.prototype['coupon'] = undefined;
 
 /**
- * The mode field specifies the behaviour or functionality of the cart.  Valid values are:   0 - No cart - No cart is shown  1 - Read-only - The cart is shown with a breakdown of the item details provided by objects in the contents array.  2 - Selection cart - The cart is shown as a drop-down box of available cart items that the customer can a single item select from.  3 - Dynamic cart - a text box is rendered to enable the operator to input an amount.  4 - Multi cart - The cart is displayed with items rendered with selectable quantities. 
+ * The mode field specifies the behaviour or functionality of the cart.  Valid values are:  - `0` No cart - No cart is shown - `1` Read-only - The cart is shown with a breakdown of the item details provided by objects in the contents array. - `2` Selection cart - The cart is shown as a drop-down box of available cart items that the customer can a single item select from. - `3` Dynamic cart - a text box is rendered to enable the operator to input an amount. - `4` Multi cart - The cart is displayed with items rendered with selectable quantities. 
  * @member {Number} mode
  */
 PaylinkCart.prototype['mode'] = undefined;

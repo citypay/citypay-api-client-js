@@ -18,6 +18,8 @@ import AccountStatus from './model/AccountStatus';
 import Acknowledgement from './model/Acknowledgement';
 import AclCheckRequest from './model/AclCheckRequest';
 import AclCheckResponseModel from './model/AclCheckResponseModel';
+import AdjustmentCondition from './model/AdjustmentCondition';
+import Adjustments from './model/Adjustments';
 import AirlineAdvice from './model/AirlineAdvice';
 import AirlineSegment from './model/AirlineSegment';
 import AuthReference from './model/AuthReference';
@@ -38,6 +40,8 @@ import CaptureRequest from './model/CaptureRequest';
 import Card from './model/Card';
 import CardHolderAccount from './model/CardHolderAccount';
 import CardStatus from './model/CardStatus';
+import CardTokenisationRequest from './model/CardTokenisationRequest';
+import CardTokenisationResponse from './model/CardTokenisationResponse';
 import ChargeRequest from './model/ChargeRequest';
 import CheckBatchStatus from './model/CheckBatchStatus';
 import CheckBatchStatusResponse from './model/CheckBatchStatusResponse';
@@ -52,6 +56,8 @@ import Error from './model/Error';
 import EventDataModel from './model/EventDataModel';
 import Exists from './model/Exists';
 import ExternalMPI from './model/ExternalMPI';
+import FindPaymentIntentRequest from './model/FindPaymentIntentRequest';
+import HttpConfig from './model/HttpConfig';
 import ListMerchantsResponse from './model/ListMerchantsResponse';
 import MCC6012 from './model/MCC6012';
 import Merchant from './model/Merchant';
@@ -59,7 +65,6 @@ import MerchantBatchReportRequest from './model/MerchantBatchReportRequest';
 import MerchantBatchReportResponse from './model/MerchantBatchReportResponse';
 import MerchantBatchResponse from './model/MerchantBatchResponse';
 import NetSummaryResponse from './model/NetSummaryResponse';
-import PaResAuthRequest from './model/PaResAuthRequest';
 import PaylinkAddress from './model/PaylinkAddress';
 import PaylinkAdjustmentRequest from './model/PaylinkAdjustmentRequest';
 import PaylinkAttachmentRequest from './model/PaylinkAttachmentRequest';
@@ -83,13 +88,15 @@ import PaylinkTokenStatus from './model/PaylinkTokenStatus';
 import PaylinkTokenStatusChangeRequest from './model/PaylinkTokenStatusChangeRequest';
 import PaylinkTokenStatusChangeResponse from './model/PaylinkTokenStatusChangeResponse';
 import PaylinkUI from './model/PaylinkUI';
-import PaymentIntent from './model/PaymentIntent';
 import PaymentIntentReference from './model/PaymentIntentReference';
+import PaymentIntentRequestModel from './model/PaymentIntentRequestModel';
+import PaymentIntentResponseModel from './model/PaymentIntentResponseModel';
 import Ping from './model/Ping';
 import ProcessBatchRequest from './model/ProcessBatchRequest';
 import ProcessBatchResponse from './model/ProcessBatchResponse';
 import RefundRequest from './model/RefundRequest';
 import RegisterCard from './model/RegisterCard';
+import RegisterIpModel from './model/RegisterIpModel';
 import RemittanceData from './model/RemittanceData';
 import RemittanceReportRequest from './model/RemittanceReportRequest';
 import RemittanceReportResponse from './model/RemittanceReportResponse';
@@ -98,14 +105,25 @@ import RequestChallenged from './model/RequestChallenged';
 import RetrieveRequest from './model/RetrieveRequest';
 import ThreeDSecure from './model/ThreeDSecure';
 import TokenisationResponseModel from './model/TokenisationResponseModel';
+import TransactionReportRequest from './model/TransactionReportRequest';
+import VerificationRequest from './model/VerificationRequest';
 import VoidRequest from './model/VoidRequest';
+import WebHookChannelCreateRequest from './model/WebHookChannelCreateRequest';
+import WebHookChannelCreateResponse from './model/WebHookChannelCreateResponse';
+import WebHookChannelDeleteRequest from './model/WebHookChannelDeleteRequest';
+import WebHookSubscriptionRequest from './model/WebHookSubscriptionRequest';
+import WebHookSubscriptionResponse from './model/WebHookSubscriptionResponse';
+import WebHookUnsubscribeRequest from './model/WebHookUnsubscribeRequest';
 import AuthorisationAndPaymentApi from './api/AuthorisationAndPaymentApi';
 import BatchProcessingApi from './api/BatchProcessingApi';
 import CardHolderAccountApi from './api/CardHolderAccountApi';
 import DirectPostApi from './api/DirectPostApi';
 import OperationalFunctionsApi from './api/OperationalFunctionsApi';
 import PaylinkApi from './api/PaylinkApi';
+import PaymentIntentApi from './api/PaymentIntentApi';
 import ReportingApi from './api/ReportingApi';
+import WebHooks from './api/WebHooks';
+import PaResAuthRequest from './model/PaResAuthRequest.js';
 
 
 /**
@@ -177,6 +195,18 @@ export {
      * @property {module:model/AclCheckResponseModel}
      */
     AclCheckResponseModel,
+
+    /**
+     * The AdjustmentCondition model constructor.
+     * @property {module:model/AdjustmentCondition}
+     */
+    AdjustmentCondition,
+
+    /**
+     * The Adjustments model constructor.
+     * @property {module:model/Adjustments}
+     */
+    Adjustments,
 
     /**
      * The AirlineAdvice model constructor.
@@ -299,6 +329,18 @@ export {
     CardStatus,
 
     /**
+     * The CardTokenisationRequest model constructor.
+     * @property {module:model/CardTokenisationRequest}
+     */
+    CardTokenisationRequest,
+
+    /**
+     * The CardTokenisationResponse model constructor.
+     * @property {module:model/CardTokenisationResponse}
+     */
+    CardTokenisationResponse,
+
+    /**
      * The ChargeRequest model constructor.
      * @property {module:model/ChargeRequest}
      */
@@ -383,6 +425,18 @@ export {
     ExternalMPI,
 
     /**
+     * The FindPaymentIntentRequest model constructor.
+     * @property {module:model/FindPaymentIntentRequest}
+     */
+    FindPaymentIntentRequest,
+
+    /**
+     * The HttpConfig model constructor.
+     * @property {module:model/HttpConfig}
+     */
+    HttpConfig,
+
+    /**
      * The ListMerchantsResponse model constructor.
      * @property {module:model/ListMerchantsResponse}
      */
@@ -423,12 +477,6 @@ export {
      * @property {module:model/NetSummaryResponse}
      */
     NetSummaryResponse,
-
-    /**
-     * The PaResAuthRequest model constructor.
-     * @property {module:model/PaResAuthRequest}
-     */
-    PaResAuthRequest,
 
     /**
      * The PaylinkAddress model constructor.
@@ -569,16 +617,22 @@ export {
     PaylinkUI,
 
     /**
-     * The PaymentIntent model constructor.
-     * @property {module:model/PaymentIntent}
-     */
-    PaymentIntent,
-
-    /**
      * The PaymentIntentReference model constructor.
      * @property {module:model/PaymentIntentReference}
      */
     PaymentIntentReference,
+
+    /**
+     * The PaymentIntentRequestModel model constructor.
+     * @property {module:model/PaymentIntentRequestModel}
+     */
+    PaymentIntentRequestModel,
+
+    /**
+     * The PaymentIntentResponseModel model constructor.
+     * @property {module:model/PaymentIntentResponseModel}
+     */
+    PaymentIntentResponseModel,
 
     /**
      * The Ping model constructor.
@@ -609,6 +663,12 @@ export {
      * @property {module:model/RegisterCard}
      */
     RegisterCard,
+
+    /**
+     * The RegisterIpModel model constructor.
+     * @property {module:model/RegisterIpModel}
+     */
+    RegisterIpModel,
 
     /**
      * The RemittanceData model constructor.
@@ -659,10 +719,58 @@ export {
     TokenisationResponseModel,
 
     /**
+     * The TransactionReportRequest model constructor.
+     * @property {module:model/TransactionReportRequest}
+     */
+    TransactionReportRequest,
+
+    /**
+     * The VerificationRequest model constructor.
+     * @property {module:model/VerificationRequest}
+     */
+    VerificationRequest,
+
+    /**
      * The VoidRequest model constructor.
      * @property {module:model/VoidRequest}
      */
     VoidRequest,
+
+    /**
+     * The WebHookChannelCreateRequest model constructor.
+     * @property {module:model/WebHookChannelCreateRequest}
+     */
+    WebHookChannelCreateRequest,
+
+    /**
+     * The WebHookChannelCreateResponse model constructor.
+     * @property {module:model/WebHookChannelCreateResponse}
+     */
+    WebHookChannelCreateResponse,
+
+    /**
+     * The WebHookChannelDeleteRequest model constructor.
+     * @property {module:model/WebHookChannelDeleteRequest}
+     */
+    WebHookChannelDeleteRequest,
+
+    /**
+     * The WebHookSubscriptionRequest model constructor.
+     * @property {module:model/WebHookSubscriptionRequest}
+     */
+    WebHookSubscriptionRequest,
+
+    /**
+     * The WebHookSubscriptionResponse model constructor.
+     * @property {module:model/WebHookSubscriptionResponse}
+     */
+    WebHookSubscriptionResponse,
+
+    /**
+     * The WebHookUnsubscribeRequest model constructor.
+     * @property {module:model/WebHookUnsubscribeRequest}
+     */
+    WebHookUnsubscribeRequest,
 
     /**
     * The AuthorisationAndPaymentApi service constructor.
@@ -701,8 +809,22 @@ export {
     PaylinkApi,
 
     /**
+    * The PaymentIntentApi service constructor.
+    * @property {module:api/PaymentIntentApi}
+    */
+    PaymentIntentApi,
+
+    /**
     * The ReportingApi service constructor.
     * @property {module:api/ReportingApi}
     */
-    ReportingApi
+    ReportingApi,
+
+    /**
+    * The WebHooks service constructor.
+    * @property {module:api/WebHooks}
+    */
+    WebHooks,
+
+    PaResAuthRequest
 };

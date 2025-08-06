@@ -20,7 +20,7 @@ class PaylinkCustomParam {
     /**
      * Constructs a new <code>PaylinkCustomParam</code>.
      * @alias module:model/PaylinkCustomParam
-     * @param name {String} the name of the custom parameter used to converse with the submitter.
+     * @param name {String} Refers to the rendered HTML form element name. The value of this field is used in the postback and redirect dataset.
      */
     constructor(name) { 
         
@@ -49,6 +49,9 @@ class PaylinkCustomParam {
 
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
+            if (data.hasOwnProperty('auth_meta_data')) {
+                obj['auth_meta_data'] = ApiClient.convertToType(data['auth_meta_data'], 'Boolean');
             }
             if (data.hasOwnProperty('entry_mode')) {
                 obj['entry_mode'] = ApiClient.convertToType(data['entry_mode'], 'String');
@@ -138,67 +141,73 @@ class PaylinkCustomParam {
 PaylinkCustomParam.RequiredProperties = ["name"];
 
 /**
- * the name of the custom parameter used to converse with the submitter.
+ * Refers to the rendered HTML form element name. The value of this field is used in the postback and redirect dataset.
  * @member {String} name
  */
 PaylinkCustomParam.prototype['name'] = undefined;
 
 /**
- * The type of entry mode. A value of 'pre' will pre-render the custom parameter before the payment screen. Any other value will result in the custom parameter being displayed on the payment screen.
+ * Determines if the custom parameter is stored as meta data against an authorisation allowing for that authorisation to be searched and queried by the result of this value. Defaults to false.
+ * @member {Boolean} auth_meta_data
+ */
+PaylinkCustomParam.prototype['auth_meta_data'] = undefined;
+
+/**
+ * The type of entry mode. A value of `pre` will pre-render the custom parameter before the payment screen. Any other value will result in the custom parameter being displayed on the payment screen.
  * @member {String} entry_mode
  */
 PaylinkCustomParam.prototype['entry_mode'] = undefined;
 
 /**
- * the type of html5 field, defaults to 'text'. Other options are 'dob' for a date of birth series of select list entry.
+ * The type of html field, defaulting to `text`. Options are:   - `dob`      A date of birth field as a series of select list entries  - `text`     Allows the user to enter any text.  - `password` A field where the characters are masked to protect the input, typically used for passwords.  - `email`    Used for input fields that should contain an email address.  - `number`   For numeric input, can include controls for incrementing or decrementing the number.  - `tel`      For telephone numbers.  - `url`      A text field for entering a URL.  - `hidden`   Not visible to the user, but its value is sent when the form is submitted.  - `checkbox` A check box allowing single values to be selected/deselected.  - `radio`    Allows the user to select one of a limited number of choices.  - `select`   Renders as select items  Select Options:  Select options are constructed by providing a list of values in the value custom parameter field. Each value is delimited by a pipe character `|`. Value items can also be delimited with `:` as a value label pair.  For instance, a sports club requires identifying it's age group for membership entry:  <CodeGroup title=\"Select Examples\" label=\"ProcessBatchRequest\">    ```json {{ title: 'Basic Values' }}      { \"label\" : \"Age Group\",        \"fieldType\": \"select\",        \"value\" : \"Under 18|18-30|30-50|50+\" }...       <select>          <option value=\"Under 18\">Under 18</option>          <option value=\"18-30\">18-30</option>          <option value=\"30-50\">30-50</option>          <option value=\"50+\">50+</option>      </select>    ```    ```json {{ title: 'Label and Values' }}      { \"label\" : \"Age Group\",        \"fieldType\": \"select\",        \"value\" : \"0:Under 18|1:18-30|2:30-50|3:50+\" }...       <select>          <option value=\"0\">Under 18</option>          <option value=\"1\">18-30</option>          <option value=\"2\">30-50</option>          <option value=\"3\">50+</option>      </select>    ``` </CodeGroup>  Fields may be requested as optional. If a select is required to be optional, provide a value such as `:Select an Option|options...` at the front of the list. 
  * @member {String} field_type
  */
 PaylinkCustomParam.prototype['field_type'] = undefined;
 
 /**
- * a group the parameter is linked with, allows for grouping with a title.
+ * A value which groups items for layout. The value should be a string title for rendering such as \"Your Account Info\". If no value is provided, the parameter is added to a default parameter group. Group names are ordered alphabetically when rendered.
  * @member {String} group
  */
 PaylinkCustomParam.prototype['group'] = undefined;
 
 /**
- * a label to show alongside the input.
+ * A label to show alongside the input. If this value is not supplied, the name value will be used.
  * @member {String} label
  */
 PaylinkCustomParam.prototype['label'] = undefined;
 
 /**
- * whether the parameter is locked from entry.
+ * States whether the field is locked, preventing entry or amendment by the person completing the form.
  * @member {Boolean} locked
  */
 PaylinkCustomParam.prototype['locked'] = undefined;
 
 /**
- * an index order for the parameter.
+ * A value which allows you to order the position of elements in a grouping. Values will order in ascending order. Negative values are possible.
  * @member {Number} order
  */
 PaylinkCustomParam.prototype['order'] = undefined;
 
 /**
- * a regex pattern to validate the custom parameter with.
+ * A string value which specifies the validation logic of the form element, for example a value of QA[0-9]{3,4} will require a value such as QA221 or QA4433.
  * @member {String} pattern
  */
 PaylinkCustomParam.prototype['pattern'] = undefined;
 
 /**
- * a placehold value to display in the input.
+ * A value to set as the placeholder attribute which will render in the browser.
  * @member {String} placeholder
  */
 PaylinkCustomParam.prototype['placeholder'] = undefined;
 
 /**
- * whether the field is required.
+ * A boolean value that states whether the field is required or optional. When an element is required, validation will be performed on the end user's input form.
  * @member {Boolean} required
  */
 PaylinkCustomParam.prototype['required'] = undefined;
 
 /**
- * a default value for the field.
+ * An initial value for the parameter as it appears on the Form. If your parameter is hidden, the value will be required.
  * @member {String} value
  */
 PaylinkCustomParam.prototype['value'] = undefined;

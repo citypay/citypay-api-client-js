@@ -45,6 +45,9 @@ class AuthReference {
         if (data) {
             obj = obj || new AuthReference();
 
+            if (data.hasOwnProperty('address')) {
+                obj['address'] = ApiClient.convertToType(data['address'], 'String');
+            }
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'String');
             }
@@ -57,8 +60,29 @@ class AuthReference {
             if (data.hasOwnProperty('authcode')) {
                 obj['authcode'] = ApiClient.convertToType(data['authcode'], 'String');
             }
+            if (data.hasOwnProperty('authen_result')) {
+                obj['authen_result'] = ApiClient.convertToType(data['authen_result'], 'String');
+            }
             if (data.hasOwnProperty('batchno')) {
                 obj['batchno'] = ApiClient.convertToType(data['batchno'], 'String');
+            }
+            if (data.hasOwnProperty('bin_commercial')) {
+                obj['bin_commercial'] = ApiClient.convertToType(data['bin_commercial'], 'Boolean');
+            }
+            if (data.hasOwnProperty('bin_consumer')) {
+                obj['bin_consumer'] = ApiClient.convertToType(data['bin_consumer'], 'Boolean');
+            }
+            if (data.hasOwnProperty('bin_corporate')) {
+                obj['bin_corporate'] = ApiClient.convertToType(data['bin_corporate'], 'Boolean');
+            }
+            if (data.hasOwnProperty('bin_credit')) {
+                obj['bin_credit'] = ApiClient.convertToType(data['bin_credit'], 'Boolean');
+            }
+            if (data.hasOwnProperty('bin_debit')) {
+                obj['bin_debit'] = ApiClient.convertToType(data['bin_debit'], 'Boolean');
+            }
+            if (data.hasOwnProperty('cardholder_agreement')) {
+                obj['cardholder_agreement'] = ApiClient.convertToType(data['cardholder_agreement'], 'String');
             }
             if (data.hasOwnProperty('currency')) {
                 obj['currency'] = ApiClient.convertToType(data['currency'], 'String');
@@ -66,8 +90,23 @@ class AuthReference {
             if (data.hasOwnProperty('datetime')) {
                 obj['datetime'] = ApiClient.convertToType(data['datetime'], 'Date');
             }
+            if (data.hasOwnProperty('eci')) {
+                obj['eci'] = ApiClient.convertToType(data['eci'], 'String');
+            }
+            if (data.hasOwnProperty('email')) {
+                obj['email'] = ApiClient.convertToType(data['email'], 'String');
+            }
+            if (data.hasOwnProperty('env')) {
+                obj['env'] = ApiClient.convertToType(data['env'], 'String');
+            }
             if (data.hasOwnProperty('identifier')) {
                 obj['identifier'] = ApiClient.convertToType(data['identifier'], 'String');
+            }
+            if (data.hasOwnProperty('initiation')) {
+                obj['initiation'] = ApiClient.convertToType(data['initiation'], 'String');
+            }
+            if (data.hasOwnProperty('instrument')) {
+                obj['instrument'] = ApiClient.convertToType(data['instrument'], 'String');
             }
             if (data.hasOwnProperty('maskedpan')) {
                 obj['maskedpan'] = ApiClient.convertToType(data['maskedpan'], 'String');
@@ -75,8 +114,26 @@ class AuthReference {
             if (data.hasOwnProperty('merchantid')) {
                 obj['merchantid'] = ApiClient.convertToType(data['merchantid'], 'Number');
             }
+            if (data.hasOwnProperty('meta')) {
+                obj['meta'] = ApiClient.convertToType(data['meta'], {'String': 'String'});
+            }
+            if (data.hasOwnProperty('name_on_card')) {
+                obj['name_on_card'] = ApiClient.convertToType(data['name_on_card'], 'String');
+            }
+            if (data.hasOwnProperty('postcode')) {
+                obj['postcode'] = ApiClient.convertToType(data['postcode'], 'String');
+            }
             if (data.hasOwnProperty('result')) {
                 obj['result'] = ApiClient.convertToType(data['result'], 'String');
+            }
+            if (data.hasOwnProperty('result_id')) {
+                obj['result_id'] = ApiClient.convertToType(data['result_id'], 'String');
+            }
+            if (data.hasOwnProperty('scheme')) {
+                obj['scheme'] = ApiClient.convertToType(data['scheme'], 'String');
+            }
+            if (data.hasOwnProperty('scheme_logo')) {
+                obj['scheme_logo'] = ApiClient.convertToType(data['scheme_logo'], 'String');
             }
             if (data.hasOwnProperty('trans_status')) {
                 obj['trans_status'] = ApiClient.convertToType(data['trans_status'], 'String');
@@ -86,6 +143,12 @@ class AuthReference {
             }
             if (data.hasOwnProperty('transno')) {
                 obj['transno'] = ApiClient.convertToType(data['transno'], 'Number');
+            }
+            if (data.hasOwnProperty('type')) {
+                obj['type'] = ApiClient.convertToType(data['type'], 'String');
+            }
+            if (data.hasOwnProperty('utc')) {
+                obj['utc'] = ApiClient.convertToType(data['utc'], 'Number');
             }
         }
         return obj;
@@ -97,6 +160,10 @@ class AuthReference {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>AuthReference</code>.
      */
     static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['address'] && !(typeof data['address'] === 'string' || data['address'] instanceof String)) {
+            throw new Error("Expected the field `address` to be a primitive type in the JSON string but got " + data['address']);
+        }
         // ensure the json data is a string
         if (data['amount'] && !(typeof data['amount'] === 'string' || data['amount'] instanceof String)) {
             throw new Error("Expected the field `amount` to be a primitive type in the JSON string but got " + data['amount']);
@@ -110,24 +177,72 @@ class AuthReference {
             throw new Error("Expected the field `authcode` to be a primitive type in the JSON string but got " + data['authcode']);
         }
         // ensure the json data is a string
+        if (data['authen_result'] && !(typeof data['authen_result'] === 'string' || data['authen_result'] instanceof String)) {
+            throw new Error("Expected the field `authen_result` to be a primitive type in the JSON string but got " + data['authen_result']);
+        }
+        // ensure the json data is a string
         if (data['batchno'] && !(typeof data['batchno'] === 'string' || data['batchno'] instanceof String)) {
             throw new Error("Expected the field `batchno` to be a primitive type in the JSON string but got " + data['batchno']);
+        }
+        // ensure the json data is a string
+        if (data['cardholder_agreement'] && !(typeof data['cardholder_agreement'] === 'string' || data['cardholder_agreement'] instanceof String)) {
+            throw new Error("Expected the field `cardholder_agreement` to be a primitive type in the JSON string but got " + data['cardholder_agreement']);
         }
         // ensure the json data is a string
         if (data['currency'] && !(typeof data['currency'] === 'string' || data['currency'] instanceof String)) {
             throw new Error("Expected the field `currency` to be a primitive type in the JSON string but got " + data['currency']);
         }
         // ensure the json data is a string
+        if (data['eci'] && !(typeof data['eci'] === 'string' || data['eci'] instanceof String)) {
+            throw new Error("Expected the field `eci` to be a primitive type in the JSON string but got " + data['eci']);
+        }
+        // ensure the json data is a string
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
+        }
+        // ensure the json data is a string
+        if (data['env'] && !(typeof data['env'] === 'string' || data['env'] instanceof String)) {
+            throw new Error("Expected the field `env` to be a primitive type in the JSON string but got " + data['env']);
+        }
+        // ensure the json data is a string
         if (data['identifier'] && !(typeof data['identifier'] === 'string' || data['identifier'] instanceof String)) {
             throw new Error("Expected the field `identifier` to be a primitive type in the JSON string but got " + data['identifier']);
+        }
+        // ensure the json data is a string
+        if (data['initiation'] && !(typeof data['initiation'] === 'string' || data['initiation'] instanceof String)) {
+            throw new Error("Expected the field `initiation` to be a primitive type in the JSON string but got " + data['initiation']);
+        }
+        // ensure the json data is a string
+        if (data['instrument'] && !(typeof data['instrument'] === 'string' || data['instrument'] instanceof String)) {
+            throw new Error("Expected the field `instrument` to be a primitive type in the JSON string but got " + data['instrument']);
         }
         // ensure the json data is a string
         if (data['maskedpan'] && !(typeof data['maskedpan'] === 'string' || data['maskedpan'] instanceof String)) {
             throw new Error("Expected the field `maskedpan` to be a primitive type in the JSON string but got " + data['maskedpan']);
         }
         // ensure the json data is a string
+        if (data['name_on_card'] && !(typeof data['name_on_card'] === 'string' || data['name_on_card'] instanceof String)) {
+            throw new Error("Expected the field `name_on_card` to be a primitive type in the JSON string but got " + data['name_on_card']);
+        }
+        // ensure the json data is a string
+        if (data['postcode'] && !(typeof data['postcode'] === 'string' || data['postcode'] instanceof String)) {
+            throw new Error("Expected the field `postcode` to be a primitive type in the JSON string but got " + data['postcode']);
+        }
+        // ensure the json data is a string
         if (data['result'] && !(typeof data['result'] === 'string' || data['result'] instanceof String)) {
             throw new Error("Expected the field `result` to be a primitive type in the JSON string but got " + data['result']);
+        }
+        // ensure the json data is a string
+        if (data['result_id'] && !(typeof data['result_id'] === 'string' || data['result_id'] instanceof String)) {
+            throw new Error("Expected the field `result_id` to be a primitive type in the JSON string but got " + data['result_id']);
+        }
+        // ensure the json data is a string
+        if (data['scheme'] && !(typeof data['scheme'] === 'string' || data['scheme'] instanceof String)) {
+            throw new Error("Expected the field `scheme` to be a primitive type in the JSON string but got " + data['scheme']);
+        }
+        // ensure the json data is a string
+        if (data['scheme_logo'] && !(typeof data['scheme_logo'] === 'string' || data['scheme_logo'] instanceof String)) {
+            throw new Error("Expected the field `scheme_logo` to be a primitive type in the JSON string but got " + data['scheme_logo']);
         }
         // ensure the json data is a string
         if (data['trans_status'] && !(typeof data['trans_status'] === 'string' || data['trans_status'] instanceof String)) {
@@ -137,6 +252,10 @@ class AuthReference {
         if (data['trans_type'] && !(typeof data['trans_type'] === 'string' || data['trans_type'] instanceof String)) {
             throw new Error("Expected the field `trans_type` to be a primitive type in the JSON string but got " + data['trans_type']);
         }
+        // ensure the json data is a string
+        if (data['type'] && !(typeof data['type'] === 'string' || data['type'] instanceof String)) {
+            throw new Error("Expected the field `type` to be a primitive type in the JSON string but got " + data['type']);
+        }
 
         return true;
     }
@@ -145,6 +264,12 @@ class AuthReference {
 }
 
 
+
+/**
+ * The address of the card holder.
+ * @member {String} address
+ */
+AuthReference.prototype['address'] = undefined;
 
 /**
  * The amount of the transaction in decimal currency format.
@@ -171,10 +296,52 @@ AuthReference.prototype['atrn'] = undefined;
 AuthReference.prototype['authcode'] = undefined;
 
 /**
+ * The authentication result if an ecommerce transaction. 'Y'. Authentication Successful, 'N'. Authentication Failed, 'A'. Attempts Processing Performed, 'U'. Authentication Could Not Be Performed, 'C'. Challenge Required.
+ * @member {String} authen_result
+ */
+AuthReference.prototype['authen_result'] = undefined;
+
+/**
  * A batch number which the transaction has been end of day batched towards.
  * @member {String} batchno
  */
 AuthReference.prototype['batchno'] = undefined;
+
+/**
+ * Whether the card is a commercial card.
+ * @member {Boolean} bin_commercial
+ */
+AuthReference.prototype['bin_commercial'] = undefined;
+
+/**
+ * Whether the card is a consumer card.
+ * @member {Boolean} bin_consumer
+ */
+AuthReference.prototype['bin_consumer'] = undefined;
+
+/**
+ * Whether the card is a corporate card.
+ * @member {Boolean} bin_corporate
+ */
+AuthReference.prototype['bin_corporate'] = undefined;
+
+/**
+ * Whether the card is a credit card.
+ * @member {Boolean} bin_credit
+ */
+AuthReference.prototype['bin_credit'] = undefined;
+
+/**
+ * Whether the card is a debit card.
+ * @member {Boolean} bin_debit
+ */
+AuthReference.prototype['bin_debit'] = undefined;
+
+/**
+ * Merchant-initiated transactions (MITs) are payments you trigger, where the cardholder has previously consented to you carrying out such payments. These may be scheduled (such as recurring payments and installments) or unscheduled (like account top-ups triggered by balance thresholds and no-show charges).  Scheduled These are regular payments using stored card details, like installments or a monthly subscription fee.  - `I` Instalment - A single purchase of goods or services billed to a cardholder in multiple transactions, over a period of time agreed by the cardholder and you.  - `R` Recurring - Transactions processed at fixed, regular intervals not to exceed one year between transactions, representing an agreement between a cardholder and you to purchase goods or services provided over a period of time.  Unscheduled These are payments using stored card details that do not occur on a regular schedule, like top-ups for a digital wallet triggered by the balance falling below a certain threshold.  - `A` Reauthorisation - a purchase made after the original purchase. A common scenario is delayed/split shipments.  - `C` Unscheduled Payment - A transaction using a stored credential for a fixed or variable amount that does not occur on a scheduled or regularly occurring transaction date. This includes account top-ups triggered by balance thresholds.  - `D` Delayed Charge - A delayed charge is typically used in hotel, cruise lines and vehicle rental environments to perform a supplemental account charge after original services are rendered.  - `L` Incremental - An incremental authorisation is typically found in hotel and car rental environments, where the cardholder has agreed to pay for any service incurred during the duration of the contract. An incremental authorisation is where you need to seek authorisation of further funds in addition to what you have originally requested. A common scenario is additional services charged to the contract, such as extending a stay in a hotel.  - `S` Resubmission - When the original purchase occurred, but you were not able to get authorisation at the time the goods or services were provided. It should be only used where the goods or services have already been provided, but the authorisation request is declined for insufficient funds.  - `X` No-show - A no-show is a transaction where you are enabled to charge for services which the cardholder entered into an agreement to purchase, but the cardholder did not meet the terms of the agreement.  - `N` Not Applicable - For all other transactions the value will be not applicable. 
+ * @member {String} cardholder_agreement
+ */
+AuthReference.prototype['cardholder_agreement'] = undefined;
 
 /**
  * The currency of the transaction in ISO 4217 code format.
@@ -189,10 +356,40 @@ AuthReference.prototype['currency'] = undefined;
 AuthReference.prototype['datetime'] = undefined;
 
 /**
+ * The ECI if an ecommerce transaction.
+ * @member {String} eci
+ */
+AuthReference.prototype['eci'] = undefined;
+
+/**
+ * The email address of the card holder.
+ * @member {String} email
+ */
+AuthReference.prototype['email'] = undefined;
+
+/**
+ * The environment that the transaction is process within based on the transaction type.
+ * @member {String} env
+ */
+AuthReference.prototype['env'] = undefined;
+
+/**
  * The identifier of the transaction used to process the transaction.
  * @member {String} identifier
  */
 AuthReference.prototype['identifier'] = undefined;
+
+/**
+ * The initiation of the payment. The value will be C for Card holder initiated and M for a merchant initiated transaction.
+ * @member {String} initiation
+ */
+AuthReference.prototype['initiation'] = undefined;
+
+/**
+ * The payment instrument used such as Card, Cash, Bank, Crypto, ApplePay, GooglePay, Click2Pay, PayPal, OpenBankingPayment.
+ * @member {String} instrument
+ */
+AuthReference.prototype['instrument'] = undefined;
 
 /**
  * A masking of the card number which was used to process the tranasction.
@@ -207,10 +404,45 @@ AuthReference.prototype['maskedpan'] = undefined;
 AuthReference.prototype['merchantid'] = undefined;
 
 /**
+ * @member {Object.<String, String>} meta
+ */
+AuthReference.prototype['meta'] = undefined;
+
+/**
+ * The name of the card holder.
+ * @member {String} name_on_card
+ */
+AuthReference.prototype['name_on_card'] = undefined;
+
+/**
+ * The postcode of the card holder.
+ * @member {String} postcode
+ */
+AuthReference.prototype['postcode'] = undefined;
+
+/**
  * The result of the transaction.
  * @member {String} result
  */
 AuthReference.prototype['result'] = undefined;
+
+/**
+ * The id of the result of the transaction.
+ * @member {String} result_id
+ */
+AuthReference.prototype['result_id'] = undefined;
+
+/**
+ * The card scheme of any card used.
+ * @member {String} scheme
+ */
+AuthReference.prototype['scheme'] = undefined;
+
+/**
+ * The card scheme logo of any card used.
+ * @member {String} scheme_logo
+ */
+AuthReference.prototype['scheme_logo'] = undefined;
 
 /**
  * The current status of the transaction through it's lifecycle.
@@ -219,7 +451,7 @@ AuthReference.prototype['result'] = undefined;
 AuthReference.prototype['trans_status'] = undefined;
 
 /**
- * The type of transaction that was processed.
+ * The type code of transaction that was processed.
  * @member {String} trans_type
  */
 AuthReference.prototype['trans_type'] = undefined;
@@ -229,6 +461,18 @@ AuthReference.prototype['trans_type'] = undefined;
  * @member {Number} transno
  */
 AuthReference.prototype['transno'] = undefined;
+
+/**
+ * Defines whether the transaction is a sale, refund or verification.
+ * @member {String} type
+ */
+AuthReference.prototype['type'] = undefined;
+
+/**
+ * The date and time of the transaction in UTC milli seconds since the epoc.
+ * @member {Number} utc
+ */
+AuthReference.prototype['utc'] = undefined;
 
 
 

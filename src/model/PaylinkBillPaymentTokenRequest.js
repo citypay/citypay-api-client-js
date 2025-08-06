@@ -11,6 +11,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import Adjustments from './Adjustments';
 import PaylinkAttachmentRequest from './PaylinkAttachmentRequest';
 import PaylinkEmailNotificationPath from './PaylinkEmailNotificationPath';
 import PaylinkSMSNotificationPath from './PaylinkSMSNotificationPath';
@@ -57,6 +58,9 @@ class PaylinkBillPaymentTokenRequest {
             if (data.hasOwnProperty('addressee')) {
                 obj['addressee'] = ApiClient.convertToType(data['addressee'], 'String');
             }
+            if (data.hasOwnProperty('adjustments')) {
+                obj['adjustments'] = Adjustments.constructFromObject(data['adjustments']);
+            }
             if (data.hasOwnProperty('attachments')) {
                 obj['attachments'] = ApiClient.convertToType(data['attachments'], [PaylinkAttachmentRequest]);
             }
@@ -98,6 +102,10 @@ class PaylinkBillPaymentTokenRequest {
         // ensure the json data is a string
         if (data['addressee'] && !(typeof data['addressee'] === 'string' || data['addressee'] instanceof String)) {
             throw new Error("Expected the field `addressee` to be a primitive type in the JSON string but got " + data['addressee']);
+        }
+        // validate the optional field `adjustments`
+        if (data['adjustments']) { // data not null
+          Adjustments.validateJSON(data['adjustments']);
         }
         if (data['attachments']) { // data not null
             // ensure the json data is an array
@@ -144,6 +152,11 @@ PaylinkBillPaymentTokenRequest.prototype['request'] = undefined;
  * @member {String} addressee
  */
 PaylinkBillPaymentTokenRequest.prototype['addressee'] = undefined;
+
+/**
+ * @member {module:model/Adjustments} adjustments
+ */
+PaylinkBillPaymentTokenRequest.prototype['adjustments'] = undefined;
 
 /**
  * @member {Array.<module:model/PaylinkAttachmentRequest>} attachments

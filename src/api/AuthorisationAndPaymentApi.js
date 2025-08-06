@@ -20,13 +20,13 @@ import Bin from '../model/Bin';
 import BinLookup from '../model/BinLookup';
 import CResAuthRequest from '../model/CResAuthRequest';
 import CaptureRequest from '../model/CaptureRequest';
+import CardTokenisationRequest from '../model/CardTokenisationRequest';
+import CardTokenisationResponse from '../model/CardTokenisationResponse';
 import Decision from '../model/Decision';
 import Error from '../model/Error';
-import PaResAuthRequest from '../model/PaResAuthRequest';
-import PaymentIntent from '../model/PaymentIntent';
-import PaymentIntentReference from '../model/PaymentIntentReference';
 import RefundRequest from '../model/RefundRequest';
 import RetrieveRequest from '../model/RetrieveRequest';
+import VerificationRequest from '../model/VerificationRequest';
 import VoidRequest from '../model/VoidRequest';
 
 /**
@@ -237,16 +237,16 @@ export default class AuthorisationAndPaymentApi {
 
 
     /**
-     * Create a Payment Intent
-     * This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent captures the details of a prospective payment transaction, including the payment amount, currency, and associated billing and shipping information. 
-     * @param {module:model/PaymentIntent} payment_intent 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaymentIntentReference} and HTTP response
+     * Card Tokenisation Request
+     * Performs a tokenisation request for card details.
+     * @param {module:model/CardTokenisationRequest} card_tokenisation_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CardTokenisationResponse} and HTTP response
      */
-    createPaymentIntentWithHttpInfo(payment_intent) {
-      let postBody = payment_intent;
-      // verify the required parameter 'payment_intent' is set
-      if (payment_intent === undefined || payment_intent === null) {
-        throw new Error("Missing the required parameter 'payment_intent' when calling createPaymentIntent");
+    cardTokenisationRequestWithHttpInfo(card_tokenisation_request) {
+      let postBody = card_tokenisation_request;
+      // verify the required parameter 'card_tokenisation_request' is set
+      if (card_tokenisation_request === undefined || card_tokenisation_request === null) {
+        throw new Error("Missing the required parameter 'card_tokenisation_request' when calling cardTokenisationRequest");
       }
 
       let pathParams = {
@@ -258,72 +258,25 @@ export default class AuthorisationAndPaymentApi {
       let formParams = {
       };
 
-      let authNames = ['cp-api-key'];
+      let authNames = ['cp-domain-key', 'cp-api-key'];
       let contentTypes = ['application/json', 'text/xml'];
       let accepts = ['application/json', 'text/xml'];
-      let returnType = PaymentIntentReference;
+      let returnType = CardTokenisationResponse;
       return this.apiClient.callApi(
-        '/v6/intent/create', 'POST',
+        '/v6/tokenise', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Create a Payment Intent
-     * This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent captures the details of a prospective payment transaction, including the payment amount, currency, and associated billing and shipping information. 
-     * @param {module:model/PaymentIntent} payment_intent 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaymentIntentReference}
+     * Card Tokenisation Request
+     * Performs a tokenisation request for card details.
+     * @param {module:model/CardTokenisationRequest} card_tokenisation_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CardTokenisationResponse}
      */
-    createPaymentIntent(payment_intent) {
-      return this.createPaymentIntentWithHttpInfo(payment_intent)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * PaRes
-     * The Payer Authentication Response (PaRes) is an operation after the result of authentication   being performed. The request uses an encoded packet of authentication data to  notify us of the completion of the liability shift. Once this value has been unpacked and its signature is checked, our systems will proceed to authorisation processing.    Any call to the PaRes operation will require a previous authorisation request and cannot be called  on its own without a previous [authentication required](#authenticationrequired)  being obtained. 
-     * @param {module:model/PaResAuthRequest} pa_res_auth_request 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthResponse} and HTTP response
-     */
-    paResRequestWithHttpInfo(pa_res_auth_request) {
-      let postBody = pa_res_auth_request;
-      // verify the required parameter 'pa_res_auth_request' is set
-      if (pa_res_auth_request === undefined || pa_res_auth_request === null) {
-        throw new Error("Missing the required parameter 'pa_res_auth_request' when calling paResRequest");
-      }
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['cp-api-key'];
-      let contentTypes = ['application/json', 'text/xml'];
-      let accepts = ['application/json', 'text/xml'];
-      let returnType = AuthResponse;
-      return this.apiClient.callApi(
-        '/v6/pares', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
-      );
-    }
-
-    /**
-     * PaRes
-     * The Payer Authentication Response (PaRes) is an operation after the result of authentication   being performed. The request uses an encoded packet of authentication data to  notify us of the completion of the liability shift. Once this value has been unpacked and its signature is checked, our systems will proceed to authorisation processing.    Any call to the PaRes operation will require a previous authorisation request and cannot be called  on its own without a previous [authentication required](#authenticationrequired)  being obtained. 
-     * @param {module:model/PaResAuthRequest} pa_res_auth_request 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AuthResponse}
-     */
-    paResRequest(pa_res_auth_request) {
-      return this.paResRequestWithHttpInfo(pa_res_auth_request)
+    cardTokenisationRequest(card_tokenisation_request) {
+      return this.cardTokenisationRequestWithHttpInfo(card_tokenisation_request)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -378,7 +331,7 @@ export default class AuthorisationAndPaymentApi {
 
 
     /**
-     * Retrieval
+     * Transaction Retrieval
      * A retrieval request which allows an integration to obtain the result of a transaction processed in the last 90 days. The request allows for retrieval based on the identifier or transaction  number.   The process may return multiple results in particular where a transaction was processed multiple times against the same identifier. This can happen if errors were first received. The API therefore returns up to the first 5 transactions in the latest date time order.  It is not intended for this operation to be a replacement for reporting and only allows for base transaction information to be returned. 
      * @param {module:model/RetrieveRequest} retrieve_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AuthReferences} and HTTP response
@@ -411,13 +364,60 @@ export default class AuthorisationAndPaymentApi {
     }
 
     /**
-     * Retrieval
+     * Transaction Retrieval
      * A retrieval request which allows an integration to obtain the result of a transaction processed in the last 90 days. The request allows for retrieval based on the identifier or transaction  number.   The process may return multiple results in particular where a transaction was processed multiple times against the same identifier. This can happen if errors were first received. The API therefore returns up to the first 5 transactions in the latest date time order.  It is not intended for this operation to be a replacement for reporting and only allows for base transaction information to be returned. 
      * @param {module:model/RetrieveRequest} retrieve_request 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AuthReferences}
      */
     retrievalRequest(retrieve_request) {
       return this.retrievalRequestWithHttpInfo(retrieve_request)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Verification
+     * Performs a request for verification for a card payment request.
+     * @param {module:model/VerificationRequest} verification_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Decision} and HTTP response
+     */
+    verificationRequestWithHttpInfo(verification_request) {
+      let postBody = verification_request;
+      // verify the required parameter 'verification_request' is set
+      if (verification_request === undefined || verification_request === null) {
+        throw new Error("Missing the required parameter 'verification_request' when calling verificationRequest");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['cp-api-key'];
+      let contentTypes = ['application/json', 'text/xml'];
+      let accepts = ['application/json', 'text/xml'];
+      let returnType = Decision;
+      return this.apiClient.callApi(
+        '/v6/verify', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Verification
+     * Performs a request for verification for a card payment request.
+     * @param {module:model/VerificationRequest} verification_request 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Decision}
+     */
+    verificationRequest(verification_request) {
+      return this.verificationRequestWithHttpInfo(verification_request)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

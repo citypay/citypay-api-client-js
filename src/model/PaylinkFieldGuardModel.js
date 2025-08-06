@@ -106,7 +106,7 @@ class PaylinkFieldGuardModel {
 
 
 /**
- * A type of HTML element that should be displayed such as text, password, url. Any HTML5 input type value may be supplied.  If a value of `date` is supplied the value format should be an ISO format YYYY-MM-DD format date i.e. 2024-03-01 If a value of `datetime-local` is supplied, the value format should be an ISO format YYYY-MM-DDTHH:mm i.e. 2024-06-01T19:30. 
+ * A type of HTML element that should be displayed such as text, password, url. Any HTML5 input type value may be supplied.  - If a value of `date` is supplied the value format should be an ISO format YYYY-MM-DD format date i.e. 2024-03-01 - If a value of `datetime-local` is supplied, the value format should be an ISO format YYYY-MM-DDTHH:mm i.e. 2024-06-01T19:30. 
  * @member {String} field_type
  */
 PaylinkFieldGuardModel.prototype['field_type'] = undefined;

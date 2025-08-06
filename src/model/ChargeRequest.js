@@ -24,7 +24,7 @@ class ChargeRequest {
      * @param amount {Number} The amount to authorise in the lowest unit of currency with a variable length to a maximum of 12 digits.  No decimal points are to be included and no divisional characters such as 1,024.  The amount should be the total amount required for the transaction.  For example with GBP £1,021.95 the amount value is 102195. 
      * @param identifier {String} The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
      * @param merchantid {Number} Identifies the merchant account to perform processing for.
-     * @param token {String} A tokenised form of a card that belongs to a card holder's account and that has been previously registered. The token is time based and will only be active for a short duration. The value is therefore designed not to be stored remotely for future use.   Tokens will start with ct and are resiliently tamper proof using HMacSHA-256. No sensitive card data is stored internally within the token.   Each card will contain a different token and the value may be different on any retrieval call.   The value can be presented for payment as a selection value to an end user in a web application. 
+     * @param token {String} A tokenised form of a card that belongs to a card holder's account and that has been previously registered. The token is time based and will only be active for a short duration. The value is therefore designed not to be stored remotely for future use.   Tokens will start with `ct` and are resiliently tamper proof using HMacSHA-256. No sensitive card data is stored internally within the token.   Each card will contain a different token and the value may be different on any retrieval call.   The value can be presented for payment as a selection value to an end user in a web application. 
      */
     constructor(amount, identifier, merchantid, token) { 
         
@@ -89,6 +89,9 @@ class ChargeRequest {
             }
             if (data.hasOwnProperty('match_avsa')) {
                 obj['match_avsa'] = ApiClient.convertToType(data['match_avsa'], 'String');
+            }
+            if (data.hasOwnProperty('pre_auth')) {
+                obj['pre_auth'] = ApiClient.convertToType(data['pre_auth'], 'String');
             }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], ['String']);
@@ -158,6 +161,10 @@ class ChargeRequest {
         if (data['match_avsa'] && !(typeof data['match_avsa'] === 'string' || data['match_avsa'] instanceof String)) {
             throw new Error("Expected the field `match_avsa` to be a primitive type in the JSON string but got " + data['match_avsa']);
         }
+        // ensure the json data is a string
+        if (data['pre_auth'] && !(typeof data['pre_auth'] === 'string' || data['pre_auth'] instanceof String)) {
+            throw new Error("Expected the field `pre_auth` to be a primitive type in the JSON string but got " + data['pre_auth']);
+        }
         // ensure the json data is an array
         if (!Array.isArray(data['tag'])) {
             throw new Error("Expected the field `tag` to be an array in the JSON data but got " + data['tag']);
@@ -202,7 +209,7 @@ ChargeRequest.prototype['identifier'] = undefined;
 ChargeRequest.prototype['merchantid'] = undefined;
 
 /**
- * A tokenised form of a card that belongs to a card holder's account and that has been previously registered. The token is time based and will only be active for a short duration. The value is therefore designed not to be stored remotely for future use.   Tokens will start with ct and are resiliently tamper proof using HMacSHA-256. No sensitive card data is stored internally within the token.   Each card will contain a different token and the value may be different on any retrieval call.   The value can be presented for payment as a selection value to an end user in a web application. 
+ * A tokenised form of a card that belongs to a card holder's account and that has been previously registered. The token is time based and will only be active for a short duration. The value is therefore designed not to be stored remotely for future use.   Tokens will start with `ct` and are resiliently tamper proof using HMacSHA-256. No sensitive card data is stored internally within the token.   Each card will contain a different token and the value may be different on any retrieval call.   The value can be presented for payment as a selection value to an end user in a web application. 
  * @member {String} token
  */
 ChargeRequest.prototype['token'] = undefined;
@@ -214,7 +221,7 @@ ChargeRequest.prototype['token'] = undefined;
 ChargeRequest.prototype['avs_postcode_policy'] = undefined;
 
 /**
- * Merchant-initiated transactions (MITs) are payments you trigger, where the cardholder has previously consented to you carrying out such payments. These may be scheduled (such as recurring payments and installments) or unscheduled (like account top-ups triggered by balance thresholds and no-show charges).  Scheduled --- These are regular payments using stored card details, like installments or a monthly subscription fee.  - `I` Instalment - A single purchase of goods or services billed to a cardholder in multiple transactions, over a period of time agreed by the cardholder and you.  - `R` Recurring - Transactions processed at fixed, regular intervals not to exceed one year between transactions, representing an agreement between a cardholder and you to purchase goods or services provided over a period of time.  Unscheduled --- These are payments using stored card details that do not occur on a regular schedule, like top-ups for a digital wallet triggered by the balance falling below a certain threshold.  - `A` Reauthorisation - a purchase made after the original purchase. A common scenario is delayed/split shipments.  - `C` Unscheduled Payment - A transaction using a stored credential for a fixed or variable amount that does not occur on a scheduled or regularly occurring transaction date. This includes account top-ups triggered by balance thresholds.  - `D` Delayed Charge - A delayed charge is typically used in hotel, cruise lines and vehicle rental environments to perform a supplemental account charge after original services are rendered.  - `L` Incremental - An incremental authorisation is typically found in hotel and car rental environments, where the cardholder has agreed to pay for any service incurred during the duration of the contract. An incremental authorisation is where you need to seek authorisation of further funds in addition to what you have originally requested. A common scenario is additional services charged to the contract, such as extending a stay in a hotel.  - `S` Resubmission - When the original purchase occurred, but you were not able to get authorisation at the time the goods or services were provided. It should be only used where the goods or services have already been provided, but the authorisation request is declined for insufficient funds.  - `X` No-show - A no-show is a transaction where you are enabled to charge for services which the cardholder entered into an agreement to purchase, but the cardholder did not meet the terms of the agreement. 
+ * Merchant-initiated transactions (MITs) are payments you trigger, where the cardholder has previously consented to you carrying out such payments. These may be scheduled (such as recurring payments and installments) or unscheduled (like account top-ups triggered by balance thresholds and no-show charges).  Scheduled These are regular payments using stored card details, like installments or a monthly subscription fee.  - `I` Instalment - A single purchase of goods or services billed to a cardholder in multiple transactions, over a period of time agreed by the cardholder and you.  - `R` Recurring - Transactions processed at fixed, regular intervals not to exceed one year between transactions, representing an agreement between a cardholder and you to purchase goods or services provided over a period of time.  Unscheduled These are payments using stored card details that do not occur on a regular schedule, like top-ups for a digital wallet triggered by the balance falling below a certain threshold.  - `A` Reauthorisation - a purchase made after the original purchase. A common scenario is delayed/split shipments.  - `C` Unscheduled Payment - A transaction using a stored credential for a fixed or variable amount that does not occur on a scheduled or regularly occurring transaction date. This includes account top-ups triggered by balance thresholds.  - `D` Delayed Charge - A delayed charge is typically used in hotel, cruise lines and vehicle rental environments to perform a supplemental account charge after original services are rendered.  - `L` Incremental - An incremental authorisation is typically found in hotel and car rental environments, where the cardholder has agreed to pay for any service incurred during the duration of the contract. An incremental authorisation is where you need to seek authorisation of further funds in addition to what you have originally requested. A common scenario is additional services charged to the contract, such as extending a stay in a hotel.  - `S` Resubmission - When the original purchase occurred, but you were not able to get authorisation at the time the goods or services were provided. It should be only used where the goods or services have already been provided, but the authorisation request is declined for insufficient funds.  - `X` No-show - A no-show is a transaction where you are enabled to charge for services which the cardholder entered into an agreement to purchase, but the cardholder did not meet the terms of the agreement.  - `N` Not Applicable - For all other transactions the value will be not applicable. 
  * @member {String} cardholder_agreement
  */
 ChargeRequest.prototype['cardholder_agreement'] = undefined;
@@ -254,6 +261,12 @@ ChargeRequest.prototype['initiation'] = undefined;
  * @member {String} match_avsa
  */
 ChargeRequest.prototype['match_avsa'] = undefined;
+
+/**
+ * A policy value which determines whether a pre auth policy is enforced or bypassed.  Values are:   `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy.  Enforces pre-authorisation when it does not pre-auth by default.   `2` to bypass. Bypasses pre-authorisation when it is enabled to pre auth by default.   `3` to ignore. The same as the default policy (0). Although it currently mirrors the default, this option is included for compatibility with other policies. 
+ * @member {String} pre_auth
+ */
+ChargeRequest.prototype['pre_auth'] = undefined;
 
 /**
  * @member {Array.<String>} tag

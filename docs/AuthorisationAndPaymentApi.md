@@ -8,10 +8,10 @@ Method | HTTP request | Description
 [**binRangeLookupRequest**](AuthorisationAndPaymentApi.md#binRangeLookupRequest) | **POST** /v6/bin | Bin Lookup
 [**cResRequest**](AuthorisationAndPaymentApi.md#cResRequest) | **POST** /v6/cres | CRes
 [**captureRequest**](AuthorisationAndPaymentApi.md#captureRequest) | **POST** /v6/capture | Capture
-[**createPaymentIntent**](AuthorisationAndPaymentApi.md#createPaymentIntent) | **POST** /v6/intent/create | Create a Payment Intent
-[**paResRequest**](AuthorisationAndPaymentApi.md#paResRequest) | **POST** /v6/pares | PaRes
+[**cardTokenisationRequest**](AuthorisationAndPaymentApi.md#cardTokenisationRequest) | **POST** /v6/tokenise | Card Tokenisation Request
 [**refundRequest**](AuthorisationAndPaymentApi.md#refundRequest) | **POST** /v6/refund | Refund
-[**retrievalRequest**](AuthorisationAndPaymentApi.md#retrievalRequest) | **POST** /v6/retrieve | Retrieval
+[**retrievalRequest**](AuthorisationAndPaymentApi.md#retrievalRequest) | **POST** /v6/retrieve | Transaction Retrieval
+[**verificationRequest**](AuthorisationAndPaymentApi.md#verificationRequest) | **POST** /v6/verify | Verification
 [**voidRequest**](AuthorisationAndPaymentApi.md#voidRequest) | **POST** /v6/void | Void
 
 
@@ -71,7 +71,18 @@ Name | Type | Description  | Notes
 
 Bin Lookup
 
-A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number&#39;s  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it&#39;s country of origin 3. it&#39;s currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's 
+leading digits help to identify who
+
+0. the card scheme is such as Visa, MasterCard or American Express 
+1. the issuer of the card, such as the bank
+2. it's country of origin
+3. it's currency of origin
+
+Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin
+data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate
+result.
+
 
 ### Example
 
@@ -120,7 +131,14 @@ Name | Type | Description  | Notes
 
 CRes
 
-The CRes request performs authorisation processing once a challenge request has been completed with an Authentication Server (ACS). This challenge response contains confirmation that will allow the API systems to return an authorisation response based on the result. Our systems will  know out of band via an &#x60;RReq&#x60; call by the ACS to notify us if the liability shift has been issued.  Any call to the CRes operation will require a previous authorisation request and cannot be called  on its own without a previous [request challenge](#requestchallenged) being obtained. 
+The CRes request performs authorisation processing once a challenge request has been completed
+with an Authentication Server (ACS). This challenge response contains confirmation that will
+allow the API systems to return an authorisation response based on the result. Our systems will 
+know out of band via an `RReq` call by the ACS to notify us if the liability shift has been issued.
+
+Any call to the CRes operation will require a previous authorisation request and cannot be called 
+on its own without a previous [request challenge](#requestchallenged) being obtained.
+
 
 ### Example
 
@@ -169,7 +187,24 @@ Name | Type | Description  | Notes
 
 Capture
 
-_The capture process only applies to transactions which have been pre-authorised only._   The capture process will ensure that a transaction will now settle. It is expected that a capture call will be provided within 3 days or a maximum of 7 days.  A capture request is provided to confirm that you wish the transaction to be settled. This request can contain a final amount for the transaction which is different to the original authorisation amount. This may be useful in a delayed system process such as waiting for stock to be ordered, confirmed, or services provided before the final cost is known.  When a transaction is completed, a new authorisation code may be created and a new confirmation can be sent online to the acquiring bank.  Once the transaction has been processed. A standard [&#x60;Acknowledgement&#x60;](#acknowledgement) will be returned, outlining the result of the transaction. On a successful completion process, the transaction will be available for the settlement and completed at the end of the day. 
+_The capture process only applies to transactions which have been pre-authorised only._ 
+
+The capture process will ensure
+that a transaction will now settle. It is expected that a capture call will be provided within 3 days or
+a maximum of 7 days.
+
+A capture request is provided to confirm that you wish the transaction to be settled. This request can
+contain a final amount for the transaction which is different to the original authorisation amount. This
+may be useful in a delayed system process such as waiting for stock to be ordered, confirmed, or services
+provided before the final cost is known.
+
+When a transaction is completed, a new authorisation code may be created and a new confirmation
+can be sent online to the acquiring bank.
+
+Once the transaction has been processed. A standard [`Acknowledgement`](#acknowledgement) will be returned,
+outlining the result of the transaction. On a successful completion process, the transaction will
+be available for the settlement and completed at the end of the day.
+
 
 ### Example
 
@@ -212,13 +247,13 @@ Name | Type | Description  | Notes
 - **Accept**: application/json, text/xml
 
 
-## createPaymentIntent
+## cardTokenisationRequest
 
-> PaymentIntentReference createPaymentIntent(payment_intent)
+> CardTokenisationResponse cardTokenisationRequest(card_tokenisation_request)
 
-Create a Payment Intent
+Card Tokenisation Request
 
-This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent captures the details of a prospective payment transaction, including the payment amount, currency, and associated billing and shipping information. 
+Performs a tokenisation request for card details.
 
 ### Example
 
@@ -229,10 +264,14 @@ let client = new CityPay.ApiClient({
     "client_id": process.env.CP_CLIENT_ID,
     "licence_key": process.env.CP_LICENCE_KEY
 })
+// Configure API key authorization: cp-domain-key
+let cp-domain-key = defaultClient.authentications['cp-domain-key'];
+cp-domain-key.apiKey = 'YOUR API KEY';
+//cp-domain-key.apiKeyPrefix = 'Token';
 
 let apiInstance = new CityPay.AuthorisationAndPaymentApi();
-let payment_intent = new CityPay.PaymentIntent(); // PaymentIntent | 
-apiInstance.createPaymentIntent(payment_intent).then((data) => {
+let card_tokenisation_request = new CityPay.CardTokenisationRequest(); // CardTokenisationRequest | 
+apiInstance.cardTokenisationRequest(card_tokenisation_request).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -245,64 +284,15 @@ apiInstance.createPaymentIntent(payment_intent).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **payment_intent** | [**PaymentIntent**](PaymentIntent.md)|  | 
+ **card_tokenisation_request** | [**CardTokenisationRequest**](CardTokenisationRequest.md)|  | 
 
 ### Return type
 
-[**PaymentIntentReference**](PaymentIntentReference.md)
+[**CardTokenisationResponse**](CardTokenisationResponse.md)
 
 ### Authorization
 
-[cp-api-key](../README.md#cp-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, text/xml
-- **Accept**: application/json, text/xml
-
-
-## paResRequest
-
-> AuthResponse paResRequest(pa_res_auth_request)
-
-PaRes
-
-The Payer Authentication Response (PaRes) is an operation after the result of authentication   being performed. The request uses an encoded packet of authentication data to  notify us of the completion of the liability shift. Once this value has been unpacked and its signature is checked, our systems will proceed to authorisation processing.    Any call to the PaRes operation will require a previous authorisation request and cannot be called  on its own without a previous [authentication required](#authenticationrequired)  being obtained. 
-
-### Example
-
-```javascript
-import CityPay from 'citypay-api';
-let client = new CityPay.ApiClient({
-    "sandbox": true,
-    "client_id": process.env.CP_CLIENT_ID,
-    "licence_key": process.env.CP_LICENCE_KEY
-})
-
-let apiInstance = new CityPay.AuthorisationAndPaymentApi();
-let pa_res_auth_request = new CityPay.PaResAuthRequest(); // PaResAuthRequest | 
-apiInstance.paResRequest(pa_res_auth_request).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pa_res_auth_request** | [**PaResAuthRequest**](PaResAuthRequest.md)|  | 
-
-### Return type
-
-[**AuthResponse**](AuthResponse.md)
-
-### Authorization
-
-[cp-api-key](../README.md#cp-api-key)
+[cp-domain-key](../README.md#cp-domain-key), [cp-api-key](../README.md#cp-api-key)
 
 ### HTTP request headers
 
@@ -316,7 +306,10 @@ Name | Type | Description  | Notes
 
 Refund
 
-A refund request which allows for the refunding of a previous transaction up  and to the amount of the original sale. A refund will be performed against the  original card used to process the transaction. 
+A refund request which allows for the refunding of a previous transaction up 
+and to the amount of the original sale. A refund will be performed against the 
+original card used to process the transaction.
+
 
 ### Example
 
@@ -363,9 +356,19 @@ Name | Type | Description  | Notes
 
 > AuthReferences retrievalRequest(retrieve_request)
 
-Retrieval
+Transaction Retrieval
 
-A retrieval request which allows an integration to obtain the result of a transaction processed in the last 90 days. The request allows for retrieval based on the identifier or transaction  number.   The process may return multiple results in particular where a transaction was processed multiple times against the same identifier. This can happen if errors were first received. The API therefore returns up to the first 5 transactions in the latest date time order.  It is not intended for this operation to be a replacement for reporting and only allows for base transaction information to be returned. 
+A retrieval request which allows an integration to obtain the result of a transaction processed
+in the last 90 days. The request allows for retrieval based on the identifier or transaction 
+number. 
+
+The process may return multiple results in particular where a transaction was processed multiple
+times against the same identifier. This can happen if errors were first received. The API therefore
+returns up to the first 5 transactions in the latest date time order.
+
+It is not intended for this operation to be a replacement for reporting and only allows for base transaction
+information to be returned.
+
 
 ### Example
 
@@ -408,13 +411,70 @@ Name | Type | Description  | Notes
 - **Accept**: application/json, text/xml
 
 
+## verificationRequest
+
+> Decision verificationRequest(verification_request)
+
+Verification
+
+Performs a request for verification for a card payment request.
+
+### Example
+
+```javascript
+import CityPay from 'citypay-api';
+let client = new CityPay.ApiClient({
+    "sandbox": true,
+    "client_id": process.env.CP_CLIENT_ID,
+    "licence_key": process.env.CP_LICENCE_KEY
+})
+
+let apiInstance = new CityPay.AuthorisationAndPaymentApi();
+let verification_request = new CityPay.VerificationRequest(); // VerificationRequest | 
+apiInstance.verificationRequest(verification_request).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **verification_request** | [**VerificationRequest**](VerificationRequest.md)|  | 
+
+### Return type
+
+[**Decision**](Decision.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
+
+
 ## voidRequest
 
 > Acknowledgement voidRequest(void_request)
 
 Void
 
-_The void process generally applies to transactions which have been pre-authorised only however voids can occur  on the same day if performed before batching and settlement._   The void process will ensure that a transaction will now settle. It is expected that a void call will be  provided on the same day before batching and settlement or within 3 days or within a maximum of 7 days.  Once the transaction has been processed as a void, an [&#x60;Acknowledgement&#x60;](#acknowledgement) will be returned, outlining the result of the transaction. 
+_The void process generally applies to transactions which have been pre-authorised only however voids can occur 
+on the same day if performed before batching and settlement._ 
+
+The void process will ensure that a transaction will now settle. It is expected that a void call will be 
+provided on the same day before batching and settlement or within 3 days or within a maximum of 7 days.
+
+Once the transaction has been processed as a void, an [`Acknowledgement`](#acknowledgement) will be returned,
+outlining the result of the transaction.
+
 
 ### Example
 

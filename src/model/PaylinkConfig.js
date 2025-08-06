@@ -73,6 +73,9 @@ class PaylinkConfig {
             if (data.hasOwnProperty('merch_terms')) {
                 obj['merch_terms'] = ApiClient.convertToType(data['merch_terms'], 'String');
             }
+            if (data.hasOwnProperty('meta_data')) {
+                obj['meta_data'] = ApiClient.convertToType(data['meta_data'], {'String': 'String'});
+            }
             if (data.hasOwnProperty('options')) {
                 obj['options'] = ApiClient.convertToType(data['options'], ['String']);
             }
@@ -219,7 +222,7 @@ class PaylinkConfig {
 
 
 /**
- * Specifies the approach to be adopted by the Paylink form when displaying a 3-D Secure challenge window. The values may be  iframe: shows the 3-D Secure ACS in an iframe dialog, neatly embedding it in Paylink. This provides a more seamless flow for the cardholder who is able to validate and authenticate their card using a dialog provided by their card issuer.  inline: an inline mode transfers the full browser window to the authentication server, allowing the payment cardholder to see their payment card issuer's URL and the certificate status in the browser. If you request an iframe mode and the browser width is deemed as being small (< 768px) then an inline mode will be enforced. This is to ensure that mobile users have an improved user experience. 
+ * Specifies the approach to be adopted by the Paylink form when displaying a 3-D Secure challenge window. The values may be   - `iframe` shows the 3-D Secure ACS in an iframe dialog, neatly embedding it in Paylink. This provides a more seamless flow for the cardholder who is able to validate and authenticate their card using a dialog provided by their card issuer.  - `inline` an inline mode transfers the full browser window to the authentication server, allowing the payment cardholder to see their payment card issuer's URL and the certificate status in the browser.  If you request an iframe mode and the browser width is deemed as being small (< 768px) then an inline mode will be enforced. This is to ensure that mobile users have an appropriate user experience.  The default type if not supplied is **iframe**. 
  * @member {String} acs_mode
  */
 PaylinkConfig.prototype['acs_mode'] = undefined;
@@ -236,7 +239,7 @@ PaylinkConfig.prototype['custom_params'] = undefined;
 PaylinkConfig.prototype['descriptor'] = undefined;
 
 /**
- * Specifies a period of time in seconds after which the token cannot be used. A value of 0 defines that the token will never expire. The API will convert an expiry time based on a string value. For instance:   s - Time in seconds, for example 90s.   m - Time in minutes, for example 20m.   h - Time in hours, for example 4h.   w - Time in weeks, for example 4w.   M - Time in months, for example 6M.   y - Time in years, for example 1y.   Defaults to 30 minutes. 
+ * Specifies a period of time in seconds after which the token cannot be used. A value of 0 defines that the token will never expire. The API will convert an expiry time based on a string value.  For instance: -  s - Time in seconds, for example 90s. -  m - Time in minutes, for example 20m. -  h - Time in hours, for example 4h. -  w - Time in weeks, for example 4w. -  M - Time in months, for example 6M. -  y - Time in years, for example 1y. -  Defaults to 30 minutes. 
  * @member {String} expire_in
  */
 PaylinkConfig.prototype['expire_in'] = undefined;
@@ -262,6 +265,11 @@ PaylinkConfig.prototype['merch_logo'] = undefined;
  * @member {String} merch_terms
  */
 PaylinkConfig.prototype['merch_terms'] = undefined;
+
+/**
+ * @member {Object.<String, String>} meta_data
+ */
+PaylinkConfig.prototype['meta_data'] = undefined;
 
 /**
  * @member {Array.<String>} options
